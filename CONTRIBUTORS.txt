@@ -8,4 +8,8 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-- Rafael Corchuelo (corchu@us.es)
+- Pablo Nieto Córdoba (pabniecor@alum.us.es)
+- Alejandro Vela Molina (alevelmol@alum.us.es)
+- Antonio Luis Jiménez de la Fuente (antjimde@alum.us.es)
+- Samuel Granado Oliva (samgraoli@alum.us.es)
+- Darío Román Jiménez (darromjim@alum.us.es)

@@ -10,9 +10,9 @@
 
 master.company.title = La empresa
 master.company.text = \
-	Acme ANS, S.A. es una empresa ficticia que ofrece un proyecto starter para los \
-	estudiantes de la asignatura Diseño y Pruebas de la titulación de \
-	Ingeniería del Software en la Universidad de Seville. 
+	Acme ANS, SA. es un proyecto que tiene como objetivo cumplir con los \
+	requisitos obligatorios del cliente. Proporciona un punto de partida simple \
+	 y funcional para garantizar que todas las especificaciones se aborden de manera efectiva.
 master.company.name = Acme ANS, S.A.
 master.company.address = 01 Acme Drive, Wondercity, Wonderland
 master.company.phone = +1 000 111 222

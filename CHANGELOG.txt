@@ -10,4 +10,5 @@
 
 ** Year 2025
 
+D02 Updated project to work with framework version 25.2.0.
 D01	Created and customized the project Acme-ANS based on the Hello-World starter project.

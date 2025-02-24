@@ -8,14 +8,8 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-This is a starter project.  It is intended to be a core learning asset for the students
-who have enrolled the Design and Testing subject of the Software Engineering curriculum of the 
-University of Seville.  This project helps them start working on their new information system 
-projects.
-
-To get this project up and running, please follow the guideline in the theory/lab materials,
-taking into account that you must link the appropriate version of the Acme-Framework excluding 
-the following resources:
-
-- **/fragments/**
- 
+The"Acme-ANS" project is a new initiative aimed at meeting the mandatory requirements
+ specified by our client. This project serves as a foundational example to demonstrate
+ the implementation of essential features while adhering to the client's specifications.
+ The primary objective is to deliver a simple, functional, and scalable solution that can
+ serve as a starting point for more complex developments.

@@ -23,7 +23,7 @@ public class Airport extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				name;
 
@@ -38,9 +38,14 @@ public class Airport extends AbstractEntity {
 	private OperationalScope	operationalScope;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
-	private String				cityAndCountry;
+	private String				city;
+
+	@Mandatory
+	@ValidString(min = 1, max = 50)
+	@Automapped
+	private String				country;
 
 	@Optional
 	@ValidUrl
@@ -50,7 +55,7 @@ public class Airport extends AbstractEntity {
 	@Optional
 	@ValidEmail
 	@Automapped
-	private String				emailAddress;
+	private String				email;
 
 	@Optional
 	@ValidString(pattern = "^\\+?\\d{6,15}$")

@@ -27,30 +27,30 @@ public class Review extends AbstractEntity {
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	String						name;
+	private String				name;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	Date						momentPosted;
+	private Date				momentPosted;
 
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	String						subject;
+	private String				subject;
 
 	@Mandatory
 	@ValidString(max = 255)
 	@Automapped
-	String						text;
+	private String				text;
 
 	@Optional
 	@ValidNumber(min = 0., max = 10.)
 	@Automapped
-	Double						score;
+	private Double				score;
 
 	@Optional
 	@Automapped
-	Boolean						recommended;
+	private Boolean				recommended;
 
 }

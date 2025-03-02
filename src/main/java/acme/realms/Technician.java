@@ -20,30 +20,30 @@ public class Technician {
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
 	@Column(unique = true)
-	String	licenseNumber;
+	private String	licenseNumber;
 
 	@Mandatory
 	@ValidString(pattern = "^\\+?\\d{6,15}$")
 	@Automapped
-	String	phoneNumber;
+	private String	phoneNumber;
 
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	String	specialisation;
+	private String	specialisation;
 
 	@Mandatory
 	@Automapped
-	Boolean	healthTestPassed;
+	private Boolean	healthTestPassed;
 
 	@Mandatory
 	@ValidNumber(min = 0)
 	@Automapped
-	Integer	experience;
+	private Integer	experience;
 
 	@Optional
 	@ValidString(max = 255)
 	@Automapped
-	String	certifications;
+	private String	certifications;
 
 }

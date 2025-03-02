@@ -22,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class AirlineManager extends AbstractRole {
+public class Manager extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
 

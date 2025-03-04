@@ -46,4 +46,9 @@ public class Task extends AbstractEntity {
 	@ManyToOne
 	private Aircraft			aircraft;
 
+	@Mandatory
+	@Valid
+	@ManyToOne
+	private MaintenanceRecord	maintenanceRecord;
+
 }

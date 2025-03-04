@@ -9,6 +9,7 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.airline_operations.Aircraft;
 import acme.realms.Technician;
 
 public class Task extends AbstractEntity {
@@ -40,15 +41,9 @@ public class Task extends AbstractEntity {
 	@ManyToOne
 	private Technician			technician;
 
-	/*
-	 * will be commented while aircrafts don't exist
-	 * 
-	 * @Mandatory
-	 * 
-	 * @Valid
-	 * 
-	 * @ManyToOne
-	 * private Aircraft aircraft;
-	 */
+	@Mandatory
+	@Valid
+	@ManyToOne
+	private Aircraft			aircraft;
 
 }

@@ -50,7 +50,7 @@ public class Airline extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	public Date					foundationMoment;
+	private Date				foundationMoment;
 
 	@Optional
 	@ValidEmail

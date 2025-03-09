@@ -11,6 +11,8 @@ public class Involves extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
+	// Relationships -----------------------------------------------------
+
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)

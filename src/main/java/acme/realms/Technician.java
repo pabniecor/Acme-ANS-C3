@@ -31,7 +31,7 @@ public class Technician extends AbstractRole {
 	private String				phoneNumber;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				specialisation;
 
@@ -40,7 +40,7 @@ public class Technician extends AbstractRole {
 	private Boolean				healthTestPassed;
 
 	@Mandatory
-	@ValidNumber(min = 0)
+	@ValidNumber(min = 0, max = 120)
 	@Automapped
 	private Integer				experience;
 

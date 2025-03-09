@@ -5,14 +5,18 @@ import java.util.Date;
 
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.validation.AbstractValidator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.maintenance_and_technical.MaintenanceRecord;
+import acme.entities.maintenance_and_technical.MaintenanceRecordRepository;
 
 public class MaintenanceRecordValidator extends AbstractValidator<ValidMaintenanceRecord, MaintenanceRecord> {
 
-	//	As there's no repositories yet, this part stays commented
-	//	public MaintenanceRecordRepository repository;
+	@Autowired
+	public MaintenanceRecordRepository repository;
+
 
 	@Override
 	protected void initialise(final ValidMaintenanceRecord annotation) {

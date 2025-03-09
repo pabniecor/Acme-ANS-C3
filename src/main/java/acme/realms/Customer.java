@@ -1,7 +1,10 @@
 
 package acme.realms;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
@@ -9,10 +12,14 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.customer_management.Booking;
 
 public class Customer extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
+
+	@OneToMany(mappedBy = "customer")
+	private Collection<Booking>	bookings;
 
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$", min = 8, max = 9)

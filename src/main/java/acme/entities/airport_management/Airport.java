@@ -28,7 +28,7 @@ public class Airport extends AbstractEntity {
 	private String				name;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{3}$")
+	@ValidString(min = 3, max = 3, pattern = "^[A-Z]{3}$")
 	@Column(unique = true)
 	private String				IATA;
 
@@ -56,6 +56,11 @@ public class Airport extends AbstractEntity {
 	@ValidEmail
 	@Automapped
 	private String				email;
+
+	@Optional
+	@ValidString(min = 0, max = 50)
+	@Automapped
+	private String				address;
 
 	@Optional
 	@ValidString(pattern = "^\\+?\\d{6,15}$")

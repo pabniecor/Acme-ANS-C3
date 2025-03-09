@@ -7,11 +7,14 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractRole;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidFlightCrewMember;
 import acme.entities.airline_operations.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +22,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidFlightCrewMember
+
 public class FlightCrewMember extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
@@ -34,7 +39,7 @@ public class FlightCrewMember extends AbstractRole {
 	private String				phoneNumber;
 
 	@Mandatory
-	@ValidString(max = 255)
+	@ValidString(min = 1, max = 255)
 	@Automapped
 	private String				languageSkills;
 
@@ -49,12 +54,12 @@ public class FlightCrewMember extends AbstractRole {
 	private Airline				airline;
 
 	@Mandatory
-	@ValidNumber(min = 0) /* Salary cannot be negative */
+	@ValidMoney(min = 0.00, max = 1000000.00)
 	@Automapped
-	private Double				salary;
+	private Money				salary;
 
 	@Optional
-	@ValidNumber(min = 0) /* Years of Experience cannot be negative */
+	@ValidNumber(min = 0, max = 120)
 	@Automapped
 	private Integer				yearsOfExperience;
 }

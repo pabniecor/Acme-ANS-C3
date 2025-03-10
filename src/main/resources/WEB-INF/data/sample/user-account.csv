@@ -19,5 +19,5 @@ user-account-technician-03,true,"UserIdentity{name: 'Hermenegildo', surname:'Rod
 user-account-customer-01,true,"UserIdentity{name:'Ricardo', surname:'Rodríguez', email:'ricardrodri@acme.com'}",customer1,customer1
 user-account-customer-02,true,"UserIdentity{name:'Diego', surname:'Llorente', email:'dieglloren@acme.com'}",customer2,customer2
 user-account-customer-03,true,"UserIdentity{name:'Sergio', surname:'Canales', email:'sergiocanales@acme.com'}",customer3,customer3
-user-account-administrator-01,true,"UserIdentity{name:'Andrés', surname: 'Pavón', email: 'andpav@acme.com'}",administrator1,administrator1
-user-account-administrator-02,true,"UserIdentity{name:'María', surname: 'Benadez', email: 'marbe@acme.com'}",administrator2,administrator2
+user-account-administrator-02,true,"UserIdentity{name:'Andrés', surname: 'Pavón', email: 'andpav@acme.com'}",administrator1,administrator1
+user-account-administrator-03,true,"UserIdentity{name:'María', surname: 'Benadez', email: 'marbe@acme.com'}",administrator2,administrator2

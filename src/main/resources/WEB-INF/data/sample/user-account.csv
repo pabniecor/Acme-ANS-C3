@@ -11,11 +11,13 @@ user-account-manager-03,true,"UserIdentity{name: 'Amparo', surname: 'González',
 user-account-member-01,true,"UserIdentity{name: 'Fahte', surname: 'Mohamed', email: 'fahtemed@acme.com'}",member1,member1
 user-account-member-02,true,"UserIdentity{name: 'Mario', surname: 'Löfgren', email: 'mariogren@acme.com'}",member2,member2
 user-account-member-03,true,"UserIdentity{name: 'Jim', surname: 'Chia', email: 'jinchia@acme.com'}",member3,member3
-user-account-member-04,true,"UserIdentity{name: 'Тrevor', surname: Kaevel',email: 'trevkaev@acme.com'}",member4,member4
-user-account-member-05,true,"UserIdentity{name: 'Diego', surname: 'Gonzalez Blanco', email: 'diegonza@acme.com'}","",""
+user-account-member-04,true,"UserIdentity{name: 'Тrevor', surname: 'Kaevel',email: 'trevkaev@acme.com'}",member4,member4
+user-account-member-05,true,"UserIdentity{name: 'Diego', surname: 'Gonzalez Blanco', email: 'diegonza@acme.com'}",member,member
 user-account-technician-01,true,"UserIdentity{name: 'Vladimir', surname:'Estrada', email: 'vladimirrepairman@acme.com'}",technician1,technician1
 user-account-technician-02,true,"UserIdentity{name: 'Dwayne', surname:'Jhonson', email: 'dwaynejhon@acme.com'}",technician2,technician2
 user-account-technician-03,true,"UserIdentity{name: 'Hermenegildo', surname:'Rodríguez', email: 'hermenrodri@acme.com'}",technician3,technician3
 user-account-customer-01,true,"UserIdentity{name:'Ricardo', surname:'Rodríguez', email:'ricardrodri@acme.com'}",customer1,customer1
 user-account-customer-02,true,"UserIdentity{name:'Diego', surname:'Llorente', email:'dieglloren@acme.com'}",customer2,customer2
-user-account-customer-03,true,"UserIdentity{name:'Sergio', surname:'Canales', email:'sergiocanales@acme.com'.}",customer3,customer3
+user-account-customer-03,true,"UserIdentity{name:'Sergio', surname:'Canales', email:'sergiocanales@acme.com'}",customer3,customer3
+user-account-administrator-01,true,"UserIdentity{name:'Andrés', surname: 'Pavón', email: 'andpav@acme.com'}",administrator1,administrator1
+user-account-administrator-02,true,"UserIdentity{name:'María', surname: 'Benadez', email: 'marbe@acme.com'}",administrator2,administrator2

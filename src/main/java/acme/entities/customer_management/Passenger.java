@@ -3,10 +3,8 @@ package acme.entities.customer_management;
 
 import java.util.Date;
 
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
@@ -19,11 +17,6 @@ import acme.client.components.validation.ValidString;
 public class Passenger extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
-
-	@Mandatory
-	@Valid
-	@ManyToOne()
-	private Booking				booking;
 
 	@Mandatory
 	@ValidString(min = 1, max = 255)

@@ -1,12 +1,9 @@
 
 package acme.entities.customer_management;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -19,43 +16,34 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
-import acme.realms.Customer;
 
 public class Booking extends AbstractEntity {
 
-	private static final long		serialVersionUID	= 1L;
-
-	@Mandatory
-	@Valid
-	@ManyToOne()
-	private Customer				customer;
-
-	@OneToMany(mappedBy = "booking")
-	private Collection<Passenger>	passengers;
+	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@ValidString(pattern = "^[A-Z0-9]{6,8}$")
 	@Column(unique = true)
-	private String					locatorCode;
+	private String				locatorCode;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date					purchaseMoment;
+	private Date				purchaseMoment;
 
 	@Mandatory
 	@Valid
 	@Automapped
-	private TravelClass				travelClass;
+	private TravelClass			travelClass;
 
 	@Mandatory
 	@ValidMoney
 	@Automapped
-	private Money					price;
+	private Money				price;
 
 	@Optional
 	@ValidString(pattern = "^\\d{4}$")
 	@Automapped
-	private String					lastCardNibble;
+	private String				lastCardNibble;
 
 }

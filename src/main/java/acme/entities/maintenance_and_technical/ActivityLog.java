@@ -1,5 +1,5 @@
 
-package acme.entities.customer_service_and_claims;
+package acme.entities.maintenance_and_technical;
 
 import java.util.Date;
 
@@ -12,24 +12,26 @@ import javax.validation.Valid;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.realms.AssistanceAgents;
+import acme.constraints.ValidActivityLog;
+import acme.entities.airport_management.FlightAssignment;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Claim extends AbstractEntity {
+@ValidActivityLog
+public class ActivityLog extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private AssistanceAgents	assistanceAgent;
+	private FlightAssignment	flightAssignment;
 
 	@Mandatory
 	@ValidMoment(past = true)
@@ -37,21 +39,17 @@ public class Claim extends AbstractEntity {
 	private Date				registrationMoment;
 
 	@Mandatory
-	@ValidEmail
+	@ValidString(min = 1, max = 50)
 	@Automapped
-	private String				passengerEmail;
+	private String				typeOfIncident;
 
 	@Mandatory
-	@ValidString(max = 255, min = 1)
+	@ValidString(min = 1, max = 255)
 	@Automapped
 	private String				description;
 
 	@Mandatory
-	@Valid
+	@ValidNumber(min = 0, max = 10)
 	@Automapped
-	private ClaimType			type;
-
-	@Mandatory
-	@Automapped
-	private Boolean				indicator;
+	private Integer				severityLevel;
 }

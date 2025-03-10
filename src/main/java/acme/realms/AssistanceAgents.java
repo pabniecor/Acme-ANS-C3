@@ -41,11 +41,6 @@ public class AssistanceAgents extends AbstractRole {
 	private String				spokenLanguages;
 
 	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airline				airline;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				moment;
@@ -64,4 +59,11 @@ public class AssistanceAgents extends AbstractRole {
 	@ValidUrl
 	@Automapped
 	private String				photo;
+
+	// Relationships -----------------------------------------------------
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 }

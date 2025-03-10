@@ -14,28 +14,30 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidTrackingLog;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@ValidTrackingLog
 public class TrackingLog extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidMoment
+	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				lastUpdateMoment;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidString(max = 50, min = 1)
 	@Automapped
 	private String				step;
 
 	@Optional
-	@ValidNumber(min = 0., max = 100.)
+	@ValidNumber(max = 100., min = 0.)
 	@Automapped
 	private Double				resolutionPercentage;
 
@@ -45,5 +47,6 @@ public class TrackingLog extends AbstractEntity {
 
 	@Optional
 	@ValidString(max = 255)
+	@Automapped
 	private String				resolution;
 }

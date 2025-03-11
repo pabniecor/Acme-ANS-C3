@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -37,11 +38,12 @@ public class TrackingLog extends AbstractEntity {
 	private String				step;
 
 	@Optional
-	@ValidNumber(max = 100., min = 0.)
+	@ValidNumber(max = 100., min = 0., fraction = 2)
 	@Automapped
 	private Double				resolutionPercentage;
 
 	@Mandatory
+	@Valid
 	@Automapped
 	private Boolean				indicator;
 

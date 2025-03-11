@@ -19,6 +19,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidAssistanceAgents;
 import acme.entities.airline_operations.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidAssistanceAgents
 public class AssistanceAgents extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
@@ -51,7 +53,7 @@ public class AssistanceAgents extends AbstractRole {
 	private String				briefBio;
 
 	@Optional
-	@ValidMoney(min = 0., max = Double.MAX_VALUE)
+	@ValidMoney(min = 0., max = 1000000.)
 	@Automapped
 	private Money				salary;
 

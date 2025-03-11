@@ -1,0 +1,75 @@
+key,name,iata-code,website,airline-type,foundation-moment,email,phone-number
+#base entity
+airline-00,"Lorem ipsum dolor sit ame",AAX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+#name - standard variations
+airline-01,L,ABX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-02,Lo,ACX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-03,"Lorem ipsum dolor sit amet  consectetur adipiscin",ADX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-04,"Lorem ipsum dolor sit amet  consectetur adipiscing",AEX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-05,โลเร็ม อิปซัม,AFX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-06,لوريم إيبسوم,AGX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-07,洛伦·伊普森,AHX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-08,<marquee>Hacked</marquee>,AIX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-09,<script>alert('Hacked!');</script>,AJX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-10,' or 'A' = 'A,AKX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+#name - no singular values
+#iataCode - standard variations
+airline-11,"Lorem ipsum dolor sit amet",AXX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+#iataCode - no singular values
+#website - standard variations
+airline-12,"Lorem ipsum dolor sit amet",ALX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-13,"Lorem ipsum dolor sit amet",AMX,http://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-14,"Lorem ipsum dolor sit amet",ANX,https://www.acmeairlines.org,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-15,"Lorem ipsum dolor sit amet",AOX,http://www.acmeairlines.org,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-16,"Lorem ipsum dolor sit amet",APX,https://www.acmeairlines.com/flight,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-17,"Lorem ipsum dolor sit amet",AQX,http://www.acmeairlines.com/flight,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-18,"Lorem ipsum dolor sit amet",ARX,https://www.flyweight.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-19,"Lorem ipsum dolor sit amet",ASX,https://secure.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-20,"Lorem ipsum dolor sit amet",ATX,http://www.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-21,"Lorem ipsum dolor sit amet",AUX,ftp://secure,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-22,"Lorem ipsum dolor sit amet",AVX,ftp://secure.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-23,"Lorem ipsum dolor sit amet",AWX,https://www.acmeairlines.com/index.html,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-24,"Lorem ipsum dolor sit amet",AXX,https://secure.flyhigh.com/booking/index.html,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-25,"Lorem ipsum dolor sit amet",AYX,https://www.acmeairlines.com/flights/search,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-26,"Lorem ipsum dolor sit amet",AXX,https://www.acmeairlines.com/flights?from=JFK&to=LAX,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-27,"Lorem ipsum dolor sit amet",BAX,https://www.acmeairlines.com/search?q=cheap+flights,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-28,"Lorem ipsum dolor sit amet",BBX,https://www.acmeairlines.com/booking?flightId=12345&seats=2,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-29,"Lorem ipsum dolor sit amet",BCX,https://www.acmeairlines.com/offers?sort=price&order=asc,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-30,"Lorem ipsum dolor sit amet",BDX,https://www.acmeairlines.com/flights/international?class=economy&direct=true,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-31,"Lorem ipsum dolor sit amet",BEX,https://www.acmeairlines.com/services/baggage?weight=23kg&extra=true,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-32,"Lorem ipsum dolor sit amet",BFX,https://www.acmeairlines.com/search?departure=2025-04-01&return=2025-04-15&adults=2&children=1,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-33,"Lorem ipsum dolor sit amet",BGX,https://booking.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-34,"Lorem ipsum dolor sit amet",BHX,https://www.acmeairlines.com/path/with/special%20characters,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-35,"Lorem ipsum dolor sit amet",BIX,https://www.acmeairlines.com/flights#direct-only,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-36,"Lorem ipsum dolor sit amet",BJX,https://www.acmeairlines.com:8443/secure-booking,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-37,"Lorem ipsum dolor sit amet",BKX,https://www.acmeairlines.com/api/v2/flight-status,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+#website - no singular values
+#airline-type - standard variations
+airline-38,"Lorem ipsum dolor sit ame",BLX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-39,"Lorem ipsum dolor sit ame",BMX,https://www.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-40,"Lorem ipsum dolor sit ame",BNX,https://www.acmeairlines.com,LOWCOST,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+#airline-type - no singular values
+#foundation-moment - standard variations
+airline-41,"Lorem ipsum dolor sit ame",BOX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-42,"Lorem ipsum dolor sit ame",BPX,https://www.acmeairlines.com,STANDARD,2000/01/01 00:00,acme@lorem-ipsum.org,+1234567890
+airline-43,"Lorem ipsum dolor sit ame",BQX,https://www.acmeairlines.com,STANDARD,2000/01/01 00:01,acme@lorem-ipsum.org,+1234567890
+airline-44,"Lorem ipsum dolor sit ame",BRX,https://www.acmeairlines.com,STANDARD,2025/01/01 00:00,acme@lorem-ipsum.org,+1234567890
+airline-45,"Lorem ipsum dolor sit ame",BSX,https://www.acmeairlines.com,STANDARD,2024/12/31 23:59,acme@lorem-ipsum.org,+1234567890
+#foundation-moment - no singular values
+#email - standard variations
+airline-46,"Lorem ipsum dolor sit ame",BTX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-47,"Lorem ipsum dolor sit ame",BUX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme:password@lorem-ipsum.org,+1234567890
+airline-48,"Lorem ipsum dolor sit ame",BVX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@acme.e,+1234567890
+airline-49,"Lorem ipsum dolor sit ame",BWX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@acme.es,+1234567890
+airline-50,"Lorem ipsum dolor sit ame",BXX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@acme.esx,+1234567890
+airline-51,"Lorem ipsum dolor sit ame",BYX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu,+1234567890
+airline-52,"Lorem ipsum dolor sit ame",BZX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.dolor.es.org,+1234567890
+#email - no singular values
+#phone-number - standard variations
+airline-53,"Lorem ipsum dolor sit ame",CAX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+1234567890
+airline-54,"Lorem ipsum dolor sit ame",CBX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,12345678990
+airline-55,"Lorem ipsum dolor sit ame",CCX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+123456
+airline-56,"Lorem ipsum dolor sit ame",CDX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,+12345678901234
+airline-57,"Lorem ipsum dolor sit ame",CEX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,123456
+airline-58,"Lorem ipsum dolor sit ame",CFX,https://www.acmeairlines.com,STANDARD,2012/07/02 00:00,acme@lorem-ipsum.org,12345678901234
+#phone-number - no singular values

@@ -46,7 +46,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				super.state(context, uniqueLeg, "flightNumber", "The flightNumber is duplicated");
 			}
 			{
-				String AirlineIATA = leg.getFlight().getManager().getAirline().getIATA();
+				String AirlineIATA = leg.getFlight().getManager().getAirline().getIataCode();
 
 				boolean correctFlightNumber = leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 

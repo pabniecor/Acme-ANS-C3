@@ -5,19 +5,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import acme.client.components.basis.AbstractEntity;
-import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidService;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@ValidService
 public class Service extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
@@ -28,14 +29,14 @@ public class Service extends AbstractEntity {
 	private String				name;
 
 	@Mandatory
-	@ValidString
+	@ValidUrl
 	@Automapped
 	private String				pictureLink;
 
 	@Mandatory
-	@ValidNumber(min = 1)
+	@ValidNumber(min = 1., max = 100., fraction = 2)
 	@Automapped
-	private Integer				averageDwellTime;
+	private Double				averageDwellTime;
 
 	@Optional
 	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
@@ -43,7 +44,7 @@ public class Service extends AbstractEntity {
 	private String				promotionCode;
 
 	@Optional
-	@ValidMoney(min = 0.)
+	@ValidNumber(min = 0., max = 100., fraction = 2)
 	@Automapped
-	private Money				money;
+	private Double				moneyDiscount;
 }

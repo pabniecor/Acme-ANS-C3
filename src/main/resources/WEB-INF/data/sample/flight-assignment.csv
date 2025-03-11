@@ -1,0 +1,31 @@
+key,key:leg,key:flightCrew,duty,moment,current-status,remarks
+#base entity
+flight-assignment-00,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+#duty - standard variations
+flight-assignment-01,leg-00,member-01,CO_PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-02,leg-00,member-01,LEAD_ATTENDANT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-03,leg-00,member-01,CABIN_ATTENDANT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+#duty - no singular values
+#moment - standard variations
+flight-assignment-04,leg-00,member-01,PILOT,2000/01/01 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-05,leg-00,member-01,PILOT,2000/01/01 00:01,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-06,leg-00,member-01,PILOT,2024/12/31 23:59,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-07,leg-00,member-01,PILOT,2025/01/01 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+#moment - no singular values
+#current status - standard variations
+flight-assignment-08,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-09,leg-00,member-01,PILOT,2012/07/02 00:00,PENDING,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+flight-assignment-10,leg-00,member-01,PILOT,2012/07/02 00:00,CANCELLED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*"
+#current status - no singular values
+#renarks - standard variations
+flight-assignment-11,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,""
+flight-assignment-12,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,L
+flight-assignment-13,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
+flight-assignment-14,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolore"
+flight-assignment-15,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,โลเร็ม อิปซัม
+flight-assignment-16,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,لوريم إيبسوم
+flight-assignment-17,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,洛伦·伊普森
+flight-assignment-18,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,<marquee>Hacked</marquee>
+flight-assignment-19,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,<script>alert(‘Hacked!’);</script>
+flight-assignment-20,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,' or 'A' = 'A 
+

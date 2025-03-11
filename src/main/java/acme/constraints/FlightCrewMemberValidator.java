@@ -34,13 +34,9 @@ public class FlightCrewMemberValidator extends AbstractValidator<ValidFlightCrew
 		{
 			String name = flightCrewMember.getIdentity().getName();
 			String surname = flightCrewMember.getIdentity().getSurname();
-			String[] surnames = surname.split(" ");
 			boolean correctIdentifier;
 
-			if (surnames.length == 1)
-				correctIdentifier = flightCrewMember.getEmployeeCode().charAt(0) == name.charAt(0) && flightCrewMember.getEmployeeCode().charAt(1) == surname.charAt(0);
-			else
-				correctIdentifier = flightCrewMember.getEmployeeCode().charAt(0) == name.charAt(0) && flightCrewMember.getEmployeeCode().charAt(1) == surnames[0].charAt(0) && flightCrewMember.getEmployeeCode().charAt(2) == surnames[1].charAt(0);
+			correctIdentifier = flightCrewMember.getEmployeeCode().charAt(0) == name.charAt(0) && flightCrewMember.getEmployeeCode().charAt(1) == surname.charAt(0);
 
 			super.state(context, correctIdentifier, "identifier", "The manager's identier does not correspond to their initials");
 		}

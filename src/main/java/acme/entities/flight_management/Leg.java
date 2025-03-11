@@ -37,16 +37,16 @@ public class Leg extends AbstractEntity {
 
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{3}\\d{4}$")  // IATA code + 4 dígitos
-	@Column(unique = true, length = 7)
+	@Column(unique = true)
 	private String				flightNumber;
 
 	@Mandatory
-	@ValidMoment(max = "2201/01/01  00:00:00", past = false) //min = Current time, max = 2201/01/01  00:00:00
+	@ValidMoment() //min = Current time, max = 2201/01/01  00:00:00
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				scheduledDeparture;
 
 	@Mandatory
-	@ValidMoment(min = "", max = "2201/01/01  00:00:00") //min = scheduledDeparture + 1 minute, max = 2201/01/01  00:00:00
+	@ValidMoment() //min = scheduledDeparture + 1 minute, max = 2201/01/01  00:00:00
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				scheduledArrival;
 
@@ -60,7 +60,7 @@ public class Leg extends AbstractEntity {
 
 	@Transient
 	public Double getDuration() {
-		Integer result = MomentHelper.compare(this.scheduledArrival, this.scheduledDeparture);
+		Integer result = MomentHelper.computeDuration(this.scheduledArrival, this.scheduledDeparture).toHoursPart();
 		return result.doubleValue();
 	}
 

@@ -1,0 +1,5 @@
+key,key:userAccount,availability-status,employee-code,phone-number,language-skills,key:airline,salary,years-of-experience
+member-01,user-account-member-01,AVAILABLE,FMA857105,+34000000000,L,airline-00,EUR 0.00,0
+member-02,user-account-member-02,AVAILABLE,ML375102,+34123456789,Lo,airline-00,EUR 1.00,1
+member-03,user-account-member-03,ON_VACATION,JC416725,+345551314,"Lorem ipsum dolor sit amet  consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",airline-00,EUR 999999.00,119
+member-04,user-account-member-04,ON_LEAVE,TK216589,+34000111222,"Lorem ipsum dolor sit amet  consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",airline-00,EUR 1000000.00,120

@@ -45,7 +45,7 @@ public class Airline extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@Automapped
-	private Type				type;
+	private AirlineType			airlineType;
 
 	@Mandatory
 	@ValidMoment(past = true)

@@ -32,9 +32,9 @@ public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistance
 			String name = assistanceAgents.getIdentity().getName();
 			String surname = assistanceAgents.getIdentity().getSurname();
 
-			boolean correctIdentifier = assistanceAgents.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgents.getEmployeeCode().charAt(1) == surname.charAt(0);
+			boolean correctEmployeeCode = assistanceAgents.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgents.getEmployeeCode().charAt(1) == surname.charAt(0);
 
-			super.state(context, correctIdentifier, "identifier", "The manager's identier does not correspond to their initials");
+			super.state(context, correctEmployeeCode, "employeeCode", "The first two or three letters of the employeeCode do not correspond to their initials");
 		}
 
 		result = !super.hasErrors(context);

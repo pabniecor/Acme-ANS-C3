@@ -4,6 +4,7 @@ package acme.entities.customer_service_and_claims;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -51,4 +52,11 @@ public class TrackingLog extends AbstractEntity {
 	@ValidString(max = 255)
 	@Automapped
 	private String				resolution;
+
+	// Relationships -----------------------------------------------------
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Claim				claim;
 }

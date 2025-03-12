@@ -65,7 +65,7 @@ airport-50,Lorem ipsum dolor sit ame,ABV,INTERNATIONAL,Lorem ipsum dolor sit ame
 airport-51,Lorem ipsum dolor sit ame,ABW,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,acme@lorem-ipsum.org,111111111
 #website - no singular values
 #email - standard variations
-airport-52,Lorem ipsum dolor sit ame,ABX,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,acme:password@lorem-ipsum.org,111111111
+airport-52,Lorem ipsum dolor sit ame,ABX,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,acmeword@lorem-ipsum.org,111111111
 airport-53,Lorem ipsum dolor sit ame,ABY,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,a@b.e,111111111
 airport-54,Lorem ipsum dolor sit ame,ABZ,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,a@b.es,111111111
 airport-55,Lorem ipsum dolor sit ame,ACA,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org/a/b?a&b,a@b.esx,111111111

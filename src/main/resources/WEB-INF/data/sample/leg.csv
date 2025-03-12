@@ -1,0 +1,24 @@
+key,flight-number,scheduled-departure,scheduled-arrival,status,key:flight,key:departure-airport,key:arrival-airport,key:aircraft
+#base entity
+leg-00,AAX1234,2030/01/01 00:00,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+#flight-number - standard variations
+leg-01,AAX0000,2030/01/01 00:00,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-02,AAX9999,2030/01/01 00:00,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+#flight-number - no singular values
+#scheduled-departure - standard variations
+leg-03,AAX1111,2025/01/01 00:00,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-04,AAX1112,2025/01/01 00:01,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-05,AAX1113,2200/12/31 23:58,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-06,AAX1114,2200/12/31 23:59,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+#scheduled-departure - no singular values
+#scheduled-arrival - standard variations
+leg-07,AAX1115,2030/01/01 00:00,2030/01/01 00:01,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-08,AAX1116,2030/01/01 00:00,2030/01/01 00:02,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-09,AAX1117,2030/01/01 00:00,2200/12/31 23:58,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-10,AAX1118,2030/01/01 00:00,2200/12/31 23:59,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+#scheduled-arrival - no singular values
+#status - standard variations
+leg-11,AAX1119,2030/01/01 00:00,2030/01/01 01:00,ON_TIME,flight-00,airport-00,airport-01,aircraft-00
+leg-12,AAX1120,2030/01/01 00:00,2030/01/01 01:00,DELAYED,flight-00,airport-00,airport-01,aircraft-00
+leg-13,AAX1121,2030/01/01 00:00,2030/01/01 01:00,CANCELLED,flight-00,airport-00,airport-01,aircraft-00
+leg-14,AAX1122,2030/01/01 00:00,2030/01/01 01:00,LANDED,flight-00,airport-00,airport-01,aircraft-00

@@ -1,0 +1,3 @@
+key,key:userAccount,identifier,years-of-experience,date-of-birth,picture-url,key:airline
+manager-01,user-account-manager-01,CM917323,0,2012/07/01 00:00,https://this-person-does-not-exist.com/img/avatar-gen3b2f1a4c5678d90e12abcd3456ef7890.jpg,airline-00
+manager-02,user-account-manager-02,PAN239582,1,2004/11/25 14:13,https://this-person-does-not-exist.com/img/avatar-genff00aabbccddeeff1122334455667788.jpg,airline-01

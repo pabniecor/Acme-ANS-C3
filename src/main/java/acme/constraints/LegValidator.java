@@ -1,12 +1,16 @@
 
 package acme.constraints;
 
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
+import acme.client.helpers.MomentHelper;
 import acme.entities.flight_management.Leg;
 import acme.entities.flight_management.LegRepository;
 
@@ -51,6 +55,22 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				boolean correctFlightNumber = leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 
 				super.state(context, correctFlightNumber, "flightNumber", "The flightNumber IATA code is incorrect");
+			}
+			{
+				boolean correctScheduledDeparture;
+				Date currentMoment = MomentHelper.getCurrentMoment();
+
+				correctScheduledDeparture = MomentHelper.isBefore(leg.getScheduledDeparture(), currentMoment);
+
+				super.state(context, correctScheduledDeparture, "scheduledDeparture", "The scheduledDeparture can not be before the current time");
+			}
+			{
+				boolean correctScheduledArrival;
+				Date minMoment = MomentHelper.deltaFromMoment(leg.getScheduledDeparture(), 1, ChronoUnit.MINUTES);
+
+				correctScheduledArrival = MomentHelper.isBefore(leg.getScheduledArrival(), minMoment);
+
+				super.state(context, correctScheduledArrival, "scheduledArrival", "The scheduledArrival can not be before the scheduledDeparture + 1 minute");
 			}
 		}
 

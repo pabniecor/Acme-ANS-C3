@@ -34,7 +34,7 @@ public class ActivityLog extends AbstractEntity {
 	private FlightAssignment	flightAssignment;
 
 	@Mandatory
-	@ValidMoment(past = true)
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				registrationMoment;
 

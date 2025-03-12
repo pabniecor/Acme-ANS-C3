@@ -2,6 +2,7 @@
 package acme.constraints;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -33,10 +34,11 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 		if (value == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			ActivityLog al = this.repository.findActivityLogtByFlightAssignmentId(value.getFlightAssignment().getId());
-			Date legDate = al.getFlightAssignment().getLeg().getScheduledArrival();
+			List<ActivityLog> al = this.repository.findActivityLogtByFlightAssignmentId(value.getFlightAssignment().getId());
+			ActivityLog al1 = al.get(0);
+			Date legDate = al1.getFlightAssignment().getLeg().getScheduledArrival();
 
-			boolean properDate = al.getRegistrationMoment().after(legDate);
+			boolean properDate = al1.getRegistrationMoment().after(legDate);
 
 			super.state(context, properDate, "registrationMoment", "The registration moment is established before the leg arrive");
 		}

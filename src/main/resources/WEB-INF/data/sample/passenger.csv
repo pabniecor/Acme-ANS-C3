@@ -15,7 +15,7 @@ passenger-10,' or 'A' = 'A,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegeta
 # full-name no singular values
 # email - standard variations
 passenger-11,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-12,Lorem ipsum dolor sit ame,acme:password@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
+passenger-12,Lorem ipsum dolor sit ame,acmeword@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
 passenger-13,Lorem ipsum dolor sit ame,a@b.e,ABC123DE,2012/07/02 00:00,Vegetarian meal
 passenger-14,Lorem ipsum dolor sit ame,a@b.es,ABC123DE,2012/07/02 00:00,Vegetarian meal
 passenger-15,Lorem ipsum dolor sit ame,a@b.esx,ABC123DE,2012/07/02 00:00,Vegetarian meal

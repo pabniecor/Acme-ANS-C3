@@ -55,7 +55,7 @@ public class Flight extends AbstractEntity {
 
 
 	@Transient
-	public Date getDeparture() { //min = Current time, max = 2201/01/01  00:00:00
+	public Date getDeparture() { //min = Current time, max = 2201/01/01 00:00:00
 		Date result;
 		FlightRepository repository;
 		Date departure;
@@ -68,7 +68,7 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public Date getArrival() { //min = scheduledDeparture + 1 minute, max = 2201/01/01  00:00:00
+	public Date getArrival() { //min = scheduledDeparture + 1 minute, max = 2201/01/01 00:00:00
 		Date result;
 		FlightRepository repository;
 		Date arrival;

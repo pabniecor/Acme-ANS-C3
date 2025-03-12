@@ -1,13 +1,7 @@
 
 package acme.constraints;
 
-
-import java.util.Comparator;
 import java.util.List;
-
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -62,7 +56,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				super.state(context, correctFlightNumber, "flightNumber", "The flightNumber IATA code is incorrect");
 			}
 
-
 			{
 				boolean notOverlappingLeg;
 				List<Leg> legsByFlight;
@@ -74,7 +67,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 				legsByFlight.add(leg);
 
-				legsByFlight.sort(Comparator.comparing(Leg::getSequenceOrder));
+				//				legsByFlight.sort(Comparator.comparing(Leg::getSequenceOrder));
 				int numOverlappedLegs = 0;
 				for (int i = 1; i < legsByFlight.size(); i++) {
 
@@ -84,7 +77,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 					if (MomentHelper.isBeforeOrEqual(currectLeg.getScheduledDeparture(), previousLeg.getScheduledArrival()))
 						numOverlappedLegs = numOverlappedLegs + 1;
 				}
-				notOverlappingLeg = numOverlappedLegs == 0;
+				notOverlappingLeg = numOverlappedLegs != 0;
 				super.state(context, notOverlappingLeg, "*", "The leg can not overlap other legs in the same flight");
 			}
 			//			{

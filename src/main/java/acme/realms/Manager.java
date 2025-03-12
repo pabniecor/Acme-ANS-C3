@@ -46,7 +46,7 @@ public class Manager extends AbstractRole {
 	private Integer				yearsOfExperience;
 
 	@Mandatory
-	@ValidMoment(min = "2000/01/01  00:00:00", past = true) // max = Current time
+	@ValidMoment(past = true) // max = Current time
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				dateOfBirth;
 

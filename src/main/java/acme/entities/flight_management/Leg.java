@@ -41,12 +41,12 @@ public class Leg extends AbstractEntity {
 	private String				flightNumber;
 
 	@Mandatory
-	@ValidMoment() //min = Current time, max = 2201/01/01  00:00:00
+	@ValidMoment(past = false) //min = Current time, max = 2201/01/01  00:00:00
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				scheduledDeparture;
 
 	@Mandatory
-	@ValidMoment() //min = scheduledDeparture + 1 minute, max = 2201/01/01  00:00:00
+	@ValidMoment //min = scheduledDeparture + 1 minute, max = 2201/01/01  00:00:00
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				scheduledArrival;
 

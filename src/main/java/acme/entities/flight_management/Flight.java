@@ -39,7 +39,7 @@ public class Flight extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@Automapped
-	private SelfTransfer		indication;
+	private Boolean				selfTransfer;
 
 	@Mandatory
 	@ValidMoney(min = 0.00, max = 1000000.00)
@@ -47,7 +47,7 @@ public class Flight extends AbstractEntity {
 	private Money				cost;
 
 	@Optional
-	@ValidString(min = 0, max = 255)
+	@ValidString(max = 255)
 	@Automapped
 	private String				description;
 
@@ -87,8 +87,8 @@ public class Flight extends AbstractEntity {
 		String departureCity;
 
 		repository = SpringHelper.getBean(FlightRepository.class);
-		Date departureDate = this.getDeparture();
-		departureCity = repository.computeOriginCity(this.getId(), departureDate);
+
+		departureCity = repository.computeOriginCity(this.getId());
 		result = departureCity == null ? "null" : departureCity;
 
 		return result;
@@ -101,8 +101,8 @@ public class Flight extends AbstractEntity {
 		String arrivalCity;
 
 		repository = SpringHelper.getBean(FlightRepository.class);
-		Date arrivalDate = this.getArrival();
-		arrivalCity = repository.computeOriginCity(this.getId(), arrivalDate);
+
+		arrivalCity = repository.computeOriginCity(this.getId());
 		result = arrivalCity == null ? "null" : arrivalCity;
 
 		return result;

@@ -35,7 +35,7 @@ public class Airline extends AbstractEntity {
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{3}$")
 	@Column(unique = true)
-	private String				IATA;
+	private String				iataCode;
 
 	@Mandatory
 	@ValidUrl
@@ -45,7 +45,7 @@ public class Airline extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@Automapped
-	private Type				type;
+	private AirlineType			airlineType;
 
 	@Mandatory
 	@ValidMoment(past = true)

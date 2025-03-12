@@ -19,6 +19,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidAssistanceAgents;
 import acme.entities.airline_operations.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,12 +27,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidAssistanceAgents
 public class AssistanceAgents extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Column(unique = true)
 	private String				employeeCode;
 
@@ -39,11 +41,6 @@ public class AssistanceAgents extends AbstractRole {
 	@ValidString(max = 255)
 	@Automapped
 	private String				spokenLanguages;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airline				airline;
 
 	@Mandatory
 	@ValidMoment(past = true)
@@ -56,7 +53,7 @@ public class AssistanceAgents extends AbstractRole {
 	private String				briefBio;
 
 	@Optional
-	@ValidMoney(min = 0., max = Double.MAX_VALUE)
+	@ValidMoney(min = 0., max = 1000000.)
 	@Automapped
 	private Money				salary;
 
@@ -64,4 +61,11 @@ public class AssistanceAgents extends AbstractRole {
 	@ValidUrl
 	@Automapped
 	private String				photo;
+
+	// Relationships -----------------------------------------------------
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 }

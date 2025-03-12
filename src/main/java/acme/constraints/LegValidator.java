@@ -1,8 +1,13 @@
 
 package acme.constraints;
 
+
 import java.util.Comparator;
 import java.util.List;
+
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -50,12 +55,13 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				super.state(context, uniqueLeg, "flightNumber", "The flightNumber is duplicated");
 			}
 			{
-				String AirlineIATA = leg.getFlight().getManager().getAirline().getIATA();
+				String AirlineIATA = leg.getFlight().getManager().getAirline().getIataCode();
 
 				boolean correctFlightNumber = leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 
 				super.state(context, correctFlightNumber, "flightNumber", "The flightNumber IATA code is incorrect");
 			}
+
 
 			{
 				boolean notOverlappingLeg;

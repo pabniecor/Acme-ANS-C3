@@ -3,6 +3,7 @@ package acme.entities.airline_operations;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -32,7 +33,7 @@ public class Aircraft extends AbstractEntity {
 	private String				registrationNumber;
 
 	@Mandatory
-	@ValidNumber(min = 1) /* A aircraft must have at least one person */
+	@ValidNumber(min = 1, max = 255) /* A aircraft must have at least one person */
 	@Automapped
 	private Integer				capacity;
 
@@ -50,4 +51,9 @@ public class Aircraft extends AbstractEntity {
 	@ValidString(max = 255)
 	@Automapped
 	private String				details;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 }

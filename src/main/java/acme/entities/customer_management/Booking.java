@@ -55,8 +55,6 @@ public class Booking extends AbstractEntity {
 	@Automapped
 	private String				lastCardNibble;
 
-	/* Establecer una relación con customer (sin automapped) y con flight () */
-
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)

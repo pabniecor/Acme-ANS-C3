@@ -1,4 +1,4 @@
-key,momentDone,maintenanceStatus,nextInspection,estimatedCost,notes,key:aircraft,key:technician
+key,moment-done,maintenance-status,next-inspection,estimated-cost,notes,key:aircraft,key:technician
 # base entity
 maintenanceRecord-00,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",aircraft-00,technician1
 # momentDone - standard variations

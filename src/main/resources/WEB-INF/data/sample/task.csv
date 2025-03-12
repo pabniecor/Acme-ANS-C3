@@ -1,4 +1,4 @@
-key,taskType,description,priority,estimatedDuration,key:technician
+key,task-type,description,priority,estimated-duration,key:technician
 # base entity
 task-00,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,technician1
 # taskType - standard variations

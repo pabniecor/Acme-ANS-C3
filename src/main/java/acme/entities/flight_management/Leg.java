@@ -15,6 +15,7 @@ import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.MomentHelper;
 import acme.constraints.ValidLeg;
@@ -87,4 +88,10 @@ public class Leg extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Aircraft	aircraft;
 
+	// Additional attributes ----------------------------------------------------------
+
+	@Mandatory
+	@ValidNumber(min = 1)
+	@Automapped
+	private Integer		sequenceOrder;
 }

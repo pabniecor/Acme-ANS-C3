@@ -46,20 +46,21 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				existingLeg = this.repository.findLegByFlightNumber(leg.getFlightNumber());
 				uniqueLeg = existingLeg == null || existingLeg.equals(leg);
 
-				super.state(context, uniqueLeg, "flightNumber", "The flightNumber is duplicated");
+				super.state(context, uniqueLeg, "flightNumber", "acme.validation.leg.flightNumberDuplication.message");
 			}
 			{
 				String AirlineIATA = leg.getFlight().getManager().getAirline().getIataCode();
 
 				boolean correctFlightNumber = leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 
-				super.state(context, correctFlightNumber, "flightNumber", "The flightNumber IATA code is incorrect");
+				super.state(context, correctFlightNumber, "flightNumber", "acme.validation.leg.flightNumberIATA.message");
 			}
 
 			{
 				boolean notOverlappingLeg;
 				List<Leg> legsByFlight;
-				Leg currectLeg, previousLeg;
+				Leg currectLeg;
+				Leg previousLeg;
 
 				legsByFlight = this.repository.computeLegsByFlight(leg.getFlight().getId());
 
@@ -78,7 +79,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 						numOverlappedLegs = numOverlappedLegs + 1;
 				}
 				notOverlappingLeg = numOverlappedLegs != 0;
-				super.state(context, notOverlappingLeg, "*", "The leg can not overlap other legs in the same flight");
+				super.state(context, notOverlappingLeg, "*", "acme.validation.leg.notOverlappingLeg.message");
 			}
 			//			{
 			//				boolean correctScheduledDeparture;

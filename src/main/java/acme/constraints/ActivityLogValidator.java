@@ -9,6 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
+import acme.client.helpers.MomentHelper;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.entities.maintenance_and_technical.ActivityLogRepository;
 
@@ -38,7 +39,7 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 			ActivityLog al1 = al.get(0);
 			Date legDate = al1.getFlightAssignment().getLeg().getScheduledArrival();
 
-			boolean properDate = al1.getRegistrationMoment().after(legDate);
+			boolean properDate = MomentHelper.isAfter(al1.getRegistrationMoment(), legDate);
 
 			super.state(context, properDate, "registrationMoment", "The registration moment is established before the leg arrive");
 		}

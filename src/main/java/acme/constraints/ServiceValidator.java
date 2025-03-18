@@ -3,19 +3,23 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.airport_management.Service;
+import acme.entities.airport_management.ServiceRepository;
 
 @Validator
 public class ServiceValidator extends AbstractValidator<ValidService, Service> {
 	// Internal state ---------------------------------------------------------
 
-	//	@Autowired
-	//	private ServiceRepository repository;
+	@Autowired
+	private ServiceRepository repository;
 
 	// ConstraintValidator interface ------------------------------------------
+
 
 	@Override
 	protected void initialise(final ValidService annotation) {
@@ -28,7 +32,9 @@ public class ServiceValidator extends AbstractValidator<ValidService, Service> {
 
 		boolean result;
 
-		{
+		if (service == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
 			Integer currentYear = MomentHelper.getCurrentMoment().getYear(); // Difference between current year and 1900
 			String currentYearToString = currentYear.toString();
 			String promotionCode = service.getPromotionCode();
@@ -38,9 +44,7 @@ public class ServiceValidator extends AbstractValidator<ValidService, Service> {
 
 			super.state(context, correctPromotionCode, "promotionCode", "The last two digits must correspond to the current year");
 		}
-
 		result = !super.hasErrors(context);
-
 		return result;
 	}
 }

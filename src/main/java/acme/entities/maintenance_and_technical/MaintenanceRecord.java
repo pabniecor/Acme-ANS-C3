@@ -47,7 +47,7 @@ public class MaintenanceRecord extends AbstractEntity {
 	private Date				nextInspection;
 
 	@Mandatory
-	@ValidMoney(min = 0, max = 1000000)
+	@ValidMoney
 	@Automapped
 	private Money				estimatedCost;
 

@@ -30,8 +30,9 @@ public class FlightCrewMemberValidator extends AbstractValidator<ValidFlightCrew
 		assert context != null;
 
 		boolean result;
-
-		{
+		if (flightCrewMember == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
 			String name = flightCrewMember.getIdentity().getName();
 			String surname = flightCrewMember.getIdentity().getSurname();
 			boolean correctIdentifier;

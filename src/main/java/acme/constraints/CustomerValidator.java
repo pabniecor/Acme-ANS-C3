@@ -20,8 +20,9 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 		assert context != null;
 
 		boolean result;
-
-		{
+		if (customer == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
 			String name = customer.getIdentity().getName();
 			String surname = customer.getIdentity().getSurname();
 

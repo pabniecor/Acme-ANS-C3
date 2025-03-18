@@ -88,7 +88,8 @@ public class Flight extends AbstractEntity {
 
 		repository = SpringHelper.getBean(FlightRepository.class);
 
-		departureCity = repository.computeOriginCity(this.getId());
+		Date scheduledDeparture = repository.computeDeparture(this.getId());
+		departureCity = repository.computeOriginCity(this.getId(), scheduledDeparture);
 		result = departureCity == null ? "null" : departureCity;
 
 		return result;
@@ -102,7 +103,8 @@ public class Flight extends AbstractEntity {
 
 		repository = SpringHelper.getBean(FlightRepository.class);
 
-		arrivalCity = repository.computeOriginCity(this.getId());
+		Date scheduledArrival = repository.computeArrival(this.getId());
+		arrivalCity = repository.computeDestinationCity(this.getId(), scheduledArrival);
 		result = arrivalCity == null ? "null" : arrivalCity;
 
 		return result;

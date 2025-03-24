@@ -1,0 +1,2 @@
+acme.validation.activityLog.registrationMoment.message = El momento de registro esta establecido antes de la hora de llegada de la escala.
+acme.validation.flightCrewMember.employeeCode.message = El identificador del miembro no coincide con las iniciales del miembro

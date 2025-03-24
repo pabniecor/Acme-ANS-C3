@@ -1,0 +1,2 @@
+acme.validation.activityLog.registrationMoment.message = The registration moment is established before the leg arrive
+acme.validation.flightCrewMember.employeeCode.message = The manager's identifier does not correspond to their initials

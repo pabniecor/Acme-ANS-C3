@@ -17,3 +17,6 @@ acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pue
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto
+
+acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
+acme.validation.customer.identifier.message = El identificador del cliente es incorrecto

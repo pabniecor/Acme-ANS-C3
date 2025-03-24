@@ -41,7 +41,7 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 
 			boolean properDate = MomentHelper.isAfter(al1.getRegistrationMoment(), legDate);
 
-			super.state(context, properDate, "registrationMoment", "The registration moment is established before the leg arrive");
+			super.state(context, properDate, "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
 		}
 		result = !super.hasErrors(context);
 		return result;

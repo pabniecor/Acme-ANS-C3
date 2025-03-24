@@ -1,2 +1,8 @@
 acme.validation.activityLog.registrationMoment.message = El momento de registro esta establecido antes de la hora de llegada de la escala.
 acme.validation.flightCrewMember.employeeCode.message = El identificador del miembro no coincide con las iniciales del miembro
+
+acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima inspección debe ocurrir después de la actual
+
+acme.validation.technician.uniqueLicenseNumber.message = El número de licencia debe ser único para cada técnico
+acme.validation.technician.correctLicenseNumberPattern.message = El número de licencia debe seguir este patrón -> ^[A-Z]{2,3}\\d{6}$
+acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$

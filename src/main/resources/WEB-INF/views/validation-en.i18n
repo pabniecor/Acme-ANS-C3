@@ -1,2 +1,8 @@
 acme.validation.activityLog.registrationMoment.message = The registration moment is established before the leg arrive
 acme.validation.flightCrewMember.employeeCode.message = The manager's identifier does not correspond to their initials
+
+acme.validation.maintenanceRecord.coherentNextInspection.message = Next inspection must take place after current inspection
+
+acme.validation.technician.uniqueLicenseNumber.message = License number must be unique for each technician
+acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
+acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$

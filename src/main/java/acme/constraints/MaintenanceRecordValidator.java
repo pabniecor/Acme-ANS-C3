@@ -39,7 +39,7 @@ public class MaintenanceRecordValidator extends AbstractValidator<ValidMaintenan
 			if (momentDone != null && nextInspection != null) {
 				correctNextInspection = MomentHelper.isBefore(momentDone, nextInspection);
 
-				super.state(context, correctNextInspection, "nextInspection", "acme.validation.maintenanceRecord.nextInspection.message");
+				super.state(context, correctNextInspection, "nextInspection", "acme.validation.maintenanceRecord.coherentNextInspection.message");
 			}
 		}
 

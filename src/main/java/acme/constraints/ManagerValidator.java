@@ -34,6 +34,22 @@ public class ManagerValidator extends AbstractValidator<ValidManager, Manager> {
 		if (manager == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
+			boolean uniqueManager;
+			Manager existingManager;
+
+			existingManager = this.repository.findManagerByIdentifier(manager.getIdentifier());
+			uniqueManager = existingManager == null || existingManager.equals(manager);
+
+			super.state(context, uniqueManager, "identifier", "acme.validation.manager.duplicate-identifier.message");
+		}
+		{
+			boolean isValidIdentifier;
+
+			isValidIdentifier = manager.getIdentifier().matches("^[A-Z]{2,3}\\d{6}$");
+
+			super.state(context, isValidIdentifier, "identifier", "acme.validation.manager.identifier.message");
+		}
+		{
 			String name = manager.getIdentity().getName();
 			String surname = manager.getIdentity().getSurname();
 

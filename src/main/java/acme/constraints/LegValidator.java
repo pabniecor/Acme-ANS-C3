@@ -46,14 +46,21 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				existingLeg = this.repository.findLegByFlightNumber(leg.getFlightNumber());
 				uniqueLeg = existingLeg == null || existingLeg.equals(leg);
 
-				super.state(context, uniqueLeg, "flightNumber", "acme.validation.leg.flightNumberDuplication.message");
+				super.state(context, uniqueLeg, "flightNumber", "acme.validation.leg.duplicate-flightNumber.message");
+			}
+			{
+				boolean isValidFlightNumber;
+
+				isValidFlightNumber = leg.getFlightNumber().matches("^[A-Z]{3}\\d{4}$");
+
+				super.state(context, isValidFlightNumber, "flightNumber", "acme.validation.leg.flightNumber.message");
 			}
 			{
 				String AirlineIATA = leg.getFlight().getManager().getAirline().getIataCode();
 
 				boolean correctFlightNumber = leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 
-				super.state(context, correctFlightNumber, "flightNumber", "acme.validation.leg.flightNumberIATA.message");
+				super.state(context, correctFlightNumber, "flightNumber", "acme.validation.leg.flightNumber.message");
 			}
 
 			{

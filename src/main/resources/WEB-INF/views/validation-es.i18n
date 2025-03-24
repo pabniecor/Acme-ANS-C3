@@ -1,4 +1,5 @@
 acme.validation.activityLog.registrationMoment.message = El momento de registro esta establecido antes de la hora de llegada de la escala.
+
 acme.validation.flightCrewMember.employeeCode.message = El identificador del miembro no coincide con las iniciales del miembro
 
 acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima inspección debe ocurrir después de la actual
@@ -6,3 +7,13 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima i
 acme.validation.technician.uniqueLicenseNumber.message = El número de licencia debe ser único para cada técnico
 acme.validation.technician.correctLicenseNumberPattern.message = El número de licencia debe seguir este patrón -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$
+
+acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
+acme.validation.manager.identifier.message = El identificador del manager es incorrecto
+
+acme.validation.leg.duplicate-flightNumber.message = El número de vuelo del tramo está duplicado
+acme.validation.leg.flightNumber.message = El número de vuelo del tramo es incorrecto
+acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pueden solapar
+
+acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
+acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto

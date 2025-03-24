@@ -1,0 +1,20 @@
+administrator.aircraft.list.label.model = Modelo: 
+administrator.aircraft.list.label.registrationNumber = Número de registro:
+administrator.aircraft.list.label.capacity = Capacidad:
+administrator.aircraft.list.label.cargoWeight = Peso máximo de carga: 
+administrator.aircraft.list.label.status = Estatus: 
+administrator.aircraft.list.label.details = Detalles: 
+administrator.aircraft.list.label.airline = Aerolinea: 
+
+administrator.aircraft.form.label.model = Modelo: 
+administrator.aircraft.form.label.registrationNumber = Número de registro: 
+administrator.aircraft.form.label.capacity = Capacidad: 
+administrator.aircraft.form.label.cargoWeight = Peso máximo de carga: 
+administrator.aircraft.form.label.status = Estatus: 
+administrator.aircraft.form.label.details = Detalles: 
+administrator.aircraft.form.label.airline = Aerolinea: 
+
+administrator.aircraft.list.title = Listado de aeronaves
+administrator.aircraft.form.title = Formulario de aeronaves
+
+administrator.aircraft.list.button.create = Crear aeronave

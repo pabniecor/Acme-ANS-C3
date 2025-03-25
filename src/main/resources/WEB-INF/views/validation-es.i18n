@@ -20,3 +20,11 @@ acme.validation.airport.iataCode.message = El código iata del aeropuerto es inc
 
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
+
+acme.validation.assistanceAgents.employeeCode.message = El código de empleado no corresponde con sus iniciales
+
+acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
+
+acme.validation.trackingLog.resolutionPercentage.message = El porcentaje de resolución debe de ser 100%
+acme.validation.trackingLog.resolution-notNull.message = La resolución no puede ser nula
+acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores

@@ -39,7 +39,7 @@ public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistance
 
 			boolean correctEmployeeCode = assistanceAgents.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgents.getEmployeeCode().charAt(1) == surname.charAt(0);
 
-			super.state(context, correctEmployeeCode, "employeeCode", "The first two or three letters of the employeeCode do not correspond to their initials");
+			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgents.employeeCode.message");
 		}
 
 		result = !super.hasErrors(context);

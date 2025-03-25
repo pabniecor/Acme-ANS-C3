@@ -1,4 +1,4 @@
-key,registration-moment,passenger-email,description,type,indicator,key:assistance-agent,key:leg
+key,registration-moment,passenger-email,description,type,accepted,key:assistance-agent,key:leg
 # base entity
 claim-00,2012/07/02 00:00,acme@lorem-ipsum.org,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",FLIGHT_ISSUES,true,agent-01,leg-01
 # registrationMoment - standard variations

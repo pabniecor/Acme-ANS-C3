@@ -25,7 +25,7 @@ acme.validation.assistanceAgents.employeeCode.message = The employee code does n
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
 
-acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Resolution percentage must be 100%
-acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolution percentage cannot be 100%
-acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null
-acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blanck
+acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Resolution percentage must be 100% when status is ACCEPTED or REJECTED
+acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolution percentage cannot be 100% when status is PENDING
+acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null when status is ACCEPTED or REJECTED
+acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blanck when status is ACCEPTED or REJECTED

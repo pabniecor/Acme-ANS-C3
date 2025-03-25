@@ -38,15 +38,15 @@ public class TrackingLog extends AbstractEntity {
 	@Automapped
 	private String				step;
 
-	@Optional
+	@Mandatory
 	@ValidScore
 	@Automapped
 	private Double				resolutionPercentage;
 
-	@Optional
+	@Mandatory
 	@Valid
 	@Automapped
-	private Boolean				indicator;
+	private TrackStatus			status;
 
 	@Optional
 	@ValidString(max = 255)

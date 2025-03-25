@@ -42,7 +42,7 @@ public class ServiceValidator extends AbstractValidator<ValidService, Service> {
 			boolean correctPromotionCode = currentYearToString.charAt(currentYearToString.length() - 2) == promotionCode.charAt(promotionCode.length() - 2)
 				&& currentYearToString.charAt(currentYearToString.length() - 1) == promotionCode.charAt(promotionCode.length() - 1);
 
-			super.state(context, correctPromotionCode, "promotionCode", "The last two digits must correspond to the current year");
+			super.state(context, correctPromotionCode, "promotionCode", "acme.validation.service.promotionCode.message");
 		}
 		result = !super.hasErrors(context);
 		return result;

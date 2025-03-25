@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
+import acme.entities.customer_service_and_claims.TrackStatus;
 import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.entities.customer_service_and_claims.TrackingLogRepository;
 
@@ -33,24 +34,27 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 		if (trackingLog == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			Boolean indicator = trackingLog.getIndicator();
+			TrackStatus indicator = trackingLog.getStatus();
 
-			if (indicator != null) {
+			if (indicator != TrackStatus.PENDING) {
 				Double resolutionPercentage = trackingLog.getResolutionPercentage();
 				String resolution = trackingLog.getResolution();
 				boolean correctResolutionPercentage;
 				boolean correctResolution;
 
-				if (indicator) {
-					correctResolutionPercentage = resolutionPercentage != null;
-					super.state(context, correctResolutionPercentage, "resolutionPercentage", "Resolution percentage cannot be null");
-				} else {
-					correctResolutionPercentage = resolutionPercentage == null;
-					super.state(context, correctResolutionPercentage, "resolutionPercentage", "Resolution percentage must be null");
-				}
+				if (indicator == TrackStatus.ACCEPTED || indicator == TrackStatus.REJECTED) {
+					{
+						correctResolutionPercentage = resolutionPercentage == 100;
+						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage.message");
+					}
+					{
+						correctResolution = resolution != null;
+						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
+						correctResolution = !resolution.trim().equals("");
+						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
+					}
 
-				correctResolution = resolution != null;
-				super.state(context, correctResolution, "resolution", "Resolution cannot be null");
+				}
 			}
 
 		}

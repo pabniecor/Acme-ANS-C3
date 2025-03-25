@@ -23,6 +23,7 @@ master.menu.anonymous.favourite-link4913 = 49137920: Román Jiménez, Darío
 master.menu.administrator = Administrador
 master.menu.administrator.list-user-accounts = Ver cuentas de usuario
 master.menu.administrator.list-aircrafts = Listar aeronaves
+master.menu.administrator.list-airports = Listar aeropuertos
 master.menu.administrator.populate-db-initial = Poblar BD (inicial)
 master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema

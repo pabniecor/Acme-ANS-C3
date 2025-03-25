@@ -18,3 +18,7 @@ administrator.aircraft.list.title = Listado de aeronaves
 administrator.aircraft.form.title = Formulario de aeronaves
 
 administrator.aircraft.list.button.create = Crear aeronave
+
+administrator.aircraft.form.button.update = Actualizar aeronave
+administrator.aircraft.form.button.delete = Borrar aeronave
+administrator.aircraft.form.button.create = Crear aeronave

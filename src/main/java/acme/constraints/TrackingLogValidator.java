@@ -36,16 +36,17 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 		else {
 			TrackStatus indicator = trackingLog.getStatus();
 
+			Double resolutionPercentage = trackingLog.getResolutionPercentage();
+			boolean correctResolutionPercentage;
+
 			if (indicator != TrackStatus.PENDING) {
-				Double resolutionPercentage = trackingLog.getResolutionPercentage();
 				String resolution = trackingLog.getResolution();
-				boolean correctResolutionPercentage;
 				boolean correctResolution;
 
 				if (indicator == TrackStatus.ACCEPTED || indicator == TrackStatus.REJECTED) {
 					{
 						correctResolutionPercentage = resolutionPercentage == 100;
-						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage.message");
+						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
 					}
 					{
 						correctResolution = resolution != null;
@@ -55,6 +56,9 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 					}
 
 				}
+			} else if (indicator == TrackStatus.PENDING) {
+				correctResolutionPercentage = resolutionPercentage != 100;
+				super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
 			}
 
 		}

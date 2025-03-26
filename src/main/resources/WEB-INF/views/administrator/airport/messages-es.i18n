@@ -20,3 +20,5 @@ administrator.airport.list.title = Listado de aeropuertos
 administrator.airport.form.title = Formulario de aeropuertos
 
 administrator.airport.list.button.create = Crear aeropuerto
+administrator.airport.form.button.create = Crear aeropuerto
+administrator.airport.form.button.update = Actualizar aeropuerto

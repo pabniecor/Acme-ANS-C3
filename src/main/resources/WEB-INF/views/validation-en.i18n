@@ -29,3 +29,5 @@ acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Resolution 
 acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolution percentage cannot be 100% when status is PENDING
 acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blanck when status is ACCEPTED or REJECTED
+
+acme.validation.confirmation.message = Need confirmation

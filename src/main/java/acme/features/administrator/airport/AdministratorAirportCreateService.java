@@ -39,7 +39,10 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void validate(final Airport airport) {
-		;
+		boolean confirmation;
+
+		confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override
@@ -57,6 +60,7 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 		dataset = super.unbindObject(airport, "name", "iataCode", "operationalScope", "city", "country", "website", "email", "contactPhone");
 		dataset.put("operationalScope", operationalScope);
+		dataset.put("confirmation", false);
 
 		super.getResponse().addData(dataset);
 	}

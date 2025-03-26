@@ -20,3 +20,5 @@ administrator.airport.list.title = Airport List
 administrator.airport.form.title = Airport Form
 
 administrator.airport.list.button.create = Create airport
+administrator.airport.form.button.create = Create airport
+administrator.airport.form.button.update = Update airport

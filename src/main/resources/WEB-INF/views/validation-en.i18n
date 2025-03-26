@@ -28,3 +28,5 @@ acme.validation.service.promotionCode.message = The last two digits must corresp
 acme.validation.trackingLog.resolutionPercentage.message = Resolution percentage must be 100%
 acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blanck
+
+acme.validation.confirmation.message = Need confirmation

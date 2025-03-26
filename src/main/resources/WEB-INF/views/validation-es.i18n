@@ -28,3 +28,5 @@ acme.validation.service.promotionCode.message = Los dos últimos dígitos deben 
 acme.validation.trackingLog.resolutionPercentage.message = El porcentaje de resolución debe de ser 100%
 acme.validation.trackingLog.resolution-notNull.message = La resolución no puede ser nula
 acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores
+
+acme.validation.confirmation.message = Se necesita confirmación

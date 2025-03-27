@@ -12,4 +12,18 @@
 	<acme:input-textbox code="administrator.airport.form.label.website" path="website" />
 	<acme:input-textbox code="administrator.airport.form.label.email" path="email" />
 	<acme:input-textbox code="administrator.airport.form.label.contactPhone" path="contactPhone" />
+	
+	<jstl:if test="${!readonly}">
+		<acme:input-checkbox code="administrator.airport.form.label.confirmation" path="confirmation" />
+		
+		<jstl:choose>
+			<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+				<acme:submit code="administrator.airport.form.button.update" action="/administrator/airport/update"/>
+			</jstl:when>
+			<jstl:when test="${_command == 'create'}">
+				<acme:submit code="administrator.airport.form.button.create" action="/administrator/airport/create"/>
+			</jstl:when>		
+		</jstl:choose>
+	</jstl:if>
+	
 </acme:form>

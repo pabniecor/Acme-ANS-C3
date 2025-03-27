@@ -20,5 +20,5 @@ administrator.aircraft.form.title = Aircraft Form
 administrator.aircraft.list.button.create = Create aircraft
 
 administrator.aircraft.form.button.update = Update aircraft
-administrator.aircraft.form.button.delete = Delete aircraft
 administrator.aircraft.form.button.create = Create aircraft
+administrator.aircraft.form.button.disable = Disable aircraft

@@ -15,7 +15,7 @@ import acme.entities.airline_operations.AircraftStatus;
 import acme.entities.airline_operations.Airline;
 
 @GuiService
-public class AdministratorAircraftDeleteService extends AbstractGuiService<Administrator, Aircraft> {
+public class AdministratorAircraftDisableService extends AbstractGuiService<Administrator, Aircraft> {
 
 	@Autowired
 	private AdministratorAircraftRepository repository;
@@ -44,18 +44,14 @@ public class AdministratorAircraftDeleteService extends AbstractGuiService<Admin
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		AircraftStatus status;
-
-		status = super.getRequest().getData("status", AircraftStatus.class);
-		if (status == AircraftStatus.ACTIVE_SERVICE)
-			super.state(status == AircraftStatus.ACTIVE_SERVICE, "*", "administrator.aircraft.delete.activeService");
+		;
 	}
 
 	@Override
 	public void perform(final Aircraft aircraft) {
-		this.repository.delete(aircraft);
+		aircraft.setStatus(AircraftStatus.UNDER_MAINTENANCE);
+		this.repository.save(aircraft);
 	}
-
 	@Override
 	public void unbind(final Aircraft aircraft) {
 		Dataset dataset;
@@ -74,4 +70,5 @@ public class AdministratorAircraftDeleteService extends AbstractGuiService<Admin
 
 		super.getResponse().addData(dataset);
 	}
+
 }

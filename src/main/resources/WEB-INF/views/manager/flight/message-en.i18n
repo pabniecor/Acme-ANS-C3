@@ -1,0 +1,20 @@
+manager.flight.list.label.tag = Tag:
+manager.flight.list.label.selfTransfer = SelfTransfer:
+manager.flight.list.label.cost = Cost:
+manager.flight.list.label.description = Description:
+manager.flight.list.label.manager = Manager:
+
+manager.flight.form.label.tag = Tag:
+manager.flight.form.label.selfTransfer = SelfTransfer:
+manager.flight.form.label.cost = Cost:
+manager.flight.form.label.description = Description:
+manager.flight.form.label.manager = Manager:
+
+manager.flight.list.title = Flight List
+manager.flight.form.title = Flight Form
+
+manager.flight.list.button.create = Create flight
+
+manager.flight.form.button.update = Update flight
+manager.flight.form.button.delete = Delete flight
+manager.flight.form.button.create = Create flight

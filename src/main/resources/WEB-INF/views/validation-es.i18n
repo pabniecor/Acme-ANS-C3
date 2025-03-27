@@ -29,3 +29,4 @@ acme.validation.trackingLog.resolutionPercentage-mustBe100.message = El porcenta
 acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = El porcentaje de resolución no puede ser 100% cuando el estado es PENDING
 acme.validation.trackingLog.resolution-notNull.message = La resolución no puede ser nula cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores cuando el estado es ACCEPTED o REJECTED
+acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución debe ser nula o vacía cuando el estado es PENDING

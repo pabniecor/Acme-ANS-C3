@@ -1,0 +1,19 @@
+administrator.airline.list.label.name = Name: 
+administrator.airline.list.label.iataCode = IATA Code:
+administrator.airline.list.label.website = Website:
+administrator.airline.list.label.airlineType = Airline Type:
+
+administrator.airline.form.label.name = Name: 
+administrator.airline.form.label.iataCode = IATA Code:
+administrator.airline.form.label.website = Website:
+administrator.airline.form.label.airlineType = Airline Type: 
+administrator.airline.form.label.foundationMoment = Foundation Moment: 
+administrator.airline.form.label.email = Email: 
+administrator.airline.form.label.phoneNumber = Phone Number: 
+
+administrator.airline.list.title = Airline List
+administrator.airline.form.title = Airline Form
+
+administrator.airline.list.button.create = Create airline
+administrator.airline.form.button.create = Create airline
+administrator.airline.form.button.update = Update airline

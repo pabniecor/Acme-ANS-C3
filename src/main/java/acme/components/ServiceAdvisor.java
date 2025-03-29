@@ -18,7 +18,7 @@ public class ServiceAdvisor {
 
 
 	@ModelAttribute("service")
-	public Service getAdvertisement() {
+	public Service getService() {
 		Service result;
 
 		try {

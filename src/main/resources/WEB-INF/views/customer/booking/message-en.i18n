@@ -1,0 +1,27 @@
+customer.booking.list.label.locatorCode= Locator Code:
+customer.booking.list.label.purchaseMoment= Purchase Moment:
+customer.booking.list.label.travelClass= Travel Class:
+customer.booking.list.label.price= Price:
+customer.booking.list.label.price= Price:
+customer.booking.list.label.lastCardNibble= Last Card Nibble:
+customer.booking.list.label.flight= Flight:
+customer.booking.list.label.customer= Customer:
+
+customer.booking.form.label.locatorCode= Locator Code:
+customer.booking.form.label.purchaseMoment= Purchase Moment:
+customer.booking.form.label.travelClass= Travel Class:
+customer.booking.form.label.price= Price:
+customer.booking.form.label.lastCardNibble= Last Card Nibble:
+customer.booking.form.label.flight= Flight:
+customer.booking.form.label.customer= Customer:
+
+
+customer.booking.list.title = Booking List
+customer.booking.form.title = Booking Form
+
+customer.booking.list.button.create = Create Booking
+
+customer.booking.form.button.create = Create Booking
+customer.booking.form.button.update = Update Booking
+customer.booking.form.button.delete = Delete Booking
+

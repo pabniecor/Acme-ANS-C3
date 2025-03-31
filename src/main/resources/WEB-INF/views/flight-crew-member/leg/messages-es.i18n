@@ -1,0 +1,6 @@
+member.leg.list.label.flight-number = Número de vuelo:
+member.leg.list.label.flight = Vuelo:
+member.leg.list.label.arrival-time = Hora de llegada estimada: 
+member.leg.list.label.arrival-airport = Aeropuerto de llegada:
+
+flight-crew-member.leg.list.title = Escalas asociadas a la asignación de vuelo.

@@ -54,6 +54,11 @@
 		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
 			<acme:menu-suboption code="master.menu.customer.list-bookings" action="/customer/booking/list"/>
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.member" access="hasRealm('FlightCrewMember')">
+			<acme:menu-suboption code="master.menu.member.list.flight-assignments-complete" action="/flight-crew-member/flight-assignment/complete-list"/>
+			<acme:menu-suboption code="master.menu.member.list.flight-assignments-incomplete" action="/flight-crew-member/flight-assignment/incomplete-list"/>
+		</acme:menu-option>
 	</acme:menu-left>
 
 	<acme:menu-right>		

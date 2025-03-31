@@ -15,6 +15,7 @@ manager.flight.form.title = Formulario de vuelos
 
 manager.flight.list.button.create = Crear vuelo
 
+manager.flight.form.button.legs = Listar escalas
 manager.flight.form.button.update = Actualizar vuelo
 manager.flight.form.button.delete = Eliminar vuelo
 manager.flight.form.button.create = Crear vuelo

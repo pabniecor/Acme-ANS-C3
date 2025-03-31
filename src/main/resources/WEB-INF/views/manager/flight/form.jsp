@@ -12,6 +12,7 @@
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+			<acme:button code="manager.flight.form.button.legs" action="/manager/leg/list?masterId=${id}"/>
 			<acme:submit code="manager.flight.form.button.update" action="/manager/flight/update"/>
 			<acme:submit code="manager.flight.form.button.delete" action="/manager/flight/delete"/>
 		</jstl:when>

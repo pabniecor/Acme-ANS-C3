@@ -1,0 +1,31 @@
+manager.leg.list.label.flightNumber = Número de vuelo:
+manager.leg.list.label.scheduledDeparture = Momento de partida:
+manager.leg.list.label.scheduledArrival = Momento de llegada: 
+manager.leg.list.label.status = Estado: 
+manager.leg.list.label.flight = Vuelo: 
+manager.leg.list.label.departureAirport = Aeropuerto de partida: 
+manager.leg.list.label.arrivalAirport = Aeropuerto de llegada: 
+manager.leg.list.label.aircraft = Avión: 
+manager.leg.list.label.sequenceOrder = Orden de secuencia: 
+manager.leg.list.label.published = Publicado: 
+
+manager.leg.form.label.flightNumber = Número de vuelo:
+manager.leg.form.label.scheduledDeparture = Momento de partida:
+manager.leg.form.label.scheduledArrival = Momento de llegada: 
+manager.leg.form.label.status = Estado: 
+manager.leg.form.label.flight = Vuelo: 
+manager.leg.form.label.departureAirport = Aeropuerto de partida: 
+manager.leg.form.label.arrivalAirport = Aeropuerto de llegada: 
+manager.leg.form.label.aircraft = Avión: 
+manager.leg.form.label.sequenceOrder = Orden de secuencia: 
+manager.leg.form.label.published = Publicado: 
+
+manager.leg.list.title = Lista de escalas
+manager.leg.form.title = Formulario de escalas
+
+manager.leg.list.button.create = Crear escala
+
+manager.leg.form.button.update = Actualizar escala
+manager.leg.form.button.create = Crear escala
+manager.leg.form.button.delete = Eliminar escala
+manager.leg.form.button.publish = Publicar escala

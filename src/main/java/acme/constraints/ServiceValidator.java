@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
+import acme.components.ServiceRepository;
 import acme.entities.airport_management.Service;
-import acme.entities.airport_management.ServiceRepository;
 
 @Validator
 public class ServiceValidator extends AbstractValidator<ValidService, Service> {

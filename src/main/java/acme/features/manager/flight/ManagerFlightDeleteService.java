@@ -14,36 +14,46 @@ import acme.entities.flight_management.Leg;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight> {
+public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flight> {
 
 	@Autowired
-	private ManagerFlightRepository repository;
+	protected ManagerFlightRepository repository;
 
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
-		Flight flight;
-		Manager manager;
+		int id = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(id);
 
-		masterId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(masterId);
-		manager = flight == null ? null : flight.getManager();
-		status = super.getRequest().getPrincipal().hasRealm(manager) || flight != null && !flight.getDraftMode();
+		boolean authorised = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()) && flight.getDraftMode();
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
 	public void load() {
-		Flight flight;
-		int id;
-
-		id = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(id);
-
+		int id = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(id);
 		super.getBuffer().addData(flight);
+	}
+
+	@Override
+	public void bind(final Flight flight) {
+		;
+	}
+
+	@Override
+	public void validate(final Flight flight) {
+		;
+	}
+
+	@Override
+	public void perform(final Flight flight) {
+		Collection<Leg> legs;
+
+		legs = this.repository.findLegsByFlightId(flight.getId());
+		this.repository.deleteAll(legs);
+		this.repository.delete(flight);
 	}
 
 	@Override
@@ -65,13 +75,6 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		dataset.put("departureCity", flight.getOriginCity());
 		dataset.put("arrivalCity", flight.getDestinationCity());
 		dataset.put("numberOfLayovers", flight.getLayovers());
-
-		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
-		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
-		boolean canPublish = flight.getDraftMode() && allPublished;
-
-		dataset.put("canPublish", canPublish);
 
 		super.getResponse().addData(dataset);
 	}

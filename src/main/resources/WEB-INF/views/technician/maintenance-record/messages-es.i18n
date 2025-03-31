@@ -11,8 +11,12 @@ technician.maintenanceRecord.form.label.notes = Notas:
 technician.maintenanceRecord.form.label.aircraft = Aeronave:
 technician.maintenanceRecord.form.label.technician = Técnico:
 technician.maintenanceRecord.form.label.tasks = Tareas asociadas:
+technician.maintenanceRecord.form.label.confirmation = Confirmar
 
 technician.maintenance-record.list.title = Listado de informes de mantenimiento
 technician.maintenance-record.form.title = Detalles del informe de mantenimiento
 
 technician.maintenanceRecord.list.button.create = Crear informe de mantenimiento
+technician.maintenanceRecord.form.button.create = Crear
+technician.maintenanceRecord.form.button.update = Actualizar informe de mantenimiento
+technician.maintenanceRecord.form.button.delete = Eliminar informe de mantenimiento

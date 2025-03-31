@@ -31,4 +31,8 @@ acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be nu
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blank when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be null or blank when status is PENDING
 
+acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
+
 acme.validation.confirmation.message = Need confirmation
+
+

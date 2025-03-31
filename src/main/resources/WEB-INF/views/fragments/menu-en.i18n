@@ -49,6 +49,13 @@ master.menu.manager.list-flights = List flights
 master.menu.customer = Customer
 master.menu.customer.list-bookings = List bookings
 
+# master.menu.member ##########################################################
+
+master.menu.member = Member
+master.menu.member.favourite-link = Favourite link
+master.menu.member.list.flight-assignments-complete = List completed flight assignments
+master.menu.member.list.flight-assignments-incomplete = List incompleted flight assignments
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account

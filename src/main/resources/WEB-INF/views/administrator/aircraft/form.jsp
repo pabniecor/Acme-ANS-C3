@@ -12,6 +12,10 @@
 	<acme:input-textbox code="administrator.aircraft.form.label.details" path="details" />
 	<acme:input-select code="administrator.aircraft.form.label.airline" path="airline" choices="${airlines}" />
 	
+	<jstl:if test="${!readonly}">
+		<acme:input-checkbox code="administrator.announcement.form.label.confirmation" path="confirmation"/>
+	</jstl:if>
+	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|disable')}">
 			<acme:submit code="administrator.aircraft.form.button.update" action="/administrator/aircraft/update"/>

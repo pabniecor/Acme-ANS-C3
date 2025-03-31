@@ -14,7 +14,7 @@ import acme.entities.flight_management.Leg;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight> {
+public class ManagerFlightPublishService extends AbstractGuiService<Manager, Flight> {
 
 	@Autowired
 	private ManagerFlightRepository repository;
@@ -30,7 +30,7 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		masterId = super.getRequest().getData("id", int.class);
 		flight = this.repository.findFlightById(masterId);
 		manager = flight == null ? null : flight.getManager();
-		status = super.getRequest().getPrincipal().hasRealm(manager) || flight != null && !flight.getDraftMode();
+		status = super.getRequest().getPrincipal().hasRealm(manager) && flight != null && flight.getDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -47,6 +47,29 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	}
 
 	@Override
+	public void bind(final Flight flight) {
+		// No binding necesario para publicación
+	}
+
+	@Override
+	public void validate(final Flight flight) {
+		int flightId = flight.getId();
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flightId);
+
+		boolean hasLegs = !legs.isEmpty();
+		boolean allPublished = legs.stream().noneMatch(Leg::getDraftMode);
+
+		super.state(hasLegs, "draftMode", "manager.flight.publish.error.no-legs");
+		super.state(allPublished, "draftMode", "manager.flight.publish.error.unpublished-legs");
+	}
+
+	@Override
+	public void perform(final Flight flight) {
+		flight.setDraftMode(false);
+		this.repository.save(flight);
+	}
+
+	@Override
 	public void unbind(final Flight flight) {
 		assert flight != null;
 		Dataset dataset;
@@ -59,19 +82,6 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager", "draftMode");
 		dataset.put("manager", choises.getSelected().getKey());
 		dataset.put("managers", choises);
-
-		dataset.put("sheduledDeparture", flight.getDeparture());
-		dataset.put("sheduledArrival", flight.getArrival());
-		dataset.put("departureCity", flight.getOriginCity());
-		dataset.put("arrivalCity", flight.getDestinationCity());
-		dataset.put("numberOfLayovers", flight.getLayovers());
-
-		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
-		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
-		boolean canPublish = flight.getDraftMode() && allPublished;
-
-		dataset.put("canPublish", canPublish);
 
 		super.getResponse().addData(dataset);
 	}

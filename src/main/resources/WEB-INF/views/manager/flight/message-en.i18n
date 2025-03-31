@@ -15,6 +15,7 @@ manager.flight.form.title = Flight Form
 
 manager.flight.list.button.create = Create flight
 
+manager.flight.form.button.legs = List legs
 manager.flight.form.button.update = Update flight
 manager.flight.form.button.delete = Delete flight
 manager.flight.form.button.create = Create flight

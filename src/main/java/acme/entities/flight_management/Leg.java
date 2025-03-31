@@ -94,4 +94,9 @@ public class Leg extends AbstractEntity {
 	@ValidNumber(min = 1)
 	@Automapped
 	private Integer		sequenceOrder;
+
+	@Mandatory
+	@Valid
+	@Automapped
+	private Boolean		published;
 }

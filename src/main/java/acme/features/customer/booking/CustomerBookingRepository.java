@@ -26,6 +26,9 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	@Query("select b from Booking b where b.customer.id = :customerId")
 	Collection<Booking> findBookingsByCustomerId(int customerId);
 
+	@Query("select b from Booking b where b.customer.id = :customerId")
+	Booking findBookingByCustomerId(int customerId);
+
 	@Query("select f from Flight f")
 	Collection<Flight> findAllFlights();
 

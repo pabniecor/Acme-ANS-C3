@@ -49,7 +49,6 @@ master.menu.manager.list-flights = Listar vuelos
 master.menu.customer = Cliente
 master.menu.customer.list-bookings = Listar reservas
 
-
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta

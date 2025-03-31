@@ -15,10 +15,10 @@ import acme.entities.flight_management.Flight;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerBookingShowService extends AbstractGuiService<Customer, Booking> {
+public class CustomerBookingPublishService extends AbstractGuiService<Customer, Booking> {
 
 	@Autowired
-	private CustomerBookingRepository repository;
+	protected CustomerBookingRepository repository;
 
 
 	@Override
@@ -31,7 +31,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		bookingId = super.getRequest().getData("id", int.class);
 		booking = this.repository.findBookingById(bookingId);
 		customer = booking == null ? null : booking.getCustomer();
-		status = super.getRequest().getPrincipal().hasRealm(customer) || booking != null && booking.getDraftMode() == false;
+		status = booking != null && booking.getDraftMode() == true && super.getRequest().getPrincipal().hasRealm(customer);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,7 +48,28 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	}
 
 	@Override
+	public void validate(final Booking booking) {
+		String lastNibble = booking.getLastCardNibble();
+
+		boolean lastCardNibbleNotNull = !(lastNibble.isBlank() || booking.getLastCardNibble() == null);
+
+		super.state(lastCardNibbleNotNull, "lastCardNibble", "acme.validation.customer.lastCardNibble.message");
+	}
+
+	@Override
+	public void bind(final Booking booking) {
+		;
+	}
+
+	@Override
+	public void perform(final Booking booking) {
+		booking.setDraftMode(false);
+		this.repository.save(booking);
+	}
+
+	@Override
 	public void unbind(final Booking booking) {
+		assert booking != null;
 
 		Dataset dataset;
 		Collection<Customer> customers;
@@ -73,7 +94,6 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		dataset.put("customers", choicesCustomer);
 
 		super.getResponse().addData(dataset);
-
 	}
 
 }

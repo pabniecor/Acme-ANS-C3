@@ -6,6 +6,7 @@ customer.booking.list.label.price= Price:
 customer.booking.list.label.lastCardNibble= Last Card Nibble:
 customer.booking.list.label.flight= Flight:
 customer.booking.list.label.customer= Customer:
+customer.booking.list.label.draftMode= Draft Mode:
 
 customer.booking.form.label.locatorCode= Locator Code:
 customer.booking.form.label.purchaseMoment= Purchase Moment:
@@ -14,6 +15,7 @@ customer.booking.form.label.price= Price:
 customer.booking.form.label.lastCardNibble= Last Card Nibble:
 customer.booking.form.label.flight= Flight:
 customer.booking.form.label.customer= Customer:
+customer.booking.form.label.draftMode = Draft Mode:
 
 
 customer.booking.list.title = Booking List
@@ -23,5 +25,7 @@ customer.booking.list.button.create = Create Booking
 
 customer.booking.form.button.create = Create Booking
 customer.booking.form.button.update = Update Booking
-customer.booking.form.button.delete = Delete Booking
+customer.booking.form.button.publish = Publish Booking
+
+customer.booking.form.button.passengers = Passengers 
 

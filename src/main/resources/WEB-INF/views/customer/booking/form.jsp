@@ -13,14 +13,17 @@
 	<acme:input-select code="customer.booking.form.label.customer" path="customer" choices="${customers}" />
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+		<jstl:when test="${_command == 'show' && draftMode == false}">
+			<acme:button code="customer.booking.form.button.passengers" action="/customer/passenger/list?bookingId=${id}"/>
+		</jstl:when>
+		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == true}">
 			<acme:submit code="customer.booking.form.button.update" action="/customer/booking/update"/>
-			<acme:submit code="customer.booking.form.button.delete" action="/customer/booking/delete"/>
+			<acme:submit code="customer.booking.form.button.publish" action="/customer/booking/publish"/>
+			<acme:button code="customer.booking.form.button.passengers" action="/customer/passenger/list?bookingId=${id}"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 		</jstl:when>		
 	</jstl:choose>
 	
-
 </acme:form>

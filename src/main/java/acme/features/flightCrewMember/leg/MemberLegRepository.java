@@ -1,0 +1,17 @@
+
+package acme.features.flightCrewMember.leg;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import acme.client.repositories.AbstractRepository;
+import acme.entities.flight_management.Leg;
+
+@Repository
+public interface MemberLegRepository extends AbstractRepository {
+
+	@Query("select fa.leg from FlightAssignment fa where fa.id =:id")
+	Collection<Leg> findAllLegsOfFlightAssingment(int id);
+}

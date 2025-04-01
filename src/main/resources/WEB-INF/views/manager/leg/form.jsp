@@ -15,7 +15,7 @@
 	<acme:input-integer code="manager.leg.form.label.sequenceOrder" path="sequenceOrder" />
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|disable|publish') && published == false}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|disable|publish') && draftMode == true}">
 			<acme:submit code="manager.leg.form.button.update" action="/manager/leg/update"/>
 			<acme:submit code="manager.leg.form.button.delete" action="/manager/leg/delete"/>
 			<acme:submit code="manager.leg.form.button.publish" action="/manager/leg/publish"/>

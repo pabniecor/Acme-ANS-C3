@@ -1,0 +1,6 @@
+member.leg.list.label.flight-number = Flight number: 
+member.leg.list.label.flight = Flight: 
+member.leg.list.label.arrival-time = Scheduled arrival: 
+member.leg.list.label.arrival-airport = Arrival airport:
+
+flight-crew-member.leg.list.title = Legs asociated to the Flight assignment.

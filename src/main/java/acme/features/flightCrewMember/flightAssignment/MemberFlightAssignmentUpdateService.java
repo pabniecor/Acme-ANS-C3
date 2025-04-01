@@ -70,9 +70,9 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		// 		CREO Q SOLO VA EN EL PUBLISH
 
 		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.isEmpty(), "leg", "acme.validation.legAssigned");
+		super.state(legs.isEmpty() || legs.contains(fa.getLeg()), "leg", "acme.validation.legAssigned");
 
-		super.state(fa.getDuty() == Duty.LEAD_ATTENDANT, "duty", "acme.validation.leadAttendant");
+		//		super.state(fa.getDuty() == Duty.LEAD_ATTENDANT, "duty", "acme.validation.leadAttendant");
 
 		nPilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.PILOT));
 		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
@@ -112,7 +112,7 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 
 		dataset = super.unbindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
 		dataset.put("duty", Duty.LEAD_ATTENDANT);
-		if (fa.getDuty() != Duty.LEAD_ATTENDANT)
+		if (fa.getDuty() != Duty.LEAD_ATTENDANT || fa.getDraft() == false)
 			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);

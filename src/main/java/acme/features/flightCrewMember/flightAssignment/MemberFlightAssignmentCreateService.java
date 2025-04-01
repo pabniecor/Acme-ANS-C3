@@ -42,7 +42,7 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 
 	@Override
 	public void bind(final FlightAssignment fa) {
-		super.bindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks");
+		super.bindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
 	}
 
 	@Override
@@ -82,6 +82,7 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 
 	@Override
 	public void perform(final FlightAssignment fa) {
+		fa.setDraft(true);
 		this.repository.save(fa);
 	}
 

@@ -1,0 +1,24 @@
+technician.maintenanceRecord.list.label.momentDone = Fecha de mantenimiento:
+technician.maintenanceRecord.list.label.maintenanceStatus = Estado:
+technician.maintenanceRecord.list.label.nextInspection = Próxima inspección:
+technician.maintenanceRecord.list.label.estimatedCost = Coste estimado:
+
+technician.maintenanceRecord.form.label.momentDone = Fecha de mantenimiento:
+technician.maintenanceRecord.form.label.maintenanceStatus = Estado:
+technician.maintenanceRecord.form.label.nextInspection = Próxima inspección:
+technician.maintenanceRecord.form.label.estimatedCost = Coste estimado:
+technician.maintenanceRecord.form.label.draftMode = Modo borrador
+technician.maintenanceRecord.form.label.notes = Notas:
+technician.maintenanceRecord.form.label.aircraft = Aeronave:
+technician.maintenanceRecord.form.label.technician = Técnico:
+technician.maintenanceRecord.form.label.confirmation = Confirmar
+
+technician.maintenance-record.list.title = Listado de informes de mantenimiento
+technician.maintenance-record.form.title = Detalles del informe de mantenimiento
+
+technician.maintenanceRecord.list.button.create = Crear informe de mantenimiento
+technician.maintenanceRecord.form.button.create = Crear
+technician.maintenanceRecord.form.button.update = Actualizar informe de mantenimiento
+technician.maintenanceRecord.form.button.tasks = Tareas asociadas
+technician.maintenanceRecord.form.button.publish = Publicar informe de mantenimiento
+technician.maintenanceRecord.form.button.unPublish = Hacer privado el informe de mantenimiento

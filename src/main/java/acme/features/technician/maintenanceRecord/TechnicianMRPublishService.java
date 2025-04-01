@@ -1,6 +1,7 @@
 
 package acme.features.technician.maintenanceRecord;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,14 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
+import acme.entities.maintenance_and_technical.Involves;
 import acme.entities.maintenance_and_technical.MaintenanceRecord;
 import acme.entities.maintenance_and_technical.MaintenanceStatus;
+import acme.entities.maintenance_and_technical.Task;
 import acme.realms.Technician;
 
 @GuiService
-public class TechnicianMRCreateService extends AbstractGuiService<Technician, MaintenanceRecord> {
+public class TechnicianMRPublishService extends AbstractGuiService<Technician, MaintenanceRecord> {
 
 	@Autowired
 	private TechnicianMRRepository repository;
@@ -23,18 +26,22 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void authorise() {
-		boolean status;
+		int id = super.getRequest().getData("id", int.class);
+		MaintenanceRecord mr = this.repository.findMRById(id);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getDraftMode();
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
 	public void load() {
 		MaintenanceRecord mr;
+		int id;
 
-		mr = new MaintenanceRecord();
+		id = super.getRequest().getData("id", int.class);
+		mr = this.repository.findMRById(id);
+
 		super.getBuffer().addData(mr);
 	}
 
@@ -45,20 +52,35 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void validate(final MaintenanceRecord mr) {
-		boolean confirmation;
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		boolean allTasksPublished;
+		boolean hasNoTasks;
+		Collection<Involves> involves;
+		Collection<Task> involvedTasks = new ArrayList<>();
+
+		involves = this.repository.findInvolvesByMRId(mr.getId());
+		for (Involves i : involves) {
+			Task t = this.repository.findTaskById(i.getTask().getId());
+			involvedTasks.add(t);
+		}
+
+		hasNoTasks = involvedTasks.isEmpty();
+		allTasksPublished = involvedTasks.stream().allMatch(t -> t.getDraftMode().equals(false));
+
+		if (!allTasksPublished)
+			super.state(allTasksPublished, "draftMode", "acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks");
+		if (hasNoTasks)
+			super.state(hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks");
 	}
 
 	@Override
 	public void perform(final MaintenanceRecord mr) {
-		mr.setDraftMode(true);
+		mr.setDraftMode(false);
 		this.repository.save(mr);
 	}
 
 	@Override
 	public void unbind(final MaintenanceRecord mr) {
-		assert mr != null;
+
 		Dataset dataset;
 		SelectChoices maintenanceStatus;
 		Collection<Aircraft> aircrafts;

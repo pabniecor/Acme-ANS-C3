@@ -20,7 +20,11 @@ public class TechnicianMRListService extends AbstractGuiService<Technician, Main
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -30,8 +34,7 @@ public class TechnicianMRListService extends AbstractGuiService<Technician, Main
 		Integer technicianId;
 
 		technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
-		maintenanceRecords = this.repository.findAllMRs();
-		maintenanceRecords.stream().filter(mr -> mr.getTechnician().getId() == technicianId).toList();
+		maintenanceRecords = this.repository.findMRsByTechnicianId(technicianId);
 
 		super.getBuffer().addData(maintenanceRecords);
 
@@ -44,7 +47,7 @@ public class TechnicianMRListService extends AbstractGuiService<Technician, Main
 
 		dataset = super.unbindObject(maintenanceRecord, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost");
 
-		super.addPayload(dataset, maintenanceRecord, "notes", "aircraft.model", "technician.licenseNumber");
+		super.addPayload(dataset, maintenanceRecord, "notes", "draftMode", "aircraft.model", "technician.licenseNumber");
 		super.getResponse().addData(dataset);
 	}
 }

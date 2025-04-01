@@ -20,3 +20,6 @@ member.flight-assignment.form.button.fcm = Miembros asociados
 member.flight-assignment.form.button.update = Actualizar asignación de vuelo
 member.flight-assignment.form.button.publish = Publicar asignación de vuelo
 member.flight-assignment.form.button.create = Crear asignación de vuelo
+member.flight-assignment.form.button.delete = Borrar asignación de vuelo
+
+member.flight-assignment.list.button.create = Crear asignación de vuelo

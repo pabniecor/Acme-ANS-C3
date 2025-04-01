@@ -31,13 +31,16 @@ public class MemberFlightAssignmentController extends AbstractGuiController<Flig
 	@Autowired
 	private MemberFlightAssignmentPublishService			publishService;
 
+	@Autowired
+	private MemberFlightAssignmentDeleteService				deleteService;
+
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("create", this.createService);
-		// TODO: DELETE
+		super.addBasicCommand("delete", this.deleteService);
 
 		super.addCustomCommand("complete-list", "list", this.completeListService);
 		super.addCustomCommand("incomplete-list", "list", this.incompleteListService);

@@ -57,9 +57,9 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		//		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		//		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
-		fcm = super.getRequest().getData("flightCrew", FlightCrewMember.class);
+		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
 		super.state(fcm.getAvailabilityStatus() == Status.AVAILABLE, "flightCrew", "acme.validation.flightCrewUnavailable.message");
-
+		super.state(fcm == fa.getFlightCrew(), "flightCrew", "acme.validation.notSameMember");
 		//		leg = super.getRequest().getData("leg", Leg.class);
 		Date currentMoment = MomentHelper.getCurrentMoment();
 		Timestamp moment = Timestamp.from(currentMoment.toInstant());
@@ -73,16 +73,17 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
 
 		if (fa.getDuty() == Duty.PILOT)
-			super.state(nPilots < 1, "flightCrew", "acme.validation.tooManyPilots.message");
+			super.state(nPilots < 1, "duty", "acme.validation.tooManyPilots.message");
 
 		if (fa.getDuty() == Duty.CO_PILOT)
-			super.state(nCopilots < 1, "flightCrew", "acme.validation.tooManyCopilots.message");
+			super.state(nCopilots < 1, "duty", "acme.validation.tooManyCopilots.message");
 
 	}
 
 	@Override
 	public void perform(final FlightAssignment fa) {
 		fa.setDraft(true);
+		fa.setFlightCrew(this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId()));
 		this.repository.save(fa);
 	}
 
@@ -91,27 +92,24 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		assert fa != null;
 		Dataset dataset;
 		Collection<Leg> legs;
-		Collection<FlightCrewMember> fcms;
+		FlightCrewMember fcm;
 		SelectChoices choisesLeg;
 		SelectChoices choisesSta;
 		SelectChoices choisesDut;
-		SelectChoices choisesMem;
 
 		legs = this.repository.findAllLegs();
-		fcms = this.repository.findAllMembers();
+		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());
 		choisesDut = SelectChoices.from(Duty.class, fa.getDuty());
-		choisesMem = SelectChoices.from(fcms, "employeeCode", fa.getFlightCrew());
 
 		dataset = super.unbindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);
 		dataset.put("duties", choisesDut);
-		dataset.put("members", choisesMem);
-		dataset.put("flightCrew", choisesMem.getSelected().getKey());
+		dataset.put("flightCrew", fcm);
 
 		super.getResponse().addData(dataset);
 	}

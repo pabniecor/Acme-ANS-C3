@@ -20,7 +20,7 @@ import acme.realms.FlightCrewMember;
 import acme.realms.Status;
 
 @GuiService
-public class MemberFlightAssignmentUpdateService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
+public class MemberFlightAssignmentDeleteService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
 
 	@Autowired
 	private MemberFlightAssignmentRepository repository;
@@ -89,8 +89,7 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 
 	@Override
 	public void perform(final FlightAssignment fa) {
-		fa.setFlightCrew(this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId()));
-		this.repository.save(fa);
+		this.repository.delete(fa);
 	}
 
 	@Override
@@ -122,5 +121,4 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 
 		super.getResponse().addData(dataset);
 	}
-
 }

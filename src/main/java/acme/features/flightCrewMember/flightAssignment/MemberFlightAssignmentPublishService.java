@@ -1,23 +1,18 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
-import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.Duty;
 import acme.entities.airport_management.FlightAssignment;
 import acme.entities.flight_management.Leg;
 import acme.realms.FlightCrewMember;
-import acme.realms.Status;
 
 @GuiService
 public class MemberFlightAssignmentPublishService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
@@ -45,43 +40,12 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 
 	@Override
 	public void bind(final FlightAssignment fa) {
-		super.bindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
+		super.bindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks");
 	}
 
 	@Override
 	public void validate(final FlightAssignment fa) {
-		boolean confirmation;
-		FlightCrewMember fcm;
-		Leg leg;
-		Collection<Leg> legs;
-		Long nPilots;
-		Long nCopilots;
-
-		//		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		//		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		fcm = super.getRequest().getData("flightCrew", FlightCrewMember.class);
-		super.state(fcm.getAvailabilityStatus() == Status.AVAILABLE, "flightCrew", "acme.validation.flightCrewUnavailable.message");
-
-		leg = super.getRequest().getData("leg", Leg.class);
-		Date currentMoment = MomentHelper.getCurrentMoment();
-		Timestamp moment = Timestamp.from(currentMoment.toInstant());
-		super.state(MomentHelper.isBefore(leg.getScheduledDeparture(), currentMoment), "moment", "acme.validation.momentInvalid.message");
-
-		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.isEmpty(), "leg", "acme.validation.legAssigned");
-
 		super.state(fa.getDuty() == Duty.LEAD_ATTENDANT, "duty", "acme.validation.leadAttendant");
-
-		nPilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.PILOT));
-		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
-
-		if (fa.getDuty() == Duty.PILOT)
-			super.state(nPilots < 1, "flightCrew", "acme.validation.tooManyPilots");
-
-		if (fa.getDuty() == Duty.CO_PILOT)
-			super.state(nCopilots < 1, "flightCrew", "acme.validation.tooManyCopilots");
-
 	}
 	@Override
 	public void perform(final FlightAssignment fa) {
@@ -109,7 +73,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		choisesMem = SelectChoices.from(fcms, "employeeCode", fa.getFlightCrew());
 
 		dataset = super.unbindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
-		if (fa.getDuty() != Duty.LEAD_ATTENDANT)
+		if (fa.getDuty() != Duty.LEAD_ATTENDANT || fa.getDraft() == false)
 			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);

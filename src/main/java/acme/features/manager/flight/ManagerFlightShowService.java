@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flight_management.Flight;
+import acme.entities.flight_management.Leg;
 import acme.realms.Manager;
 
 @GuiService
@@ -21,7 +22,17 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		Flight flight;
+		Manager manager;
+
+		masterId = super.getRequest().getData("id", int.class);
+		flight = this.repository.findFlightById(masterId);
+		manager = flight == null ? null : flight.getManager();
+		status = super.getRequest().getPrincipal().hasRealm(manager) || flight != null && !flight.getDraftMode();
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -45,9 +56,22 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		managers = this.repository.findAllManagers();
 		choises = SelectChoices.from(managers, "identifier", flight.getManager());
 
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager");
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager", "draftMode");
 		dataset.put("manager", choises.getSelected().getKey());
 		dataset.put("managers", choises);
+
+		dataset.put("sheduledDeparture", flight.getDeparture());
+		dataset.put("sheduledArrival", flight.getArrival());
+		dataset.put("departureCity", flight.getOriginCity());
+		dataset.put("arrivalCity", flight.getDestinationCity());
+		dataset.put("numberOfLayovers", flight.getLayovers());
+
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+		boolean hasLegs = !legs.isEmpty();
+		boolean allPublished = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
+		boolean canPublish = flight.getDraftMode() && allPublished;
+
+		dataset.put("canPublish", canPublish);
 
 		super.getResponse().addData(dataset);
 	}

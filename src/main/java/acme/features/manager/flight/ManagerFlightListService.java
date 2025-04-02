@@ -20,7 +20,11 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -34,9 +38,13 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void unbind(final Flight flight) {
+		assert flight != null;
 		Dataset dataset;
+		boolean showCreate;
 
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager");
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager", "draftMode");
+		showCreate = super.getRequest().getPrincipal().hasRealm(flight.getManager());
+		super.getResponse().addGlobal("showCreate", showCreate);
 
 		super.getResponse().addData(dataset);
 	}

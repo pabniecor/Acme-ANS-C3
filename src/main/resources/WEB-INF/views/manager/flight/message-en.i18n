@@ -2,13 +2,19 @@ manager.flight.list.label.tag = Tag:
 manager.flight.list.label.selfTransfer = SelfTransfer:
 manager.flight.list.label.cost = Cost:
 manager.flight.list.label.description = Description:
-manager.flight.list.label.manager = Manager:
+manager.flight.list.label.manager = Manager: 
 
 manager.flight.form.label.tag = Tag:
 manager.flight.form.label.selfTransfer = SelfTransfer:
 manager.flight.form.label.cost = Cost:
 manager.flight.form.label.description = Description:
-manager.flight.form.label.manager = Manager:
+manager.flight.form.label.manager = Manager: 
+manager.flight.form.label.draftMode = Draft Mode: 
+manager.flight.form.label.departure = Scheduled Departure: 
+manager.flight.form.label.arrival = Scheduled Arrival: 
+manager.flight.form.label.originCity = Origin City: 
+manager.flight.form.label.destinationCity = Destination City: 
+manager.flight.form.label.layovers = Number of Layovers: 
 
 manager.flight.list.title = Flight List
 manager.flight.form.title = Flight Form
@@ -19,3 +25,8 @@ manager.flight.form.button.legs = List legs
 manager.flight.form.button.update = Update flight
 manager.flight.form.button.delete = Delete flight
 manager.flight.form.button.create = Create flight
+manager.flight.form.button.publish = Publish flight
+
+manager.flight.publish.error.no-legs = The flight has no legs
+manager.flight.publish.error.unpublished-legs = The flight has unpublished legs
+manager.flight.error.no-changes = No modifications registered

@@ -1,0 +1,24 @@
+technician.maintenanceRecord.list.label.momentDone = Maintenance date:
+technician.maintenanceRecord.list.label.maintenanceStatus = Status:
+technician.maintenanceRecord.list.label.nextInspection = Next inspection:
+technician.maintenanceRecord.list.label.estimatedCost = Estimated cost:
+
+technician.maintenanceRecord.form.label.momentDone = Maintenance date:
+technician.maintenanceRecord.form.label.maintenanceStatus = Status:
+technician.maintenanceRecord.form.label.nextInspection = Next inspection:
+technician.maintenanceRecord.form.label.estimatedCost = Estimated cost:
+technician.maintenanceRecord.form.label.draftMode = Draft mode
+technician.maintenanceRecord.form.label.notes = Notes:
+technician.maintenanceRecord.form.label.aircraft = Aircraft:
+technician.maintenanceRecord.form.label.technician = Technician:
+technician.maintenanceRecord.form.label.confirmation = Confirm
+
+technician.maintenance-record.list.title = Maintenance records list
+technician.maintenance-record.form.title = Maintenance record details
+
+technician.maintenanceRecord.list.button.create = Create maintenance record
+technician.maintenanceRecord.form.button.create = Create
+technician.maintenanceRecord.form.button.update = Update maintenance record
+technician.maintenanceRecord.form.button.tasks = Involved tasks
+technician.maintenanceRecord.form.button.publish = Publish maintenance record
+technician.maintenanceRecord.form.button.unPublish = Make maintenance record private

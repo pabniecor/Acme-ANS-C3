@@ -33,7 +33,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.repository.findLegById(legId);
 		manager = leg == null ? null : leg.getFlight().getManager();
-		status = leg != null && !leg.getPublished() && super.getRequest().getPrincipal().hasRealm(manager);
+		status = leg != null && leg.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -68,7 +68,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void perform(final Leg leg) {
-		leg.setPublished(true);
+		leg.setDraftMode(false);
 		this.repository.save(leg);
 	}
 
@@ -96,7 +96,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
 		lastSequenceOrder = this.repository.findLastSequenceOrderByFlightId(leg.getFlight().getId());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "published");
+		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());

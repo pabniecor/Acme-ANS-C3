@@ -7,6 +7,8 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = Next inspecti
 acme.validation.technician.uniqueLicenseNumber.message = License number must be unique for each technician
 acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$
+acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks = To publish a maintenance record, all its tasks must be published
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks = To publish a maintenanceRecord it must have any associated task
 
 acme.validation.manager.duplicate-identifier.message = The manager's identifier is duplicated
 acme.validation.manager.identifier.message = The manager's identifier is incorrect
@@ -31,4 +33,8 @@ acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be nu
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blank when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be null or blank when status is PENDING
 
+acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
+
 acme.validation.confirmation.message = Need confirmation
+
+

@@ -7,6 +7,8 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima i
 acme.validation.technician.uniqueLicenseNumber.message = El número de licencia debe ser único para cada técnico
 acme.validation.technician.correctLicenseNumberPattern.message = El número de licencia debe seguir este patrón -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$
+acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks = Para publicar un informe de mantenimiento, sus tareas deben estar publicadas
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks = Para publicar un informe de mantenimiento, debe tener alguna tarea asociada
 
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
@@ -30,5 +32,7 @@ acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = El porcen
 acme.validation.trackingLog.resolution-notNull.message = La resolución no puede ser nula cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución debe ser nula o vacía cuando el estado es PENDING
+
+acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 
 acme.validation.confirmation.message = Se necesita confirmación

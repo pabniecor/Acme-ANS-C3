@@ -44,6 +44,25 @@ master.menu.consumer.favourite-link = Favourite link
 master.menu.manager = Manager
 master.menu.manager.list-flights = List flights
 
+<<<<<<< Updated upstream
+# master.menu.customer ##########################################################
+
+master.menu.customer = Customer
+master.menu.customer.list-bookings = List bookings
+
+# master.menu.member ##########################################################
+
+master.menu.member = Member
+master.menu.member.favourite-link = Favourite link
+master.menu.member.list.flight-assignments-complete = List completed flight assignments
+master.menu.member.list.flight-assignments-incomplete = List incompleted flight assignments
+=======
+# master.menu.assistanceAgent ##########################################################
+
+master.menu.assistance-agent = AssistanceAgent
+master.menu.assistance-agent.list-claims = List claims
+>>>>>>> Stashed changes
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account
@@ -52,3 +71,8 @@ master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.provider-profile = Provider profile
 master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
+
+# master.menu.technician #######################################################
+
+master.menu.technician = Technician
+master.menu.technician.list-maintenanceRecords = Maintenance record listing

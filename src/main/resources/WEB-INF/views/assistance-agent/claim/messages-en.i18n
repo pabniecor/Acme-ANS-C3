@@ -1,0 +1,23 @@
+assistance-agent.claim.list.label.registrationMoment = Registration Moment: 
+assistance-agent.claim.list.label.type = Claim Type: 
+assistance-agent.claim.list.label.accepted = Accepted: 
+
+assistance-agent.claim.form.label.registrationMoment = Registration Moment: 
+assistance-agent.claim.form.label.passengerEmail = Passenger Email: 
+assistance-agent.claim.form.label.description = Description: 
+assistance-agent.claim.form.label.type = Claim Type: 
+assistance-agent.claim.form.label.accepted = Accepted
+assistance-agent.claim.form.label.draftMode = Draft Mode
+assistance-agent.claim.form.label.assistanceAgent = Assistance Agent: 
+assistance-agent.claim.form.label.leg = Leg: 
+
+assistance-agent.claim.list.title = Claim List
+assistance-agent.claim.form.title = Claim Form
+
+assistance-agent.claim.list.button.create = Create claim
+assistance-agent.claim.form.button.create = Create claim
+assistance-agent.claim.form.button.update = Update claim
+assistance-agent.claim.form.button.delete = Delete claim
+assistance-agent.claim.form.button.publish = Publish claim
+
+assistance-agent.claim.form.label.confirmation = Confirmation

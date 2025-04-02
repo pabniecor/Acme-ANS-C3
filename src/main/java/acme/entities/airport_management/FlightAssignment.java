@@ -56,4 +56,9 @@ public class FlightAssignment extends AbstractEntity {
 	@ValidString(min = 0, max = 255)
 	@Automapped
 	private String				remarks;
+
+	@Mandatory
+	@Valid
+	@Automapped
+	private Boolean				draft;
 }

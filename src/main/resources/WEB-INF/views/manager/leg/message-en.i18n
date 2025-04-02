@@ -7,7 +7,7 @@ manager.leg.list.label.departureAirport = Departure Airport:
 manager.leg.list.label.arrivalAirport = Arrival Airport: 
 manager.leg.list.label.aircraft = Aircraft: 
 manager.leg.list.label.sequenceOrder = Sequence Order: 
-manager.leg.list.label.published = Published: 
+manager.leg.list.label.draftMode = Draft Mode: 
 
 manager.leg.form.label.flightNumber = Flight Number:
 manager.leg.form.label.scheduledDeparture = Scheduled Departure:
@@ -18,7 +18,7 @@ manager.leg.form.label.departureAirport = Departure Airport:
 manager.leg.form.label.arrivalAirport = Arrival Airport: 
 manager.leg.form.label.aircraft = Aircraft: 
 manager.leg.form.label.sequenceOrder = Sequence Order: 
-manager.leg.form.label.published = Published: 
+manager.leg.form.label.draftMode = Draft Mode: 
 
 manager.leg.list.title = Leg List
 manager.leg.form.title = Leg Form

@@ -7,6 +7,8 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima i
 acme.validation.technician.uniqueLicenseNumber.message = El número de licencia debe ser único para cada técnico
 acme.validation.technician.correctLicenseNumberPattern.message = El número de licencia debe seguir este patrón -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$
+acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks = Para publicar un informe de mantenimiento, sus tareas deben estar publicadas
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks = Para publicar un informe de mantenimiento, debe tener alguna tarea asociada
 
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
@@ -21,7 +23,7 @@ acme.validation.airport.iataCode.message = El código iata del aeropuerto es inc
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
 
-acme.validation.assistanceAgents.employeeCode.message = El código de empleado no corresponde con sus iniciales
+acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 
 acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
 
@@ -31,4 +33,9 @@ acme.validation.trackingLog.resolution-notNull.message = La resolución no puede
 acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución debe ser nula o vacía cuando el estado es PENDING
 
+acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
+
 acme.validation.confirmation.message = Se necesita confirmación
+
+acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
+acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.

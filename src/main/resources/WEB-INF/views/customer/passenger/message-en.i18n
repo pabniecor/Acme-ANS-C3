@@ -1,0 +1,16 @@
+customer.passenger.list.label.fullName = Full name:
+customer.passenger.list.label.email = Email:
+customer.passenger.list.label.passportNumber = Passport number:
+customer.passenger.list.label.birthDate = Birth Date:
+
+customer.passenger.form.label.fullName = Full Name:
+customer.passenger.form.label.email = Email:
+customer.passenger.form.label.passportNumber = Passport number:
+customer.passenger.form.label.birthDate = Birth date:
+customer.passenger.form.label.specialNeeds = Special needs:
+
+customer.passenger.list.title = Passenger's list
+customer.passenger.form.title = Passenger form 
+
+customer.passenger.list.button.create = Create passenger
+customer.passenger.form.button.create = Create passenger

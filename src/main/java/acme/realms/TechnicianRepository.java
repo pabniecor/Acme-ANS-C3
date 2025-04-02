@@ -11,7 +11,7 @@ import acme.client.repositories.AbstractRepository;
 @Repository
 public interface TechnicianRepository extends AbstractRepository {
 
-	@Query("SELECT t.licenseNumber from Technician t")
+	@Query("select t.licenseNumber from Technician t")
 	List<String> findAllLicenseNumbers();
 
 }

@@ -76,3 +76,4 @@ master.menu.user-account.consumer-profile = Consumer profile
 
 master.menu.technician = Technician
 master.menu.technician.list-maintenanceRecords = Maintenance record listing
+master.menu.technician.list-tasks = Task listing

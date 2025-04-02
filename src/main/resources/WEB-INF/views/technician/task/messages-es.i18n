@@ -2,4 +2,20 @@ technician.task.list.label.taskType = Tipo de tarea:
 technician.task.list.label.priority = Prioridad:
 technician.task.list.label.estimatedDuration = Duración estimada:
 
+technician.task.form.label.taskType = Tipo de tarea:
+technician.task.form.label.description = Descripción:
+technician.task.form.label.priority = Prioridad:
+technician.task.form.label.estimatedDuration = Duración estimada:
+technician.task.form.label.draftMode = Modo borrador
+technician.task.form.label.technician = Técnico asignado:
+technician.task.form.label.confirmation = Confirmar
+
 technician.task.list.title = Listado de tareas
+technician.task.form.title = Detalles de la tarea
+
+technician.task.list.button.create = Crear tarea
+
+technician.task.form.button.update = Actualizar tarea
+technician.task.form.button.create = Crear
+technician.task.form.button.delete = Eliminar tarea
+technician.task.form.button.publish = Publicar tarea

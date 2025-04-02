@@ -9,3 +9,5 @@
  	<acme:list-column code="technician.task.list.label.estimatedDuration" path="estimatedDuration" width="30%"/>
  	<acme:list-payload path="payload"/>	
  </acme:list>
+ 
+  <acme:button code="technician.task.list.button.create" action="/technician/task/create"/>

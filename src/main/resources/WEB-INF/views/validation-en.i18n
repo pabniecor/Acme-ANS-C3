@@ -37,4 +37,9 @@ acme.validation.customer.lastCardNibble.message = The last credit card nibble sh
 
 acme.validation.confirmation.message = Need confirmation
 
+<<<<<<< Updated upstream
 
+=======
+acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
+acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published
+>>>>>>> Stashed changes

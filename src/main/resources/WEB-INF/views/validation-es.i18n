@@ -36,3 +36,6 @@ acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución deb
 acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 
 acme.validation.confirmation.message = Se necesita confirmación
+
+acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
+acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.

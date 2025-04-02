@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
-import acme.realms.AssistanceAgents;
-import acme.realms.AssistanceAgentsRepository;
+import acme.realms.AssistanceAgent;
+import acme.realms.AssistanceAgentRepository;
 
 @Validator
-public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistanceAgents, AssistanceAgents> {
+public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistanceAgents, AssistanceAgent> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AssistanceAgentsRepository repository;
+	private AssistanceAgentRepository repository;
 
 	// ConstraintValidator interface ------------------------------------------
 
@@ -27,7 +27,7 @@ public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistance
 	}
 
 	@Override
-	public boolean isValid(final AssistanceAgents assistanceAgents, final ConstraintValidatorContext context) {
+	public boolean isValid(final AssistanceAgent assistanceAgents, final ConstraintValidatorContext context) {
 		assert context != null;
 
 		boolean result;

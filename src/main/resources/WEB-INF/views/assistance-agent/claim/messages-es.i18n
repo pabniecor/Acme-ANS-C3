@@ -1,0 +1,23 @@
+assistance-agent.claim.list.label.registrationMoment = Fecha de registro: 
+assistance-agent.claim.list.label.type = Tipo de reclamación: 
+assistance-agent.claim.list.label.accepted = Aceptado: 
+
+assistance-agent.claim.form.label.registrationMoment = Fecha de registro: 
+assistance-agent.claim.form.label.passengerEmail = Correo electrónico del pasajero: 
+assistance-agent.claim.form.label.description = Descripción: 
+assistance-agent.claim.form.label.type = Tipo de reclamación: 
+assistance-agent.claim.form.label.accepted = Aceptado: 
+assistance-agent.claim.form.label.draftMode = Modo borrador: 
+assistance-agent.claim.form.label.assistanceAgent = Agente de asistencia: 
+assistance-agent.claim.form.label.leg = Etapa: 
+
+assistance-agent.claim.list.title = Lista de reclamaciones
+assistance-agent.claim.form.title = Formulario de reclamaciones
+
+assistance-agent.claim.list.button.create = Crear reclamación
+assistance-agent.claim.form.button.create = Crear reclamación
+assistance-agent.claim.form.button.update = Actualizar reclamación
+assistance-agent.claim.form.button.delete = Eliminar reclamación
+assistance-agent.claim.form.button.publish = Publicar reclamación
+
+assistance-agent.claim.form.label.confirmation = Confirmación

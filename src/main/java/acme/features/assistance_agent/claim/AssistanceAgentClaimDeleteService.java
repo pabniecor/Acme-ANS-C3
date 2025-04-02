@@ -1,5 +1,5 @@
 
-package acme.features.assistance_agents.claim;
+package acme.features.assistance_agent.claim;
 
 import java.util.Collection;
 
@@ -11,33 +11,31 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_service_and_claims.Claim;
 import acme.entities.customer_service_and_claims.ClaimType;
+import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.entities.flight_management.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimUpdateService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimDeleteService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
-	private AssistanceAgentClaimRepository repository;
+	protected AssistanceAgentClaimRepository repository;
 
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
+		boolean status;
 
-		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
 
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Claim claim;
-		int id;
+		int id = super.getRequest().getData("id", int.class);
 
-		id = super.getRequest().getData("id", int.class);
-		claim = this.repository.findClaimById(id);
+		Claim claim = this.repository.findClaimById(id);
 
 		super.getBuffer().addData(claim);
 	}
@@ -56,12 +54,16 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
 		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.claim.draftMode-update.message");
+			super.state(draftMode, "draftMode", "acme.validation.claim.draftMode-delete.message");
 	}
 
 	@Override
 	public void perform(final Claim claim) {
-		this.repository.save(claim);
+		Collection<TrackingLog> trackingLogs;
+
+		trackingLogs = this.repository.findTrackingLogsByClaimId(claim.getId());
+		this.repository.deleteAll(trackingLogs);
+		this.repository.delete(claim);
 	}
 
 	@Override
@@ -83,10 +85,13 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "accepted", "draftMode", "assistanceAgent", "leg");
 		dataset.put("assistanceAgent", agentChoices.getSelected().getKey());
 		dataset.put("assistanceAgents", agentChoices);
+
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("legs", legChoices);
+
 		dataset.put("types", claimTypes);
 
 		super.getResponse().addData(dataset);
 	}
+
 }

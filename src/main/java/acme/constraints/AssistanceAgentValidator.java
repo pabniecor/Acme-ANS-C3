@@ -11,7 +11,7 @@ import acme.realms.AssistanceAgent;
 import acme.realms.AssistanceAgentRepository;
 
 @Validator
-public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistanceAgents, AssistanceAgent> {
+public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceAgent, AssistanceAgent> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -22,24 +22,24 @@ public class AssistanceAgentsValidator extends AbstractValidator<ValidAssistance
 
 
 	@Override
-	protected void initialise(final ValidAssistanceAgents annotation) {
+	protected void initialise(final ValidAssistanceAgent annotation) {
 		assert annotation != null;
 	}
 
 	@Override
-	public boolean isValid(final AssistanceAgent assistanceAgents, final ConstraintValidatorContext context) {
+	public boolean isValid(final AssistanceAgent assistanceAgent, final ConstraintValidatorContext context) {
 		assert context != null;
 
 		boolean result;
-		if (assistanceAgents == null)
+		if (assistanceAgent == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			String name = assistanceAgents.getIdentity().getName();
-			String surname = assistanceAgents.getIdentity().getSurname();
+			String name = assistanceAgent.getIdentity().getName();
+			String surname = assistanceAgent.getIdentity().getSurname();
 
-			boolean correctEmployeeCode = assistanceAgents.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgents.getEmployeeCode().charAt(1) == surname.charAt(0);
+			boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
 
-			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgents.employeeCode.message");
+			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
 		}
 
 		result = !super.hasErrors(context);

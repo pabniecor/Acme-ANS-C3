@@ -1,5 +1,5 @@
 
-package acme.features.assistance_agents.claim;
+package acme.features.assistance_agent.claim;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ import acme.entities.flight_management.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimCreateService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimUpdateService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -23,9 +23,10 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		boolean authorised;
+		int id = super.getRequest().getData("id", int.class);
+		Claim claim = this.repository.findClaimById(id);
 
-		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -33,8 +34,11 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	@Override
 	public void load() {
 		Claim claim;
+		int id;
 
-		claim = new Claim();
+		id = super.getRequest().getData("id", int.class);
+		claim = this.repository.findClaimById(id);
+
 		super.getBuffer().addData(claim);
 	}
 
@@ -46,13 +50,17 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	@Override
 	public void validate(final Claim claim) {
 		boolean confirmation;
+		boolean draftMode = claim.getDraftMode();
+
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+
+		if (draftMode == false)
+			super.state(draftMode, "draftMode", "acme.validation.claim.draftMode-update.message");
 	}
 
 	@Override
 	public void perform(final Claim claim) {
-		claim.setDraftMode(true);
 		this.repository.save(claim);
 	}
 

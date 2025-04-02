@@ -1,5 +1,5 @@
 
-package acme.features.assistance_agents.claim;
+package acme.features.assistance_agent.claim;
 
 import javax.annotation.PostConstruct;
 

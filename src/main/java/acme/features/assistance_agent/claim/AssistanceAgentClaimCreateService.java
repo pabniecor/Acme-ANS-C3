@@ -1,5 +1,5 @@
 
-package acme.features.assistance_agents.claim;
+package acme.features.assistance_agent.claim;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ import acme.entities.flight_management.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimCreateService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -23,10 +23,9 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
+		boolean authorised;
 
-		boolean authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || claim != null && !claim.getDraftMode();
+		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -34,12 +33,27 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 	@Override
 	public void load() {
 		Claim claim;
-		int id;
 
-		id = super.getRequest().getData("id", int.class);
-		claim = this.repository.findClaimById(id);
-
+		claim = new Claim();
 		super.getBuffer().addData(claim);
+	}
+
+	@Override
+	public void bind(final Claim claim) {
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "accepted", "draftMode", "assistanceAgent", "leg");
+	}
+
+	@Override
+	public void validate(final Claim claim) {
+		boolean confirmation;
+		confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+	}
+
+	@Override
+	public void perform(final Claim claim) {
+		claim.setDraftMode(true);
+		this.repository.save(claim);
 	}
 
 	@Override

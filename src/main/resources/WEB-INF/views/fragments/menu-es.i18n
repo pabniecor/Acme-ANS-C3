@@ -44,6 +44,7 @@ master.menu.consumer.favourite-link = Enlace favorito
 master.menu.manager = Gerente
 master.menu.manager.list-flights = Listar vuelos
 
+<<<<<<< Updated upstream
 # master.menu.customer ##########################################################
 
 master.menu.customer = Cliente
@@ -55,6 +56,12 @@ master.menu.member = Miembro
 master.menu.member.favourite-link = Enlace favorito
 master.menu.member.list.flight-assignments-complete = Listar asignaciones de vuelo completadas
 master.menu.member.list.flight-assignments-incomplete = Listas asignaciones de vuelo incompletas
+=======
+# master.menu.assistanceAgent ##########################################################
+
+master.menu.assistance-agent = Agente de asistencia
+master.menu.assistance-agent.list-claims = Listar reclamaciones
+>>>>>>> Stashed changes
 
 # master.menu.user-account ####################################################
 

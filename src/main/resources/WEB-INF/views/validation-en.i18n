@@ -23,7 +23,7 @@ acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
 acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
 acme.validation.customer.identifier.message = The customer's identifier is incorrect
 
-acme.validation.assistanceAgents.employeeCode.message = The employee code does not correspond to their initials
+acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
 
@@ -37,4 +37,9 @@ acme.validation.customer.lastCardNibble.message = The last credit card nibble sh
 
 acme.validation.confirmation.message = Need confirmation
 
+<<<<<<< Updated upstream
 
+=======
+acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
+acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published
+>>>>>>> Stashed changes

@@ -50,7 +50,6 @@
 		<acme:menu-option code="master.menu.manager" access="hasRealm('Manager')">
 			<acme:menu-suboption code="master.menu.manager.list-flights" action="/manager/flight/list"/>
 		</acme:menu-option>
-<<<<<<< Updated upstream
 
 		<acme:menu-option code="master.menu.technician" access="hasRealm('Technician')">
 			<acme:menu-suboption code="master.menu.technician.list-maintenanceRecords" action="/technician/maintenance-record/list"/>
@@ -63,11 +62,10 @@
 		<acme:menu-option code="master.menu.member" access="hasRealm('FlightCrewMember')">
 			<acme:menu-suboption code="master.menu.member.list.flight-assignments-complete" action="/flight-crew-member/flight-assignment/complete-list"/>
 			<acme:menu-suboption code="master.menu.member.list.flight-assignments-incomplete" action="/flight-crew-member/flight-assignment/incomplete-list"/>
-=======
+		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
 			<acme:menu-suboption code="master.menu.assistance-agent.list-claims" action="/assistance-agent/claim/list"/>
->>>>>>> Stashed changes
 		</acme:menu-option>
 	</acme:menu-left>
 

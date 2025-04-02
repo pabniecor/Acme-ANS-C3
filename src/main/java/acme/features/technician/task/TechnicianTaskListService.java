@@ -1,7 +1,6 @@
 
 package acme.features.technician.task;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.maintenance_and_technical.Involves;
 import acme.entities.maintenance_and_technical.Task;
 import acme.realms.Technician;
 
 @GuiService
-public class TechnicianTaskListForMRService extends AbstractGuiService<Technician, Task> {
+public class TechnicianTaskListService extends AbstractGuiService<Technician, Task> {
 
 	@Autowired
 	TechnicianTaskRepository repository;
@@ -22,22 +20,21 @@ public class TechnicianTaskListForMRService extends AbstractGuiService<Technicia
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 
-		Collection<Involves> involves;
-		Collection<Task> tasks = new ArrayList<>();
-		Integer mrId;
+		Collection<Task> tasks;
+		Integer technicianId;
 
-		mrId = super.getRequest().getData("masterId", int.class);
-		involves = this.repository.findInvolvesByMRId(mrId);
-		for (Involves i : involves) {
-			Task t = this.repository.findTaskById(i.getTask().getId());
-			tasks.add(t);
-		}
+		technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
+		tasks = this.repository.findTasksByTechnicianId(technicianId);
 
 		super.getBuffer().addData(tasks);
 

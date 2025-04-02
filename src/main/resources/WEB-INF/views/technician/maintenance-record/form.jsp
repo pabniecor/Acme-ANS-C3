@@ -13,13 +13,17 @@
 	<acme:input-select code="technician.maintenanceRecord.form.label.aircraft" path="aircraft" choices="${aircrafts}" />
 	<acme:input-select code="technician.maintenanceRecord.form.label.technician" path="technician" choices="${technicians}" />
 	
-	<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list?masterId=${id}"/>
+	<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list-for-mr?masterId=${id}"/>
 	
 	<jstl:choose>		
  		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == true}">
  			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	
  			<acme:submit code="technician.maintenanceRecord.form.button.update" action="/technician/maintenance-record/update"/>
  			<acme:submit code="technician.maintenanceRecord.form.button.publish" action="/technician/maintenance-record/publish"/>
+ 		</jstl:when>
+ 		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == false}">
+ 			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	
+ 			<acme:submit code="technician.maintenanceRecord.form.button.update" action="/technician/maintenance-record/update"/>
  		</jstl:when>
  		<jstl:when test="${_command == 'create'}">
  			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	

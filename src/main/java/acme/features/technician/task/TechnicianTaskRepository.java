@@ -18,6 +18,9 @@ public interface TechnicianTaskRepository extends AbstractRepository {
 	@Query("select i from Involves i where i.maintenanceRecord.id = :id")
 	Collection<Involves> findInvolvesByMRId(int id);
 
+	@Query("select i from Involves i where i.task.id = :id")
+	Collection<Involves> findInvolvesByTaskId(int id);
+
 	@Query("select t from Task t where t.id = :id")
 	Task findTaskById(int id);
 

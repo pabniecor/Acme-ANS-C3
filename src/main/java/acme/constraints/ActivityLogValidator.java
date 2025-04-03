@@ -36,12 +36,14 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
 			List<ActivityLog> al = this.repository.findActivityLogtByFlightAssignmentId(value.getFlightAssignment().getId());
-			ActivityLog al1 = al.get(0);
-			Date legDate = al1.getFlightAssignment().getLeg().getScheduledArrival();
+			if (!al.isEmpty()) {
+				ActivityLog al1 = al.get(0);
+				Date legDate = al1.getFlightAssignment().getLeg().getScheduledArrival();
 
-			boolean properDate = MomentHelper.isAfter(al1.getRegistrationMoment(), legDate);
+				boolean properDate = MomentHelper.isAfter(al1.getRegistrationMoment(), legDate);
 
-			super.state(context, properDate, "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
+				super.state(context, properDate, "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
+			}
 		}
 		result = !super.hasErrors(context);
 		return result;

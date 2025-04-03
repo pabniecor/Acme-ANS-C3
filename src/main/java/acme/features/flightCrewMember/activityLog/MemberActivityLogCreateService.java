@@ -63,11 +63,9 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 		SelectChoices choicesFas;
 
 		fas = this.repository.findAllFlightAssignments();
-		//		fa = this.repository.findFlightAssignmentById(this.getRequest().getData("flightAssignment", FlightAssignment.class).getId());
 
 		choicesFas = SelectChoices.from(fas, "id", al.getFlightAssignment());
 		dataset = super.unbindObject(al, "registrationMoment", "typeOfIncident", "description", "severityLevel", "draft");
-		//		dataset.put("flightAssignment", fa);
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("assignments", choicesFas);
 

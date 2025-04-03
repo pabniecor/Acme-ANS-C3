@@ -3,3 +3,12 @@ member.flight-crew-member.list.label.status = Status:
 member.flight-crew-member.list.label.airline = Airline: 
 
 flight-crew-member.flight-crew-member.list.title = Flight crew members asociated to the Flight assignment
+flight-crew-member.flight-crew-member.form.title = Form of flight crew member
+
+member.flight-crew-member.form.label.employee-code = Employee code: 
+member.flight-crew-member.form.label.phone-number = Phone number: 
+member.flight-crew-member.form.label.languages = Languages skills: 
+member.flight-crew-member.form.label.status = Availability status: 
+member.flight-crew-member.form.label.airline = Airline: 
+member.flight-crew-member.form.label.salary = Salary: 
+member.flight-crew-member.form.label.experience = Years of experience: 

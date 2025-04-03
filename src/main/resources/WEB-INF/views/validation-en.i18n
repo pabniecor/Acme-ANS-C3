@@ -53,3 +53,11 @@ acme.validation.customer.passengersForBookingNotNull.message = The booking must 
 acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
 acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published
 
+acme.validation.assignmentNotPublished.message = The flight assignment is not published yet
+
+acme.validation.flightCrewUnavailable.message = The flight crew member is not available
+acme.validation.legAssigned.message = Member is already assigned
+acme.validation.tooManyPilots.message = The assignment already has a pilot
+acme.validation.tooManyCopilots.message = The assignment already has a copilot 
+acme.validation.assignmentPublished.message = The assignment has already been published
+acme.validation.leadAttendant.message = You are not lead attendant in this assignment

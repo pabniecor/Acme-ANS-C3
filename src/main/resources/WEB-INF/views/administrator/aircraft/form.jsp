@@ -13,7 +13,7 @@
 	<acme:input-select code="administrator.aircraft.form.label.airline" path="airline" choices="${airlines}" />
 	
 	<jstl:if test="${!readonly}">
-		<acme:input-checkbox code="administrator.announcement.form.label.confirmation" path="confirmation"/>
+		<acme:input-checkbox code="administrator.aircraft.form.label.confirmation" path="confirmation"/>
 	</jstl:if>
 	
 	<jstl:choose>
@@ -26,4 +26,4 @@
 		</jstl:when>		
 	</jstl:choose>
 
-</acme:form>text
+</acme:form>

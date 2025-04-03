@@ -53,3 +53,11 @@ acme.validation.customer.passengersForBookingNotNull.message = La reserva debe t
 acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
 acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
 
+acme.validation.assignmentNotPublished.message = La asignación de vuelo no está publicada aún
+
+acme.validation.flightCrewUnavailable.message = El miembro de la tripulación no está disponible
+acme.validation.legAssigned.message = El miembro ya está asignado
+acme.validation.tooManyPilots.message = La asignación ya tiene un piloto
+acme.validation.tooManyCopilots.message = La asignación ya tiene un copiloto 
+acme.validation.assignmentPublished.message = La asignación ya ha sido publicada
+acme.validation.leadAttendant.message = No eres encargado principal en esta asignación

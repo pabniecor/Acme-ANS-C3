@@ -40,12 +40,12 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 
 	@Override
 	public void bind(final FlightAssignment fa) {
-		super.bindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks");
+		super.bindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks");
 	}
 
 	@Override
 	public void validate(final FlightAssignment fa) {
-		super.state(fa.getDuty() == Duty.LEAD_ATTENDANT, "duty", "acme.validation.leadAttendant");
+		super.state(fa.getDuty() == Duty.LEAD_ATTENDANT, "duty", "acme.validation.leadAttendant.message");
 	}
 	@Override
 	public void perform(final FlightAssignment fa) {
@@ -72,15 +72,13 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		choisesDut = SelectChoices.from(Duty.class, fa.getDuty());
 		choisesMem = SelectChoices.from(fcms, "employeeCode", fa.getFlightCrew());
 
-		dataset = super.unbindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
+		dataset = super.unbindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks", "draft");
 		if (fa.getDuty() != Duty.LEAD_ATTENDANT || fa.getDraft() == false)
 			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);
 		dataset.put("duties", choisesDut);
-		dataset.put("members", choisesMem);
-		dataset.put("flightCrew", choisesMem.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

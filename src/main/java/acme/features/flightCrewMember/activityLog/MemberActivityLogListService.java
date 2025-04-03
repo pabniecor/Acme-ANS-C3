@@ -39,6 +39,7 @@ public class MemberActivityLogListService extends AbstractGuiService<FlightCrewM
 		Dataset dataset;
 
 		dataset = super.unbindObject(al, "flightAssignment", "registrationMoment", "typeOfIncident", "description", "severityLevel", "draft");
+		dataset.put("flightAssignment", al.getFlightAssignment().getLeg().getFlightNumber());
 
 		super.getResponse().addData(dataset);
 	}

@@ -50,7 +50,9 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 		choises = SelectChoices.from(airlines, "name", aircraft.getAirline());
 
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
-		dataset.put("airline", choises.getSelected().getKey());
+		int airlineId = Integer.valueOf(choises.getSelected().getKey());
+		Airline airlinee = this.repository.findAirlineById(airlineId);
+		dataset.put("airline", airlinee);
 		dataset.put("airlines", choises);
 		dataset.put("status", aircraftStatus);
 

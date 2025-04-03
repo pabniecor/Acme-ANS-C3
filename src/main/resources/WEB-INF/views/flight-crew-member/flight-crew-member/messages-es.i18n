@@ -3,3 +3,12 @@ member.flight-crew-member.list.label.status = Estatus:
 member.flight-crew-member.list.label.airline = Aerolínea:
 
 flight-crew-member.flight-crew-member.list.title = Miembros de la frota asociados a la asignación de vuelo
+flight-crew-member.flight-crew-member.form.title = Formulario del miembro de la flota
+
+member.flight-crew-member.form.label.employee-code = Código de empleado:
+member.flight-crew-member.form.label.phone-number = Teléfono: 
+member.flight-crew-member.form.label.languages = Habilidades lingüisticas:
+member.flight-crew-member.form.label.status = Disponibilidad: 
+member.flight-crew-member.form.label.airline = Aerolínea: 
+member.flight-crew-member.form.label.salary = Salario: 
+member.flight-crew-member.form.label.experience = Años de experiencia: 

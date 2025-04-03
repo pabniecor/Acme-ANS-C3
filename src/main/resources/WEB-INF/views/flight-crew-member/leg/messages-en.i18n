@@ -4,3 +4,13 @@ member.leg.list.label.arrival-time = Scheduled arrival:
 member.leg.list.label.arrival-airport = Arrival airport:
 
 flight-crew-member.leg.list.title = Legs asociated to the Flight assignment.
+flight-crew-member.leg.form.title = Form of leg
+
+member.leg.form.label.flight-number = Flight number: 
+member.leg.form.label.scheduled-departure = Scheduled departure:  
+member.leg.form.label.scheduled-arrival = Scheduled arrival: 
+member.leg.form.label.status = Status: 
+member.leg.form.label.flight = Flight: 
+member.leg.form.label.departure-airport = Departure airport: 
+member.leg.form.label.arrival-airport = Arrival airport:
+member.leg.form.label.aircraft = Aircraft:

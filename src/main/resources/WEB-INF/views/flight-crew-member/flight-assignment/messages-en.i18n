@@ -1,7 +1,7 @@
 member.flight-assignment.list.label.status = Status: 
 member.flight-assignment.list.label.moment = Moment: 
 member.flight-assignment.list.label.duty = Duty:
-member.flight-assignment.list.label.flight-crew-member = Flight Crew Member: 
+
 
 member.flight-assignment.form.label.leg = Leg: 
 member.flight-assignment.form.label.flightcrew = Flight crew member:
@@ -16,6 +16,7 @@ flight-crew-member.flight-assignment.form.title = Form of flight assignments
 
 member.flight-assignment.form.button.legs = Legs associated
 member.flight-assignment.form.button.fcm = Members associated
+member.flight-assignment.form.button.als = Activity logs associated
 
 member.flight-assignment.form.button.update = Update flight assignment
 member.flight-assignment.form.button.publish = Publish flight assignment
@@ -23,3 +24,4 @@ member.flight-assignment.form.button.create = Create flight assignment
 member.flight-assignment.form.button.delete = Delete flight assignment
 
 member.flight-assignment.list.button.create = Create flight assignment
+

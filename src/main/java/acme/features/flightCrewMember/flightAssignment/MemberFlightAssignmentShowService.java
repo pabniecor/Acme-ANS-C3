@@ -24,7 +24,17 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		Boolean status;
+		int masterId;
+		FlightCrewMember member;
+		FlightAssignment fa;
+
+		masterId = super.getRequest().getData("id", int.class);
+		fa = this.repository.findFlightAssignmentById(masterId);
+		member = fa == null ? null : fa.getFlightCrew();
+		status = fa != null && (!fa.getDraft() || super.getRequest().getPrincipal().hasRealm(member));
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

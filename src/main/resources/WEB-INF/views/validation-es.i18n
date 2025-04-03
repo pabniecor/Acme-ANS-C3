@@ -18,6 +18,12 @@ acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pue
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto
 
+acme.validation.airline.duplicate-iataCode.message = El código iata de la aerolínea está duplicado
+acme.validation.airline.iataCode.message = El código iata de la aerolínea es incorrecto
+
+acme.validation.booking.duplicate-locatorCode.message = El código localizador de la reserva está duplicado
+acme.validation.booking.locatorCode.message = El código localizador de la reserva es incorrecto
+
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
 
@@ -34,3 +40,10 @@ acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución deb
 acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 
 acme.validation.confirmation.message = Se necesita confirmación
+
+acme.validation.bookingRecord.booking.availability.message = La reserva a la que estás intentando acceder no está disponible
+acme.validation.bookingRecord.passenger.availability.message = El pasajero al que estás intentando acceder no está disponible
+acme.validation.bookingRecord.create = BookingRecord creado
+
+acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
+

@@ -18,6 +18,12 @@ acme.validation.leg.notOverlappingLeg.message = The leg's from a flight can not 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
 
+acme.validation.airline.duplicate-iataCode.message = The airline's iataCode is duplicated
+acme.validation.airline.iataCode.message = The airline's iataCode is incorrect
+
+acme.validation.booking.duplicate-locatorCode.message = The booking's locatorCode is duplicated
+acme.validation.booking.locatorCode.message = The booking's locatorCode is incorrect
+
 acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
 acme.validation.customer.identifier.message = The customer's identifier is incorrect
 
@@ -34,5 +40,12 @@ acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 
 acme.validation.confirmation.message = Need confirmation
+
+acme.validation.bookingRecord.booking.availability.message = The booking you are trying to get is not available
+acme.validation.bookingRecord.passenger.availability.message = The passenger you are trying to get is not available
+acme.validation.bookingRecord.create = BookingRecord created
+
+acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
+
 
 

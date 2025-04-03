@@ -1,0 +1,21 @@
+member.activity-log.list.label.flight-assignment = Asignación: 
+member.activity-log.list.label.moment = Momento de registro:
+member.activity-log.list.label.incident = Tipo de incidente:
+member.activity-log.list.label.severity = Nivel de severidad
+
+flight-crew-member.activity-log.list.title = Listado de los registros de actividad
+flight-crew-member.activity-log.form.title = Formulario de los registros de actividad
+
+member.activity-log.form.label.assignment = Asignación:
+member.activity-log.form.label.moment = Momento de registro: 
+member.activity-log.form.label.incident = Tipo de incidente: 
+member.activity-log.form.label.description = Descripción: 
+member.activity-log.form.label.severity = Nivel de severidad: 
+member.activity-log.form.label.draft = ¿Borrador?
+
+member.activity-log.form.button.update = Actuaizar registro 
+member.activity-log.form.button.publish = Publicar registro
+member.activity-log.form.button.delete = Borrar registro
+member.activity-log.form.button.create = Crear registro
+
+member.activity-log.list.button.create = Crear registro

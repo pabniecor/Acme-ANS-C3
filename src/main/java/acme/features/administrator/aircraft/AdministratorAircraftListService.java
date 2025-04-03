@@ -37,7 +37,7 @@ public class AdministratorAircraftListService extends AbstractGuiService<Adminis
 		Dataset dataset;
 
 		dataset = super.unbindObject(aircraft, "model", "registrationNumber", "capacity", "cargoWeight", "status", "details", "airline");
-
+		dataset.put("airline", aircraft.getAirline().getName());
 		super.getResponse().addData(dataset);
 	}
 }

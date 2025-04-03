@@ -23,16 +23,7 @@ public class MemberFlightAssignmentsListIncompletedService extends AbstractGuiSe
 
 	@Override
 	public void authorise() {
-		//		int masterId;
-		//		FlightCrewMember fcm;
-		//		FlightAssignment fa;
-		//		int fcmId;
-		//
-		//		masterId = super.getRequest().getData("id", int.class);
-		//		fa = this.repository.findFlightAssignmentById(masterId);
-		//		fcmId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-		super.getResponse().setAuthorised(/* fcmId == fa.getFlightCrew().getId() */ true);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
 	}
 
 	@Override

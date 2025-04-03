@@ -22,9 +22,6 @@ public class MemberActivityLogShowService extends AbstractGuiService<FlightCrewM
 
 	@Override
 	public void authorise() {
-		//		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
-		// 		super.getResponse().setAuthorised(true);
-
 		Boolean status;
 		int masterId;
 		FlightCrewMember member;

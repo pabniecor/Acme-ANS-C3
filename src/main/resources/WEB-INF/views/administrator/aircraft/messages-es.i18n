@@ -13,6 +13,7 @@ administrator.aircraft.form.label.cargoWeight = Peso máximo de carga:
 administrator.aircraft.form.label.status = Estatus: 
 administrator.aircraft.form.label.details = Detalles: 
 administrator.aircraft.form.label.airline = Aerolinea: 
+administrator.aircraft.form.label.confirmation = ¿Estás de acuerdo?
 
 administrator.aircraft.list.title = Listado de aeronaves
 administrator.aircraft.form.title = Formulario de aeronaves

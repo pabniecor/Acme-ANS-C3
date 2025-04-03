@@ -46,7 +46,7 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 		FlightAssignment fa;
 
 		fa = al.getFlightAssignment();
-		super.state(fa.getDraft() == false, "*", "acme.validation.assignmentNotPublished");
+		super.state(fa.getDraft() == false, "*", "acme.validation.assignmentNotPublished.message");
 
 	}
 	@Override

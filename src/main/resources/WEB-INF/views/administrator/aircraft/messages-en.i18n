@@ -13,6 +13,7 @@ administrator.aircraft.form.label.cargoWeight = Cargo Weight:
 administrator.aircraft.form.label.status = Status: 
 administrator.aircraft.form.label.details = Details: 
 administrator.aircraft.form.label.airline = Airline: 
+administrator.aircraft.form.label.confirmation = Confirm?
 
 administrator.aircraft.list.title = Aircraft List
 administrator.aircraft.form.title = Aircraft Form

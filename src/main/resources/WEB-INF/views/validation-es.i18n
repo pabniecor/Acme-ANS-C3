@@ -48,14 +48,19 @@ acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro 
 
 acme.validation.confirmation.message = Se necesita confirmación
 
-<<<<<<< HEAD
 acme.validation.bookingRecord.booking.availability.message = La reserva a la que estás intentando acceder no está disponible
 acme.validation.bookingRecord.passenger.availability.message = El pasajero al que estás intentando acceder no está disponible
 acme.validation.bookingRecord.create = BookingRecord creado
 
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
 
-=======
 acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
 acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
->>>>>>> e7538071166cf6b33a1a187405beb660ce689a73
+
+acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
+
+
+acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
+acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
+
+

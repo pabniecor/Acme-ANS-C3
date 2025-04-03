@@ -1,0 +1,5 @@
+member.flight-crew-member.list.label.employee-code = Employee code:
+member.flight-crew-member.list.label.status = Status: 
+member.flight-crew-member.list.label.airline = Airline: 
+
+flight-crew-member.flight-crew-member.list.title = Flight crew members asociated to the Flight assignment

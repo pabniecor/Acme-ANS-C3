@@ -1,0 +1,21 @@
+member.activity-log.list.label.flight-assignment = Flight assignment: 
+member.activity-log.list.label.moment = Registration moment: 
+member.activity-log.list.label.incident = Type of incident: 
+member.activity-log.list.label.severity = Severity level: 
+
+flight-crew-member.activity-log.list.title = List of activity logs
+flight-crew-member.activity-log.form.title = Form of activity logs
+
+member.activity-log.form.label.assignment = Flight assignment: 
+member.activity-log.form.label.moment = Registration moment: 
+member.activity-log.form.label.incident = Type of incident: 
+member.activity-log.form.label.description = Description:
+member.activity-log.form.label.severity = Severity level: 
+member.activity-log.form.label.draft = Draft?
+
+member.activity-log.form.button.update = Update log
+member.activity-log.form.button.publish = Publish log
+member.activity-log.form.button.delete = Delete log
+member.activity-log.form.button.create = Create log
+
+member.activity-log.list.button.create = Create log

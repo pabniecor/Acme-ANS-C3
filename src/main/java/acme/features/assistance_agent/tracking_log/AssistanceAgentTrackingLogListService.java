@@ -43,8 +43,6 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		claimsId = claimsRelatedToCurrentAgent.stream().map(c -> c.getId()).toList();
 
 		trackingLogs = this.repository.findAllTrackingLogs().stream().filter(t -> claimsId.contains(t.getClaim().getId())).toList();
-		//		Collection<TrackingLog> trackingLogs;
-		//		trackingLogs = this.repository.findAllTrackingLogs();
 
 		super.getBuffer().addData(trackingLogs);
 	}

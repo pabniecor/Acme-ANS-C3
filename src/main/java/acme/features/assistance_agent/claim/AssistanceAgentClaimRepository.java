@@ -21,8 +21,11 @@ public interface AssistanceAgentClaimRepository extends AbstractRepository {
 	@Query("select c from Claim c where c.id = :id")
 	Claim findClaimById(int id);
 
-	@Query("select c from Claim c where c.accepted = true or c.accepted = false")
-	Collection<Claim> findCompletedClaims();
+	@Query("select c from Claim c where (c.accepted = true or c.accepted = false) and c.assistanceAgent.id = :agentId")
+	Collection<Claim> findAllCompletedClaimsByCurrentUser(int agentId);
+
+	@Query("select a from AssistanceAgent a where a.userAccount.id = :id")
+	AssistanceAgent findAssistanceAgentByUserAccountId(int id);
 
 	@Query("select a from AssistanceAgent a")
 	Collection<AssistanceAgent> findAllAssistanceAgents();

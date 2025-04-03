@@ -29,11 +29,15 @@ public class AssistanceAgentClaimListService extends AbstractGuiService<Assistan
 
 	@Override
 	public void load() {
-		Collection<Claim> claims;
+		int userAccountId = super.getRequest().getPrincipal().getAccountId();
+		AssistanceAgent currentAgent;
+		Collection<Claim> claimsRelatedToCurrentAgent;
 
-		claims = this.repository.findCompletedClaims();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
 
-		super.getBuffer().addData(claims);
+		claimsRelatedToCurrentAgent = this.repository.findAllCompletedClaimsByCurrentUser(currentAgent.getId());
+
+		super.getBuffer().addData(claimsRelatedToCurrentAgent);
 	}
 
 	@Override

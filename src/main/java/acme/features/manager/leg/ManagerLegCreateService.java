@@ -52,7 +52,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		Integer sequenceOrder = lastSequenceOrder + 1;
 
 		leg = new Leg();
-		leg.setDraftMode(true);
+
+		leg.setDraftMode(flight.getDraftMode());
 		leg.setFlight(flight);
 		leg.setSequenceOrder(sequenceOrder);
 

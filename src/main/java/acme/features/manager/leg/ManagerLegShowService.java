@@ -69,7 +69,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		aircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
+		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode", "duration");
 		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
 		dataset.put("arrivalAirport", arrivalAirport.getSelected().getKey());
@@ -79,6 +79,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("arrivalAirports", arrivalAirport);
 		dataset.put("aircrafts", aircraft);
 		dataset.put("status", legStatus);
+		dataset.put("duration", leg.getDuration());
 
 		super.getResponse().addData(dataset);
 	}

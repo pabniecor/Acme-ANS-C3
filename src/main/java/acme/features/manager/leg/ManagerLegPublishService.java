@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
+import acme.entities.airline_operations.AircraftStatus;
 import acme.entities.airport_management.Airport;
 import acme.entities.flight_management.Flight;
 import acme.entities.flight_management.Leg;
@@ -56,7 +57,9 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+		boolean activeAircraftStatus;
+		activeAircraftStatus = leg.getAircraft().getStatus() == AircraftStatus.ACTIVE_SERVICE;
+		super.state(activeAircraftStatus, "aircraft", "acme.validation.leg.aircraft.message");
 	}
 
 	@Override

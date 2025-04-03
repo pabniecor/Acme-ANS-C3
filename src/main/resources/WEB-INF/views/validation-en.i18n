@@ -20,6 +20,7 @@ acme.validation.leg.notOverlappingLeg.message = The leg's from a flight can not 
 acme.validation.leg.scheduledArrival.message = The scheduled departure must be before the scheduled arrival with 1 minute of difference
 acme.validation.leg.notNullDates.message = The scheduled departure and arrival dates must not be null
 acme.validation.leg.arrivalAirport.message = The departure airport and arrival airport must not be the same airport
+acme.validation.leg.aircraft.message = The leg's aircraft must Active
 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect

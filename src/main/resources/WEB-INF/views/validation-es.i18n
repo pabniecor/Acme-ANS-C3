@@ -20,6 +20,7 @@ acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pue
 acme.validation.leg.scheduledArrival.message = La salida programada debe ser anterior a la llegada programada con un minuto de diferencia
 acme.validation.leg.notNullDates.message = Las fechas programadas de salida y llegada no deben ser nulas
 acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto.
+acme.validation.leg.aircraft.message = El avión del tramo debe Activo
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto

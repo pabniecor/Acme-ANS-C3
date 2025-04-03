@@ -44,17 +44,15 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 
 			if (indicator != TrackStatus.PENDING) {
 				if (indicator == TrackStatus.ACCEPTED || indicator == TrackStatus.REJECTED) {
-					{
-						correctResolutionPercentage = resolutionPercentage == 100;
-						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
-					}
-					{
-						correctResolution = resolution != null;
-						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
-						correctResolution = !resolution.trim().equals("");
-						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
-					}
+					correctResolutionPercentage = resolutionPercentage == 100;
+					super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
 				}
+				//					{
+				//						correctResolution = resolution != null;
+				//						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
+				//						correctResolution = !resolution.trim().equals("");
+				//						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
+				//					}
 			} else {
 				{
 					correctResolutionPercentage = resolutionPercentage != 100;

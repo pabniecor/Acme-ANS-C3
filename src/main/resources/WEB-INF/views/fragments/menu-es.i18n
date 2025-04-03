@@ -56,12 +56,12 @@ master.menu.member = Miembro
 master.menu.member.favourite-link = Enlace favorito
 master.menu.member.list.flight-assignments-complete = Listar asignaciones de vuelo completadas
 master.menu.member.list.flight-assignments-incomplete = Listas asignaciones de vuelo incompletas
-=======
+
 # master.menu.assistanceAgent ##########################################################
 
 master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-claims = Listar reclamaciones
->>>>>>> Stashed changes
+master.menu.assistance-agent.list-tracking-logs = Listar seguimientos
 
 # master.menu.user-account ####################################################
 

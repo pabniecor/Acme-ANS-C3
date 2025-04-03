@@ -56,7 +56,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
 		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.claim.draftMode-update.message");
+			super.state(draftMode, "draftMode", "acme.validation.draftMode-update.message");
 	}
 
 	@Override

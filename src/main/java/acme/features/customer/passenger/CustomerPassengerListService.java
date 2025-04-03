@@ -27,7 +27,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 
 		bookingId = super.getRequest().getData("bookingId", int.class);
 		booking = this.repository.findBookingById(bookingId);
-		status = booking != null && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+		status = booking != null && (booking.getDraftMode() == false || super.getRequest().getPrincipal().hasRealm(booking.getCustomer()));
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,7 +48,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 	public void unbind(final Passenger passenger) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds");
+		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger");
 
 		super.getResponse().addData(dataset);
 	}
@@ -61,7 +61,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 
 		bookingId = super.getRequest().getData("bookingId", int.class);
 		booking = this.repository.findBookingById(bookingId);
-		showCreate = super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+		showCreate = booking.getDraftMode() == true && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
 
 		super.getResponse().addGlobal("bookingId", bookingId);
 		super.getResponse().addGlobal("showCreate", showCreate);

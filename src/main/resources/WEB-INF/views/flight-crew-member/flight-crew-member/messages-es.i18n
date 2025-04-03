@@ -1,0 +1,5 @@
+member.flight-crew-member.list.label.employee-code = Código de empleado: 
+member.flight-crew-member.list.label.status = Estatus: 
+member.flight-crew-member.list.label.airline = Aerolínea:
+
+flight-crew-member.flight-crew-member.list.title = Miembros de la frota asociados a la asignación de vuelo

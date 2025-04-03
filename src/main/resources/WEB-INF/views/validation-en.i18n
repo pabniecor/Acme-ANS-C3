@@ -7,13 +7,20 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = Next inspecti
 acme.validation.technician.uniqueLicenseNumber.message = License number must be unique for each technician
 acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$
+acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message = To publish a maintenance record, all its tasks must be published
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenanceRecord it must have any associated task
 
 acme.validation.manager.duplicate-identifier.message = The manager's identifier is duplicated
 acme.validation.manager.identifier.message = The manager's identifier is incorrect
 
 acme.validation.leg.duplicate-flightNumber.message = The leg's flightNumber is duplicated
 acme.validation.leg.flightNumber.message = The leg's flightNumber is incorrect
+acme.validation.leg.flightNumber-airlineIATA.message = The leg's flightNumber first 3 letters must correspond to his airline iataCode
 acme.validation.leg.notOverlappingLeg.message = The leg's from a flight can not overlap
+acme.validation.leg.scheduledArrival.message = The scheduled departure must be before the scheduled arrival with 1 minute of difference
+acme.validation.leg.notNullDates.message = The scheduled departure and arrival dates must not be null
+acme.validation.leg.arrivalAirport.message = The departure airport and arrival airport must not be the same airport
+acme.validation.leg.aircraft.message = The leg's aircraft must Active
 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
@@ -27,7 +34,7 @@ acme.validation.booking.locatorCode.message = The booking's locatorCode is incor
 acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
 acme.validation.customer.identifier.message = The customer's identifier is incorrect
 
-acme.validation.assistanceAgents.employeeCode.message = The employee code does not correspond to their initials
+acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
 
@@ -41,11 +48,8 @@ acme.validation.customer.lastCardNibble.message = The last credit card nibble sh
 
 acme.validation.confirmation.message = Need confirmation
 
-acme.validation.bookingRecord.booking.availability.message = The booking you are trying to get is not available
-acme.validation.bookingRecord.passenger.availability.message = The passenger you are trying to get is not available
-acme.validation.bookingRecord.create = BookingRecord created
-
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
 
-
+acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
+acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published
 

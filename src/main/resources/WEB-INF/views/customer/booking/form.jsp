@@ -10,7 +10,6 @@
 	<acme:input-money code="customer.booking.form.label.price" path="price" />
 	<acme:input-textbox code="customer.booking.form.label.lastCardNibble" path="lastCardNibble" />
 	<acme:input-select code="customer.booking.form.label.flight" path="flight" choices="${flights}"/>
-	<acme:input-select code="customer.booking.form.label.customer" path="customer" choices="${customers}" />
 	
 	<jstl:choose>
 		<jstl:when test="${_command == 'show' && draftMode == false}">

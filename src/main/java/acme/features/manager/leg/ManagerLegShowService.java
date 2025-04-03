@@ -31,7 +31,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 		legId = super.getRequest().getData("id", int.class);
 		flight = this.repository.findFlightByLegId(legId);
-		status = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de published de flight
+		status = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de draftMode de flight
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -69,7 +69,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		aircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "published");
+		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode", "duration");
 		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
 		dataset.put("arrivalAirport", arrivalAirport.getSelected().getKey());
@@ -79,6 +79,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("arrivalAirports", arrivalAirport);
 		dataset.put("aircrafts", aircraft);
 		dataset.put("status", legStatus);
+		dataset.put("duration", leg.getDuration());
 
 		super.getResponse().addData(dataset);
 	}

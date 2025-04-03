@@ -49,7 +49,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight", "customer");
+		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight");
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		choicesCustomer = SelectChoices.from(customers, "identifier", booking.getCustomer());
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight", "customer");
+		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight");
 		dataset.put("travelClass", travelClass);
 
 		dataset.put("flight", choicesFlight.getSelected().getKey());
@@ -90,13 +90,5 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		super.getResponse().addData(dataset);
 	}
-
-	/*
-	 * @Override
-	 * public void onSuccess() {
-	 * if (super.getRequest().getMethod().equalsIgnoreCase("POST"))
-	 * PrincipalHelper.handleUpdate();
-	 * }
-	 */
 
 }

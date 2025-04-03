@@ -7,13 +7,20 @@ acme.validation.maintenanceRecord.coherentNextInspection.message = La próxima i
 acme.validation.technician.uniqueLicenseNumber.message = El número de licencia debe ser único para cada técnico
 acme.validation.technician.correctLicenseNumberPattern.message = El número de licencia debe seguir este patrón -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$
+acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message = Para publicar un informe de mantenimiento, sus tareas deben estar publicadas
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = Para publicar un informe de mantenimiento, debe tener alguna tarea asociada
 
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
 
 acme.validation.leg.duplicate-flightNumber.message = El número de vuelo del tramo está duplicado
 acme.validation.leg.flightNumber.message = El número de vuelo del tramo es incorrecto
+acme.validation.leg.flightNumber-airlineIATA.message = Las 3 primeras letras del flightNumber del tramo deben corresponder a su iataCode de compañía aérea
 acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pueden solapar
+acme.validation.leg.scheduledArrival.message = La salida programada debe ser anterior a la llegada programada con un minuto de diferencia
+acme.validation.leg.notNullDates.message = Las fechas programadas de salida y llegada no deben ser nulas
+acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto.
+acme.validation.leg.aircraft.message = El avión del tramo debe Activo
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto
@@ -27,7 +34,7 @@ acme.validation.booking.locatorCode.message = El código localizador de la reser
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
 
-acme.validation.assistanceAgents.employeeCode.message = El código de empleado no corresponde con sus iniciales
+acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 
 acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
 
@@ -41,9 +48,14 @@ acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro 
 
 acme.validation.confirmation.message = Se necesita confirmación
 
+<<<<<<< HEAD
 acme.validation.bookingRecord.booking.availability.message = La reserva a la que estás intentando acceder no está disponible
 acme.validation.bookingRecord.passenger.availability.message = El pasajero al que estás intentando acceder no está disponible
 acme.validation.bookingRecord.create = BookingRecord creado
 
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
 
+=======
+acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
+acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
+>>>>>>> e7538071166cf6b33a1a187405beb660ce689a73

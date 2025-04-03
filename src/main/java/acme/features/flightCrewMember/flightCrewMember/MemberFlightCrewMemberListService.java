@@ -1,0 +1,54 @@
+
+package acme.features.flightCrewMember.flightCrewMember;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acme.client.components.models.Dataset;
+import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
+import acme.realms.FlightCrewMember;
+
+@GuiService
+public class MemberFlightCrewMemberListService extends AbstractGuiService<FlightCrewMember, FlightCrewMember> {
+
+	@Autowired
+	private MemberFlightCrewMemberRepository repository;
+
+
+	@Override
+	public void authorise() {
+		super.getResponse().setAuthorised(true);
+	}
+
+	@Override
+	public void load() {
+		Collection<FlightCrewMember> fcms;
+		int masterId;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		fcms = this.repository.findMembersById(masterId);
+
+		super.getBuffer().addData(fcms);
+	}
+
+	@Override
+	public void unbind(final FlightCrewMember fcm) {
+		Dataset dataset;
+
+		dataset = super.unbindObject(fcm, "employeeCode", "phoneNumber", "languageSkills", "availabilityStatus", "airline", "salary", "yearsOfExperience");
+
+		super.getResponse().addData(dataset);
+	}
+
+	@Override
+	public void unbind(final Collection<FlightCrewMember> fcms) {
+		int masterId;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+
+		super.getResponse().addGlobal("masterId", masterId);
+
+	}
+}

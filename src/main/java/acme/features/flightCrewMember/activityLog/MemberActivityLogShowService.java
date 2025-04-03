@@ -1,0 +1,68 @@
+
+package acme.features.flightCrewMember.activityLog;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
+import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
+import acme.entities.airport_management.FlightAssignment;
+import acme.entities.maintenance_and_technical.ActivityLog;
+import acme.realms.FlightCrewMember;
+
+@GuiService
+public class MemberActivityLogShowService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
+
+	@Autowired
+	private MemberActivityLogRepository repository;
+
+
+	@Override
+	public void authorise() {
+		//		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		// 		super.getResponse().setAuthorised(true);
+
+		Boolean status;
+		int masterId;
+		FlightCrewMember member;
+		ActivityLog al;
+
+		masterId = super.getRequest().getData("id", int.class);
+		al = this.repository.findActivityLogById(masterId);
+		member = al == null ? null : al.getFlightAssignment().getFlightCrew();
+		status = al != null && (!al.getDraft() || super.getRequest().getPrincipal().hasRealm(member));
+
+		super.getResponse().setAuthorised(status);
+	}
+
+	@Override
+	public void load() {
+		ActivityLog al;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		al = this.repository.findActivityLogById(id);
+
+		super.getBuffer().addData(al);
+	}
+
+	@Override
+	public void unbind(final ActivityLog al) {
+		assert al != null;
+		Dataset dataset;
+		Collection<FlightAssignment> fas;
+		SelectChoices choicesFas;
+
+		fas = this.repository.findAllFlightAssignments();
+
+		choicesFas = SelectChoices.from(fas, "id", al.getFlightAssignment());
+		dataset = super.unbindObject(al, "registrationMoment", "typeOfIncident", "description", "severityLevel", "draft");
+		//		dataset.put("flightAssignment", choicesFas.getSelected().getKey());
+		dataset.put("assignments", choicesFas);
+
+		super.getResponse().addData(dataset);
+	}
+}

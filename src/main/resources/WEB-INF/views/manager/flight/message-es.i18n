@@ -1,14 +1,21 @@
-manager.flight.list.label.tag = Etiqueta:
-manager.flight.list.label.selfTransfer = Auto transferencia:
-manager.flight.list.label.cost = Coste:
-manager.flight.list.label.description = Descripción:
-manager.flight.list.label.manager = Gerente:
+manager.flight.list.label.tag = Etiqueta: 
+manager.flight.list.label.selfTransfer = Auto transferencia: 
+manager.flight.list.label.cost = Coste: 
+manager.flight.list.label.description = Descripción: 
+manager.flight.list.label.manager = Gerente: 
+manager.flight.list.label.draftMode = Modo borrador: 
 
 manager.flight.form.label.tag = Etiqueta:
 manager.flight.form.label.selfTransfer = Auto transferencia:
 manager.flight.form.label.cost = Coste:
 manager.flight.form.label.description = Descripción:
-manager.flight.form.label.manager = Gerente:
+manager.flight.form.label.manager = Gerente: 
+manager.flight.form.label.draftMode = Modo borrador: 
+manager.flight.form.label.departure = Salida programada: 
+manager.flight.form.label.arrival = Llegada Programada: 
+manager.flight.form.label.originCity = Ciudad de Origen: 
+manager.flight.form.label.destinationCity = Ciudad de destino: 
+manager.flight.form.label.layovers = Número de escalas: 
 
 manager.flight.list.title = Lista de vuelos
 manager.flight.form.title = Formulario de vuelos
@@ -19,3 +26,8 @@ manager.flight.form.button.legs = Listar escalas
 manager.flight.form.button.update = Actualizar vuelo
 manager.flight.form.button.delete = Eliminar vuelo
 manager.flight.form.button.create = Crear vuelo
+manager.flight.form.button.publish = Publicar vuelo
+
+manager.flight.publish.error.no-legs = El vuelo no tiene escalas
+manager.flight.publish.error.unpublished-legs = El vuelo tiene escalas en modo borrador
+manager.flight.error.no-changes = No se han registrado modificaciones

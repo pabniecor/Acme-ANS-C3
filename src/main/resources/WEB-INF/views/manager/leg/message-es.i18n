@@ -7,7 +7,7 @@ manager.leg.list.label.departureAirport = Aeropuerto de partida:
 manager.leg.list.label.arrivalAirport = Aeropuerto de llegada: 
 manager.leg.list.label.aircraft = Avión: 
 manager.leg.list.label.sequenceOrder = Orden de secuencia: 
-manager.leg.list.label.published = Publicado: 
+manager.leg.list.label.draftMode = Modo borrador: 
 
 manager.leg.form.label.flightNumber = Número de vuelo:
 manager.leg.form.label.scheduledDeparture = Momento de partida:
@@ -18,7 +18,8 @@ manager.leg.form.label.departureAirport = Aeropuerto de partida:
 manager.leg.form.label.arrivalAirport = Aeropuerto de llegada: 
 manager.leg.form.label.aircraft = Avión: 
 manager.leg.form.label.sequenceOrder = Orden de secuencia: 
-manager.leg.form.label.published = Publicado: 
+manager.leg.form.label.draftMode = Modo borrador: 
+manager.leg.form.label.duration = Duración: 
 
 manager.leg.list.title = Lista de escalas
 manager.leg.form.title = Formulario de escalas

@@ -7,12 +7,10 @@
 	<acme:list-column code="customer.passenger.list.label.fullName" path="fullName" width="30%" />
 	<acme:list-column code="customer.passenger.list.label.email" path="email" width="20%" />
 	<acme:list-column code="customer.passenger.list.label.passportNumber" path="passportNumber" width="20%" />
-	<acme:list-column code="customer.passenger.list.label.birthDate" path="birthDate" width="30%" />
+	<acme:list-column code="customer.passenger.list.label.birthDate" path="birthDate" width="20%" />
+	<acme:list-column code="customer.passenger.list.label.draftModePassenger" path="draftModePassenger" width="10%" />
 	<acme:list-payload path="payload"/>	
 </acme:list>
 
-
-<jstl:if test="${showCreate}">
-	<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create?bookingId=${bookingId}&passengerId=${id}"/>	
-</jstl:if>
+<acme:button code="customer.passenger.form.button.create" action="/customer/passenger/create?bookingId=${bookingId}"/>
 

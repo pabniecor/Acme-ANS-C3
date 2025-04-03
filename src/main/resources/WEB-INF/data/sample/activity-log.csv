@@ -1,38 +1,38 @@
-key,key:flightAssignment,registration-moment,type-of-incident,description,severity-level
+key,key:flightAssignment,registration-moment,type-of-incident,description,severity-level,draft
 #base entity
-activity-log-00,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
+activity-log-00,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
 #registration moment - standard variations
-activity-log-01,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-02,flight-assignment-00,2030/01/01 00:03,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-03,flight-assignment-00,2200/12/31 23:58,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-04,flight-assignment-00,2200/12/31 23:59,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
+activity-log-01,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-02,flight-assignment-00,2030/01/01 00:03,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-03,flight-assignment-00,2200/12/31 23:58,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-04,flight-assignment-00,2200/12/31 23:59,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
 #registration moment - no singular values
 #type of incident - standard variations
-activity-log-05,flight-assignment-00,2030/01/01 00:02,L,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-06,flight-assignment-00,2030/01/01 00:02,Lo,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-07,flight-assignment-00,2030/01/01 00:02,"Lorem ipsum dolor sit amet, consectetur adipiscin","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-08,flight-assignment-00,2030/01/01 00:02,"Lorem ipsum dolor sit amet, consectetur adipiscing","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-09,flight-assignment-00,2030/01/01 00:02,โลเร็ม อิปซัม,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-10,flight-assignment-00,2030/01/01 00:02,لوريم إيبسوم,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-11,flight-assignment-00,2030/01/01 00:02,洛伦·伊普森,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-12,flight-assignment-00,2030/01/01 00:02,<marquee>Hacked</marquee>,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-13,flight-assignment-00,2030/01/01 00:02,<script>alert(‘Hacked!’);</script>,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
-activity-log-14,flight-assignment-00,2030/01/01 00:02,' or 'A' = 'A,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5
+activity-log-05,flight-assignment-00,2030/01/01 00:02,L,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-06,flight-assignment-00,2030/01/01 00:02,Lo,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-07,flight-assignment-00,2030/01/01 00:02,"Lorem ipsum dolor sit amet, consectetur adipiscin","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-08,flight-assignment-00,2030/01/01 00:02,"Lorem ipsum dolor sit amet, consectetur adipiscing","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-09,flight-assignment-00,2030/01/01 00:02,โลเร็ม อิปซัม,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-10,flight-assignment-00,2030/01/01 00:02,لوريم إيبسوم,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-11,flight-assignment-00,2030/01/01 00:02,洛伦·伊普森,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-12,flight-assignment-00,2030/01/01 00:02,<marquee>Hacked</marquee>,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-13,flight-assignment-00,2030/01/01 00:02,<script>alert(‘Hacked!’);</script>,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
+activity-log-14,flight-assignment-00,2030/01/01 00:02,' or 'A' = 'A,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,true
 #type of incident - no singular values
 #description - standard variations
-activity-log-15,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,L,5
-activity-log-16,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,Lo,5
-activity-log-17,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",5
-activity-log-18,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",5
-activity-log-19,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,โลเร็ม อิปซัม,5
-activity-log-20,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,لوريم إيبسوم,5
-activity-log-21,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,洛伦·伊普森,5
-activity-log-22,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,<marquee>Hacked</marquee>,5
-activity-log-23,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,<script>alert(‘Hacked!’);</script>,5
-activity-log-24,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,' or 'A' = 'A,5
+activity-log-15,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,L,5,true
+activity-log-16,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,Lo,5,true
+activity-log-17,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",5,true
+activity-log-18,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",5,true
+activity-log-19,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,โลเร็ม อิปซัม,5,true
+activity-log-20,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,لوريم إيبسوم,5,true
+activity-log-21,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,洛伦·伊普森,5,true
+activity-log-22,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,<marquee>Hacked</marquee>,5,true
+activity-log-23,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,<script>alert(‘Hacked!’);</script>,5,true
+activity-log-24,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,' or 'A' = 'A,5,true
 #description - no singular values
 #serevity level - standard variations
-activity-log-25,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",0
-activity-log-26,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",1
-activity-log-27,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",9
-activity-log-28,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",10
+activity-log-25,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",0,true
+activity-log-26,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",1,true
+activity-log-27,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",9,true
+activity-log-28,flight-assignment-00,2030/01/01 00:02,Lorem ipsum dolor sit ame,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",10,false

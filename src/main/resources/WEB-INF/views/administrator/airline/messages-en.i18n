@@ -17,3 +17,5 @@ administrator.airline.form.title = Airline Form
 administrator.airline.list.button.create = Create airline
 administrator.airline.form.button.create = Create airline
 administrator.airline.form.button.update = Update airline
+
+administrator.airline.form.label.confirmation = Confirmation

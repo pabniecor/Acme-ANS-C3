@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
+import acme.entities.airline_operations.AircraftStatus;
 import acme.entities.airport_management.Airport;
 import acme.entities.flight_management.Flight;
 import acme.entities.flight_management.Leg;
@@ -33,7 +34,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		legId = super.getRequest().getData("id", int.class);
 		leg = this.repository.findLegById(legId);
 		manager = leg == null ? null : leg.getFlight().getManager();
-		status = leg != null && !leg.getPublished() && super.getRequest().getPrincipal().hasRealm(manager);
+		status = leg != null && leg.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -51,24 +52,19 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		int flightId;
-		Flight flight;
-
-		flightId = super.getRequest().getData("flight", int.class);
-		flight = this.repository.findFlightById(flightId);
-
-		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder");
-		leg.setFlight(flight);
+		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "departureAirport", "arrivalAirport", "aircraft");
 	}
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+		boolean activeAircraftStatus;
+		activeAircraftStatus = leg.getAircraft().getStatus() == AircraftStatus.ACTIVE_SERVICE;
+		super.state(activeAircraftStatus, "aircraft", "acme.validation.leg.aircraft.message");
 	}
 
 	@Override
 	public void perform(final Leg leg) {
-		leg.setPublished(true);
+		leg.setDraftMode(false);
 		this.repository.save(leg);
 	}
 
@@ -84,7 +80,6 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		SelectChoices arrivalAirport;
 		SelectChoices aircraft;
 		SelectChoices legStatus;
-		Integer lastSequenceOrder;
 
 		flights = this.repository.findAllFlights();
 		airports = this.repository.findAllAirports();
@@ -94,9 +89,8 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		arrivalAirport = SelectChoices.from(airports, "iataCode", leg.getArrivalAirport());
 		aircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
-		lastSequenceOrder = this.repository.findLastSequenceOrderByFlightId(leg.getFlight().getId());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "published");
+		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
@@ -107,7 +101,6 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("arrivalAirports", arrivalAirport);
 		dataset.put("aircrafts", aircraft);
 		dataset.put("status", legStatus);
-		dataset.put("sequenceOrder", lastSequenceOrder + 1);
 
 		super.getResponse().addData(dataset);
 	}

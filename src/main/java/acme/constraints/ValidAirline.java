@@ -11,9 +11,9 @@ import javax.validation.Payload;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AssistanceAgentsValidator.class)
+@Constraint(validatedBy = AirlineValidator.class)
 
-public @interface ValidAssistanceAgents {
+public @interface ValidAirline {
 
 	// Standard validation properties -----------------------------------------
 

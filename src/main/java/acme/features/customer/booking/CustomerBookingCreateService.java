@@ -23,7 +23,8 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		super.getResponse().setAuthorised(isCustomer);
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight", "customer");
+		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight");
 	}
 
 	@Override

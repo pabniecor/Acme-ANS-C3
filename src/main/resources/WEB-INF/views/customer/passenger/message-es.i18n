@@ -1,17 +1,22 @@
 customer.passenger.list.label.fullName = Nombre completo:
 customer.passenger.list.label.email = Email:
 customer.passenger.list.label.passportNumber = Número de pasaporte:
-custom.passenger.list.label.birthDate = Fecha de cumpleaños:
+customer.passenger.list.label.birthDate = Fecha de cumpleaños:
+customer.passenger.list.label.draftModePassenger = Modo borrador del pasajero:
 
 customer.passenger.form.label.fullName = Nombre completo:
 customer.passenger.form.label.email = Email:
 customer.passenger.form.label.passportNumber = Número de pasaporte:
 customer.passenger.form.label.birthDate = Fecha de cumpleaños:
-customer.passenger.form.label.specialNeeds = Necesidades especiales:
+customer.passenger.form.label.specialNeeds = NNecesidades especiales:
 
 customer.passenger.list.title = Lista de pasajeros
 customer.passenger.form.title = Formulario de pasajeros
 
 customer.passenger.list.button.create = Crear pasajero
-customer.passenger.form.button.create = Crear pasajero
 
+customer.passenger.form.button.create = Crear pasajero
+customer.passenger.form.button.update = Actualizar pasajero
+customer.passenger.form.button.publish = Publicar pasajero
+
+customer.booking-record.create = Crear pasajero

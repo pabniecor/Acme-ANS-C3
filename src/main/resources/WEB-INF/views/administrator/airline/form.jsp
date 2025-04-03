@@ -12,6 +12,8 @@
 	<acme:input-email code="administrator.airline.form.label.email" path="email"/>
 	<acme:input-textbox code="administrator.airline.form.label.phoneNumber" path="phoneNumber"/>
 	
+	<jstl:if test="${!readOnly}">
+		<acme:input-checkbox code="administrator.airline.form.label.confirmation" path="confirmation" />
 		
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|disable')}">
@@ -21,5 +23,6 @@
 			<acme:submit code="administrator.airline.form.button.create" action="/administrator/airline/create"/>
 		</jstl:when>		
 	</jstl:choose>
+	</jstl:if>
 	
 </acme:form>

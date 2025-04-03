@@ -1,59 +1,63 @@
-key,full-name,email,passport-number,birth-date,special-needs
+key,full-name,email,passport-number,birth-date,special-needs,draft-mode-passenger,key:customer
 # base entity
-passenger-00,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
+passenger-00,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
 # full-name - standard variations
-passenger-01,L,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-02,Lo,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-03,Lorem ipsum dolor sit ameter consectetur adipiscing elit. Nulla facilisi. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-04,Lorem ipsum dolor sit ametern consectetur adipiscing elit. Nulla facilisi. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-05,康熙王,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-06,محمد بن سلمان,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-07,Mario González,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-08,<marquee>Hacked</marquee>,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-09,<script>alert('Hacked!');</script>,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-10,' or 'A' = 'A,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
+passenger-01,L,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-02,Lo,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-03,Lorem ipsum dolor sit ameter consectetur adipiscing elit. Nulla facilisi. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-04,Lorem ipsum dolor sit ametern consectetur adipiscing elit. Nulla facilisi. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-05,康熙王,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-06,محمد بن سلمان,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-07,Mario González,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-08,<marquee>Hacked</marquee>,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-09,<script>alert('Hacked!');</script>,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-10,' or 'A' = 'A,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
 # full-name no singular values
 # email - standard variations
-passenger-11,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-12,Lorem ipsum dolor sit ame,acmeword@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-13,Lorem ipsum dolor sit ame,a@b.e,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-14,Lorem ipsum dolor sit ame,a@b.es,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-15,Lorem ipsum dolor sit ame,a@b.esx,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-16,Lorem ipsum dolor sit ame,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-17,Lorem ipsum dolor sit ame,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.dolor.es.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
+passenger-11,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-12,Lorem ipsum dolor sit ame,acmeword@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-13,Lorem ipsum dolor sit ame,a@b.e,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-14,Lorem ipsum dolor sit ame,a@b.es,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-15,Lorem ipsum dolor sit ame,a@b.esx,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-16,Lorem ipsum dolor sit ame,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-17,Lorem ipsum dolor sit ame,lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.dolor.es.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
 # email - no singular values
 # passport-number - standard variations
-passenger-18,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-19,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123,2012/07/02 00:00,Vegetarian meal
-passenger-20,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABCDEF,2012/07/02 00:00,Vegetarian meal
-passenger-21,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,A1B2C3,2012/07/02 00:00,Vegetarian meal
-passenger-22,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,123ABCD,2012/07/02 00:00,Vegetarian meal
-passenger-23,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,A12345,2012/07/02 00:00,Vegetarian meal
-passenger-24,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,000000,2012/07/02 00:00,Vegetarian meal
-passenger-25,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,AAAAAA,2012/07/02 00:00,Vegetarian meal
-passenger-26,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,999999,2012/07/02 00:00,Vegetarian meal
-passenger-27,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ZZZZZZ,2012/07/02 00:00,Vegetarian meal
-passenger-28,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,000000000,2012/07/02 00:00,Vegetarian meal
-passenger-29,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,AAAAAAAAA,2012/07/02 00:00,Vegetarian meal
-passenger-30,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,999999999,2012/07/02 00:00,Vegetarian meal
-passenger-31,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ZZZZZZZZZ,2012/07/02 00:00,Vegetarian meal
+passenger-18,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-19,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-20,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABCDEF,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-21,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,A1B2C3,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-22,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,123ABCD,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-23,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,A12345,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-24,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,000000,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-25,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,AAAAAA,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-26,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,999999,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-27,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ZZZZZZ,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-28,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,000000000,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-29,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,AAAAAAAAA,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-30,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,999999999,2012/07/02 00:00,Vegetarian meal,true,customer-01
+passenger-31,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ZZZZZZZZZ,2012/07/02 00:00,Vegetarian meal,true,customer-01
 # passport-number - no singular values
 # birth-date - standard variations
-passenger-32,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal
-passenger-33,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2000/01/01 00:00,Vegetarian meal
-passenger-34,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2000/01/01 00:01,Vegetarian meal
-passenger-35,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2025/01/01 00:00,Vegetarian meal
-passenger-36,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2024/12/31 23:59,Vegetarian meal
+passenger-32,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+passenger-33,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2000/01/01 00:00,Vegetarian meal,false,customer-02
+passenger-34,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2000/01/01 00:01,Vegetarian meal,false,customer-02
+passenger-35,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2025/01/01 00:00,Vegetarian meal,false,customer-02
+passenger-36,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2024/12/31 23:59,Vegetarian meal,false,customer-02
 # birth-date - no singular values
 # special-needs - standard variations
-passenger-37,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,
-passenger-38,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,L
-passenger-39,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lo
-passenger-40,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lorem ipsum dolor sit amet consectetur adipisci
-passenger-41,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lorem ipsum dolor sit amet consectetur adipiscin
-passenger-42,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,حمد بن سلمان
-passenger-43,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,需要特殊膳食和轮椅协助
-passenger-44,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,<marquee>Hacked</marquee>
-passenger-45,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,<script>alert('Hacked!');</script>
-passenger-46,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,' or 'A' = 'A
+passenger-37,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,,true,customer-01
+passenger-38,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,L,true,customer-01
+passenger-39,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lo,true,customer-01
+passenger-40,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lorem ipsum dolor sit amet consectetur adipisci,true,customer-01
+passenger-41,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Lorem ipsum dolor sit amet consectetur adipiscin,true,customer-01
+passenger-42,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,حمد بن سلمان,true,customer-01
+passenger-43,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,需要特殊膳食和轮椅协助,true,customer-01
+passenger-44,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,<marquee>Hacked</marquee>,true,customer-01
+passenger-45,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,<script>alert('Hacked!');</script>,true,customer-01
+passenger-46,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,' or 'A' = 'A,true,customer-01
 # special-needs - no singular values
+# draft-mode-passenger - standard variations
+passenger-47,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-02
+passenger-48,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
+# draft-mode-passenger - no singular values

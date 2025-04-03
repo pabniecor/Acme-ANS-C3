@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_management.Booking;
+import acme.entities.customer_management.Passenger;
 import acme.entities.customer_management.TravelClass;
 import acme.entities.flight_management.Flight;
 import acme.realms.Customer;
@@ -50,9 +51,13 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	@Override
 	public void validate(final Booking booking) {
 		String lastNibble = booking.getLastCardNibble();
+		Collection<Passenger> bookingPassengers;
 
+		bookingPassengers = this.repository.findPassengersByBookingId(booking.getId());
 		boolean lastCardNibbleNotNull = !(lastNibble.isBlank() || booking.getLastCardNibble() == null);
+		boolean passengersForBookingNotNull = !bookingPassengers.isEmpty();
 
+		super.state(passengersForBookingNotNull, "*", "acme.validation.customer.passengersForBookingNotNull.message");
 		super.state(lastCardNibbleNotNull, "lastCardNibble", "acme.validation.customer.lastCardNibble.message");
 	}
 
@@ -84,7 +89,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		choicesCustomer = SelectChoices.from(customers, "identifier", booking.getCustomer());
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight", "customer");
+		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight");
 		dataset.put("travelClass", travelClass);
 
 		dataset.put("flight", choicesFlight.getSelected().getKey());

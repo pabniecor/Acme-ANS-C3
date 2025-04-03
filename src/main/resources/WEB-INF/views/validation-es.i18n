@@ -25,6 +25,12 @@ acme.validation.leg.aircraft.message = El avión del tramo debe Activo
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto
 
+acme.validation.airline.duplicate-iataCode.message = El código iata de la aerolínea está duplicado
+acme.validation.airline.iataCode.message = El código iata de la aerolínea es incorrecto
+
+acme.validation.booking.duplicate-locatorCode.message = El código localizador de la reserva está duplicado
+acme.validation.booking.locatorCode.message = El código localizador de la reserva es incorrecto
+
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
 
@@ -42,5 +48,10 @@ acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro 
 
 acme.validation.confirmation.message = Se necesita confirmación
 
+
+acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
+
+
 acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
 acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
+

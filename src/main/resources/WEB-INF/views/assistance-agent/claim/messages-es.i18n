@@ -7,7 +7,7 @@ assistance-agent.claim.form.label.passengerEmail = Correo electrónico del pasaj
 assistance-agent.claim.form.label.description = Descripción: 
 assistance-agent.claim.form.label.type = Tipo de reclamación: 
 assistance-agent.claim.form.label.accepted = Aceptado: 
-assistance-agent.claim.form.label.draftMode = Modo borrador: 
+assistance-agent.claim.form.label.draftMode = Modo borrador
 assistance-agent.claim.form.label.assistanceAgent = Agente de asistencia: 
 assistance-agent.claim.form.label.leg = Etapa: 
 

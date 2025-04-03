@@ -1,0 +1,23 @@
+assistance-agent.tracking-log.list.label.lastUpdateMoment = Last Update Moment: 
+assistance-agent.tracking-log.list.label.step = Step: 
+assistance-agent.tracking-log.list.label.resolutionPercentage = Resolution Percentage: 
+assistance-agent.tracking-log.list.label.status = Status: 
+
+assistance-agent.tracking-log.form.label.lastUpdateMoment = Last Update Moment: 
+assistance-agent.tracking-log.form.label.step = Step: 
+assistance-agent.tracking-log.form.label.resolutionPercentage = Resolution Percentage: 
+assistance-agent.tracking-log.form.label.status = Status: 
+assistance-agent.tracking-log.form.label.resolution = Resolution: 
+assistance-agent.tracking-log.form.label.draftMode = Draft Mode
+assistance-agent.tracking-log.form.label.claim = Claim: 
+
+assistance-agent.tracking-log.list.title = Tracking Log List
+assistance-agent.tracking-log.form.title = Tracking Log Form
+
+assistance-agent.tracking-log.list.button.create = Create tracking log
+assistance-agent.tracking-log.form.button.create = Create tracking log
+assistance-agent.tracking-log.form.button.update = Update tracking log
+assistance-agent.tracking-log.form.button.delete = Delete tracking log
+assistance-agent.tracking-log.form.button.publish = Publish tracking log
+
+assistance-agent.tracking-log.form.label.confirmation = Confirmation

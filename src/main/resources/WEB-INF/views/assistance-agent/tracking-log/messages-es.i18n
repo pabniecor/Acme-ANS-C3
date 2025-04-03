@@ -1,0 +1,23 @@
+assistance-agent.tracking-log.list.label.lastUpdateMoment = Última actualización: 
+assistance-agent.tracking-log.list.label.step = Etapa: 
+assistance-agent.tracking-log.list.label.resolutionPercentage = Porcentaje de resolución: 
+assistance-agent.tracking-log.list.label.status = Estado: 
+
+assistance-agent.tracking-log.form.label.lastUpdateMoment = Última actualización: 
+assistance-agent.tracking-log.form.label.step = Etapa: 
+assistance-agent.tracking-log.form.label.resolutionPercentage = Porcentaje de resolución: 
+assistance-agent.tracking-log.form.label.status = Estado: 
+assistance-agent.tracking-log.form.label.resolution = Resolución: 
+assistance-agent.tracking-log.form.label.draftMode = Modo borrador
+assistance-agent.tracking-log.form.label.claim = Reclamación: 
+
+assistance-agent.tracking-log.list.title = Lista de seguimientos
+assistance-agent.tracking-log.form.title = Formulario de seguimientos
+
+assistance-agent.tracking-log.list.button.create = Crear seguimiento
+assistance-agent.tracking-log.form.button.create = Crear seguimiento
+assistance-agent.tracking-log.form.button.update = Actualizar seguimiento
+assistance-agent.tracking-log.form.button.delete = Eliminar seguimiento
+assistance-agent.tracking-log.form.button.publish = Publicar seguimiento
+
+assistance-agent.tracking-log.form.label.confirmation = Confirmación

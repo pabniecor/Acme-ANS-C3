@@ -54,7 +54,7 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
 		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.claim.draftMode-delete.message");
+			super.state(draftMode, "draftMode", "acme.validation.draftMode-delete.message");
 	}
 
 	@Override

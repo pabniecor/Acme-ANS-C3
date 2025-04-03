@@ -48,10 +48,7 @@ acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro 
 
 acme.validation.confirmation.message = Se necesita confirmación
 
-
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
 
-
-acme.validation.claim.draftMode-update = No se puede actualizar la reclamación porque es pública.
-acme.validation.claim.draftMode-delete = No se puede eliminar la reclamación porque es pública.
-
+acme.validation.draftMode-update = No se puede actualizar la reclamación porque es pública.
+acme.validation.draftMode-delete = No se puede eliminar la reclamación porque es pública.

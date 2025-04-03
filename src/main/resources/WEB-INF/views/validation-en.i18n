@@ -48,11 +48,7 @@ acme.validation.customer.lastCardNibble.message = The last credit card nibble sh
 
 acme.validation.confirmation.message = Need confirmation
 
-
-
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
 
-
-acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
-acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published
-
+acme.validation.draftMode-update.message = Cannot update because this claim is published
+acme.validation.draftMode-delete.message = Cannot delete because this claim is published

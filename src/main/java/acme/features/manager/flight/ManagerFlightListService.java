@@ -30,8 +30,11 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 	@Override
 	public void load() {
 		Collection<Flight> flights;
+		int managerId;
 
-		flights = this.repository.findAllFlights();
+		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		flights = this.repository.findFlightsByManagerId(managerId);
 
 		super.getBuffer().addData(flights);
 	}
@@ -42,7 +45,7 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		Dataset dataset;
 		boolean showCreate;
 
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager", "draftMode");
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 		showCreate = super.getRequest().getPrincipal().hasRealm(flight.getManager());
 		super.getResponse().addGlobal("showCreate", showCreate);
 

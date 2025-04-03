@@ -31,7 +31,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
-		status = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de draftMode de flight
+		status = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -45,16 +45,23 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
 
+		Integer lastSequenceOrder = this.repository.findLastSequenceOrderByFlightId(masterId);
+		if (lastSequenceOrder == null)
+			lastSequenceOrder = 0;
+
+		Integer sequenceOrder = lastSequenceOrder + 1;
+
 		leg = new Leg();
 		leg.setDraftMode(true);
 		leg.setFlight(flight);
+		leg.setSequenceOrder(sequenceOrder);
 
 		super.getBuffer().addData(leg);
 	}
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder");
+		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "departureAirport", "arrivalAirport", "aircraft");
 	}
 
 	@Override
@@ -71,38 +78,29 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 	public void unbind(final Leg leg) {
 		assert leg != null;
 		Dataset dataset;
-		Collection<Flight> flights;
 		Collection<Airport> airports;
 		Collection<Aircraft> aircrafts;
-		SelectChoices flight;
 		SelectChoices departureAirport;
 		SelectChoices arrivalAirport;
 		SelectChoices aircraft;
 		SelectChoices legStatus;
-		Integer lastSequenceOrder;
 
-		flights = this.repository.findAllFlights();
 		airports = this.repository.findAllAirports();
 		aircrafts = this.repository.findAllAircrafts();
-		flight = SelectChoices.from(flights, "tag", leg.getFlight());
 		departureAirport = SelectChoices.from(airports, "iataCode", leg.getDepartureAirport());
 		arrivalAirport = SelectChoices.from(airports, "iataCode", leg.getArrivalAirport());
 		aircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
-		lastSequenceOrder = this.repository.findLastSequenceOrderByFlightId(leg.getFlight().getId());
 
 		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
-		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
 		dataset.put("arrivalAirport", arrivalAirport.getSelected().getKey());
 		dataset.put("aircraft", aircraft.getSelected().getKey());
-		dataset.put("flights", flight);
 		dataset.put("departureAirports", departureAirport);
 		dataset.put("arrivalAirports", arrivalAirport);
 		dataset.put("aircrafts", aircraft);
 		dataset.put("status", legStatus);
-		dataset.put("sequenceOrder", lastSequenceOrder + 1);
 
 		super.getResponse().addData(dataset);
 	}

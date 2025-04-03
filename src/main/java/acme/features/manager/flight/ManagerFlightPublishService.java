@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flight_management.Flight;
@@ -48,7 +47,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void bind(final Flight flight) {
-		// No binding necesario para publicación
+		;
 	}
 
 	@Override
@@ -73,15 +72,8 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	public void unbind(final Flight flight) {
 		assert flight != null;
 		Dataset dataset;
-		Collection<Manager> managers;
-		SelectChoices choises;
 
-		managers = this.repository.findAllManagers();
-		choises = SelectChoices.from(managers, "identifier", flight.getManager());
-
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager", "draftMode");
-		dataset.put("manager", choises.getSelected().getKey());
-		dataset.put("managers", choises);
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

@@ -8,12 +8,10 @@
 	<acme:input-checkbox code="manager.flight.form.label.selfTransfer" path="selfTransfer" />
 	<acme:input-money code="manager.flight.form.label.cost" path="cost" />
 	<acme:input-textbox code="manager.flight.form.label.description" path="description" />
-	<acme:input-select code="manager.flight.form.label.manager" path="manager" choices="${managers}" />
 	
 	<!-- Atributos derivados (solo aparecen en el show) -->
-    	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish|create')}">
-	        <acme:input-checkbox code="manager.flight.form.label.draftMode" path="draftMode" readonly="true"/>
-		    <acme:input-moment code="manager.flight.form.label.departure" path="departure" readonly="true"/>
+    	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
+		    <acme:input-moment code="manager.flight.form.label.departure" path="getDeparture" readonly="true"/>
 		    <acme:input-moment code="manager.flight.form.label.arrival" path="arrival" readonly="true"/>
 		    <acme:input-textbox code="manager.flight.form.label.originCity" path="originCity" readonly="true"/>
 		    <acme:input-textbox code="manager.flight.form.label.destinationCity" path="destinationCity" readonly="true"/>
@@ -29,7 +27,7 @@
 			<acme:submit code="manager.flight.form.button.update" action="/manager/flight/update"/>
 			<acme:submit code="manager.flight.form.button.delete" action="/manager/flight/delete"/>
 			<jstl:if test="${canPublish}">
-				<acme:submit code="manager.flight.publish" action="/manager/flight/publish" />
+				<acme:submit code="manager.flight.form.button.publish" action="/manager/flight/publish" />
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">

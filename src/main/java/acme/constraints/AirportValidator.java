@@ -34,20 +34,22 @@ public class AirportValidator extends AbstractValidator<ValidAirport, Airport> {
 		if (airport == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			boolean uniqueAirport;
-			Airport existingAirport;
+			{
+				boolean uniqueAirport;
+				Airport existingAirport;
 
-			existingAirport = this.repository.findAirportByIataCode(airport.getIataCode());
-			uniqueAirport = existingAirport == null || existingAirport.equals(airport);
+				existingAirport = this.repository.findAirportByIataCode(airport.getIataCode());
+				uniqueAirport = existingAirport == null || existingAirport.getIataCode().isBlank() || existingAirport.equals(airport);
 
-			super.state(context, uniqueAirport, "iataCode", "acme.validation.airport.duplicate-iataCode.message");
-		}
-		{
-			boolean isValidIataCode;
+				super.state(context, uniqueAirport, "iataCode", "acme.validation.airport.duplicate-iataCode.message");
+			}
+			{
+				boolean isValidIataCode;
 
-			isValidIataCode = airport.getIataCode().matches("^[A-Z]{3}$");
+				isValidIataCode = airport.getIataCode().matches("^[A-Z]{3}$");
 
-			super.state(context, isValidIataCode, "iataCode", "acme.validation.airport.iataCode.message");
+				super.state(context, isValidIataCode, "iataCode", "acme.validation.airport.iataCode.message");
+			}
 		}
 
 		result = !super.hasErrors(context);

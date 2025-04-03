@@ -23,49 +23,46 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		boolean status;
-
-		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Manager.class));
 	}
 
 	@Override
 	public void load() {
-		Flight object = new Flight();
-		object.setDraftMode(true);
-		super.getBuffer().addData(object);
+		Flight flight;
+		Manager Manager;
+
+		Manager = (Manager) super.getRequest().getPrincipal().getActiveRealm();
+
+		flight = new Flight();
+		flight.setDraftMode(true);
+		flight.setManager(Manager);
+
+		super.getBuffer().addData(flight);
 	}
 
 	@Override
-	public void bind(final Flight object) {
-		assert object != null;
-		super.bindObject(object, "tag", "selfTransfer", "cost", "description");
+	public void bind(final Flight flight) {
+		assert flight != null;
+		super.bindObject(flight, "tag", "selfTransfer", "cost", "description");
 	}
 
 	@Override
-	public void validate(final Flight object) {
-		assert object != null;
-		// Puedes dejarlo vacío por ahora
+	public void validate(final Flight flight) {
+		;
 	}
 
 	@Override
-	public void perform(final Flight object) {
-		assert object != null;
-
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		int managerId = this.repository.findManagerByUserAccountId(userAccountId);
-
-		Manager manager = new Manager();
-		manager.setId(managerId);
-
-		object.setManager(manager);
-		this.repository.save(object);
+	public void perform(final Flight flight) {
+		this.repository.save(flight);
 	}
 
 	@Override
-	public void unbind(final Flight object) {
-		Dataset dataset = super.unbindObject(object, "tag", "selfTransfer", "cost", "description");
+	public void unbind(final Flight flight) {
+		assert flight != null;
+		Dataset dataset;
+
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
+
 		super.getResponse().addData(dataset);
 	}
 

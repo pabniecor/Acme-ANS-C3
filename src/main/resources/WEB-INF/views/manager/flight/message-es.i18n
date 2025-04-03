@@ -1,8 +1,9 @@
-manager.flight.list.label.tag = Etiqueta:
-manager.flight.list.label.selfTransfer = Auto transferencia:
-manager.flight.list.label.cost = Coste:
-manager.flight.list.label.description = Descripción:
-manager.flight.list.label.manager = Gerente:
+manager.flight.list.label.tag = Etiqueta: 
+manager.flight.list.label.selfTransfer = Auto transferencia: 
+manager.flight.list.label.cost = Coste: 
+manager.flight.list.label.description = Descripción: 
+manager.flight.list.label.manager = Gerente: 
+manager.flight.list.label.draftMode = Modo borrador: 
 
 manager.flight.form.label.tag = Etiqueta:
 manager.flight.form.label.selfTransfer = Auto transferencia:

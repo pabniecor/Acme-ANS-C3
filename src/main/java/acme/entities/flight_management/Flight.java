@@ -60,71 +60,55 @@ public class Flight extends AbstractEntity {
 
 
 	@Transient
-	public Date getDeparture() { //min = Current time, max = 2201/01/01 00:00:00
+	public Date getDeparture() {
 		Date result;
-		FlightRepository repository;
-		Date departure;
-
-		repository = SpringHelper.getBean(FlightRepository.class);
-		departure = repository.computeDeparture(this.getId());
-		result = departure;
-
+		Leg leg;
+		LegRepository legRepository;
+		legRepository = SpringHelper.getBean(LegRepository.class);
+		leg = legRepository.findLegsOrderByAscendent(this.getId()).stream().findFirst().orElse(null);
+		result = leg != null ? leg.getScheduledDeparture() : null;
 		return result;
 	}
 
 	@Transient
-	public Date getArrival() { //min = scheduledDeparture + 1 minute, max = 2201/01/01 00:00:00
+	public Date getArrival() {
 		Date result;
-		FlightRepository repository;
-		Date arrival;
-
-		repository = SpringHelper.getBean(FlightRepository.class);
-		arrival = repository.computeArrival(this.getId());
-		result = arrival;
-
+		Leg leg;
+		LegRepository legRepository;
+		legRepository = SpringHelper.getBean(LegRepository.class);
+		leg = legRepository.findLegsOrderByDescendent(this.getId()).stream().findFirst().orElse(null);
+		result = leg != null ? leg.getScheduledArrival() : null;
 		return result;
 	}
 
 	@Transient
-	public String getOriginCity() { //min = 1, max = 50
+	public String getOriginCity() {
 		String result;
-		FlightRepository repository;
-		String departureCity;
-
-		repository = SpringHelper.getBean(FlightRepository.class);
-
-		Date scheduledDeparture = repository.computeDeparture(this.getId());
-		departureCity = repository.computeOriginCity(this.getId(), scheduledDeparture);
-		result = departureCity == null ? "null" : departureCity;
-
+		Leg leg;
+		LegRepository legRepository;
+		legRepository = SpringHelper.getBean(LegRepository.class);
+		leg = legRepository.findLegsOrderByAscendent(this.getId()).stream().findFirst().orElse(null);
+		result = leg != null ? leg.getDepartureAirport().getCity() : null;
 		return result;
 	}
 
 	@Transient
-	public String getDestinationCity() { //min = 1, max = 50
+	public String getDestinationCity() {
 		String result;
-		FlightRepository repository;
-		String arrivalCity;
-
-		repository = SpringHelper.getBean(FlightRepository.class);
-
-		Date scheduledArrival = repository.computeArrival(this.getId());
-		arrivalCity = repository.computeDestinationCity(this.getId(), scheduledArrival);
-		result = arrivalCity == null ? "null" : arrivalCity;
-
+		Leg leg;
+		LegRepository legRepository;
+		legRepository = SpringHelper.getBean(LegRepository.class);
+		leg = legRepository.findLegsOrderByDescendent(this.getId()).stream().findFirst().orElse(null);
+		result = leg != null ? leg.getArrivalAirport().getCity() : null;
 		return result;
 	}
 
 	@Transient
 	public Integer getLayovers() {
 		Integer result;
-		FlightRepository repository;
-		Integer layovers;
-
-		repository = SpringHelper.getBean(FlightRepository.class);
-		layovers = repository.computeNumLayovers(this.getId());
-		result = layovers == null ? 0 : layovers.intValue();
-
+		LegRepository legRepository;
+		legRepository = SpringHelper.getBean(LegRepository.class);
+		result = legRepository.countNumberOfLegsOfFlight(this.getId());
 		return result;
 	}
 

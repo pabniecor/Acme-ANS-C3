@@ -3,6 +3,7 @@ manager.flight.list.label.selfTransfer = SelfTransfer:
 manager.flight.list.label.cost = Cost:
 manager.flight.list.label.description = Description:
 manager.flight.list.label.manager = Manager: 
+manager.flight.list.label.draftMode = Draft Mode: 
 
 manager.flight.form.label.tag = Tag:
 manager.flight.form.label.selfTransfer = SelfTransfer:

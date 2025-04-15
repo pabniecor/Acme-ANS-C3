@@ -26,8 +26,8 @@ airline-17,Lorem ipsum dolor sit amet,ARX,http://www.acmeairlines.com/flight,LUX
 airline-18,Lorem ipsum dolor sit amet,ASX,https://www.flyweight.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-19,Lorem ipsum dolor sit amet,ATX,https://secure.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-20,Lorem ipsum dolor sit amet,AUX,http://www.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
-airline-21,Lorem ipsum dolor sit amet,AVX,ftp://secure,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
-airline-22,Lorem ipsum dolor sit amet,AWX,ftp://secure.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-21,Lorem ipsum dolor sit amet,AVX,http://secure.org,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-22,Lorem ipsum dolor sit amet,AWX,http://secure.flyhigh.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-23,Lorem ipsum dolor sit amet,AXX,https://www.acmeairlines.com/index.html,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-24,Lorem ipsum dolor sit amet,AYX,https://secure.flyhigh.com/booking/index.html,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-25,Lorem ipsum dolor sit amet,AZX,https://www.acmeairlines.com/flights/search,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
@@ -41,7 +41,7 @@ airline-32,Lorem ipsum dolor sit amet,BGX,https://www.acmeairlines.com/search?de
 airline-33,Lorem ipsum dolor sit amet,BHX,https://booking.acmeairlines.com,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-34,Lorem ipsum dolor sit amet,BIX,https://www.acmeairlines.com/path/with/special%20characters,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-35,Lorem ipsum dolor sit amet,BJX,https://www.acmeairlines.com/flights#direct-only,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
-airline-36,Lorem ipsum dolor sit amet,BKX,https://www.acmeairlines.com:8443/secure-booking,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
+airline-36,Lorem ipsum dolor sit amet,BKX,https://www.acmeairlines.com/8443/secure-booking,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 airline-37,Lorem ipsum dolor sit amet,BLX,https://www.acmeairlines.com/api/v2/flight-status,LUXURY,2012/07/02 00:00,acme@lorem-ipsum.org,+1987654321
 #website - no singular values
 #airline-type - standard variations

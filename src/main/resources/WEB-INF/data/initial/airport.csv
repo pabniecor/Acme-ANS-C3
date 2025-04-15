@@ -46,12 +46,12 @@ airport-33,Lorem ipsum dolor sit ame,ABF,INTERNATIONAL,Lorem ipsum dolor sit ame
 airport-34,Lorem ipsum dolor sit ame,ABG,INTERNATIONAL,Lorem ipsum dolor sit ame,' or 'A' = 'A,http://lorem.com/ipsum,acme@lorem-ipsum.org,111111111
 #country - no singular values
 #website - standard variations
-airport-35,Lorem ipsum dolor sit ame,ABH,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,ftp://a,acme@lorem-ipsum.org,111111111
-airport-36,Lorem ipsum dolor sit ame,ABI,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,ftp://a.b,acme@lorem-ipsum.org,111111111
+airport-35,Lorem ipsum dolor sit ame,ABH,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,https://a,acme@lorem-ipsum.org,111111111
+airport-36,Lorem ipsum dolor sit ame,ABI,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,https://a.b,acme@lorem-ipsum.org,111111111
 airport-37,Lorem ipsum dolor sit ame,ABJ,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://www.lorem-ipsum.org/dolor/sit/amet/consectetur/adipiscing/elit/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/,acme@lorem-ipsum.org,111111111
 airport-38,Lorem ipsum dolor sit ame,ABK,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://www.lorem-ipsum.org/dolor/sit/amet/consectetur/adipiscing/elit/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/X,acme@lorem-ipsum.org,111111111
 airport-39,Lorem ipsum dolor sit ame,ABL,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,https://www.lorem-ipsum.org,acme@lorem-ipsum.org,111111111
-airport-40,Lorem ipsum dolor sit ame,ABM,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,ftp://www.lorem-ipsum.org,acme@lorem-ipsum.org,111111111
+airport-40,Lorem ipsum dolor sit ame,ABM,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://www.lorem-ipsum.org,acme@lorem-ipsum.org,111111111
 airport-41,Lorem ipsum dolor sit ame,ABN,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://www.lorem-ipsum.org/dolor/sit.html,acme@lorem-ipsum.org,111111111
 airport-42,Lorem ipsum dolor sit ame,AZB,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://www.lorem-ipsum.org/dolor/sit.html#dolor,acme@lorem-ipsum.org,111111111
 airport-43,Lorem ipsum dolor sit ame,ABO,INTERNATIONAL,Lorem ipsum dolor sit ame,Lorem ipsum dolor sit ame,http://example.org?a=1&b=2,acme@lorem-ipsum.org,111111111

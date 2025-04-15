@@ -23,8 +23,8 @@ service-16,"Lorem ipsum dolor sit amet",http://www.acmeairlines.com/flight,50.50
 service-17,"Lorem ipsum dolor sit amet",https://www.flyweight.com,50.50,NOPQ-25,50.00
 service-18,"Lorem ipsum dolor sit amet",https://secure.flyhigh.com,50.50,RSTU-25,50.00
 service-19,"Lorem ipsum dolor sit amet",http://www.flyhigh.com,50.50,VWXY-25,50.00
-service-20,"Lorem ipsum dolor sit amet",ftp://secure,50.50,ZABC-25,50.00
-service-21,"Lorem ipsum dolor sit amet",ftp://secure.flyhigh.com,50.50,DEFG-25,50.00
+service-20,"Lorem ipsum dolor sit amet",http://secure,50.50,ZABC-25,50.00
+service-21,"Lorem ipsum dolor sit amet",http://secure.flyhigh.com,50.50,DEFG-25,50.00
 service-22,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/index.html,50.50,HIJK-25,50.00
 service-23,"Lorem ipsum dolor sit amet",https://secure.flyhigh.com/booking/index.html,50.50,LMNO-25,50.00
 service-24,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/flights/search,50.50,PQRS-25,50.00
@@ -38,7 +38,7 @@ service-31,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/search?depa
 service-32,"Lorem ipsum dolor sit amet",https://booking.acmeairlines.com,50.50,CDEG-25,50.00
 service-33,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/path/with/special%20characters,50.50,HIJM-25,50.00
 service-34,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/flights#direct-only,50.50,NOPW-25,50.00
-service-35,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com:8443/secure-booking,50.50,QRTV-25,50.00
+service-35,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/8443/secure-booking,50.50,QRTV-25,50.00
 service-36,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/api/v2/flight-status,50.50,UXYZ-25,50.00
 #pictureLink - no singular values
 #averageDwellTime - standard variations

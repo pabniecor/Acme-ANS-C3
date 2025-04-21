@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.FlightAssignment;
+import acme.entities.flight_management.Leg;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
@@ -22,7 +24,15 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		boolean status;
+		int masterId;
+		FlightAssignment fa;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		fa = this.repository.findFlightAssignmentById(masterId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId();
+		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
@@ -44,7 +54,10 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void validate(final ActivityLog al) {
-		;
+		Leg l;
+
+		l = al.getFlightAssignment().getLeg();
+		super.state(MomentHelper.isAfter(al.getRegistrationMoment(), l.getScheduledArrival()), "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.airport_management.FlightAssignment;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
@@ -20,7 +21,14 @@ public class MemberActivityLogListService extends AbstractGuiService<FlightCrewM
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		boolean status;
+		int masterId;
+		FlightAssignment fa;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		fa = this.repository.findFlightAssignmentById(masterId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId();
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

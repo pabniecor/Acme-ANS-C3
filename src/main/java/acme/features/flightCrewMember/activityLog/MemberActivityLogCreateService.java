@@ -57,7 +57,8 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 		Leg l;
 
 		l = al.getFlightAssignment().getLeg();
-		super.state(MomentHelper.isAfter(al.getRegistrationMoment(), l.getScheduledArrival()), "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
+		if (al.getRegistrationMoment() != null)
+			super.state(MomentHelper.isAfter(al.getRegistrationMoment(), l.getScheduledArrival()), "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
 	}
 
 	@Override

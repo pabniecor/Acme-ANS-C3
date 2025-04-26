@@ -112,6 +112,11 @@ public class Flight extends AbstractEntity {
 		return result;
 	}
 
+	@Transient
+	public String getBookingFlight() {
+		return this.getOriginCity() + "-->" + this.getDestinationCity();
+	}
+
 	// Relationships ----------------------------------------------------------
 
 

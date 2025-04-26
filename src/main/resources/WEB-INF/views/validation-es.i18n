@@ -61,3 +61,5 @@ acme.validation.tooManyPilots.message = La asignación ya tiene un piloto
 acme.validation.tooManyCopilots.message = La asignación ya tiene un copiloto 
 acme.validation.assignmentPublished.message = La asignación ya ha sido publicada
 acme.validation.leadAttendant.message = No eres encargado principal en esta asignación
+
+acme.validation.airline.invalid-type.message = El tipo de aerolínea debe ser STANDARD, LOWCOST o LUXURY

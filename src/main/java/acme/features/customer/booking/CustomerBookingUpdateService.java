@@ -49,7 +49,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight");
+		super.bindObject(booking, "locatorCode", "travelClass", "lastCardNibble", "flight");
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		SelectChoices travelClass;
 
 		flights = this.repository.findAllFlights();
-		choicesFlight = SelectChoices.from(flights, "tag", booking.getFlight());
+		choicesFlight = SelectChoices.from(flights, "bookingFlight", booking.getFlight());
 		customers = this.repository.findAllCustomers();
 		choicesCustomer = SelectChoices.from(customers, "identifier", booking.getCustomer());
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());

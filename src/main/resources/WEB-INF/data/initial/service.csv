@@ -23,7 +23,7 @@ service-16,"Lorem ipsum dolor sit amet",http://www.acmeairlines.com/flight,50.50
 service-17,"Lorem ipsum dolor sit amet",https://www.flyweight.com,50.50,NOPQ-25,50.00
 service-18,"Lorem ipsum dolor sit amet",https://secure.flyhigh.com,50.50,RSTU-25,50.00
 service-19,"Lorem ipsum dolor sit amet",http://www.flyhigh.com,50.50,VWXY-25,50.00
-service-20,"Lorem ipsum dolor sit amet",http://secure,50.50,ZABC-25,50.00
+service-20,"Lorem ipsum dolor sit amet",http://secure.com,50.50,ZABC-25,50.00
 service-21,"Lorem ipsum dolor sit amet",http://secure.flyhigh.com,50.50,DEFG-25,50.00
 service-22,"Lorem ipsum dolor sit amet",https://www.acmeairlines.com/index.html,50.50,HIJK-25,50.00
 service-23,"Lorem ipsum dolor sit amet",https://secure.flyhigh.com/booking/index.html,50.50,LMNO-25,50.00

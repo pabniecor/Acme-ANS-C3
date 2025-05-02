@@ -2,12 +2,12 @@
 package acme.features.technician.maintenanceRecord;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
@@ -26,8 +26,9 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		MaintenanceRecord mr = this.repository.findMRById(id);
+		int technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
 
-		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getTechnician().getId() == technicianId;
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -45,20 +46,15 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void bind(final MaintenanceRecord mr) {
-		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "draftMode", "aircraft", "technician");
+		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "aircraft", "technician");
 	}
 
 	@Override
 	public void validate(final MaintenanceRecord mr) {
 		boolean confirmation;
-		boolean validDates;
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		validDates = MomentHelper.isBefore(mr.getMomentDone(), mr.getNextInspection());
-
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-		if (validDates)
-			super.state(validDates, "nextInspection", "acme.validation.maintenanceRecord.coherentNextInspection.message");
 	}
 
 	@Override
@@ -75,7 +71,7 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 		SelectChoices aircraftChoices;
 		SelectChoices maintenanceStatus;
 
-		technicians = this.repository.findAllTechnicians();
+		technicians = List.of(this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()));
 		aircrafts = this.repository.findAllAircrafts();
 		maintenanceStatus = SelectChoices.from(MaintenanceStatus.class, mr.getMaintenanceStatus());
 		aircraftChoices = SelectChoices.from(aircrafts, "model", mr.getAircraft());

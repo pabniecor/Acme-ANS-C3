@@ -9,6 +9,7 @@ acme.validation.technician.correctLicenseNumberPattern.message = El número de l
 acme.validation.technician.correctPhoneNumberPattern.message = El número de teléfono debe seguir este patrón -> ^\\+?\\d{6,15}$
 acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message = Para publicar un informe de mantenimiento, sus tareas deben estar publicadas
 acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = Para publicar un informe de mantenimiento, debe tener alguna tarea asociada
+acme.validation.technician.maintenanceRecord.error.validStatus.message = No se puede crear un registro de mantenimiento ya completado
 
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto

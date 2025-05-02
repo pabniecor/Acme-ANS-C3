@@ -2,6 +2,7 @@
 package acme.features.technician.maintenanceRecord;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,12 +36,13 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 		MaintenanceRecord mr;
 
 		mr = new MaintenanceRecord();
+		mr.setDraftMode(true);
 		super.getBuffer().addData(mr);
 	}
 
 	@Override
 	public void bind(final MaintenanceRecord mr) {
-		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "draftMode", "aircraft", "technician");
+		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "aircraft", "technician");
 	}
 
 	@Override
@@ -48,6 +50,10 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 		boolean confirmation;
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+
+		boolean validStatus;
+		validStatus = super.getRequest().getData("maintenanceStatus", MaintenanceStatus.class) == MaintenanceStatus.COMPLETED;
+		super.state(!validStatus, "maintenanceStatus", "acme.validation.technician.maintenanceRecord.error.validStatus.message");
 	}
 
 	@Override
@@ -60,15 +66,15 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 	public void unbind(final MaintenanceRecord mr) {
 		assert mr != null;
 		Dataset dataset;
-		SelectChoices maintenanceStatus;
 		Collection<Aircraft> aircrafts;
 		Collection<Technician> technicians;
+		SelectChoices maintenanceStatus;
 		SelectChoices aircraftChoices;
 		SelectChoices technicianChoices;
 
 		maintenanceStatus = SelectChoices.from(MaintenanceStatus.class, mr.getMaintenanceStatus());
 		aircrafts = this.repository.findAllAircrafts();
-		technicians = this.repository.findAllTechnicians();
+		technicians = List.of(this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()));
 		aircraftChoices = SelectChoices.from(aircrafts, "model", mr.getAircraft());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", mr.getTechnician());
 

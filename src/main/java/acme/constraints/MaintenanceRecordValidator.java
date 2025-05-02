@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.maintenance_and_technical.MaintenanceRecord;
-import acme.entities.maintenance_and_technical.MaintenanceRecordRepository;
+import acme.features.technician.maintenanceRecord.TechnicianMRRepository;
 
 public class MaintenanceRecordValidator extends AbstractValidator<ValidMaintenanceRecord, MaintenanceRecord> {
 
 	@Autowired
-	public MaintenanceRecordRepository repository;
+	public TechnicianMRRepository repository;
 
 
 	@Override

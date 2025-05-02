@@ -38,4 +38,7 @@ public interface TechnicianMRRepository extends AbstractRepository {
 	@Query("select t from Technician t")
 	List<Technician> findAllTechnicians();
 
+	@Query("select mr from MaintenanceRecord mr where mr.draftMode = false")
+	List<MaintenanceRecord> findAllPublishedMRs();
+
 }

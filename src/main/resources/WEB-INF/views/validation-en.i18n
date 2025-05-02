@@ -8,7 +8,8 @@ acme.validation.technician.uniqueLicenseNumber.message = License number must be 
 acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
 acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$
 acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message = To publish a maintenance record, all its tasks must be published
-acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenanceRecord it must have any associated task
+acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenance record it must have any associated task
+acme.validation.technician.maintenanceRecord.error.validStatus.message = A new maintenance record cannot be already completed
 
 acme.validation.manager.duplicate-identifier.message = The manager's identifier is duplicated
 acme.validation.manager.identifier.message = The manager's identifier is incorrect

@@ -55,6 +55,7 @@
 			<acme:menu-suboption code="master.menu.technician.list-maintenanceRecords" action="/technician/maintenance-record/list"/>
 			<acme:menu-suboption code="master.menu.technician.list-tasks" action="/technician/task/list"/>
 			<acme:menu-suboption code="master.menu.technician.list-publicMRs" action="/technician/maintenance-record/list-public"/>
+			<acme:menu-suboption code="master.menu.technician.list-publicTasks" action="/technician/task/public-list"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">

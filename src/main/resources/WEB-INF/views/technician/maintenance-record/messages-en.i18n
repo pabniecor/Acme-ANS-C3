@@ -21,4 +21,3 @@ technician.maintenanceRecord.form.button.create = Create
 technician.maintenanceRecord.form.button.update = Update maintenance record
 technician.maintenanceRecord.form.button.tasks = Involved tasks
 technician.maintenanceRecord.form.button.publish = Publish maintenance record
-technician.maintenanceRecord.form.button.unPublish = Make maintenance record private

@@ -25,12 +25,18 @@ public interface TechnicianTaskRepository extends AbstractRepository {
 	Task findTaskById(int id);
 
 	@Query("select t from Technician t where t.userAccount.id = :id")
-	Technician findTechnicianById(int id);
+	Technician findTechnicianByUserId(int id);
 
 	@Query("select t from Task t where t.technician.id = :id")
 	Collection<Task> findTasksByTechnicianId(int id);
 
 	@Query("select t from Technician t")
 	List<Technician> findAllTechnicians();
+
+	@Query("select t from Task t where t.draftMode = false")
+	List<Task> findPublicTasks();
+
+	@Query("select t from Technician t where t.id = :id")
+	Technician findTechnicianById(int id);
 
 }

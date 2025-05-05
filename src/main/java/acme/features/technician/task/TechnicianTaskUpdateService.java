@@ -2,6 +2,7 @@
 package acme.features.technician.task;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,10 +23,18 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Task task = this.repository.findTaskById(id);
+		boolean authorised = false;
+		Task task;
+		Technician loggedTechnician;
+		Technician selectedTechnician;
 
-		boolean authorised = task != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && task.getDraftMode();
+		if (super.getRequest().hasData("id")) {
+			task = this.repository.findTaskById(super.getRequest().getData("id", int.class));
+			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
+			selectedTechnician = super.getRequest().getData("technician", Technician.class);
+
+			authorised = task != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && task.getDraftMode() && task.getTechnician().getId() == loggedTechnician.getId() && loggedTechnician.equals(selectedTechnician);
+		}
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -43,7 +52,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void bind(final Task task) {
-		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");
+		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration");
 	}
 
 	@Override
@@ -65,7 +74,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		SelectChoices technicianChoices;
 		SelectChoices taskType;
 
-		technicians = this.repository.findAllTechnicians();
+		technicians = List.of(this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()));
 		taskType = SelectChoices.from(TaskType.class, task.getTaskType());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", task.getTechnician());
 

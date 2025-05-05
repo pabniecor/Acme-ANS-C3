@@ -77,4 +77,5 @@ master.menu.user-account.consumer-profile = Perfil de consumidor
 master.menu.technician = Técnico
 master.menu.technician.list-maintenanceRecords = Listado de registros de mantenimiento
 master.menu.technician.list-tasks = Listado de tareas
-master.menu.technician.list-publicMRs = Listado de registros de mantenimeinto publicados
+master.menu.technician.list-publicMRs = Registros de mantenimeinto publicados
+master.menu.technician.list-publicTasks = Tareas públicas

@@ -77,3 +77,4 @@ master.menu.technician = Technician
 master.menu.technician.list-maintenanceRecords = Maintenance record listing
 master.menu.technician.list-tasks = Task listing
 master.menu.technician.list-publicMRs = Public maintenance records
+master.menu.technician.list-publicTasks = Public tasks

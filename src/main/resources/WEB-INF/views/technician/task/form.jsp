@@ -3,13 +3,13 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
-<acme:form>
+<acme:form readonly="${!draftMode}">
 	<acme:input-select code="technician.task.form.label.taskType" path="taskType" choices="${status}"/>
 	<acme:input-textarea code="technician.task.form.label.description" path="description" />
 	<acme:input-integer code="technician.task.form.label.priority" path="priority" />
 	<acme:input-integer code="technician.task.form.label.estimatedDuration" path="estimatedDuration" />
-	<acme:input-checkbox code="technician.task.form.label.draftMode" path="draftMode" />
-	<acme:input-select code="technician.task.form.label.technician" path="technician" choices="${technicians}" />
+	<acme:input-checkbox code="technician.task.form.label.draftMode" path="draftMode" readonly="true"/>
+	<acme:input-select code="technician.task.form.label.technician" path="technician" choices="${technicians}" readonly="true" />
 	
 	<jstl:choose>		
  		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">

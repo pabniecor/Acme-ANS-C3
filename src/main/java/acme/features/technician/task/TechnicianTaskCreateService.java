@@ -2,6 +2,7 @@
 package acme.features.technician.task;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,8 +24,16 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 	@Override
 	public void authorise() {
 		boolean status;
+		Technician loggedTechnician;
+		Technician t;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+		if (super.getRequest().hasData("id", int.class)) {
+			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
+			t = super.getRequest().getData("technician", Technician.class);
+
+			status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && t.equals(loggedTechnician);
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -32,14 +41,18 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 	@Override
 	public void load() {
 		Task task;
-
 		task = new Task();
+		Technician t = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
+
+		task.setTechnician(t);
+		task.setDraftMode(true);
+
 		super.getBuffer().addData(task);
 	}
 
 	@Override
 	public void bind(final Task task) {
-		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");
+		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration");
 	}
 
 	@Override
@@ -51,7 +64,6 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void perform(final Task task) {
-		task.setDraftMode(true);
 		this.repository.save(task);
 	}
 
@@ -64,7 +76,7 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 		SelectChoices technicianChoices;
 
 		taskType = SelectChoices.from(TaskType.class, task.getTaskType());
-		technicians = this.repository.findAllTechnicians();
+		technicians = List.of(this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()));
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", task.getTechnician());
 
 		dataset = super.unbindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");

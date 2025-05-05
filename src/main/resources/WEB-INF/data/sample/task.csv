@@ -4,7 +4,7 @@ task-00,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se
 # taskType - standard variations
 task-01,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician1
 task-02,INSPECTION,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician1
-task-03,REPAIR,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician1
+task-03,REPAIR,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,false,technician1
 task-04,SYSTEM_CHECK,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician1
 # taskType - no singular values
 # description - standard variations
@@ -15,7 +15,7 @@ task-08,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se
 task-09,MAINTENANCE,"โลเร็ม อิปซัม",5,500,true,technician1
 task-10,MAINTENANCE,"لوريم إيبسوم",5,500,true,technician1
 task-11,MAINTENANCE,"洛伦·伊普森",5,500,true,technician1
-task-12,MAINTENANCE,"<marquee>Hacked</marquee>",5,500,true,technician1
+task-12,MAINTENANCE,"<marquee>Hacked</marquee>",5,500,false,technician1
 task-13,MAINTENANCE,"<script>alert(‘Hacked!’);</script>",5,500,true,technician1
 task-14,MAINTENANCE,"'' or 'A' = 'A",5,500,true,technician1
 # description - no singular values
@@ -32,7 +32,7 @@ task-21,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se
 task-22,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,1000,true,technician1
 # estimatedDuration - no singular values
 # draftMode - standard variations
-task-23,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician1
+task-23,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,true,technician2
 task-24,MAINTENANCE,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",5,500,false,technician1
 #draftMode - no singular values
 

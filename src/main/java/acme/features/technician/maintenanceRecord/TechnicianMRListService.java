@@ -33,7 +33,7 @@ public class TechnicianMRListService extends AbstractGuiService<Technician, Main
 		Collection<MaintenanceRecord> maintenanceRecords;
 		Integer technicianId;
 
-		technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
+		technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
 		maintenanceRecords = this.repository.findMRsByTechnicianId(technicianId);
 
 		super.getBuffer().addData(maintenanceRecords);

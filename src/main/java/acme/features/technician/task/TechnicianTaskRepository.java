@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.maintenance_and_technical.Involves;
+import acme.entities.maintenance_and_technical.MaintenanceRecord;
 import acme.entities.maintenance_and_technical.Task;
 import acme.realms.Technician;
 
@@ -38,5 +39,8 @@ public interface TechnicianTaskRepository extends AbstractRepository {
 
 	@Query("select t from Technician t where t.id = :id")
 	Technician findTechnicianById(int id);
+
+	@Query("select mr from MaintenanceRecord mr where mr.id = :id")
+	MaintenanceRecord findMRById(int id);
 
 }

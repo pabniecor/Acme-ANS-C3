@@ -1,0 +1,8 @@
+technician.involves.form.label.maintenanceRecord = Maintenance record:
+technician.involves.form.label.task = Task:
+technician.involves.form.label.confirmation = Confirm
+technician.involves.form.button.create = Assign tasks
+technician.involves.form.button.delete = Unassign tasks
+technician.involves.form.button.create.submit = Assign
+technician.involves.form.button.delete.submit = Unassign
+technician.involves.form.title = Assign/Unassign tasks

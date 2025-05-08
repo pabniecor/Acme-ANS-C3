@@ -25,8 +25,20 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 	@Override
 	public void authorise() {
 		boolean status;
+		List<Aircraft> aircrafts;
+		Aircraft a;
+		Technician loggedTechnician;
+		Technician t;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+		if (super.getRequest().hasData("id", int.class)) {
+			aircrafts = this.repository.findAllAircrafts();
+			a = super.getRequest().getData("aircraft", Aircraft.class);
+			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
+			t = super.getRequest().getData("technician", Technician.class);
+			if (a != null && t != null)
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && aircrafts.contains(a) && t.equals(loggedTechnician);
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -34,15 +46,17 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 	@Override
 	public void load() {
 		MaintenanceRecord mr;
+		Technician t = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
 
 		mr = new MaintenanceRecord();
 		mr.setDraftMode(true);
+		mr.setTechnician(t);
 		super.getBuffer().addData(mr);
 	}
 
 	@Override
 	public void bind(final MaintenanceRecord mr) {
-		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "aircraft", "technician");
+		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "aircraft");
 	}
 
 	@Override
@@ -58,7 +72,6 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void perform(final MaintenanceRecord mr) {
-		mr.setDraftMode(true);
 		this.repository.save(mr);
 	}
 
@@ -74,7 +87,7 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 		maintenanceStatus = SelectChoices.from(MaintenanceStatus.class, mr.getMaintenanceStatus());
 		aircrafts = this.repository.findAllAircrafts();
-		technicians = List.of(this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()));
+		technicians = List.of(this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()));
 		aircraftChoices = SelectChoices.from(aircrafts, "model", mr.getAircraft());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", mr.getTechnician());
 

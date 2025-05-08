@@ -4,15 +4,16 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form readonly="${!draftMode}">
+	
 	<acme:input-moment code="technician.maintenanceRecord.form.label.momentDone" path="momentDone" />
 	<acme:input-select code="technician.maintenanceRecord.form.label.maintenanceStatus" path="maintenanceStatus" choices="${status}" />
 	<acme:input-moment code="technician.maintenanceRecord.form.label.nextInspection" path="nextInspection" />
 	<acme:input-money code="technician.maintenanceRecord.form.label.estimatedCost" path="estimatedCost" />
 	<acme:input-textarea code="technician.maintenanceRecord.form.label.notes" path="notes" />
-	<acme:input-checkbox readonly="true" code="technician.maintenanceRecord.form.label.draftMode" path="draftMode" />
-	<acme:input-select code="technician.maintenanceRecord.form.label.aircraft" path="aircraft" choices="${aircrafts}" />
-	<acme:input-select code="technician.maintenanceRecord.form.label.technician" path="technician" choices="${technicians}" />
-	
+	<acme:input-checkbox code="technician.maintenanceRecord.form.label.draftMode" path="draftMode" readonly="true"/>
+	<acme:input-select code="technician.maintenanceRecord.form.label.aircraft" path="aircraft" choices="${aircrafts}"/>
+	<acme:input-select code="technician.maintenanceRecord.form.label.technician" path="technician" choices="${technicians}" readonly="true" />
+		
 	<jstl:choose>		
  		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == true}">
  		<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list-for-mr?masterId=${id}"/>

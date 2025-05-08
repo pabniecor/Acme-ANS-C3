@@ -25,13 +25,13 @@ public class TechnicianMRShowService extends AbstractGuiService<Technician, Main
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		MaintenanceRecord mr = this.repository.findMRById(id);
-		int technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
+		int technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
 		boolean authorised;
 
-		if (mr.getDraftMode() == true)
-			authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getTechnician().getId() == technicianId;
+		if (mr.getDraftMode())
+			authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr != null && mr.getTechnician().getId() == technicianId;
 		else
-			authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+			authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr != null;
 
 		super.getResponse().setAuthorised(authorised);
 	}

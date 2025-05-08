@@ -11,6 +11,12 @@ acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message = 
 acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = Para publicar un informe de mantenimiento, debe tener alguna tarea asociada
 acme.validation.technician.maintenanceRecord.error.validStatus.message = No se puede crear un registro de mantenimiento ya completado
 
+acme.validation.technician.involves.error.notAssignedTask.message = La tarea no está asignada al registro de mantenimiento, ese registro tiene estas tareas: {0}
+acme.validation.technician.involves.error.notAssignedMR.message = El registro de mantenimiento no guarda relación con la tarea, esa tarea está asignada a estos registros: {0}
+acme.validation.technician.involves.error.alreadyAssignedTask.message = La tarea ya está asignada al registro de mantenimiento, puedes asignar estas otras: {0}
+acme.validation.technician.involves.error.alreadyAssignedMR.message = El registro de mantenimiento ya guarda relación con la tarea, estos otros no lo hacen: {0}
+acme.validation.technician.involves.error.nullDelete.message = Se debe elegir una tarea y un registro de mantenimeinto
+
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
 

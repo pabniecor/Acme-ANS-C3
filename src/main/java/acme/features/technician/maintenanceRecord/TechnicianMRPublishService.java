@@ -29,7 +29,7 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		MaintenanceRecord mr = this.repository.findMRById(id);
-		int technicianId = this.repository.findTechnicianById(super.getRequest().getPrincipal().getAccountId()).getId();
+		int technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
 
 		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getDraftMode() && mr.getTechnician().getId() == technicianId;
 

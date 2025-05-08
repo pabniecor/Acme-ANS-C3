@@ -1,0 +1,8 @@
+technician.involves.form.label.maintenanceRecord = Registro de mantenimiento:
+technician.involves.form.label.task = Tarea:
+technician.involves.form.label.confirmation = Confirmar
+technician.involves.form.button.create = Asignar tareas
+technician.involves.form.button.delete = Quitar asignación de tareas
+technician.involves.form.button.create.submit = Asignar
+technician.involves.form.button.delete.submit = Quitar asignación
+technician.involves.form.title = Asigne/Quite asignación de tareas

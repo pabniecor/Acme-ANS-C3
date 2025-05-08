@@ -24,7 +24,7 @@ public interface TechnicianMRRepository extends AbstractRepository {
 	MaintenanceRecord findMRById(int id);
 
 	@Query("select t from Technician t where t.userAccount.id = :id")
-	Technician findTechnicianById(int id);
+	Technician findTechnicianByUserId(int id);
 
 	@Query("select i from Involves i where i.maintenanceRecord.id = :id")
 	Collection<Involves> findInvolvesByMRId(int id);
@@ -40,5 +40,14 @@ public interface TechnicianMRRepository extends AbstractRepository {
 
 	@Query("select mr from MaintenanceRecord mr where mr.draftMode = false")
 	List<MaintenanceRecord> findAllPublishedMRs();
+
+	@Query("select t from Task t")
+	List<Task> findAllTasks();
+
+	@Query("select mr from MaintenanceRecord mr")
+	List<MaintenanceRecord> findAllMRs();
+
+	@Query("select t from Task t where t.technician.id = :id")
+	List<Task> findTasksByTechnicianId(int id);
 
 }

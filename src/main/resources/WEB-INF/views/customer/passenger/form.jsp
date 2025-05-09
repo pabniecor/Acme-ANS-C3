@@ -16,7 +16,7 @@
 			<acme:submit code="customer.passenger.form.button.publish" action="/customer/passenger/publish"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
-			<acme:submit code="customer.passenger.form.button.create" action="/customer/passenger/create?bookingId=${bookingId}"/>
+			<acme:submit code="customer.passenger.form.button.create" action="/customer/passenger/create"/>
 		</jstl:when>		
 	</jstl:choose>	
 

@@ -61,7 +61,6 @@ master.menu.member.list.flight-assignments-incomplete = Listas asignaciones de v
 
 master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-claims = Listar reclamaciones
-master.menu.assistance-agent.list-tracking-logs = Listar seguimientos
 
 # master.menu.user-account ####################################################
 

@@ -19,6 +19,10 @@
 			<acme:submit code="assistance-agent.claim.form.button.update" action="/assistance-agent/claim/update"/>
 			<acme:submit code="assistance-agent.claim.form.button.delete" action="/assistance-agent/claim/delete"/>
 			<acme:submit code="assistance-agent.claim.form.button.publish" action="/assistance-agent/claim/publish"/>
+			<acme:button code="assistance-agent.claim.form.button.listTrackingLogs" action="/assistance-agent/tracking-log/list?masterId=${id}"/>
+		</jstl:when>
+		<jstl:when test="${_command == 'show' && draftMode == false}">
+			<acme:button code="assistance-agent.claim.form.button.listTrackingLogs" action="/assistance-agent/tracking-log/list?masterId=${id}"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:input-checkbox code="assistance-agent.claim.form.label.confirmation" path="confirmation"/>

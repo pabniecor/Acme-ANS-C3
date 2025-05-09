@@ -60,7 +60,6 @@ master.menu.member.list.flight-assignments-incomplete = List incompleted flight 
 
 master.menu.assistance-agent = AssistanceAgent
 master.menu.assistance-agent.list-claims = List claims
-master.menu.assistance-agent.list-tracking-logs = List tracking logs
 
 # master.menu.user-account ####################################################
 

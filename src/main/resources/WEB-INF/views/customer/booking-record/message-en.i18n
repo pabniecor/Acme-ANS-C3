@@ -1,0 +1,12 @@
+customer.booking-record.list.label.passenger.fullName = Full Name
+customer.booking-record.list.label.passenger.email = Email
+customer.booking-record.list.label.passenger.passportNumber = Passport Number
+customer.booking-record.list.label.passenger.birthDate = Birth Date
+customer.booking-record.list.label.passenger.draftModePassenger = Draft Mode
+
+customer.booking-record.list.button.create = Assign Passenger to Booking
+
+customer.booking-record.form.label.passenger = Passengers associated to booking
+
+customer.booking-record.form.button.create = Assign Passenger
+

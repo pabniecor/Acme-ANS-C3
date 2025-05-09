@@ -8,7 +8,7 @@ customer.passenger.form.label.fullName = Nombre completo:
 customer.passenger.form.label.email = Email:
 customer.passenger.form.label.passportNumber = Número de pasaporte:
 customer.passenger.form.label.birthDate = Fecha de cumpleaños:
-customer.passenger.form.label.specialNeeds = NNecesidades especiales:
+customer.passenger.form.label.specialNeeds = Necesidades especiales:
 
 customer.passenger.list.title = Lista de pasajeros
 customer.passenger.form.title = Formulario de pasajeros

@@ -10,4 +10,4 @@
 	<acme:list-payload path="payload"/>
 </acme:list>
 
-<acme:button code="member.flight-assignment.list.button.create" action="/flight-crew-member/flight-assignment/create?masterId=${masterId}"/>
+<acme:button code="member.flight-assignment.list.button.create" action="/flight-crew-member/flight-assignment/create"/>

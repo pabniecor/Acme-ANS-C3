@@ -28,7 +28,28 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		Boolean status;
+		int l;
+		Duty duty;
+		acme.entities.airport_management.Status st;
+		Leg leg;
+		Collection<Duty> duties;
+		Collection<acme.entities.airport_management.Status> statuss;
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class);
+		if (super.getRequest().hasData("id")) {
+			leg = super.getRequest().getData("leg", Leg.class);
+			l = super.getRequest().getData("leg", int.class);
+			duty = super.getRequest().getData("duty", Duty.class);
+			st = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
+			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
+			duties = this.repository.findAllDutyTypes();
+			statuss = this.repository.findAllStatusTypes();
+			boolean statusDuty = duty == null ? true : duties.contains(duty);
+			boolean statusSt = st == null ? true : statuss.contains(st);
+			status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && statusLeg && statusDuty && statusSt;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -51,7 +72,6 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 	public void validate(final FlightAssignment fa) {
 		boolean confirmation;
 		FlightCrewMember fcm;
-		//		Leg leg;
 		Collection<Leg> legs;
 		Long nPilots;
 		Long nCopilots;
@@ -104,6 +124,7 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);
 		dataset.put("duties", choisesDut);
+		dataset.put("member", fa.getFlightCrew().getId());
 
 		super.getResponse().addData(dataset);
 	}

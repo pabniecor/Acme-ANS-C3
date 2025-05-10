@@ -68,8 +68,7 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 		choisesMem = SelectChoices.from(fcms, "employeeCode", fa.getFlightCrew());
 
 		dataset = super.unbindObject(fa, "leg", "flightCrew", "duty", "moment", "currentStatus", "remarks", "draft");
-		dataset.put("duty", Duty.LEAD_ATTENDANT);
-		if (fa.getDuty() != Duty.LEAD_ATTENDANT)
+		if (!fa.getDraft())
 			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);

@@ -2,7 +2,6 @@
 package acme.features.manager.flight;
 
 import java.util.Collection;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,8 +23,9 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		Flight flight = this.repository.findFlightById(id);
+		Manager manager = flight == null ? null : flight.getManager();
 
-		boolean authorised = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()) && flight.getDraftMode();
+		boolean authorised = flight != null && super.getRequest().getPrincipal().hasRealm(manager) && flight.getDraftMode();
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -45,15 +45,15 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		assert flight != null;
-		if (super.getRequest().getCommand().equalsIgnoreCase("update")) {
-			Flight original = this.repository.findFlightById(flight.getId());
-
-			boolean isModified = !Objects.equals(flight.getTag(), original.getTag()) || !Objects.equals(flight.getDescription(), original.getDescription()) || !Objects.equals(flight.getSelfTransfer(), original.getSelfTransfer())
-				|| !Objects.equals(flight.getCost().getAmount(), original.getCost().getAmount()) || !Objects.equals(flight.getCost().getCurrency(), original.getCost().getCurrency());
-
-			super.state(isModified, "*", "manager.flight.error.no-changes");
-		}
+		//		assert flight != null;
+		//		if (super.getRequest().getCommand().equalsIgnoreCase("update")) {
+		//			Flight original = this.repository.findFlightById(flight.getId());
+		//
+		//			boolean isModified = !Objects.equals(flight.getTag(), original.getTag()) || !Objects.equals(flight.getDescription(), original.getDescription()) || !Objects.equals(flight.getSelfTransfer(), original.getSelfTransfer())
+		//				|| !Objects.equals(flight.getCost().getAmount(), original.getCost().getAmount()) || !Objects.equals(flight.getCost().getCurrency(), original.getCost().getCurrency());
+		//
+		//			super.state(isModified, "*", "manager.flight.error.no-changes");
+		//		}
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void unbind(final Flight flight) {
-		Dataset dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description");
+		Dataset dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 
 		dataset.put("id", flight.getId());
 		dataset.put("sheduledDeparture", flight.getDeparture());

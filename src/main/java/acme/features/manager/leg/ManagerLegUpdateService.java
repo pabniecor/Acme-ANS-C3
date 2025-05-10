@@ -34,6 +34,28 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		manager = leg == null ? null : leg.getFlight().getManager();
 		status = leg != null && leg.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
 
+		if (status) {
+			String method;
+			int daId, aaId, aId;
+			Airport da;
+			Airport aa;
+			Aircraft a;
+
+			method = super.getRequest().getMethod();
+
+			if (method.equals("GET"))
+				status = true;
+			else {
+				daId = super.getRequest().getData("departureAirport", int.class);
+				aaId = super.getRequest().getData("arrivalAirport", int.class);
+				aId = super.getRequest().getData("aircraft", int.class);
+				da = this.repository.findAirportById(daId);
+				aa = this.repository.findAirportById(aaId);
+				a = this.repository.findAircraftById(aId);
+				status = daId == 0 || da != null && aaId == 0 || aa != null && aId == 0 || a != null;
+			}
+		}
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -82,7 +104,6 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
 
 		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
-		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
 		dataset.put("arrivalAirport", arrivalAirport.getSelected().getKey());
 		dataset.put("aircraft", aircraft.getSelected().getKey());

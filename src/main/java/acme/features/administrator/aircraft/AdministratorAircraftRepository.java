@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.airline_operations.Aircraft;
+import acme.entities.airline_operations.AircraftStatus;
 import acme.entities.airline_operations.Airline;
 
 @Repository
@@ -24,4 +25,7 @@ public interface AdministratorAircraftRepository extends AbstractRepository {
 
 	@Query("select a from Airline a where a.id =:id")
 	Airline findAirlineById(int id);
+
+	@Query("select distinct(a.status) from Aircraft a")
+	Collection<AircraftStatus> findAllStatus();
 }

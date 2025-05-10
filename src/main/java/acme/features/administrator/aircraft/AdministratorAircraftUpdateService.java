@@ -23,7 +23,21 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status;
+		Airline airline;
+		int a;
+		AircraftStatus st;
+		Collection<AircraftStatus> sts;
+
+		airline = super.getRequest().getData("airline", Airline.class);
+		a = super.getRequest().getData("airline", int.class);
+		st = super.getRequest().getData("status", AircraftStatus.class);
+		sts = this.repository.findAllStatus();
+		Boolean statusAir = a == 0 ? true : this.repository.findAllAirlines().contains(airline);
+		Boolean statusSt = st == null ? true : sts.contains(st);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && statusAir && statusSt;
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

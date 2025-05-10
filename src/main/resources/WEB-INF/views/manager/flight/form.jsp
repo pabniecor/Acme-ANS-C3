@@ -31,7 +31,7 @@
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
-			<acme:submit code="manager.flight.form.button.create" action="/manager/flight/create"/>
+			<acme:submit code="manager.flight.form.button.create" action="/manager/flight/create?masterId=${masterId}"/>
 		</jstl:when>		
 	</jstl:choose>
 

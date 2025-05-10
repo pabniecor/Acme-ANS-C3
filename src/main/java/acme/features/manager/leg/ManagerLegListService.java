@@ -27,7 +27,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
-		status = flight != null && super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de draftMode de flight
+		status = flight != null && (!flight.getDraftMode() || super.getRequest().getPrincipal().hasRealm(flight.getManager()));
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -60,7 +60,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
-		showCreate = super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de draftMode de flight
+		showCreate = flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(flight.getManager()); //Meter lo de draftMode de flight
 
 		super.getResponse().addGlobal("masterId", masterId);
 		super.getResponse().addGlobal("showCreate", showCreate);

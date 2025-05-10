@@ -51,4 +51,5 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 
 		super.getResponse().addData(dataset);
 	}
+
 }

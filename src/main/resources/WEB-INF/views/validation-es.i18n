@@ -24,10 +24,12 @@ acme.validation.leg.duplicate-flightNumber.message = El número de vuelo del tra
 acme.validation.leg.flightNumber.message = El número de vuelo del tramo es incorrecto
 acme.validation.leg.flightNumber-airlineIATA.message = Las 3 primeras letras del flightNumber del tramo deben corresponder a su iataCode de compañía aérea
 acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pueden solapar
+acme.validation.leg.scheduledDeparture.message = La salida programada debe ser una fecha futura
 acme.validation.leg.scheduledArrival.message = La salida programada debe ser anterior a la llegada programada con un minuto de diferencia
 acme.validation.leg.notNullDates.message = Las fechas programadas de salida y llegada no deben ser nulas
-acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto.
-acme.validation.leg.aircraft.message = El avión del tramo debe Activo
+acme.validation.leg.notNullAirports.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser nulos
+acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto
+acme.validation.leg.aircraft.message = El avión del tramo debe existir y estar Activo
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto

@@ -22,18 +22,13 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	@Override
 	public void authorise() {
 		boolean status;
-		//		Collection<TrackingLog> trackingLogs;
-		//		TrackingLog anyTrackingLog;
 		AssistanceAgent currentAgent;
 		int claimId = super.getRequest().getData("masterId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		//		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
-		//		anyTrackingLog = trackingLogs.stream().findFirst().get();
-
 		int userAccountId = super.getRequest().getPrincipal().getAccountId();
 		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		Collection<Claim> agentXClaims = this.repository.findAllCompletedClaimsByCurrentUser(currentAgent.getId());
+		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
 

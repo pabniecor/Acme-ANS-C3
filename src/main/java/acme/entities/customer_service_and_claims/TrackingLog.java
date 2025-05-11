@@ -46,7 +46,7 @@ public class TrackingLog extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@Automapped
-	private TrackStatus			status;
+	private AcceptanceStatus	status;
 
 	@Optional
 	@ValidString(max = 255)

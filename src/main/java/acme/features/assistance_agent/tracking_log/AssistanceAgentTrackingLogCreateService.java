@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.customer_service_and_claims.AcceptanceStatus;
 import acme.entities.customer_service_and_claims.Claim;
-import acme.entities.customer_service_and_claims.TrackStatus;
 import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -40,7 +41,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
+		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution", "claim");
 	}
 
 	@Override
@@ -53,6 +54,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void perform(final TrackingLog trackingLog) {
 		trackingLog.setDraftMode(true);
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(trackingLog);
 	}
 
@@ -65,7 +67,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		SelectChoices claimChoices;
 
 		claims = this.repository.findAllClaims();
-		statusChoices = SelectChoices.from(TrackStatus.class, trackingLog.getStatus());
+		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");

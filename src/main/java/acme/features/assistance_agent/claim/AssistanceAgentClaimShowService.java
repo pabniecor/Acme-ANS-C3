@@ -29,7 +29,7 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 		int userAccountId = super.getRequest().getPrincipal().getAccountId();
 		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		Collection<Claim> agentXClaims = this.repository.findAllCompletedClaimsByCurrentUser(currentAgent.getId());
+		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
 
 		boolean authorised = (super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || claim != null && !claim.getDraftMode()) && agentXClaims.contains(claim);
 

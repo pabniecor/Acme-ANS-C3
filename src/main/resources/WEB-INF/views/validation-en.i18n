@@ -50,6 +50,7 @@ acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolutio
 acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blank when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be null or blank when status is PENDING
+acme.validation.claimMustBePublished.message = Tracking log's claim must be published before publishing tracking log
 
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 

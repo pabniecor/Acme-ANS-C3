@@ -42,6 +42,7 @@ acme.validation.booking.locatorCode.message = El código localizador de la reser
 
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
+acme.validation.customer.publishedFlight.message = El vuelo asignado debe estar publicado
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 

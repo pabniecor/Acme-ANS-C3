@@ -3,6 +3,7 @@ package acme.features.customer.booking;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,13 +28,28 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	public void authorise() {
 		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		if (super.getRequest().hasData("id")) {
-			Integer flightId = super.getRequest().getData("flight", int.class);
-			if (flightId != null) {
-				Flight flight = this.repository.findFlightById(flightId);
-				status = status && flight != null && flight.getDraftMode() == false;
+		if (status && super.getRequest().getMethod().equals("POST"))
+			try {
+				if (super.getRequest().hasData("travelClass")) {
+					String travelClassValue = super.getRequest().getData("travelClass", String.class);
+					try {
+						if (travelClassValue != null)
+							TravelClass.valueOf(travelClassValue);
+					} catch (IllegalArgumentException e) {
+						status = false;
+					}
+				}
+				if (status && super.getRequest().hasData("flight") && super.getRequest().getData("flight", Integer.class) != null) {
+					Integer flightId = super.getRequest().getData("flight", Integer.class);
+					if (flightId > 0) {
+						Flight flight = this.repository.findFlightById(flightId);
+						if (flight == null || flight.getDraftMode())
+							status = false;
+					}
+				}
+			} catch (Exception e) {
+				status = false;
 			}
-		}
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -62,7 +78,11 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		;
+		//		if (booking.getFlight() != null) {
+		//			boolean laterFlight = MomentHelper.isAfter(booking.getFlight().getDeparture(), MomentHelper.getCurrentMoment());
+		//			super.state(laterFlight, "flight", "NOT POSSIBLE");
+		//
+		//		}
 	}
 
 	@Override
@@ -72,29 +92,28 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void unbind(final Booking booking) {
-		assert booking != null;
+
 		Dataset dataset;
+		Collection<Flight> allFlights;
+		Collection<Flight> availableFlights;
 		SelectChoices travelClass;
-		Collection<Customer> customers;
-		Collection<Flight> flights;
-		SelectChoices choicesCustomer;
-		SelectChoices choicesFlight;
 
+		allFlights = this.repository.findAllFlights();
+		availableFlights = allFlights.stream().filter(f -> !f.getDraftMode()).filter(f -> f.getDeparture() != null && f.getDeparture().after(MomentHelper.getCurrentMoment())).filter(f -> f.getLayovers() != null && f.getLayovers() > 0)
+			.collect(Collectors.toList());
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
-		customers = this.repository.findAllCustomers();
-		choicesCustomer = SelectChoices.from(customers, "identifier", booking.getCustomer());
-		flights = this.repository.findAllFlights();
-		choicesFlight = SelectChoices.from(flights, "bookingFlight", booking.getFlight());
 
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight", "customer");
+		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight", "draftMode", "id");
 
 		dataset.put("travelClass", travelClass);
 
-		dataset.put("flight", choicesFlight.getSelected().getKey());
-		dataset.put("flights", choicesFlight);
+		SelectChoices flightChoices = null;
+		try {
+			flightChoices = SelectChoices.from(availableFlights, "bookingFlight", booking.getFlight());
+		} catch (Exception e) {
+		}
 
-		dataset.put("customer", choicesCustomer.getSelected().getKey());
-		dataset.put("customers", choicesCustomer);
+		dataset.put("flights", flightChoices);
 
 		super.getResponse().addData(dataset);
 	}

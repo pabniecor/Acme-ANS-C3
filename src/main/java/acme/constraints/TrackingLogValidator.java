@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
-import acme.entities.customer_service_and_claims.TrackStatus;
+import acme.entities.customer_service_and_claims.AcceptanceStatus;
 import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.entities.customer_service_and_claims.TrackingLogRepository;
 
@@ -34,7 +34,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 		if (trackingLog == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			TrackStatus indicator = trackingLog.getStatus();
+			AcceptanceStatus indicator = trackingLog.getStatus();
 
 			Double resolutionPercentage = trackingLog.getResolutionPercentage();
 			boolean correctResolutionPercentage;
@@ -42,27 +42,25 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 			String resolution = trackingLog.getResolution();
 			boolean correctResolution;
 
-			if (indicator != TrackStatus.PENDING) {
-				if (indicator == TrackStatus.ACCEPTED || indicator == TrackStatus.REJECTED) {
-					correctResolutionPercentage = resolutionPercentage == 100;
+			if (indicator != AcceptanceStatus.PENDING) {
+				if (indicator == AcceptanceStatus.ACCEPTED || indicator == AcceptanceStatus.REJECTED) {
+					correctResolutionPercentage = resolutionPercentage == 100.;
 					super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
 				}
-				//					{
-				//						correctResolution = resolution != null;
-				//						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
-				//						correctResolution = !resolution.trim().equals("");
-				//						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
-				//					}
+				{
+					correctResolution = resolution != null;
+					super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
+					correctResolution = !resolution.trim().equals("");
+					super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
+				}
 			} else {
-				{
-					correctResolutionPercentage = resolutionPercentage != 100;
-					super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
-				}
-				{
-					correctResolution = resolution == null || resolution.trim().equals("");
-					super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-nullOrBlanck.message");
-				}
+				correctResolutionPercentage = resolutionPercentage < 100.;
+				super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
 			}
+			//				{
+			//					correctResolution = resolution == null || resolution.trim().equals("");
+			//					super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-nullOrBlanck.message");
+			//				}
 		}
 
 		result = !super.hasErrors(context);

@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.customer_service_and_claims.AcceptanceStatus;
 import acme.entities.customer_service_and_claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentUndergoingClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -32,12 +33,15 @@ public class AssistanceAgentClaimListService extends AbstractGuiService<Assistan
 		int userAccountId = super.getRequest().getPrincipal().getAccountId();
 		AssistanceAgent currentAgent;
 		Collection<Claim> claimsRelatedToCurrentAgent;
+		Collection<Claim> completedClaims;
 
 		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
 
-		claimsRelatedToCurrentAgent = this.repository.findAllCompletedClaimsByCurrentUser(currentAgent.getId());
+		claimsRelatedToCurrentAgent = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
 
-		super.getBuffer().addData(claimsRelatedToCurrentAgent);
+		completedClaims = claimsRelatedToCurrentAgent.stream().filter(c -> c.getAccepted().equals(AcceptanceStatus.PENDING)).toList();
+
+		super.getBuffer().addData(completedClaims);
 	}
 
 	@Override

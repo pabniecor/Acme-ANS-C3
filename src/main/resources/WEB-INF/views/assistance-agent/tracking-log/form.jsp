@@ -4,12 +4,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-moment code="assistance-agent.tracking-log.form.label.lastUpdateMoment" path="lastUpdateMoment" />
+	<acme:input-moment code="assistance-agent.tracking-log.form.label.lastUpdateMoment" path="lastUpdateMoment" readonly="true"/>
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.step" path="step" />
 	<acme:input-double code="assistance-agent.tracking-log.form.label.resolutionPercentage" path="resolutionPercentage" />
 	<acme:input-select code="assistance-agent.tracking-log.form.label.status" path="status" choices="${trackStatus}" />
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.resolution" path="resolution" />
-	<acme:input-checkbox code="assistance-agent.tracking-log.form.label.draftMode" path="draftMode" />
+	<acme:input-checkbox code="assistance-agent.tracking-log.form.label.draftMode" path="draftMode" readonly="true"/>
 	<acme:input-select code="assistance-agent.tracking-log.form.label.claim" path="claim" choices="${claims}" />
 	
 	<jstl:choose>

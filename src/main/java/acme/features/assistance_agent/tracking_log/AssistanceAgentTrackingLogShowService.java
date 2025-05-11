@@ -9,8 +9,8 @@ import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.customer_service_and_claims.AcceptanceStatus;
 import acme.entities.customer_service_and_claims.Claim;
-import acme.entities.customer_service_and_claims.TrackStatus;
 import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -25,8 +25,13 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		AssistanceAgent currentAgent;
 
-		boolean authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || trackingLog != null && !trackingLog.getDraftMode();
+		int userAccountId = super.getRequest().getPrincipal().getAccountId();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+
+		boolean authorised = (super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || trackingLog != null && !trackingLog.getDraftMode()) && agentXClaims.contains(trackingLog.getClaim());
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -51,7 +56,7 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 		SelectChoices claimChoices;
 
 		claims = this.repository.findAllClaims();
-		statusChoices = SelectChoices.from(TrackStatus.class, trackingLog.getStatus());
+		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");

@@ -22,27 +22,26 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	@Override
 	public void authorise() {
 		boolean status;
+		AssistanceAgent currentAgent;
+		int claimId = super.getRequest().getData("masterId", int.class);
+		Claim claim = this.repository.findClaimById(claimId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int userAccountId = super.getRequest().getPrincipal().getAccountId();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		AssistanceAgent currentAgent;
-		Collection<Claim> claimsRelatedToCurrentAgent;
-		Collection<Integer> claimsId;
 		Collection<TrackingLog> trackingLogs;
 
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		int claimId = super.getRequest().getData("masterId", int.class);
 
-		claimsRelatedToCurrentAgent = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
-
-		claimsId = claimsRelatedToCurrentAgent.stream().map(c -> c.getId()).toList();
-
-		trackingLogs = this.repository.findAllTrackingLogs().stream().filter(t -> claimsId.contains(t.getClaim().getId())).toList();
+		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
 
 		super.getBuffer().addData(trackingLogs);
 	}

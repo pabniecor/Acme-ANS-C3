@@ -14,32 +14,36 @@ import acme.realms.AssistanceAgent;
 public class AssistanceAgentClaimController extends AbstractGuiController<AssistanceAgent, Claim> {
 
 	@Autowired
-	private AssistanceAgentClaimListService		listService;
+	private AssistanceAgentCompletedClaimListService	listCompletedService;
 
 	@Autowired
-	private AssistanceAgentClaimShowService		showService;
+	private AssistanceAgentUndergoingClaimListService	listUndergoingService;
 
 	@Autowired
-	private AssistanceAgentClaimCreateService	createService;
+	private AssistanceAgentClaimShowService				showService;
 
 	@Autowired
-	private AssistanceAgentClaimUpdateService	updateService;
+	private AssistanceAgentClaimCreateService			createService;
 
 	@Autowired
-	private AssistanceAgentClaimDeleteService	deleteService;
+	private AssistanceAgentClaimUpdateService			updateService;
 
 	@Autowired
-	private AssistanceAgentClaimPublishService	publishService;
+	private AssistanceAgentClaimDeleteService			deleteService;
+
+	@Autowired
+	private AssistanceAgentClaimPublishService			publishService;
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 
+		super.addCustomCommand("list-completed", "list", this.listCompletedService);
+		super.addCustomCommand("list-undergoing", "list", this.listUndergoingService);
 		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

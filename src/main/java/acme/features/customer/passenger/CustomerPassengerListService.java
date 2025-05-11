@@ -44,7 +44,7 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 		if (!super.getRequest().getData().containsKey("bookingId"))
 			passengers = this.repository.findPassengersByCustomerId(customerId);
 		else {
-			Integer bookingId = super.getRequest().getData("bookingId", int.class);
+			int bookingId = super.getRequest().getData("bookingId", int.class);
 			passengers = this.repository.findAssignedPassengersByBookingId(bookingId);
 		}
 

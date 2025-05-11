@@ -1,4 +1,3 @@
-
 package acme.features.customer.booking;
 
 import java.util.Collection;
@@ -20,8 +19,8 @@ public class CustomerBookingListService extends AbstractGuiService<Customer, Boo
 
 	@Override
 	public void authorise() {
-		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-		super.getResponse().setAuthorised(isCustomer);
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

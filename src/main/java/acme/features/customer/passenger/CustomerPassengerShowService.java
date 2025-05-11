@@ -1,12 +1,14 @@
 
 package acme.features.customer.passenger;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.customer_management.Booking;
 import acme.entities.customer_management.Passenger;
 import acme.realms.Customer;
 
@@ -19,15 +21,16 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int passengerId;
-		Booking booking;
+		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		super.getResponse().setAuthorised(isCustomer);
 
-		passengerId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingByPassengerId(passengerId);
-		status = booking != null && (booking.getDraftMode() == false || super.getRequest().getPrincipal().hasRealm(booking.getCustomer()));
+		if (!super.getRequest().getData().isEmpty()) {
+			int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			int passengerId = super.getRequest().getData("id", int.class);
+			Passenger passenger = this.repository.findPassengerById(passengerId);
 
-		super.getResponse().setAuthorised(status);
+			super.getResponse().setAuthorised(customerId == passenger.getCustomer().getId());
+		}
 	}
 
 	@Override
@@ -44,8 +47,16 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 	@Override
 	public void unbind(final Passenger passenger) {
 		Dataset dataset;
+		Collection<Customer> customers;
+		SelectChoices choicesCustomer;
+
+		customers = this.repository.findAllCustomers();
+		choicesCustomer = SelectChoices.from(customers, "identifier", passenger.getCustomer());
 
 		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger");
+
+		dataset.put("customer", choicesCustomer.getSelected().getKey());
+		dataset.put("customers", choicesCustomer);
 
 		super.getResponse().addData(dataset);
 	}

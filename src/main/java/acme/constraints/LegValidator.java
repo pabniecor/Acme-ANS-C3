@@ -61,11 +61,17 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 			super.state(context, correctFlightNumber, "flightNumber", "acme.validation.leg.flightNumber-airlineIATA.message");
 
-			boolean notNullDates;
+			//			boolean notNullDates;
+			//
+			//			notNullDates = leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null;
+			//
+			//			super.state(context, notNullDates, "*", "acme.validation.leg.notNullDates.message");
 
-			notNullDates = leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null;
+			boolean notPastDeparture;
 
-			super.state(context, notNullDates, "scheduledDeparture", "acme.validation.leg.notNullDates.message");
+			notPastDeparture = !MomentHelper.isPast(leg.getScheduledDeparture());
+
+			super.state(context, notPastDeparture, "scheduledDeparture", "acme.validation.leg.scheduledDeparture.message");
 
 			Date scheduledDeparture = leg.getScheduledDeparture();
 			Date scheduledArrival = leg.getScheduledArrival();
@@ -108,9 +114,15 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 			super.state(context, notOverlapping, "scheduledDeparture", "acme.validation.leg.notOverlappingLeg.message");
 
+			//			boolean notNullAirports;
+			//
+			//			notNullAirports = leg.getDepartureAirport() != null && leg.getArrivalAirport() != null;
+			//
+			//			super.state(context, notNullAirports, "*", "acme.validation.leg.notNullAirports.message");
+
 			boolean notEqualAirports;
 
-			notEqualAirports = leg.getDepartureAirport() != null && leg.getArrivalAirport() != null && leg.getDepartureAirport() != leg.getArrivalAirport();
+			notEqualAirports = leg.getDepartureAirport() != leg.getArrivalAirport();
 
 			super.state(context, notEqualAirports, "arrivalAirport", "acme.validation.leg.arrivalAirport.message");
 		}

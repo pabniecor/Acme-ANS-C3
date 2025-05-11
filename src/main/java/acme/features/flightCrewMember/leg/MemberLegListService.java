@@ -2,7 +2,6 @@
 package acme.features.flightCrewMember.leg;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,7 +30,7 @@ public class MemberLegListService extends AbstractGuiService<FlightCrewMember, L
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		legs = this.repository.findAllLegsOfFlightAssingment(masterId);
-		legs = legs.stream().filter(x -> !x.getDraftMode()).collect(Collectors.toCollection(null));
+		//legs = legs.stream().filter(x -> !x.getDraftMode()).collect(Collectors.toCollection(null));
 
 		super.getBuffer().addData(legs);
 	}

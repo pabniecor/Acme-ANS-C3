@@ -1,12 +1,14 @@
 
 package acme.features.customer.passenger;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.customer_management.Booking;
 import acme.entities.customer_management.Passenger;
 import acme.realms.Customer;
 
@@ -16,18 +18,18 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	@Autowired
 	private CustomerPassengerRepository repository;
 
-	// AbstractGuiService interface -------------------------------------------
-
 
 	@Override
 	public void authorise() {
 		boolean status;
 		int passengerId;
-		Booking booking;
+		Passenger passenger;
+		Customer customer;
 
 		passengerId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingByPassengerId(passengerId);
-		status = booking != null && booking.getDraftMode() == true && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
+		passenger = this.repository.findPassengerById(passengerId);
+		customer = passenger == null ? null : passenger.getCustomer();
+		status = passenger != null && passenger.getDraftModePassenger() == true && super.getRequest().getPrincipal().hasRealm(passenger.getCustomer());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -35,10 +37,8 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	@Override
 	public void load() {
 		Passenger passenger;
-		Customer customer;
 		int id;
 
-		customer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
 		id = super.getRequest().getData("id", int.class);
 		passenger = this.repository.findPassengerById(id);
 
@@ -63,14 +63,18 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	@Override
 	public void unbind(final Passenger passenger) {
 		assert passenger != null;
+
 		Dataset dataset;
+		Collection<Customer> customers;
+		SelectChoices choicesCustomer;
 
-		Customer customer;
+		customers = this.repository.findAllCustomers();
+		choicesCustomer = SelectChoices.from(customers, "identifier", passenger.getCustomer());
 
-		customer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
+		dataset = super.unbindObject(passenger, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode", "flight");
 
-		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger");
-		dataset.put("customer", customer);
+		dataset.put("customer", choicesCustomer.getSelected().getKey());
+		dataset.put("customers", choicesCustomer);
 
 		super.getResponse().addData(dataset);
 	}

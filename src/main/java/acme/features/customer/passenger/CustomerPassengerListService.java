@@ -21,24 +21,32 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int bookingId;
-		Booking booking;
+		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		super.getResponse().setAuthorised(isCustomer);
 
-		bookingId = super.getRequest().getData("bookingId", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		status = booking != null && (booking.getDraftMode() == false || super.getRequest().getPrincipal().hasRealm(booking.getCustomer()));
+		if (!super.getRequest().getData().isEmpty()) {
+			int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			int bookingId = super.getRequest().getData("bookingId", int.class);
+			Booking booking = this.repository.findBookingById(bookingId);
 
-		super.getResponse().setAuthorised(status);
+			super.getResponse().setAuthorised(customerId == booking.getCustomer().getId());
+		}
+
 	}
 
 	@Override
 	public void load() {
 		Collection<Passenger> passengers;
-		int bookingId;
+		int customerId;
 
-		bookingId = super.getRequest().getData("bookingId", int.class);
-		passengers = this.repository.findAssignedPassengersByBookingId(bookingId);
+		customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		if (!super.getRequest().getData().containsKey("bookingId"))
+			passengers = this.repository.findPassengersByCustomerId(customerId);
+		else {
+			int bookingId = super.getRequest().getData("bookingId", int.class);
+			passengers = this.repository.findAssignedPassengersByBookingId(bookingId);
+		}
 
 		super.getBuffer().addData(passengers);
 
@@ -53,17 +61,4 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 		super.getResponse().addData(dataset);
 	}
 
-	@Override
-	public void unbind(final Collection<Passenger> passengers) {
-		int bookingId;
-		Booking booking;
-		final boolean showCreate;
-
-		bookingId = super.getRequest().getData("bookingId", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		showCreate = booking.getDraftMode() == true && super.getRequest().getPrincipal().hasRealm(booking.getCustomer());
-
-		super.getResponse().addGlobal("bookingId", bookingId);
-		super.getResponse().addGlobal("showCreate", showCreate);
-	}
 }

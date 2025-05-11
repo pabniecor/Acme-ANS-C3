@@ -21,13 +21,15 @@ acme.validation.manager.duplicate-identifier.message = The manager's identifier 
 acme.validation.manager.identifier.message = The manager's identifier is incorrect
 
 acme.validation.leg.duplicate-flightNumber.message = The leg's flightNumber is duplicated
-acme.validation.leg.flightNumber.message = The leg's flightNumber is incorrect
+acme.validation.leg.flightNumber.message = The leg's flightNumber is incorrect Ej: AAX0001
 acme.validation.leg.flightNumber-airlineIATA.message = The leg's flightNumber first 3 letters must correspond to his airline iataCode
 acme.validation.leg.notOverlappingLeg.message = The leg's from a flight can not overlap
+acme.validation.leg.scheduledDeparture.message = The scheduled departure must be a future date
 acme.validation.leg.scheduledArrival.message = The scheduled departure must be before the scheduled arrival with 1 minute of difference
 acme.validation.leg.notNullDates.message = The scheduled departure and arrival dates must not be null
+acme.validation.leg.notNullAirports.message = The departure airport and arrival airport must not be null
 acme.validation.leg.arrivalAirport.message = The departure airport and arrival airport must not be the same airport
-acme.validation.leg.aircraft.message = The leg's aircraft must Active
+acme.validation.leg.aircraft.message = The leg's aircraft must exist and be Active
 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
@@ -57,6 +59,8 @@ acme.validation.customer.lastCardNibble.message = The last credit card nibble sh
 acme.validation.confirmation.message = Need confirmation
 
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
+
+acme.validation.customer.publishedFlight.message = The flight assigned must be published
 
 acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
 acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published

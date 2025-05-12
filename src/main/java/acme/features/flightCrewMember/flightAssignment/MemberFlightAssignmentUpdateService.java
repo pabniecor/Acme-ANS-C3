@@ -47,13 +47,19 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		d = super.getRequest().getData("duty", Duty.class);
 		s = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
 
-		legs = this.repository.findAllLegs();
-		boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
-		duties = this.repository.findAllDutyTypes();
-		statuss = this.repository.findAllStatusTypes();
-		boolean statusDuty = d == null ? true : duties.contains(d);
-		boolean statusSt = s == null ? true : statuss.contains(s);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusLeg && statusDuty && statusSt;
+		boolean statusD = fa.getDraft();
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusD;
+
+		if (status) {
+			legs = this.repository.findAllLegs();
+			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
+			duties = this.repository.findAllDutyTypes();
+			statuss = this.repository.findAllStatusTypes();
+			boolean statusDuty = d == null ? true : duties.contains(d);
+			boolean statusSt = s == null ? true : statuss.contains(s);
+
+			status = statusLeg && statusDuty && statusSt;
+		}
 		super.getResponse().setAuthorised(status);
 	}
 

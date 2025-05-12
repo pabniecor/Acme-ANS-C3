@@ -48,7 +48,8 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		statuss = this.repository.findAllStatusTypes();
 		boolean statusDuty = d == null ? true : duties.contains(d);
 		boolean statusSt = s == null ? true : statuss.contains(s);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusLeg && statusDuty && statusSt;
+		boolean statusD = fa.getDraft();
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusLeg && statusDuty && statusSt && statusD;
 		super.getResponse().setAuthorised(status);
 	}
 

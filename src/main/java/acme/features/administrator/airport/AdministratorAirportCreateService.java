@@ -1,6 +1,8 @@
 
 package acme.features.administrator.airport;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,7 +22,15 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status;
+		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		if (super.getRequest().hasData("id")) {
+			OperationalScope os = super.getRequest().getData("operationalScope", OperationalScope.class);
+			Collection<OperationalScope> oss = this.repository.findAllOperationalScopes();
+			Boolean statusSt = os == null ? true : oss.contains(os);
+			status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && statusSt;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -40,7 +50,6 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 	@Override
 	public void validate(final Airport airport) {
 		boolean confirmation;
-
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}

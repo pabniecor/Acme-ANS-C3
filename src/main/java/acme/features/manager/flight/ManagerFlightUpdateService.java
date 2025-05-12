@@ -67,11 +67,11 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 		Dataset dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 
 		dataset.put("id", flight.getId());
-		dataset.put("sheduledDeparture", flight.getDeparture());
-		dataset.put("sheduledArrival", flight.getArrival());
-		dataset.put("departureCity", flight.getOriginCity());
-		dataset.put("arrivalCity", flight.getDestinationCity());
-		dataset.put("numberOfLayovers", flight.getLayovers());
+		dataset.put("departure", flight.getDeparture());
+		dataset.put("arrival", flight.getArrival());
+		dataset.put("originCity", flight.getOriginCity());
+		dataset.put("destinationCity", flight.getDestinationCity());
+		dataset.put("layovers", flight.getLayovers());
 
 		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
 		boolean hasLegs = !legs.isEmpty();

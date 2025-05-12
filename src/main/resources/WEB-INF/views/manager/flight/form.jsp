@@ -9,7 +9,6 @@
 	<acme:input-money code="manager.flight.form.label.cost" path="cost" />
 	<acme:input-textbox code="manager.flight.form.label.description" path="description" />
 	
-	<!-- Atributos derivados (solo aparecen en el show) -->
     	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
 		    <acme:input-moment code="manager.flight.form.label.departure" path="departure" readonly="true"/>
 		    <acme:input-moment code="manager.flight.form.label.arrival" path="arrival" readonly="true"/>

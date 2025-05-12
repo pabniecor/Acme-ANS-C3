@@ -19,7 +19,7 @@ manager.leg.form.label.arrivalAirport = Arrival Airport:
 manager.leg.form.label.aircraft = Aircraft: 
 manager.leg.form.label.sequenceOrder = Sequence Order: 
 manager.leg.form.label.draftMode = Draft Mode: 
-manager.leg.form.label.duration = Duration: 
+manager.leg.form.label.duration = Duration (hours): 
 
 manager.leg.list.title = Leg List
 manager.leg.form.title = Leg Form

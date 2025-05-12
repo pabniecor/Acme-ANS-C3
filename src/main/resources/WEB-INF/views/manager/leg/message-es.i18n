@@ -19,7 +19,7 @@ manager.leg.form.label.arrivalAirport = Aeropuerto de llegada:
 manager.leg.form.label.aircraft = Avión: 
 manager.leg.form.label.sequenceOrder = Orden de secuencia: 
 manager.leg.form.label.draftMode = Modo borrador: 
-manager.leg.form.label.duration = Duración: 
+manager.leg.form.label.duration = Duración (horas): 
 
 manager.leg.list.title = Lista de escalas
 manager.leg.form.title = Formulario de escalas

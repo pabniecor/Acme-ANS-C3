@@ -47,7 +47,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void bind(final Flight flight) {
-		;
+		super.bindObject(flight, "tag", "selfTransfer", "cost", "description");
 	}
 
 	@Override
@@ -74,6 +74,11 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		Dataset dataset;
 
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
+		dataset.put("departure", flight.getDeparture());
+		dataset.put("arrival", flight.getArrival());
+		dataset.put("originCity", flight.getOriginCity());
+		dataset.put("destinationCity", flight.getDestinationCity());
+		dataset.put("layovers", flight.getLayovers());
 
 		super.getResponse().addData(dataset);
 	}

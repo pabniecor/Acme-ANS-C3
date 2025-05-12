@@ -12,7 +12,6 @@
 	<acme:input-select code="manager.leg.form.label.arrivalAirport" path="arrivalAirport" choices="${arrivalAirports}" />
 	<acme:input-select code="manager.leg.form.label.aircraft" path="aircraft" choices="${aircrafts}" />
 	
-	<!-- Atributos derivados (solo aparecen en el show) -->
     	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
 		    <acme:input-moment code="manager.leg.form.label.duration" path="duration" readonly="true"/>
        	</jstl:if>

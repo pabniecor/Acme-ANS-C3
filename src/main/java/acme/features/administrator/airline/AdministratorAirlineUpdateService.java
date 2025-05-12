@@ -1,4 +1,3 @@
-
 package acme.features.administrator.airline;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,31 +19,18 @@ public class AdministratorAirlineUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
-
-		try {
-			if (status && super.getRequest().getMethod().equals("POST")) {
-				if (super.getRequest().hasData("id")) {
-					int id = super.getRequest().getData("id", int.class);
-					Airline airline = this.repository.findAirlinetById(id);
-					status = airline != null;
-				}
-				if (status && super.getRequest().hasData("airlineType")) {
-					String airlineTypeValue = super.getRequest().getData("airlineType", String.class);
-					try {
-						if (airlineTypeValue != null)
-							AirlineType.valueOf(airlineTypeValue);
-					} catch (IllegalArgumentException e) {
-						status = false;
-					}
-				}
-
-			}
-		} catch (Exception e) {
-			// Any exception results in unauthorized access
-			status = false;
+		Boolean status;
+		int id;
+		Airline airline;
+		
+		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		
+		if (status && super.getRequest().hasData("id")) {
+			id = super.getRequest().getData("id", int.class);
+			airline = this.repository.findAirlinetById(id);
+			status = airline != null;
 		}
-
+		
 		super.getResponse().setAuthorised(status);
 	}
 

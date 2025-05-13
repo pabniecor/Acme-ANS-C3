@@ -15,10 +15,11 @@
 	<acme:input-select code="technician.maintenanceRecord.form.label.technician" path="technician" choices="${technicians}" readonly="true" />
 		
 	<jstl:choose>		
- 		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == true}">
+ 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
  		<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list-for-mr?masterId=${id}"/>
  			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	
  			<acme:submit code="technician.maintenanceRecord.form.button.update" action="/technician/maintenance-record/update"/>
+ 			<acme:submit code="technician.maintenanceRecord.form.button.delete" action="/technician/maintenance-record/delete"/>
  			<acme:submit code="technician.maintenanceRecord.form.button.publish" action="/technician/maintenance-record/publish"/>
  		</jstl:when>
  		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == false}">

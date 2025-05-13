@@ -25,19 +25,17 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 	@Override
 	public void authorise() {
 		boolean status;
-		List<Aircraft> aircrafts;
+		Collection<Aircraft> aircrafts;
+		int aircraftId;
 		Aircraft a;
-		Technician loggedTechnician;
-		Technician t;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		if (super.getRequest().hasData("id", int.class)) {
 			aircrafts = this.repository.findAllAircrafts();
-			a = super.getRequest().getData("aircraft", Aircraft.class);
-			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
-			t = super.getRequest().getData("technician", Technician.class);
-			if (a != null && t != null)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && aircrafts.contains(a) && t.equals(loggedTechnician);
+			aircraftId = super.getRequest().getData("aircraft", int.class);
+			a = this.repository.findAircraftById(aircraftId);
+			if (aircraftId != 0)
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && aircrafts.contains(a);
 		}
 
 		super.getResponse().setAuthorised(status);

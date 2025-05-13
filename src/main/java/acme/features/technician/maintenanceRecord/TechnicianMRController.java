@@ -29,6 +29,9 @@ public class TechnicianMRController extends AbstractGuiController<Technician, Ma
 	private TechnicianMRUpdateService		updateService;
 
 	@Autowired
+	private TechnicianMRDeleteService		deleteService;
+
+	@Autowired
 	private TechnicianMRPublishService		publishService;
 
 
@@ -40,6 +43,7 @@ public class TechnicianMRController extends AbstractGuiController<Technician, Ma
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("delete", this.deleteService);
 		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

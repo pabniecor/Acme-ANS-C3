@@ -30,8 +30,8 @@ public interface AssistanceAgentClaimRepository extends AbstractRepository {
 	@Query("select a from AssistanceAgent a")
 	Collection<AssistanceAgent> findAllAssistanceAgents();
 
-	@Query("select l from Leg l")
-	Collection<Leg> findAllLegs();
+	@Query("SELECT DISTINCT l FROM Claim c JOIN c.leg l WHERE l.scheduledArrival <= c.registrationMoment")
+	Collection<Leg> findLegsWithDepartureBeforeClaimRegistration();
 
 	@Query("select t from TrackingLog t where t.claim.id = :claimId")
 	Collection<TrackingLog> findTrackingLogsByClaimId(int claimId);

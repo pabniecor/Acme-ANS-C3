@@ -42,15 +42,15 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		id = super.getRequest().getData("id", int.class);
 		fa = this.repository.findFlightAssignmentById(id);
 
-		leg = super.getRequest().getData("leg", Leg.class);
-		l = super.getRequest().getData("leg", int.class);
-		d = super.getRequest().getData("duty", Duty.class);
-		s = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
-
 		boolean statusD = fa.getDraft();
 		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusD;
 
 		if (status) {
+			leg = super.getRequest().getData("leg", Leg.class);
+			l = super.getRequest().getData("leg", int.class);
+			d = super.getRequest().getData("duty", Duty.class);
+			s = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
+
 			legs = this.repository.findAllLegs();
 			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
 			duties = this.repository.findAllDutyTypes();

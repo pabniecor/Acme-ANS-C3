@@ -29,6 +29,8 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 	@Override
 	public void authorise() {
 		Boolean status;
+		int id;
+		FlightCrewMember fa;
 		int l;
 		Duty duty;
 		acme.entities.airport_management.Status st;
@@ -84,14 +86,16 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
 		super.state(legs.isEmpty(), "leg", "acme.validation.legAssigned.message");
 
-		nPilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.PILOT));
-		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
+		if (fa.getLeg() != null) {
+			nPilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
+			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
 
-		if (fa.getDuty() == Duty.PILOT)
-			super.state(nPilots < 1, "duty", "acme.validation.tooManyPilots.message");
+			if (fa.getDuty() == Duty.PILOT)
+				super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
 
-		if (fa.getDuty() == Duty.CO_PILOT)
-			super.state(nCopilots < 1, "duty", "acme.validation.tooManyCopilots.message");
+			if (fa.getDuty() == Duty.CO_PILOT)
+				super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+		}
 
 	}
 

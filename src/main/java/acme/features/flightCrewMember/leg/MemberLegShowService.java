@@ -1,6 +1,8 @@
 
 package acme.features.flightCrewMember.leg;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,7 +22,18 @@ public class MemberLegShowService extends AbstractGuiService<FlightCrewMember, L
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		Collection<Leg> legs;
+		int id;
+		Leg l;
+		Boolean status;
+
+		id = super.getRequest().getData("id", int.class);
+		l = this.repository.findLegByMemberId(super.getRequest().getPrincipal().getActiveRealm().getId());
+		if (l == null)
+			status = false;
+		else
+			status = id == l.getId();
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

@@ -58,14 +58,14 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			//			notNullDates = leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null;
 			//			super.state(context, notNullDates, "scheduledDeparture", "acme.validation.leg.notNullDates.message");
 
-			if (leg.getScheduledDeparture() != null && leg.getScheduledDeparture().getClass() == Date.class) {
-
-				boolean notPastDeparture;
-
-				notPastDeparture = !MomentHelper.isPast(leg.getScheduledDeparture());
-
-				super.state(context, notPastDeparture, "scheduledDeparture", "acme.validation.leg.scheduledDeparture.message");
-			}
+			//			if (leg.getScheduledDeparture() != null && leg.getScheduledDeparture().getClass() == Date.class) {
+			//
+			//				boolean notPastDeparture;
+			//
+			//				notPastDeparture = !MomentHelper.isPast(leg.getScheduledDeparture());
+			//
+			//				super.state(context, notPastDeparture, "scheduledDeparture", "acme.validation.leg.scheduledDeparture.message");
+			//			}
 
 			Date scheduledDeparture = leg.getScheduledDeparture();
 			Date scheduledArrival = leg.getScheduledArrival();

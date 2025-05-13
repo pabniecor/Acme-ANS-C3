@@ -28,4 +28,8 @@ flight-assignment-17,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,洛伦·�
 flight-assignment-18,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,<marquee>Hacked</marquee>,true
 flight-assignment-19,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,<script>alert(‘Hacked!’);</script>,true
 flight-assignment-20,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,' or 'A' = 'A ,true
+#remarks - no singular values
+#draft - standard variations
+flight-assignment-21,leg-00,member-01,PILOT,2012/07/02 00:10,CONFIRMED,' or 'A' = 'A ,true
+flight-assignment-22,leg-00,member-01,PILOT,2012/07/02 00:11,CONFIRMED,' or 'A' = 'A ,false
 

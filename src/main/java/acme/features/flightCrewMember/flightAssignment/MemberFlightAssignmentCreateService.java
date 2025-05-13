@@ -91,10 +91,10 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
 
 			if (fa.getDuty() == Duty.PILOT)
-				super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
+				super.state(nPilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
 
 			if (fa.getDuty() == Duty.CO_PILOT)
-				super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+				super.state(nCopilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
 		}
 
 	}
@@ -108,7 +108,6 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 
 	@Override
 	public void unbind(final FlightAssignment fa) {
-		assert fa != null;
 		Dataset dataset;
 		Collection<Leg> legs;
 		FlightCrewMember fcm;

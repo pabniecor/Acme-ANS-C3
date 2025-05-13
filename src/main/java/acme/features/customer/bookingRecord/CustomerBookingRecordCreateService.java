@@ -24,34 +24,33 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 	@Override
 	public void authorise() {
 		boolean status = false;
+		int customerId;
+		int bookingId;
+		int passengerId;
+		Booking booking;
+		Customer currentCustomer;
 
-		try {
-			int bookingId = super.getRequest().getData("bookingId", int.class);
-			Booking booking = this.repository.findBookingById(bookingId);
-			Customer currentCustomer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
+		currentCustomer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
+		customerId = currentCustomer.getId();
+		bookingId = super.getRequest().getData("bookingId", int.class);
+		booking = this.repository.findBookingById(bookingId);
 
-			if (booking != null && currentCustomer != null) {
-				status = booking.getCustomer().getId() == currentCustomer.getId();
+		if (booking != null) {
+			status = booking.getCustomer().getId() == customerId;
 
-				if (status && super.getRequest().getMethod().equals("POST"))
-					if (super.getRequest().hasData("passenger")) {
-						Integer passengerId = super.getRequest().getData("passenger", Integer.class);
+			if (status && super.getRequest().getMethod().equals("POST") && super.getRequest().hasData("passenger")) {
 
-						if (passengerId != null && passengerId > 0) {
-							Passenger passenger = this.repository.findPassengerById(passengerId);
+				passengerId = super.getRequest().getData("passenger", int.class);
 
-							status = passenger != null && passenger.getCustomer().getId() == currentCustomer.getId();
+				if (passengerId > 0) {
+					Passenger passenger = this.repository.findPassengerById(passengerId);
+					Collection<Passenger> assignedPassengers = this.repository.findAssignedPassengersByBookingId(bookingId);
+					Collection<Passenger> availablePassengers = this.repository.findPassengersByCustomerId(customerId);
 
-							if (status) {
-								Collection<Passenger> assignedPassengers = this.repository.findAssignedPassengersByBookingId(bookingId);
-								status = !assignedPassengers.contains(passenger);
-							}
-						} else
-							status = false;
-					}
+					status = passenger != null && availablePassengers.contains(passenger) && assignedPassengers.contains(passenger);
+				} else
+					status = false;
 			}
-		} catch (Exception e) {
-			status = false;
 		}
 
 		super.getResponse().setAuthorised(status);

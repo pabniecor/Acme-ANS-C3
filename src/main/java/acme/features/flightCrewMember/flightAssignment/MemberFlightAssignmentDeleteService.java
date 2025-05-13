@@ -34,7 +34,7 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 
 		masterId = super.getRequest().getData("id", int.class);
 		fa = this.repository.findFlightAssignmentById(masterId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && fa.getDraft() && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && fa.getDraft() && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && fa.getDraft();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -68,18 +68,19 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 		Timestamp moment = Timestamp.from(currentMoment.toInstant());
 
 		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.isEmpty() || legs.contains(fa.getLeg()), "leg", "acme.validation.legAssigned.message");
+		super.state(legs.isEmpty() || legs.contains(fa.getLeg()) || legs.size() == 1, "leg", "acme.validation.legAssigned.message");
 
-		nPilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.PILOT));
-		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
+		if (fa.getLeg() != null) {
+			nPilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
+			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
 
-		if (fa.getDuty() == Duty.PILOT)
-			super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
+			if (fa.getDuty() == Duty.PILOT)
+				super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
 
-		if (fa.getDuty() == Duty.CO_PILOT)
-			super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+			if (fa.getDuty() == Duty.CO_PILOT)
+				super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+		}
 
-		super.state(fa.getDraft(), "*", "acme.validation.assignmentPublished.message");
 	}
 
 	@Override
@@ -105,9 +106,6 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 		choisesDut = SelectChoices.from(Duty.class, fa.getDuty());
 
 		dataset = super.unbindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks", "draft");
-		dataset.put("duty", Duty.LEAD_ATTENDANT);
-		if (fa.getDuty() != Duty.LEAD_ATTENDANT || fa.getDraft() == false)
-			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);

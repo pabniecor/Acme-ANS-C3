@@ -19,7 +19,14 @@ public class MemberFlightCrewMemberShowService extends AbstractGuiService<Flight
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class));
+		int id;
+		FlightCrewMember fa;
+		Boolean status;
+
+		id = super.getRequest().getData("id", int.class);
+		fa = this.repository.findMemberById(id);
+		status = super.getRequest().getPrincipal().hasRealm(fa);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

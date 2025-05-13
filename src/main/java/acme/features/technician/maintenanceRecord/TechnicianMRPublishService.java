@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
@@ -30,8 +29,15 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 		int id = super.getRequest().getData("id", int.class);
 		MaintenanceRecord mr = this.repository.findMRById(id);
 		int technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
+		Collection<Aircraft> aircrafts;
+		int aircraftId;
+		Aircraft a;
 
-		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getDraftMode() && mr.getTechnician().getId() == technicianId;
+		aircrafts = this.repository.findAllAircrafts();
+		aircraftId = super.getRequest().getData("aircraft", int.class);
+		a = this.repository.findAircraftById(aircraftId);
+
+		boolean authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getDraftMode() && mr.getTechnician().getId() == technicianId && aircrafts.contains(a);
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -56,7 +62,6 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 	public void validate(final MaintenanceRecord mr) {
 		boolean allTasksPublished;
 		boolean hasNoTasks;
-		boolean validDates;
 		Collection<Involves> involves;
 		Collection<Task> involvedTasks = new ArrayList<>();
 
@@ -68,14 +73,11 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 
 		hasNoTasks = involvedTasks.isEmpty();
 		allTasksPublished = involvedTasks.stream().allMatch(t -> t.getDraftMode().equals(false));
-		validDates = MomentHelper.isBefore(mr.getMomentDone(), mr.getNextInspection());
 
 		if (!allTasksPublished)
 			super.state(allTasksPublished, "draftMode", "acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message");
 		if (hasNoTasks)
-			super.state(hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message");
-		if (validDates)
-			super.state(validDates, "nextInspection", "acme.validation.maintenanceRecord.coherentNextInspection.message");
+			super.state(!hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message");
 	}
 
 	@Override

@@ -25,23 +25,28 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 	@Override
 	public void authorise() {
 		boolean status;
-		List<Task> tasks;
-		List<MaintenanceRecord> MRs;
-		Task selectedTask;
+		Collection<Task> tasks;
+		Collection<MaintenanceRecord> MRs;
+		int selectedTaskId;
 		Technician loggedTechnician;
-		MaintenanceRecord selectedMR;
+		int selectedMRId;
+		Task t;
+		MaintenanceRecord mr;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		if (super.getRequest().hasData("id", int.class)) {
 			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
+
 			tasks = this.repository.findTasksByTechnicianId(loggedTechnician.getId());
 			MRs = this.repository.findMRsByTechnicianId(loggedTechnician.getId());
-			selectedTask = super.getRequest().getData("task", Task.class);
-			selectedMR = super.getRequest().getData("maintenanceRecord", MaintenanceRecord.class);
+			selectedTaskId = super.getRequest().getData("task", int.class);
+			selectedMRId = super.getRequest().getData("maintenanceRecord", int.class);
 
-			if (selectedTask != null && selectedMR != null)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(selectedTask) && MRs.contains(selectedMR) && selectedMR.getTechnician().equals(loggedTechnician)
-					&& selectedTask.getTechnician().equals(loggedTechnician);
+			t = this.repository.findTaskById(selectedTaskId);
+			mr = this.repository.findMRById(selectedMRId);
+
+			if (selectedTaskId != 0 && selectedMRId != 0)
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(t) && MRs.contains(mr) && mr.getTechnician().equals(loggedTechnician) && t.getTechnician().equals(loggedTechnician);
 
 		}
 

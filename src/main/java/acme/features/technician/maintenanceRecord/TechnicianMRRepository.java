@@ -33,7 +33,10 @@ public interface TechnicianMRRepository extends AbstractRepository {
 	Task findTaskById(int id);
 
 	@Query("select a from Aircraft a")
-	List<Aircraft> findAllAircrafts();
+	Collection<Aircraft> findAllAircrafts();
+
+	@Query("select a from Aircraft a where a.id = :id")
+	Aircraft findAircraftById(int id);
 
 	@Query("select t from Technician t")
 	List<Technician> findAllTechnicians();

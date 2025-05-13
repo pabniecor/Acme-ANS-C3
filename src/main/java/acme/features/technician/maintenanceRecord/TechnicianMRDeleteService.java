@@ -11,12 +11,13 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
+import acme.entities.maintenance_and_technical.Involves;
 import acme.entities.maintenance_and_technical.MaintenanceRecord;
 import acme.entities.maintenance_and_technical.MaintenanceStatus;
 import acme.realms.Technician;
 
 @GuiService
-public class TechnicianMRUpdateService extends AbstractGuiService<Technician, MaintenanceRecord> {
+public class TechnicianMRDeleteService extends AbstractGuiService<Technician, MaintenanceRecord> {
 
 	@Autowired
 	private TechnicianMRRepository repository;
@@ -73,7 +74,10 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void perform(final MaintenanceRecord mr) {
-		this.repository.save(mr);
+		Collection<Involves> relatedInvolves = this.repository.findInvolvesByMRId(mr.getId());
+
+		this.repository.deleteAll(relatedInvolves);
+		this.repository.delete(mr);
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		SelectChoices claimTypes;
 
 		assistanceAgents = this.repository.findAllAssistanceAgents();
-		legs = this.repository.findAllLegs();
+		legs = this.repository.findLegsWithDepartureBeforeClaimRegistration();
 		claimTypes = SelectChoices.from(ClaimType.class, claim.getType());
 		agentChoices = SelectChoices.from(assistanceAgents, "employeeCode", claim.getAssistanceAgent());
 		legChoices = SelectChoices.from(legs, "flightNumber", claim.getLeg());

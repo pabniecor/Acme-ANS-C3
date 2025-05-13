@@ -1,4 +1,3 @@
-
 package acme.features.customer.booking;
 
 import java.util.Collection;
@@ -24,54 +23,47 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 
 	@Override
-	public void authorise() {
-		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-
-		if (status && super.getRequest().getMethod().equals("POST"))
-			try {
-				int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-				int bookingId = super.getRequest().getData("id", int.class);
-				Booking booking = this.repository.findBookingById(bookingId);
-
-				if (booking == null || !booking.getDraftMode() || booking.getCustomer().getId() != customerId)
-					status = false;
-
-				if (status && super.getRequest().hasData("travelClass")) {
-					String travelClassValue = super.getRequest().getData("travelClass", String.class);
-
-					try {
-						if (travelClassValue != null)
-							TravelClass.valueOf(travelClassValue);
-					} catch (IllegalArgumentException e) {
-						status = false;
-					}
-				}
-
-				if (status && super.getRequest().hasData("flight") && super.getRequest().getData("flight", Integer.class) != null) {
-					Integer flightId = super.getRequest().getData("flight", Integer.class);
-					if (flightId > 0) {
-						Flight flight = this.repository.findFlightById(flightId);
-						if (flight == null || flight.getDraftMode() || flight.getDeparture() == null || !flight.getDeparture().after(MomentHelper.getCurrentMoment()) || flight.getLayovers() == null || flight.getLayovers() <= 0)
-							status = false;
-					}
-				}
-			} catch (Exception e) {
-				status = false;
-			}
-		else
-			// For GET requests, only check if the customer owns the booking
-			try {
-				int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-				int bookingId = super.getRequest().getData("id", int.class);
-				Booking booking = this.repository.findBookingById(bookingId);
-
-				status = booking != null && booking.getDraftMode() && booking.getCustomer().getId() == customerId;
-			} catch (Exception e) {
-				status = false;
-			}
-
-		super.getResponse().setAuthorised(status);
-	}
+    public void authorise() {
+        boolean status = false;
+        int customerId = 0;
+        int bookingId = 0;
+        int flightId = 0;
+        Booking booking = null;
+        Flight flight = null;
+        
+        status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+        
+        if (status) {
+            customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+            
+            if (super.getRequest().hasData("id"))
+                bookingId = super.getRequest().getData("id", int.class);
+            
+            booking = this.repository.findBookingById(bookingId);
+            
+            if (booking != null) {
+                status = booking.getDraftMode() && booking.getCustomer().getId() == customerId;
+                
+                if (status && super.getRequest().getMethod().equals("POST") && 
+                    super.getRequest().hasData("flight")) {
+                    
+                    flightId = super.getRequest().getData("flight", int.class);
+                    flight = this.repository.findFlightById(flightId);
+                    
+                    status = flight != null && 
+                            !flight.getDraftMode() && 
+                            flight.getDeparture() != null && 
+                            flight.getDeparture().after(MomentHelper.getCurrentMoment()) && 
+                            flight.getLayovers() != null && 
+                            flight.getLayovers() > 0;
+                }
+            } else {
+                status = false;
+            }
+        }
+        
+        super.getResponse().setAuthorised(status);
+    }
 
 	@Override
 	public void load() {

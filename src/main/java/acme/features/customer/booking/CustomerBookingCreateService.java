@@ -1,4 +1,3 @@
-
 package acme.features.customer.booking;
 
 import java.util.Collection;
@@ -26,30 +25,21 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-
-		if (status && super.getRequest().getMethod().equals("POST"))
-			try {
-				if (super.getRequest().hasData("travelClass")) {
-					String travelClassValue = super.getRequest().getData("travelClass", String.class);
-					try {
-						if (travelClassValue != null)
-							TravelClass.valueOf(travelClassValue);
-					} catch (IllegalArgumentException e) {
-						status = false;
-					}
-				}
-				if (status && super.getRequest().hasData("flight") && super.getRequest().getData("flight", Integer.class) != null) {
-					Integer flightId = super.getRequest().getData("flight", Integer.class);
-					if (flightId > 0) {
-						Flight flight = this.repository.findFlightById(flightId);
-						if (flight == null || flight.getDraftMode())
-							status = false;
-					}
-				}
-			} catch (Exception e) {
-				status = false;
-			}
+		boolean status = false;
+		int flightId = 0;
+		Flight flight = null;
+		
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		
+		if (status && super.getRequest().getMethod().equals("POST") && 
+			super.getRequest().hasData("flight")) {
+			
+			flightId = super.getRequest().getData("flight", int.class);
+			flight = this.repository.findFlightById(flightId);
+			
+			status = flight != null && !flight.getDraftMode();
+		}
+		
 		super.getResponse().setAuthorised(status);
 	}
 

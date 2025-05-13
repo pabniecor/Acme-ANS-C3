@@ -10,3 +10,6 @@ customer.booking-record.form.label.passenger = Passengers associated to booking
 
 customer.booking-record.form.button.create = Assign Passenger
 
+customer.booking-record.list.title = Assigned Passengers
+customer.booking-record.form.title = Assigned passenger form
+

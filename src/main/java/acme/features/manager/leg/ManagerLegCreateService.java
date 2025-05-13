@@ -51,6 +51,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 				da = super.getRequest().getData("departureAirport", Airport.class);
 				aa = super.getRequest().getData("arrivalAirport", Airport.class);
 				a = super.getRequest().getData("aircraft", Aircraft.class);
+				@SuppressWarnings("unused")
 				LegStatus st = super.getRequest().getData("status", LegStatus.class);
 				Boolean statusDa = daId == 0 ? true : this.repository.findAllAirports().contains(da);
 				Boolean statusAa = aaId == 0 ? true : this.repository.findAllAirports().contains(aa);

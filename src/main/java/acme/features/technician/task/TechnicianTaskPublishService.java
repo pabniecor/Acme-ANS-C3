@@ -24,8 +24,9 @@ public class TechnicianTaskPublishService extends AbstractGuiService<Technician,
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		Task task = this.repository.findTaskById(id);
+		Technician t = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
 
-		boolean authorised = task != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && task.getDraftMode();
+		boolean authorised = task != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && task.getDraftMode() && task.getTechnician().equals(t);
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -43,7 +44,7 @@ public class TechnicianTaskPublishService extends AbstractGuiService<Technician,
 
 	@Override
 	public void bind(final Task task) {
-		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");
+		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration");
 	}
 
 	@Override

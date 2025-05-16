@@ -43,7 +43,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 			MRs = this.repository.findMRsByTechnicianId(loggedTechnician.getId());
 			mr = this.repository.findMRById(selectedMRId);
 
-			tasks = this.repository.findTasksByTechnicianId(loggedTechnician.getId());
+			tasks = this.repository.findTasksByTechnicianIdOrPublic(loggedTechnician.getId());
 			selectedTaskId = super.getRequest().getData("task", int.class);
 			t = this.repository.findTaskById(selectedTaskId);
 
@@ -77,19 +77,19 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 		Integer technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
 
 		if (super.getRequest().getData("maintenanceRecord", MaintenanceRecord.class) != null && super.getRequest().getData("task", Task.class) != null) {
-			boolean isTaskAlreadyAssigned;
+			boolean isTaskNotAssigned;
 			Set<Integer> tasksIds;
 			Set<Integer> technicianTasksIds;
 			List<Integer> nonAssignedTasksIds;
 
 			tasksIds = this.repository.findTasksIdsByMRId(super.getRequest().getData("maintenanceRecord", MaintenanceRecord.class).getId()).stream().collect(Collectors.toSet());
-			technicianTasksIds = this.repository.findTasksByTechnicianId(technicianId).stream().map(t -> t.getId()).collect(Collectors.toSet());
+			technicianTasksIds = this.repository.findTasksByTechnicianIdOrPublic(technicianId).stream().map(t -> t.getId()).collect(Collectors.toSet());
 			technicianTasksIds.removeAll(tasksIds);
 			nonAssignedTasksIds = technicianTasksIds.stream().toList();
 
-			isTaskAlreadyAssigned = nonAssignedTasksIds.contains(super.getRequest().getData("task", Task.class).getId());
+			isTaskNotAssigned = nonAssignedTasksIds.contains(super.getRequest().getData("task", Task.class).getId());
 			String parsedTasksIds = nonAssignedTasksIds.toString().replace("[", "").replace("]", "");
-			super.state(isTaskAlreadyAssigned, "task", "acme.validation.technician.involves.error.alreadyAssignedTask.message", parsedTasksIds.isBlank() ? "none" : parsedTasksIds);
+			super.state(isTaskNotAssigned, "task", "acme.validation.technician.involves.error.alreadyAssignedTask.message", parsedTasksIds.isBlank() ? "none" : parsedTasksIds);
 
 			boolean isMRAlreadyAssigned;
 			Set<Integer> MRsIds;
@@ -124,7 +124,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 		int technicianId;
 
 		technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
-		tasks = this.repository.findTasksByTechnicianId(technicianId);
+		tasks = this.repository.findTasksByTechnicianIdOrPublic(technicianId);
 		MRs = this.repository.findMRsByTechnicianId(technicianId);
 
 		MRChoices = SelectChoices.from(MRs, "id", involves.getMaintenanceRecord());

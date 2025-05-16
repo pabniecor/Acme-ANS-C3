@@ -24,16 +24,8 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 	@Override
 	public void authorise() {
 		boolean status;
-		Technician loggedTechnician;
-		Technician t;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
-		if (super.getRequest().hasData("id", int.class)) {
-			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
-			t = super.getRequest().getData("technician", Technician.class);
-
-			status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && t.equals(loggedTechnician);
-		}
 
 		super.getResponse().setAuthorised(status);
 	}

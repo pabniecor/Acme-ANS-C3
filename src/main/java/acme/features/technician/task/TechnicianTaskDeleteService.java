@@ -45,7 +45,7 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void bind(final Task task) {
-		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");
+		super.bindObject(task, "taskType", "description", "priority", "estimatedDuration");
 	}
 
 	@Override

@@ -16,20 +16,14 @@ import acme.realms.Technician;
 @Repository
 public interface TechnicianInvolvesRepository extends AbstractRepository {
 
-	@Query("select t from Task t")
-	List<Task> findAllTasks();
-
-	@Query("select mr from MaintenanceRecord mr")
-	List<MaintenanceRecord> findAllMRs();
-
 	@Query("select t from Technician t where t.userAccount.id = :id")
 	Technician findTechnicianByUserId(int id);
 
 	@Query("select mr from MaintenanceRecord mr where mr.technician.id = :id")
 	Collection<MaintenanceRecord> findMRsByTechnicianId(int id);
 
-	@Query("select t from Task t where t.technician.id = :id")
-	Collection<Task> findTasksByTechnicianId(int id);
+	@Query("select t from Task t where t.technician.id = :id or t.draftMode = false")
+	Collection<Task> findTasksByTechnicianIdOrPublic(int id);
 
 	@Query("select i from Involves i where i.maintenanceRecord.id = :mrId and i.task.id = :taskId")
 	Involves findInvolvesbyBothIds(int mrId, int taskId);

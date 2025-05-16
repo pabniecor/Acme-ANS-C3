@@ -61,6 +61,7 @@ master.menu.member.list.flight-assignments-incomplete = List incompleted flight 
 
 master.menu.assistance-agent = AssistanceAgent
 master.menu.assistance-agent.list-claims-completed = List completed claims
+master.menu.assistance-agent.list-public-claims-completed = List public claims
 master.menu.assistance-agent.list-claims-undergoing = List undergoing claims
 
 # master.menu.user-account ####################################################

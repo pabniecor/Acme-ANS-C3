@@ -37,7 +37,7 @@ public class AssistanceAgentUndergoingClaimListService extends AbstractGuiServic
 
 		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
 
-		claimsRelatedToCurrentAgent = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		claimsRelatedToCurrentAgent = this.repository.findAllUnpublishedClaimsByCurrentUser(currentAgent.getId());
 
 		completedClaims = claimsRelatedToCurrentAgent.stream().filter(c -> c.getAccepted().equals(AcceptanceStatus.PENDING)).toList();
 

@@ -13,7 +13,7 @@ import acme.entities.customer_service_and_claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentCompletedClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentCompletedPublicClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -37,7 +37,7 @@ public class AssistanceAgentCompletedClaimListService extends AbstractGuiService
 
 		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
 
-		claimsRelatedToCurrentAgent = this.repository.findAllUnpublishedClaimsByCurrentUser(currentAgent.getId());
+		claimsRelatedToCurrentAgent = this.repository.findAllPublicClaimsByCurrentUser(currentAgent.getId());
 
 		completedClaims = claimsRelatedToCurrentAgent.stream().filter(c -> c.getAccepted().equals(AcceptanceStatus.ACCEPTED) || c.getAccepted().equals(AcceptanceStatus.REJECTED)).toList();
 

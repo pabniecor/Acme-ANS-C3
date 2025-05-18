@@ -1,4 +1,3 @@
-
 package acme.features.customer.passenger;
 
 import java.util.Collection;
@@ -21,16 +20,26 @@ public class CustomerPassengerShowService extends AbstractGuiService<Customer, P
 
 	@Override
 	public void authorise() {
-		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-		super.getResponse().setAuthorised(isCustomer);
+		boolean status = false;
+		int customerId = 0;
+		int passengerId = 0;
+		Passenger passenger = null;
 
-		if (!super.getRequest().getData().isEmpty()) {
-			int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			int passengerId = super.getRequest().getData("id", int.class);
-			Passenger passenger = this.repository.findPassengerById(passengerId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-			super.getResponse().setAuthorised(customerId == passenger.getCustomer().getId());
+		if (status && super.getRequest().hasData("id")) {
+			customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
+			
+			if (passenger != null) {
+				status = passenger.getCustomer().getId() == customerId;
+			} else {
+				status = false;
+			}
 		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

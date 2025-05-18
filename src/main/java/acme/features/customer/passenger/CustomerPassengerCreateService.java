@@ -64,7 +64,7 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 		customers = this.repository.findAllCustomers();
 		choicesCustomer = SelectChoices.from(customers, "identifier", passenger.getCustomer());
 
-		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger", "customer");
+		dataset = super.unbindObject(passenger, "id", "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger", "customer");
 
 		dataset.put("customers", choicesCustomer);
 		dataset.put("customer", choicesCustomer.getSelected().getKey());

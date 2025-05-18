@@ -89,16 +89,13 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 	@Override
 	public void unbind(final BookingRecord bookingRecord) {
 		Dataset dataset;
-		Collection<Passenger> assignedPassengers;
 		Collection<Passenger> notAssignedPassengers;
 		SelectChoices choicesPassengers;
 
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
 		int bookingId = super.getRequest().getData("bookingId", int.class);
 
-		assignedPassengers = this.repository.findAssignedPassengersByBookingId(bookingId);
-		notAssignedPassengers = this.repository.findPassengersByCustomerId(customerId).stream().filter(p -> !assignedPassengers.contains(p)).toList();
+		notAssignedPassengers = this.repository.findNotAssignedPassengersByCustomerAndBookingId(customerId, bookingId);
 		choicesPassengers = SelectChoices.from(notAssignedPassengers, "fullName", bookingRecord.getPassenger());
 
 		dataset = super.unbindObject(bookingRecord, "passenger", "booking");

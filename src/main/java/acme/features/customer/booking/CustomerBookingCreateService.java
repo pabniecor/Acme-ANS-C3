@@ -1,8 +1,9 @@
+
 package acme.features.customer.booking;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,18 +29,25 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		boolean status = false;
 		int flightId = 0;
 		Flight flight = null;
-		
+		TravelClass travelClass = null;
+		Collection<TravelClass> travelClasses;
+
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-		
-		if (status && super.getRequest().getMethod().equals("POST") && 
-			super.getRequest().hasData("flight")) {
-			
-			flightId = super.getRequest().getData("flight", int.class);
-			flight = this.repository.findFlightById(flightId);
-			
-			status = flight != null && !flight.getDraftMode();
+
+		if (status && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("flight")) {
+				flightId = super.getRequest().getData("flight", int.class);
+				flight = this.repository.findFlightById(flightId);
+				status = flight != null && !flight.getDraftMode();
+			}
+
+			if (super.getRequest().hasData("travelClass")) {
+				travelClass = super.getRequest().getData("travelClass", TravelClass.class);
+				travelClasses = this.repository.findAllTravelClasses();
+				status = status && (travelClass == null || travelClasses.contains(travelClass));
+			}
 		}
-		
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -68,11 +76,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		//		if (booking.getFlight() != null) {
-		//			boolean laterFlight = MomentHelper.isAfter(booking.getFlight().getDeparture(), MomentHelper.getCurrentMoment());
-		//			super.state(laterFlight, "flight", "NOT POSSIBLE");
-		//
-		//		}
+		;
 	}
 
 	@Override
@@ -82,26 +86,27 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void unbind(final Booking booking) {
-
 		Dataset dataset;
 		Collection<Flight> allFlights;
-		Collection<Flight> availableFlights;
+		Collection<Flight> filteredFlights;
 		SelectChoices travelClass;
+		Date currentMoment;
 
-		allFlights = this.repository.findAllFlights();
-		availableFlights = allFlights.stream().filter(f -> !f.getDraftMode()).filter(f -> f.getDeparture() != null && f.getDeparture().after(MomentHelper.getCurrentMoment())).filter(f -> f.getLayovers() != null && f.getLayovers() > 0)
-			.collect(Collectors.toList());
+		allFlights = this.repository.findAllPublishedFlights();
+		filteredFlights = new ArrayList<>();
+		currentMoment = MomentHelper.getCurrentMoment();
+
+		for (Flight flight : allFlights)
+			if (!flight.getDraftMode() && flight.getDeparture() != null && flight.getDeparture().after(currentMoment) && flight.getLayovers() != null && flight.getLayovers() > 0)
+				filteredFlights.add(flight);
+
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight", "draftMode", "id");
-
 		dataset.put("travelClass", travelClass);
 
 		SelectChoices flightChoices = null;
-		try {
-			flightChoices = SelectChoices.from(availableFlights, "bookingFlight", booking.getFlight());
-		} catch (Exception e) {
-		}
+		flightChoices = SelectChoices.from(filteredFlights, "bookingFlight", booking.getFlight());
 
 		dataset.put("flights", flightChoices);
 

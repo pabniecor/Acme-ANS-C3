@@ -20,6 +20,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	@Autowired
 	private CustomerBookingRepository repository;
 
+
 	@Override
 	public void authorise() {
 		boolean status = false;
@@ -28,38 +29,39 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		int flightId = 0;
 		Booking booking = null;
 		Flight flight = null;
-		
+		TravelClass travelClass = null;
+		Collection<TravelClass> travelClasses;
+
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-		
+
 		if (status) {
 			customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			
+
 			if (super.getRequest().hasData("id"))
 				bookingId = super.getRequest().getData("id", int.class);
-			
+
 			booking = this.repository.findBookingById(bookingId);
-			
+
 			if (booking != null) {
 				status = booking.getDraftMode() && booking.getCustomer().getId() == customerId;
-				
-				if (status && super.getRequest().getMethod().equals("POST") && 
-					super.getRequest().hasData("flight")) {
-					
-					flightId = super.getRequest().getData("flight", int.class);
-					flight = this.repository.findFlightById(flightId);
-					
-					status = flight != null && 
-							!flight.getDraftMode() && 
-							flight.getDeparture() != null && 
-							flight.getDeparture().after(MomentHelper.getCurrentMoment()) && 
-							flight.getLayovers() != null && 
-							flight.getLayovers() > 0;
+
+				if (status && super.getRequest().getMethod().equals("POST")) {
+					if (super.getRequest().hasData("flight")) {
+						flightId = super.getRequest().getData("flight", int.class);
+						flight = this.repository.findFlightById(flightId);
+						status = flight != null && !flight.getDraftMode() && flight.getDeparture() != null && flight.getDeparture().after(MomentHelper.getCurrentMoment()) && flight.getLayovers() != null && flight.getLayovers() > 0;
+					}
+
+					if (super.getRequest().hasData("travelClass")) {
+						travelClass = super.getRequest().getData("travelClass", TravelClass.class);
+						travelClasses = this.repository.findAllTravelClasses();
+						status = status && (travelClass == null || travelClasses.contains(travelClass));
+					}
 				}
-			} else {
+			} else
 				status = false;
-			}
 		}
-		
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -99,8 +101,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		flights = this.repository.findAllFlights();
-		//		Collection<Flight> availableFlights = allFlights.stream().filter(f -> !f.getDraftMode()).filter(f -> f.getDeparture() != null && f.getDeparture().after(MomentHelper.getCurrentMoment())).filter(f -> f.getLayovers() != null && f.getLayovers() > 0)
-		//			.collect(Collectors.toList());
 
 		flightChoices = SelectChoices.from(flights, "bookingFlight", booking.getFlight());
 

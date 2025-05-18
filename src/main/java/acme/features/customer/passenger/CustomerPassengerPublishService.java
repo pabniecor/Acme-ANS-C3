@@ -1,4 +1,3 @@
-
 package acme.features.customer.passenger;
 
 import java.util.Collection;
@@ -21,17 +20,28 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int passengerId;
-		Passenger passenger;
-		Customer customer;
+	    boolean status = false;
+	    int customerId = 0;
+	    int passengerId = 0;
+	    Passenger passenger = null;
+	    
+	    status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
-		customer = passenger == null ? null : passenger.getCustomer();
-		status = passenger != null && passenger.getDraftModePassenger() == true && super.getRequest().getPrincipal().hasRealm(customer);
+	    if (status) {
+	        customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		super.getResponse().setAuthorised(status);
+	        if (super.getRequest().hasData("id"))
+	            passengerId = super.getRequest().getData("id", int.class);
+
+	        passenger = this.repository.findPassengerById(passengerId);
+
+	        if (passenger != null) {
+	            status = passenger.getDraftModePassenger() && passenger.getCustomer().getId() == customerId;
+	        } else
+	            status = false;
+	    }
+
+	    super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -72,7 +82,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		customers = this.repository.findAllCustomers();
 		choicesCustomer = SelectChoices.from(customers, "identifier", passenger.getCustomer());
 
-		dataset = super.unbindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger");
+		dataset = super.unbindObject(passenger, "id", "fullName", "email", "passportNumber", "birthDate", "specialNeeds", "draftModePassenger");
 
 		dataset.put("customer", choicesCustomer.getSelected().getKey());
 		dataset.put("customers", choicesCustomer);

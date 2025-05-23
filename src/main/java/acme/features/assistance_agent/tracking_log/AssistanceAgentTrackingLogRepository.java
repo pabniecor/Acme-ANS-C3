@@ -2,6 +2,7 @@
 package acme.features.assistance_agent.tracking_log;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -32,9 +33,9 @@ public interface AssistanceAgentTrackingLogRepository extends AbstractRepository
 	@Query("select c from Claim c where c.assistanceAgent.id = :agentId")
 	Collection<Claim> findAllClaimsByCurrentUser(int agentId);
 
-	//	@Query("select c from Claim c where (c.accepted = true or c.accepted = false) and c.assistanceAgent.id = :agentId")
-	//	Collection<Claim> findAllCompletedClaimsByCurrentUser(int agentId);
-
 	@Query("select c from Claim c where c.id = :id")
 	Claim findClaimById(int id);
+
+	@Query("SELECT tl FROM TrackingLog tl WHERE tl.claim.id = :claimId ORDER BY tl.resolutionPercentage DESC")
+	List<TrackingLog> getTrackingLogsByResolutionPercentageOrder(int claimId);
 }

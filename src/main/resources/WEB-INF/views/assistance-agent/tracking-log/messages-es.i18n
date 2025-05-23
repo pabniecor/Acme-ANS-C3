@@ -19,5 +19,7 @@ assistance-agent.tracking-log.form.button.create = Crear seguimiento
 assistance-agent.tracking-log.form.button.update = Actualizar seguimiento
 assistance-agent.tracking-log.form.button.delete = Eliminar seguimiento
 assistance-agent.tracking-log.form.button.publish = Publicar seguimiento
+assistance-agent.tracking-log.show.button.reclaim = Reclamar seguimiento
+assistance-agent.tracking-log.form.button.reclaim = Reclamar seguimiento
 
 assistance-agent.tracking-log.form.label.confirmation = Confirmación

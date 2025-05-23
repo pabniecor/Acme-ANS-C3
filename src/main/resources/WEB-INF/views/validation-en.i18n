@@ -49,9 +49,11 @@ acme.validation.service.promotionCode.message = The last two digits must corresp
 
 acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Resolution percentage must be 100% when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolution percentage cannot be 100% when status is PENDING
+acme.validation.trackingLog.resolutionPercentage-monotony.message = Resolution must be higher than actual highest's one
 acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blank when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be null or blank when status is PENDING
+acme.validation.trackingLogPercentageIs100ToPublish.message = Resolution must be 100.00 to publish
 acme.validation.claimMustBePublished.message = Tracking log's claim must be published before publishing tracking log
 
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking

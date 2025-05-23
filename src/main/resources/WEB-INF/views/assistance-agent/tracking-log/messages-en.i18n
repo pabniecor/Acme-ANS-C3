@@ -19,5 +19,7 @@ assistance-agent.tracking-log.form.button.create = Create tracking log
 assistance-agent.tracking-log.form.button.update = Update tracking log
 assistance-agent.tracking-log.form.button.delete = Delete tracking log
 assistance-agent.tracking-log.form.button.publish = Publish tracking log
+assistance-agent.tracking-log.show.button.reclaim = Reclaim tracking log
+assistance-agent.tracking-log.form.button.reclaim = Reclaim tracking log
 
 assistance-agent.tracking-log.form.label.confirmation = Confirmation

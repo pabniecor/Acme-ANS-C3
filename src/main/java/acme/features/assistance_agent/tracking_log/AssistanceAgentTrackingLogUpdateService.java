@@ -82,6 +82,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
 		dataset.put("trackStatus", statusChoices);
+		dataset.put("reclaim", trackingLog.getReclaim());
 
 		super.getResponse().addData(dataset);
 	}

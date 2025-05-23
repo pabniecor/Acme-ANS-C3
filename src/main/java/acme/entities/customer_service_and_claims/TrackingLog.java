@@ -2,11 +2,13 @@
 package acme.entities.customer_service_and_claims;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -16,6 +18,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.SpringHelper;
 import acme.constraints.ValidTrackingLog;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,10 +61,32 @@ public class TrackingLog extends AbstractEntity {
 	@Automapped
 	private Boolean				draftMode;
 
+
+	@Transient
+	public Boolean getReclaim() {
+		boolean result = false;
+		if (this.claim != null) {
+			TrackingLogRepository repository = SpringHelper.getBean(TrackingLogRepository.class);
+
+			List<TrackingLog> orderedTrackingLogs = repository.getTrackingLogsByResolutionPercentageOrder(this.claim.getId());
+
+			if (orderedTrackingLogs != null && !orderedTrackingLogs.isEmpty()) {
+				List<TrackingLog> trackingLogs100Percentage = orderedTrackingLogs.stream().filter(tl -> tl.getResolutionPercentage() == 100.).toList();
+				TrackingLog highestResolutionPercentageTrackingLog = orderedTrackingLogs.get(0);
+
+				if (highestResolutionPercentageTrackingLog.getResolutionPercentage() == 100. && trackingLogs100Percentage.size() == 1 && highestResolutionPercentageTrackingLog.getDraftMode() == false)
+					result = true;
+			}
+		}
+
+		return result;
+	}
+
 	// Relationships -----------------------------------------------------
+
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Claim				claim;
+	private Claim claim;
 }

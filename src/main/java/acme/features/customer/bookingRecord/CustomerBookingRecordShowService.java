@@ -51,15 +51,19 @@ public class CustomerBookingRecordShowService extends AbstractGuiService<Custome
 		Dataset dataset;
 		Collection<Passenger> passengers;
 		SelectChoices choicesPassengers;
+		Booking booking;
 
 		passengers = this.repository.findAllPassengers();
 		choicesPassengers = SelectChoices.from(passengers, "fullName", bookingRecord.getPassenger());
+		booking = bookingRecord.getBooking();
 
 		dataset = super.unbindObject(bookingRecord, "booking", "passenger");
 
 		dataset.put("bookingId", bookingRecord.getBooking().getId());
 		dataset.put("passengerId", choicesPassengers.getSelected().getKey());
+		dataset.put("passengerName", bookingRecord.getPassenger().getFullName());
 
+		super.getResponse().addGlobal("booking", booking);
 		super.getResponse().addGlobal("passengers", choicesPassengers);
 		super.getResponse().addData(dataset);
 	}

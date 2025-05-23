@@ -13,3 +13,5 @@ customer.booking-record.form.button.create = Assign Passenger
 customer.booking-record.list.title = Assigned Passengers
 customer.booking-record.form.title = Assigned passenger form
 
+customer.booking-record.form.button.delete = Delete associated passenger
+

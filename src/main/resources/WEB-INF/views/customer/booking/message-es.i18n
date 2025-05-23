@@ -26,4 +26,5 @@ customer.booking.form.button.update = Actualizar reserva
 customer.booking.form.button.publish = Publicar reserva
 
 customer.booking.form.button.passengers = Pasajeros de la reserva
+customer.booking.form.button.delete = Borrar reserva
 

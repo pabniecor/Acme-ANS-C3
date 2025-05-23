@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_management.Booking;
+import acme.entities.customer_management.BookingRecord;
 import acme.entities.customer_management.TravelClass;
 import acme.entities.flight_management.Flight;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerBookingUpdateService extends AbstractGuiService<Customer, Booking> {
+public class CustomerBookingDeleteService extends AbstractGuiService<Customer, Booking> {
 
 	@Autowired
 	private CustomerBookingRepository repository;
@@ -24,44 +24,15 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		boolean status = false;
-		int customerId = 0;
-		int bookingId = 0;
-		int flightId = 0;
-		Booking booking = null;
-		Flight flight = null;
-		TravelClass travelClass = null;
-		Collection<TravelClass> travelClasses;
+		boolean status;
+		int id;
+		Booking booking;
+		Customer customer;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-
-		if (status) {
-			customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-			if (super.getRequest().hasData("id"))
-				bookingId = super.getRequest().getData("id", int.class);
-
-			booking = this.repository.findBookingById(bookingId);
-
-			if (booking != null) {
-				status = booking.getDraftMode() && booking.getCustomer().getId() == customerId;
-
-				if (status && super.getRequest().getMethod().equals("POST")) {
-					if (super.getRequest().hasData("flight")) {
-						flightId = super.getRequest().getData("flight", int.class);
-						flight = this.repository.findFlightById(flightId);
-						status = flight != null && !flight.getDraftMode() && flight.getDeparture() != null && flight.getDeparture().after(MomentHelper.getCurrentMoment()) && flight.getLayovers() != null && flight.getLayovers() > 0;
-					}
-
-					if (super.getRequest().hasData("travelClass")) {
-						travelClass = super.getRequest().getData("travelClass", TravelClass.class);
-						travelClasses = this.repository.findAllTravelClasses();
-						status = status && (travelClass == null || travelClasses.contains(travelClass));
-					}
-				}
-			} else
-				status = false;
-		}
+		id = super.getRequest().getData("id", int.class);
+		booking = this.repository.findBookingById(id);
+		customer = booking == null ? null : booking.getCustomer();
+		status = booking != null && booking.getDraftMode() == true && super.getRequest().getPrincipal().hasRealm(customer);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -89,7 +60,11 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void perform(final Booking booking) {
-		this.repository.save(booking);
+		Collection<BookingRecord> bookingRecords;
+
+		bookingRecords = this.repository.findBookingRecordsByBookingId(booking.getId());
+		this.repository.deleteAll(bookingRecords);
+		this.repository.delete(booking);
 	}
 
 	@Override
@@ -112,4 +87,5 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		super.getResponse().addData(dataset);
 	}
+
 }

@@ -1,0 +1,74 @@
+
+package acme.features.customer.bookingRecord;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acme.client.components.models.Dataset;
+import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
+import acme.entities.customer_management.Booking;
+import acme.entities.customer_management.BookingRecord;
+import acme.realms.Customer;
+
+@GuiService
+public class CustomerBookingRecordDeleteService extends AbstractGuiService<Customer, BookingRecord> {
+
+	@Autowired
+	private CustomerBookingRecordRepository repository;
+
+
+	@Override
+	public void authorise() {
+		boolean status;
+		int bookingRecordId;
+		BookingRecord bookingRecord;
+		Booking booking;
+		Customer customer;
+
+		bookingRecordId = super.getRequest().getData("id", int.class);
+		bookingRecord = this.repository.findBookingRecordById(bookingRecordId);
+		booking = bookingRecord == null ? null : bookingRecord.getBooking();
+		customer = booking == null ? null : booking.getCustomer();
+
+		status = bookingRecord != null && booking.getDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+
+		super.getResponse().setAuthorised(status);
+	}
+
+	@Override
+	public void load() {
+		BookingRecord bookingRecord;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		bookingRecord = this.repository.findBookingRecordById(id);
+
+		super.getBuffer().addData(bookingRecord);
+	}
+
+	@Override
+	public void bind(final BookingRecord bookingRecord) {
+		;
+	}
+
+	@Override
+	public void validate(final BookingRecord bookingRecord) {
+		;
+	}
+
+	@Override
+	public void perform(final BookingRecord bookingRecord) {
+		this.repository.delete(bookingRecord);
+	}
+
+	@Override
+	public void unbind(final BookingRecord bookingRecord) {
+		Dataset dataset;
+
+		dataset = super.unbindObject(bookingRecord, "booking", "passenger");
+		dataset.put("bookingId", bookingRecord.getBooking().getId());
+		dataset.put("passengerId", bookingRecord.getPassenger().getId());
+
+		super.getResponse().addData(dataset);
+	}
+}

@@ -56,13 +56,12 @@ acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be
 acme.validation.trackingLogPercentageIs100ToPublish.message = Resolution must be 100.00 to publish
 acme.validation.claimMustBePublished.message = Tracking log's claim must be published before publishing tracking log
 
-acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
-
 acme.validation.confirmation.message = Need confirmation
 
+acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
-
 acme.validation.customer.publishedFlight.message = The flight assigned must be published
+acme.vaidation.customer.passenger.error.booking-exists = This passenger is associated to one or more bookings
 
 acme.validation.claim.draftMode-update.message = Cannot update because this claim is published
 acme.validation.claim.draftMode-delete.message = Cannot delete because this claim is published

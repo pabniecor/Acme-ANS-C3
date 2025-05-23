@@ -1,4 +1,3 @@
-
 package acme.features.customer.bookingRecord;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +20,9 @@ public class CustomerBookingRecordController extends AbstractGuiController<Custo
 
 	@Autowired
 	private CustomerBookingRecordShowService	showService;
+	
+	@Autowired
+	private CustomerBookingRecordDeleteService	deleteService;
 
 
 	@PostConstruct
@@ -28,5 +30,6 @@ public class CustomerBookingRecordController extends AbstractGuiController<Custo
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("delete", this.deleteService);
 	}
 }

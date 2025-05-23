@@ -1,4 +1,3 @@
-
 package acme.features.customer.passenger;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +26,9 @@ public class CustomerPassengerController extends AbstractGuiController<Customer,
 
 	@Autowired
 	private CustomerPassengerPublishService	publishService;
+	
+	@Autowired
+	private CustomerPassengerDeleteService	deleteService;
 
 
 	@PostConstruct
@@ -35,6 +37,7 @@ public class CustomerPassengerController extends AbstractGuiController<Customer,
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("delete", this.deleteService);
 		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

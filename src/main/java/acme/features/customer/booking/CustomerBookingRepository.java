@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.customer_management.Booking;
+import acme.entities.customer_management.BookingRecord;
 import acme.entities.customer_management.Passenger;
 import acme.entities.customer_management.TravelClass;
 import acme.entities.flight_management.Flight;
@@ -48,5 +49,8 @@ public interface CustomerBookingRepository extends AbstractRepository {
 
 	@Query("select distinct(b.travelClass) from Booking b")
 	Collection<TravelClass> findAllTravelClasses();
+
+	@Query("select br from BookingRecord br where br.booking.id = :bookingId")
+	Collection<BookingRecord> findBookingRecordsByBookingId(int bookingId);
 
 }

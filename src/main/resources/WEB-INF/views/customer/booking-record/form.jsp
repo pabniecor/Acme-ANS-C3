@@ -4,11 +4,17 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-select code="customer.booking-record.form.label.passenger" path="passenger" choices="${passengers}"/>
-	
 	<jstl:choose>
 		<jstl:when test="${_command == 'create'}">
+			<acme:input-select code="customer.booking-record.form.label.passenger" path="passenger" choices="${passengers}"/>
 			<acme:submit code="customer.booking-record.form.button.create" action="/customer/booking-record/create?bookingId=${booking.id}"/>
-		</jstl:when>		
+		</jstl:when>
+		<jstl:when test="${_command == 'show'}">
+			<acme:input-textbox code="customer.booking-record.form.label.passenger" path="passengerName" readonly="true"/>
+			<!-- Solo mostrar el botón de eliminar si la reserva está en modo borrador -->
+			<jstl:if test="${booking.draftMode == true}">
+				<acme:submit code="customer.booking-record.form.button.delete" action="/customer/booking-record/delete"/>
+			</jstl:if>
+		</jstl:when>
 	</jstl:choose>
 </acme:form>

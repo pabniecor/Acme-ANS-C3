@@ -13,4 +13,6 @@ customer.booking-record.form.button.create = Pasajeros asociados a reserva
 customer.booking-record.list.title = Pasajeros asignados
 customer.booking-record.form.title = Formulario de pasajeros asignados
 
+customer.booking-record.form.button.delete = Borrar pasajero asociado
+
 

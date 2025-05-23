@@ -31,6 +31,9 @@ public class AssistanceAgentTrackingLogController extends AbstractGuiController<
 	@Autowired
 	private AssistanceAgentTrackingLogPublishService	publishService;
 
+	@Autowired
+	private AssistanceAgentTrackingLogReclaimService	reclaimService;
+
 
 	@PostConstruct
 	protected void initialise() {
@@ -41,5 +44,6 @@ public class AssistanceAgentTrackingLogController extends AbstractGuiController<
 		super.addBasicCommand("delete", this.deleteService);
 
 		super.addCustomCommand("publish", "update", this.publishService);
+		super.addCustomCommand("reclaim", "create", this.reclaimService);
 	}
 }

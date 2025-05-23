@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_service_and_claims.AcceptanceStatus;
@@ -15,50 +16,62 @@ import acme.entities.customer_service_and_claims.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
+public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
 
 	@Autowired
-	protected AssistanceAgentTrackingLogRepository repository;
+	private AssistanceAgentTrackingLogRepository repository;
 
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean authorised;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int id = super.getRequest().getData("masterId", int.class);
+		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
 
-		super.getResponse().setAuthorised(status);
+		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog.getReclaim() == true;
+
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
 	public void load() {
-		int id = super.getRequest().getData("id", int.class);
+		TrackingLog trackingLog;
+		TrackingLog lastTrackingLog;
+		Claim claimAssociated = new Claim();
+		AcceptanceStatus statusAssociated;
+		int id = super.getRequest().getData("masterId", int.class);
 
-		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		lastTrackingLog = this.repository.findTrackingLogById(id);
+		claimAssociated = lastTrackingLog.getClaim();
+		statusAssociated = lastTrackingLog.getStatus();
 
+		trackingLog = new TrackingLog();
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		trackingLog.setDraftMode(true);
+		trackingLog.setStatus(statusAssociated);
+		trackingLog.setResolutionPercentage(100.);
+		trackingLog.setClaim(claimAssociated);
 		super.getBuffer().addData(trackingLog);
 	}
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution", "claim");
+		super.bindObject(trackingLog, "step", "resolution");
 	}
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
-		boolean draftMode = trackingLog.getDraftMode();
-
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.draftMode-delete.message");
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		this.repository.delete(trackingLog);
+		trackingLog.setDraftMode(true);
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		this.repository.save(trackingLog);
 	}
 
 	@Override
@@ -76,6 +89,7 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
+		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("trackStatus", statusChoices);
 		dataset.put("reclaim", trackingLog.getReclaim());
 

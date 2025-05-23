@@ -57,10 +57,6 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 				correctResolutionPercentage = resolutionPercentage < 100.;
 				super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
 			}
-			//				{
-			//					correctResolution = resolution == null || resolution.trim().equals("");
-			//					super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-nullOrBlanck.message");
-			//				}
 		}
 
 		result = !super.hasErrors(context);

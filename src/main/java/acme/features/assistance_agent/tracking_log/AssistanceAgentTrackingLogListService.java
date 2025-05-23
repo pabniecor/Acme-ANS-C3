@@ -1,6 +1,7 @@
 
 package acme.features.assistance_agent.tracking_log;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,34 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		super.getResponse().setAuthorised(status);
 	}
 
+	// probar si no puedo con el parametro claimId poniendo como parametro la trackingLog id y haciendo un filtro para saber si la id pertenece a claim o trackingLog
 	@Override
 	public void load() {
-		Collection<TrackingLog> trackingLogs;
+		//		List<Integer> trackingLogIds;
+		//		List<Integer> claimIds;
+		Collection<TrackingLog> trackingLogs = new ArrayList<>();
+		int claimId;
 
-		int claimId = super.getRequest().getData("masterId", int.class);
+		//		id = super.getRequest().getData("masterId", int.class);
+
+		//		if (super.getRequest().getData("masterId", int.class) != null)
+		//			claimId = super.getRequest().getData("masterId", int.class);
+		//		else
+		//			claimId = super.getRequest().getData("claimId", int.class);
+
+		//		trackingLogIds = this.repository.findAllTrackingLogs().stream().map(tl -> tl.getId()).toList();
+		//
+		//		claimIds = this.repository.findAllClaims().stream().map(c -> c.getId()).toList();
+		//
+		//		if (claimIds.contains(id))
+		//			trackingLogs = this.repository.findAllTrackingLogsByClaimId(id);
+		//		else if (trackingLogIds.contains(id)) {
+		//			TrackingLog tl = this.repository.findTrackingLogById(id);
+		//			int claimId = tl.getClaim().getId();
+		//			trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
+		//		}
+
+		claimId = super.getRequest().getData("masterId", int.class);
 
 		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
 

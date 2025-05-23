@@ -2,6 +2,7 @@
 package acme.features.assistance_agent.tracking_log;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,6 +37,8 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		TrackingLog trackingLog;
 
 		trackingLog = new TrackingLog();
+		trackingLog.setDraftMode(true);
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -47,6 +50,19 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
+		boolean resolutionPercentageMonotony;
+
+		int claimId = trackingLog.getClaim().getId();
+
+		List<TrackingLog> trackingLogsOrderedByPercentage = this.repository.getTrackingLogsByResolutionPercentageOrder(claimId);
+
+		if (trackingLogsOrderedByPercentage != null && !trackingLogsOrderedByPercentage.isEmpty()) {
+			TrackingLog trackingLogHighestPercentage = trackingLogsOrderedByPercentage.get(0);
+
+			resolutionPercentageMonotony = trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage();
+			super.state(resolutionPercentageMonotony, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
+		}
+
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
@@ -74,6 +90,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
 		dataset.put("trackStatus", statusChoices);
+		dataset.put("reclaim", trackingLog.getReclaim());
 
 		super.getResponse().addData(dataset);
 	}

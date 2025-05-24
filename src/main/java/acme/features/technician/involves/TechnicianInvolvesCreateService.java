@@ -43,7 +43,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 			MRs = this.repository.findMRsByTechnicianId(loggedTechnician.getId());
 			mr = this.repository.findMRById(selectedMRId);
 
-			tasks = this.repository.findTasksByTechnicianIdOrPublic(loggedTechnician.getId());
+			tasks = this.repository.findPublicTasks();
 			selectedTaskId = super.getRequest().getData("task", int.class);
 			t = this.repository.findTaskById(selectedTaskId);
 
@@ -83,7 +83,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 			List<Integer> nonAssignedTasksIds;
 
 			tasksIds = this.repository.findTasksIdsByMRId(super.getRequest().getData("maintenanceRecord", MaintenanceRecord.class).getId()).stream().collect(Collectors.toSet());
-			technicianTasksIds = this.repository.findTasksByTechnicianIdOrPublic(technicianId).stream().map(t -> t.getId()).collect(Collectors.toSet());
+			technicianTasksIds = this.repository.findPublicTasks().stream().map(t -> t.getId()).collect(Collectors.toSet());
 			technicianTasksIds.removeAll(tasksIds);
 			nonAssignedTasksIds = technicianTasksIds.stream().toList();
 
@@ -124,7 +124,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 		int technicianId;
 
 		technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
-		tasks = this.repository.findTasksByTechnicianIdOrPublic(technicianId);
+		tasks = this.repository.findPublicTasks();
 		MRs = this.repository.findMRsByTechnicianId(technicianId);
 
 		MRChoices = SelectChoices.from(MRs, "id", involves.getMaintenanceRecord());

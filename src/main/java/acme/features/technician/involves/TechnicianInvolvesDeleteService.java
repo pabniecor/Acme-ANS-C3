@@ -34,10 +34,12 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 		MaintenanceRecord mr;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
-		if (super.getRequest().hasData("id", int.class)) {
+		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("GET"))
+			status = false;
+		else if (super.getRequest().hasData("id", int.class)) {
 			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
 
-			tasks = this.repository.findTasksByTechnicianIdOrPublic(loggedTechnician.getId());
+			tasks = this.repository.findPublicTasks();
 			MRs = this.repository.findMRsByTechnicianId(loggedTechnician.getId());
 			selectedTaskId = super.getRequest().getData("task", int.class);
 			selectedMRId = super.getRequest().getData("maintenanceRecord", int.class);
@@ -45,10 +47,8 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 			t = this.repository.findTaskById(selectedTaskId);
 			mr = this.repository.findMRById(selectedMRId);
 
-			boolean taskOwnedOrPublic = t.getTechnician().equals(loggedTechnician) || t.getDraftMode() == false;
-
 			if (selectedTaskId != 0 && selectedMRId != 0)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(t) && MRs.contains(mr) && mr.getTechnician().equals(loggedTechnician) && taskOwnedOrPublic;
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(t) && MRs.contains(mr) && mr.getTechnician().equals(loggedTechnician) && !t.getDraftMode();
 
 		}
 
@@ -112,7 +112,7 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 		int technicianId;
 
 		technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
-		tasks = this.repository.findTasksByTechnicianIdOrPublic(technicianId);
+		tasks = this.repository.findPublicTasks();
 		MRs = this.repository.findMRsByTechnicianId(technicianId);
 
 		MRChoices = SelectChoices.from(MRs, "id", involves.getMaintenanceRecord());

@@ -25,7 +25,7 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 	@Override
 	public void authorise() {
 		boolean authorised;
-		int id = super.getRequest().getData("id", int.class);
+		int id;
 		Collection<Aircraft> aircrafts;
 		int aircraftId;
 		Aircraft a;
@@ -33,7 +33,11 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 		Technician loggedTechnician;
 
 		authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
-		if (super.getRequest().hasData("id", int.class)) {
+
+		if (super.getRequest().getMethod().equals("GET"))
+			authorised = false;
+		else if (super.getRequest().hasData("id", int.class)) {
+			id = super.getRequest().getData("id", int.class);
 			mr = this.repository.findMRById(id);
 			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
 			aircrafts = this.repository.findAllAircrafts();
@@ -41,7 +45,8 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 			a = this.repository.findAircraftById(aircraftId);
 
 			if (aircraftId != 0)
-				authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getTechnician().getId() == loggedTechnician.getId() && mr.getDraftMode() && aircrafts.contains(a);
+				authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getTechnician().getId() == loggedTechnician.getId() && mr.getDraftMode() && aircrafts.contains(a)
+					&& super.getRequest().getCommand().equals("update");
 		}
 
 		super.getResponse().setAuthorised(authorised);

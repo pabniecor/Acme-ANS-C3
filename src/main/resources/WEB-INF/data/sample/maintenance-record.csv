@@ -36,7 +36,7 @@ maintenanceRecord-23,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"<m
 maintenanceRecord-24,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"<script>alert(‘Hacked!’);</script>",true,aircraft-00,technician1
 maintenanceRecord-25,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"'' or 'A' = 'A",true,aircraft-00,technician1
 # notes - no singular values
-# drafrMode - standard variations
+# draftMode - standard variations
 maintenanceRecord-26,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true,aircraft-00,technician2
 maintenanceRecord-27,2012/07/02 00:00,PENDING,2012/07/02 00:01,EUR 500000.00,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",false,aircraft-00,technician1
 # draftMode - no singular values

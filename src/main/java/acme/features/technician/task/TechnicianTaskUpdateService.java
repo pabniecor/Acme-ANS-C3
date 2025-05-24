@@ -27,7 +27,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		Task task;
 		Technician loggedTechnician;
 
-		if (super.getRequest().hasData("id")) {
+		if (super.getRequest().hasData("id") && super.getRequest().getMethod().equals("POST")) {
 			task = this.repository.findTaskById(super.getRequest().getData("id", int.class));
 			loggedTechnician = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId());
 

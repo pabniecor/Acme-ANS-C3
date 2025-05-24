@@ -50,7 +50,6 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-		assert leg != null;
 		Dataset dataset;
 		Collection<Airport> airports;
 		Collection<Aircraft> aircrafts;

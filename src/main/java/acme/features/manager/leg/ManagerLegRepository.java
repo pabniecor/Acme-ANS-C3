@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import acme.client.repositories.AbstractRepository;
 import acme.entities.airline_operations.Aircraft;
 import acme.entities.airport_management.Airport;
+import acme.entities.airport_management.FlightAssignment;
+import acme.entities.customer_service_and_claims.Claim;
 import acme.entities.flight_management.Flight;
 import acme.entities.flight_management.Leg;
 
@@ -48,4 +50,9 @@ public interface ManagerLegRepository extends AbstractRepository {
 	@Query("select a from Aircraft a where a.id = :aircraftId")
 	Aircraft findAircraftById(int aircraftId);
 
+	@Query("select c from Claim c where c.leg.id = :legId")
+	Collection<Claim> findClaimsByLegId(int legId);
+
+	@Query("select f from FlightAssignment f where f.leg.id = :legId")
+	Collection<FlightAssignment> findFlightAssignmentsByLegId(int legId);
 }

@@ -24,10 +24,15 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		int id = super.getRequest().getData("id", int.class);
 		Flight flight = this.repository.findFlightById(id);
 		Manager manager = flight == null ? null : flight.getManager();
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+		//Iterador para ver si todas las legs estan en draftMode
+		int numLegsPublished = 0;
+		for (Leg leg : legs)
+			if (leg.getDraftMode().equals(false))
+				numLegsPublished++;
+		boolean status = flight != null && super.getRequest().getPrincipal().hasRealm(manager) && flight.getDraftMode() && numLegsPublished == 0;
 
-		boolean authorised = flight != null && super.getRequest().getPrincipal().hasRealm(manager) && flight.getDraftMode();
-
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -49,10 +54,20 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void perform(final Flight flight) {
-		Collection<Leg> legs;
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
 
-		legs = this.repository.findLegsByFlightId(flight.getId());
+		//		for (Leg leg : legs) {
+		//			Collection<FlightAssignment> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
+		//			Collection<Claim> claims = this.repository.findClaimsByLegId(leg.getId());
+		//			this.repository.deleteAll(flightAssignments);
+		//			this.repository.deleteAll(claims);
+		//		}
+
 		this.repository.deleteAll(legs);
+
+		//		Collection<Booking> bookings = this.repository.findBookingsByFlightId(flight.getId());
+		//		this.repository.deleteAll(bookings);
+
 		this.repository.delete(flight);
 	}
 
@@ -63,11 +78,11 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 
-		dataset.put("sheduledDeparture", flight.getDeparture());
-		dataset.put("sheduledArrival", flight.getArrival());
-		dataset.put("departureCity", flight.getOriginCity());
-		dataset.put("arrivalCity", flight.getDestinationCity());
-		dataset.put("numberOfLayovers", flight.getLayovers());
+		dataset.put("departure", flight.getDeparture());
+		dataset.put("arrival", flight.getArrival());
+		dataset.put("originCity", flight.getOriginCity());
+		dataset.put("destinationCity", flight.getDestinationCity());
+		dataset.put("layovers", flight.getLayovers());
 
 		super.getResponse().addData(dataset);
 	}

@@ -51,7 +51,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void bind(final Leg leg) {
-		;
+		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status");
 	}
 
 	@Override
@@ -61,12 +61,21 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void perform(final Leg leg) {
+		//		Collection<FlightAssignment> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
+		//		Collection<Claim> claims = this.repository.findClaimsByLegId(leg.getId());
+		//
+		//		for (FlightAssignment fa : flightAssignments) {
+		//			Collection<ActivityLog> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
+		//			this.repository.deleteAll(flightAssignments);
+		//		}
+		//
+		//		this.repository.deleteAll(flightAssignments);
+		//		this.repository.deleteAll(claims);
 		this.repository.delete(leg);
 	}
 
 	@Override
 	public void unbind(final Leg leg) {
-		assert leg != null;
 		Dataset dataset;
 		Collection<Flight> flights;
 		Collection<Airport> airports;
@@ -86,7 +95,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 		aircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
 		legStatus = SelectChoices.from(LegStatus.class, leg.getStatus());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode");
+		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "flight", "departureAirport", "arrivalAirport", "aircraft", "sequenceOrder", "draftMode", "duration");
 		dataset.put("flight", flight.getSelected().getKey());
 		dataset.put("departureAirport", departureAirport.getSelected().getKey());
 		dataset.put("arrivalAirport", arrivalAirport.getSelected().getKey());
@@ -96,6 +105,7 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("arrivalAirports", arrivalAirport);
 		dataset.put("aircrafts", aircraft);
 		dataset.put("status", legStatus);
+		dataset.put("duration", leg.getDuration());
 
 		super.getResponse().addData(dataset);
 	}

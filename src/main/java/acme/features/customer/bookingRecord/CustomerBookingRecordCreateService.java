@@ -26,30 +26,28 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 		boolean status = false;
 		int customerId;
 		int bookingId;
-		int passengerId;
 		Booking booking;
 		Customer currentCustomer;
 
 		currentCustomer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
 		customerId = currentCustomer.getId();
-		bookingId = super.getRequest().getData("bookingId", int.class);
-		booking = this.repository.findBookingById(bookingId);
 
-		if (booking != null) {
-			status = booking.getCustomer().getId() == customerId;
+		if (super.getRequest().hasData("bookingId")) {
+			bookingId = super.getRequest().getData("bookingId", int.class);
+			booking = this.repository.findBookingById(bookingId);
 
-			if (status && super.getRequest().getMethod().equals("POST") && super.getRequest().hasData("passenger")) {
+			if (booking != null) {
+				status = booking.getCustomer().getId() == customerId;
 
-				passengerId = super.getRequest().getData("passenger", int.class);
+				if (status && super.getRequest().getMethod().equals("POST") && super.getRequest().hasData("passenger")) {
+					int passengerId = super.getRequest().getData("passenger", int.class);
 
-				if (passengerId > 0) {
-					Passenger passenger = this.repository.findPassengerById(passengerId);
-					Collection<Passenger> assignedPassengers = this.repository.findAssignedPassengersByBookingId(bookingId);
-					Collection<Passenger> availablePassengers = this.repository.findPassengersByCustomerId(customerId);
-
-					status = passenger != null && availablePassengers.contains(passenger) && !assignedPassengers.contains(passenger);
-				} else
-					status = false;
+					if (passengerId != 0) {
+						Passenger passenger = this.repository.findPassengerById(passengerId);
+						if (passenger == null)
+							status = false;
+					}
+				}
 			}
 		}
 

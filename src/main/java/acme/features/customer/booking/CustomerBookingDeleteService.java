@@ -40,8 +40,7 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 
 			status = booking != null && super.getRequest().getPrincipal().hasRealm(customer);
 
-			if (method.equals("POST"))
-				status = status && booking.getDraftMode();
+			status = status && booking.getDraftMode();
 		} else
 			status = false;
 

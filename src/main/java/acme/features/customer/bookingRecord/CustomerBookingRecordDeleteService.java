@@ -1,4 +1,3 @@
-
 package acme.features.customer.bookingRecord;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,8 @@ public class CustomerBookingRecordDeleteService extends AbstractGuiService<Custo
 			booking = bookingRecord == null ? null : bookingRecord.getBooking();
 			customer = booking == null ? null : booking.getCustomer();
 
-			status = bookingRecord != null && super.getRequest().getPrincipal().hasRealm(customer);
+			status = bookingRecord != null && super.getRequest().getPrincipal().hasRealm(customer) && booking.getDraftMode();
 
-			if (method.equals("POST"))
-				status = status && booking.getDraftMode();
 		} else
 			status = false;
 

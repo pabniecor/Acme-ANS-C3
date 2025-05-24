@@ -56,7 +56,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 				Boolean statusDa = daId == 0 ? true : this.repository.findAllAirports().contains(da);
 				Boolean statusAa = aaId == 0 ? true : this.repository.findAllAirports().contains(aa);
 				Boolean statusA = aId == 0 ? true : this.repository.findAllAircrafts().contains(a);
-				status = super.getRequest().getPrincipal().hasRealm(flight.getManager()) && statusDa && statusAa && statusA;
+				status = statusDa && statusAa && statusA;
 			}
 		}
 
@@ -104,7 +104,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-		assert leg != null;
 		Dataset dataset;
 		Collection<Airport> airports;
 		Collection<Aircraft> aircrafts;

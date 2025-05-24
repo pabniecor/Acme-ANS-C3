@@ -20,6 +20,9 @@ acme.validation.technician.involves.error.nullDelete.message = Se debe elegir un
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
 
+acme.validation.flight.overlapped.message = Los tramos de este vuelo no pueden solaparse
+acme.validation.flight.matchAirports.message = El aeropuerto de llegada del tramo debe coincidir con el aeropuerto de salida del siguiente tramo.
+
 acme.validation.leg.duplicate-flightNumber.message = El número de vuelo del tramo está duplicado
 acme.validation.leg.flightNumber.message = El número de vuelo del tramo es incorrecto
 acme.validation.leg.flightNumber-airlineIATA.message = Las 3 primeras letras del flightNumber del tramo deben corresponder a su iataCode de compañía aérea

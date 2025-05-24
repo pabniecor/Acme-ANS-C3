@@ -20,6 +20,9 @@ acme.validation.technician.involves.error.nullDelete.message = You must choose a
 acme.validation.manager.duplicate-identifier.message = The manager's identifier is duplicated
 acme.validation.manager.identifier.message = The manager's identifier is incorrect
 
+acme.validation.flight.overlapped.message = The leg's from this flight can not overlap
+acme.validation.flight.matchAirports.message = The leg's arrival airport must match the next leg's departure airport
+
 acme.validation.leg.duplicate-flightNumber.message = The leg's flightNumber is duplicated
 acme.validation.leg.flightNumber.message = The leg's flightNumber is incorrect Ej: AAX0001
 acme.validation.leg.flightNumber-airlineIATA.message = The leg's flightNumber first 3 letters must correspond to his airline iataCode

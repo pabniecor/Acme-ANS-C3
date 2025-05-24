@@ -1,3 +1,4 @@
+
 package acme.features.customer.passenger;
 
 import java.util.Collection;
@@ -20,28 +21,28 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 
 	@Override
 	public void authorise() {
-	    boolean status = false;
-	    int customerId = 0;
-	    int passengerId = 0;
-	    Passenger passenger = null;
-	    
-	    status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
+		boolean status = false;
+		int customerId = 0;
+		int passengerId = 0;
+		Passenger passenger = null;
 
-	    if (status) {
-	        customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-	        if (super.getRequest().hasData("id"))
-	            passengerId = super.getRequest().getData("id", int.class);
+		if (status) {
+			customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-	        passenger = this.repository.findPassengerById(passengerId);
+			if (super.getRequest().hasData("id"))
+				passengerId = super.getRequest().getData("id", int.class);
 
-	        if (passenger != null) {
-	            status = passenger.getDraftModePassenger() && passenger.getCustomer().getId() == customerId;
-	        } else
-	            status = false;
-	    }
+			passenger = this.repository.findPassengerById(passengerId);
 
-	    super.getResponse().setAuthorised(status);
+			if (passenger != null)
+				status = passenger.getDraftModePassenger() && passenger.getCustomer().getId() == customerId;
+			else
+				status = false;
+		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 
 	@Override
 	public void bind(final Passenger passenger) {
-		;
+		super.bindObject(passenger, "fullName", "email", "passportNumber", "birthDate", "specialNeeds");
 	}
 
 	@Override

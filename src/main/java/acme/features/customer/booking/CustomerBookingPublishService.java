@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_management.Booking;
@@ -28,11 +27,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		boolean status = false;
 		int customerId = 0;
 		int bookingId = 0;
-		int flightId = 0;
 		Booking booking = null;
-		Flight flight = null;
-		TravelClass travelClass = null;
-		Collection<TravelClass> travelClasses;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
@@ -49,15 +44,21 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 				if (status && super.getRequest().getMethod().equals("POST")) {
 					if (super.getRequest().hasData("flight")) {
-						flightId = super.getRequest().getData("flight", int.class);
-						flight = this.repository.findFlightById(flightId);
-						status = flight != null && !flight.getDraftMode() && flight.getDeparture() != null && flight.getDeparture().after(MomentHelper.getCurrentMoment()) && flight.getLayovers() != null && flight.getLayovers() > 0;
+						int flightId = super.getRequest().getData("flight", int.class);
+						if (flightId != 0) {
+							Flight flight = this.repository.findFlightById(flightId);
+							if (flight == null || flight.getDraftMode())
+								status = false;
+						}
 					}
 
-					if (super.getRequest().hasData("travelClass")) {
-						travelClass = super.getRequest().getData("travelClass", TravelClass.class);
-						travelClasses = this.repository.findAllTravelClasses();
-						status = status && (travelClass == null || travelClasses.contains(travelClass));
+					if (status && super.getRequest().hasData("travelClass")) {
+						TravelClass travelClass = super.getRequest().getData("travelClass", TravelClass.class);
+						if (travelClass != null) {
+							Collection<TravelClass> travelClasses = this.repository.findAllTravelClasses();
+							if (!travelClasses.contains(travelClass))
+								status = false;
+						}
 					}
 				}
 			} else
@@ -79,23 +80,20 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	}
 
 	@Override
-	public void validate(final Booking booking) {
-		String lastNibble = booking.getLastCardNibble();
-		Collection<Passenger> bookingPassengers;
+	public void bind(final Booking booking) {
+		super.bindObject(booking, "locatorCode", "travelClass", "lastCardNibble", "flight");
+	}
 
-		bookingPassengers = this.repository.findPassengersByBookingId(booking.getId());
-		boolean lastCardNibbleNotNull = !(lastNibble.isBlank() || booking.getLastCardNibble() == null);
+	@Override
+	public void validate(final Booking booking) {
+		Collection<Passenger> bookingPassengers = this.repository.findPassengersByBookingId(booking.getId());
 		boolean passengersForBookingNotNull = !bookingPassengers.isEmpty();
-		boolean publishedFlight = booking.getFlight().getDraftMode() == false;
+		boolean lastCardNibbleNotNull = booking.getLastCardNibble() != null && !booking.getLastCardNibble().isBlank();
+		boolean publishedFlight = booking.getFlight() != null && !booking.getFlight().getDraftMode();
 
 		super.state(passengersForBookingNotNull, "*", "acme.validation.customer.passengersForBookingNotNull.message");
 		super.state(lastCardNibbleNotNull, "lastCardNibble", "acme.validation.customer.lastCardNibble.message");
 		super.state(publishedFlight, "flight", "acme.validation.customer.publishedFlight.message");
-	}
-
-	@Override
-	public void bind(final Booking booking) {
-		;
 	}
 
 	@Override
@@ -108,7 +106,6 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	public void unbind(final Booking booking) {
 		Dataset dataset;
 		SelectChoices travelClass;
-		SelectChoices choicesFlights;
 		Collection<Flight> flights;
 		SelectChoices flightChoices;
 

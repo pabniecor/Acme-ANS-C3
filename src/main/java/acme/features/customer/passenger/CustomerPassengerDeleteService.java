@@ -65,11 +65,9 @@ public class CustomerPassengerDeleteService extends AbstractGuiService<Customer,
 	@Override
 	public void validate(final Passenger passenger) {
 		Booking booking;
-
 		booking = this.repository.findBookingByPassengerId(passenger.getId());
 
-		if (booking != null)
-			super.state(false, "*", "acme.vaidation.customer.passenger.error.booking-exists");
+		super.state(booking == null, "*", "acme.validation.customer.passenger.error.booking-exists");
 	}
 
 	@Override

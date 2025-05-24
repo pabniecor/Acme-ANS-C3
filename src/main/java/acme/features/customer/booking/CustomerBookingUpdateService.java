@@ -85,7 +85,8 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		;
+		boolean publishedFlight = booking.getFlight() != null && !booking.getFlight().getDraftMode();
+		super.state(publishedFlight, "flight", "acme.validation.customer.publishedFlight.message");
 	}
 
 	@Override
@@ -97,14 +98,14 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	public void unbind(final Booking booking) {
 		Dataset dataset;
 		SelectChoices travelClass;
-		Collection<Flight> flights;
+		Collection<Flight> publishedFlights;
 		SelectChoices flightChoices;
 
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
-		flights = this.repository.findAllFlights();
+		publishedFlights = this.repository.findAllPublishedFlights();
 
-		flightChoices = SelectChoices.from(flights, "bookingFlight", booking.getFlight());
+		flightChoices = SelectChoices.from(publishedFlights, "bookingFlight", booking.getFlight());
 
 		dataset = super.unbindObject(booking, "flight", "locatorCode", "travelClass", "purchaseMoment", "price", "lastCardNibble", "id", "draftMode");
 

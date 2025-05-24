@@ -1,7 +1,6 @@
 
 package acme.features.customer.booking;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -89,27 +88,18 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking booking) {
 		Dataset dataset;
-		Collection<Flight> allFlights;
-		Collection<Flight> filteredFlights;
+		Collection<Flight> publishedFlights;
 		SelectChoices travelClass;
-		Date currentMoment;
+		SelectChoices flightChoices;
 
-		allFlights = this.repository.findAllPublishedFlights();
-		filteredFlights = new ArrayList<>();
-		currentMoment = MomentHelper.getCurrentMoment();
-
-		for (Flight flight : allFlights)
-			if (!flight.getDraftMode() && flight.getDeparture() != null && flight.getDeparture().after(currentMoment) && flight.getLayovers() != null && flight.getLayovers() > 0)
-				filteredFlights.add(flight);
+		publishedFlights = this.repository.findAllPublishedFlights();
 
 		travelClass = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "flight", "draftMode", "id");
 		dataset.put("travelClass", travelClass);
 
-		SelectChoices flightChoices = null;
-		flightChoices = SelectChoices.from(filteredFlights, "bookingFlight", booking.getFlight());
-
+		flightChoices = SelectChoices.from(publishedFlights, "bookingFlight", booking.getFlight());
 		dataset.put("flights", flightChoices);
 
 		super.getResponse().addData(dataset);

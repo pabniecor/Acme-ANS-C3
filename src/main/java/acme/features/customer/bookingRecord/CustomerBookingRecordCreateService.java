@@ -1,4 +1,3 @@
-
 package acme.features.customer.bookingRecord;
 
 import java.util.Collection;
@@ -44,7 +43,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 					if (passengerId != 0) {
 						Passenger passenger = this.repository.findPassengerById(passengerId);
-						if (passenger == null)
+						if (passenger == null || passenger.getCustomer().getId() != customerId)
 							status = false;
 					}
 				}

@@ -25,9 +25,9 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 		Flight flight = this.repository.findFlightById(id);
 		Manager manager = flight == null ? null : flight.getManager();
 
-		boolean authorised = flight != null && super.getRequest().getPrincipal().hasRealm(manager) && flight.getDraftMode();
+		boolean status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
 
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -39,33 +39,24 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight flight) {
-		assert flight != null;
 		super.bindObject(flight, "tag", "selfTransfer", "cost", "description");
 	}
 
 	@Override
 	public void validate(final Flight flight) {
-		//		assert flight != null;
-		//		if (super.getRequest().getCommand().equalsIgnoreCase("update")) {
-		//			Flight original = this.repository.findFlightById(flight.getId());
-		//
-		//			boolean isModified = !Objects.equals(flight.getTag(), original.getTag()) || !Objects.equals(flight.getDescription(), original.getDescription()) || !Objects.equals(flight.getSelfTransfer(), original.getSelfTransfer())
-		//				|| !Objects.equals(flight.getCost().getAmount(), original.getCost().getAmount()) || !Objects.equals(flight.getCost().getCurrency(), original.getCost().getCurrency());
-		//
-		//			super.state(isModified, "*", "manager.flight.error.no-changes");
-		//		}
+		;
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-		assert flight != null;
 		this.repository.save(flight);
 	}
 
 	@Override
 	public void unbind(final Flight flight) {
-		Dataset dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
+		Dataset dataset;
 
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 		dataset.put("id", flight.getId());
 		dataset.put("departure", flight.getDeparture());
 		dataset.put("arrival", flight.getArrival());
@@ -75,12 +66,10 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
 		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
-		boolean canPublish = flight.getDraftMode() && allPublished;
+		boolean canPublish = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
 
 		dataset.put("canPublish", canPublish);
 
 		super.getResponse().addData(dataset);
 	}
-
 }

@@ -1,6 +1,7 @@
 
 package acme.entities.flight_management;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -34,5 +35,8 @@ public interface LegRepository extends AbstractRepository {
 
 	@Query("select max(l.sequenceOrder) from Leg l where l.flight.id = :flightId")
 	Integer findLastSequenceOrderByFlightId(int flightId);
+
+	@Query("select l from Leg l where l.aircraft.id = :aircraftId and l.id != :legId and l.draftMode = false")
+	Collection<Leg> findLegsByAircraftId(int aircraftId, int legId);
 
 }

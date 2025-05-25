@@ -47,11 +47,9 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void unbind(final Flight flight) {
-		assert flight != null;
 		Dataset dataset;
 
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode", "departure", "arrival", "originCity", "destinationCity", "layovers");
-
 		dataset.put("departure", flight.getDeparture());
 		dataset.put("arrival", flight.getArrival());
 		dataset.put("originCity", flight.getOriginCity());
@@ -60,8 +58,7 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 
 		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
 		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
-		boolean canPublish = flight.getDraftMode() && allPublished;
+		boolean canPublish = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
 
 		dataset.put("canPublish", canPublish);
 

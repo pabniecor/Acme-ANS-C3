@@ -26,27 +26,32 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void authorise() {
 		boolean status;
+		Flight flight;
+		int flightId;
+		TravelClass travelClass;
+		Collection<TravelClass> travelClasses;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
-		if (status && super.getRequest().getMethod().equals("POST")) {
+		if (super.getRequest().getMethod().equals("POST")) {
+			boolean flightStatus = true;
+			boolean travelClassStatus = true;
+
 			if (super.getRequest().hasData("flight")) {
-				int flightId = super.getRequest().getData("flight", int.class);
+				flightId = super.getRequest().getData("flight", int.class);
 				if (flightId != 0) {
-					Flight flight = this.repository.findFlightById(flightId);
-					if (flight == null || flight.getDraftMode())
-						status = false;
+					flight = this.repository.findFlightById(flightId);
+					flightStatus = flight != null && !flight.getDraftMode();
 				}
 			}
 
-			if (status && super.getRequest().hasData("travelClass")) {
-				TravelClass travelClass = super.getRequest().getData("travelClass", TravelClass.class);
-				if (travelClass != null) {
-					Collection<TravelClass> travelClasses = this.repository.findAllTravelClasses();
-					if (!travelClasses.contains(travelClass))
-						status = false;
-				}
+			if (super.getRequest().hasData("travelClass")) {
+				travelClass = super.getRequest().getData("travelClass", TravelClass.class);
+				travelClasses = this.repository.findAllTravelClasses();
+				travelClassStatus = travelClass == null ? true : travelClasses.contains(travelClass);
 			}
+
+			status = status && flightStatus && travelClassStatus;
 		}
 
 		super.getResponse().setAuthorised(status);

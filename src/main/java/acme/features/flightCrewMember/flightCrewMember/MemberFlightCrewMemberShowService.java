@@ -25,7 +25,11 @@ public class MemberFlightCrewMemberShowService extends AbstractGuiService<Flight
 
 		id = super.getRequest().getData("id", int.class);
 		fa = this.repository.findMemberById(id);
-		status = super.getRequest().getPrincipal().hasRealm(fa);
+		if (fa == null)
+			status = false;
+		else
+			status = super.getRequest().getPrincipal().hasRealm(fa);
+
 		super.getResponse().setAuthorised(status);
 	}
 

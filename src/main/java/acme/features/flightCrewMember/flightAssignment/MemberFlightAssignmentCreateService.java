@@ -91,10 +91,10 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
 
 			if (fa.getDuty() == Duty.PILOT)
-				super.state(nPilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
+				super.state(nPilots < 1, "duty", "acme.validation.tooManyPilots.message");
 
 			if (fa.getDuty() == Duty.CO_PILOT)
-				super.state(nCopilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+				super.state(nCopilots < 1, "duty", "acme.validation.tooManyCopilots.message");
 		}
 
 	}

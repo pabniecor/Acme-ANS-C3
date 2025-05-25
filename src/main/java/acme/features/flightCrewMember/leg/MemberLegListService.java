@@ -23,10 +23,15 @@ public class MemberLegListService extends AbstractGuiService<FlightCrewMember, L
 	public void authorise() {
 		int id;
 		FlightAssignment fa;
+		Boolean status;
 
 		id = super.getRequest().getData("masterId", int.class);
 		fa = this.repository.findFlightAssignmentById(id);
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew()));
+		if (fa == null)
+			status = false;
+		else
+			status = super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew());
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

@@ -28,7 +28,11 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<FlightCre
 
 		masterId = super.getRequest().getData("id", int.class);
 		log = this.repository.findActivityLogById(masterId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && log != null && log.getDraft() && super.getRequest().getPrincipal().getAccountId() == log.getFlightAssignment().getFlightCrew().getUserAccount().getId();
+		if (log == null)
+			status = false;
+		else
+			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && log.getDraft();
+
 		super.getResponse().setAuthorised(status);
 	}
 	@Override
@@ -59,7 +63,6 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void unbind(final ActivityLog al) {
-		assert al != null;
 		Dataset dataset;
 		Collection<FlightAssignment> fas;
 		SelectChoices choicesFas;

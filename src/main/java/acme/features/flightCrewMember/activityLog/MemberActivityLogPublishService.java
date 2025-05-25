@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.FlightAssignment;
+import acme.entities.flight_management.Leg;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
@@ -28,8 +30,11 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 
 		masterId = super.getRequest().getData("id", int.class);
 		log = this.repository.findActivityLogById(masterId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && log != null && !log.getFlightAssignment().getDraft()
-			&& super.getRequest().getPrincipal().getAccountId() == log.getFlightAssignment().getFlightCrew().getUserAccount().getId();
+		if (log == null)
+			status = false;
+		else
+			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && !log.getFlightAssignment().getDraft();
+
 		super.getResponse().setAuthorised(status);
 
 	}
@@ -51,11 +56,11 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 
 	@Override
 	public void validate(final ActivityLog al) {
-		FlightAssignment fa;
+		Leg l;
 
-		fa = al.getFlightAssignment();
-		super.state(fa.getDraft() == false, "*", "acme.validation.assignmentNotPublished.message");
-
+		l = al.getFlightAssignment().getLeg();
+		if (al.getRegistrationMoment() != null)
+			super.state(MomentHelper.isAfter(al.getRegistrationMoment(), l.getScheduledArrival()), "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
 	}
 	@Override
 	public void perform(final ActivityLog al) {
@@ -65,7 +70,6 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 
 	@Override
 	public void unbind(final ActivityLog al) {
-		assert al != null;
 		Dataset dataset;
 		Collection<FlightAssignment> fas;
 		SelectChoices choicesFas;

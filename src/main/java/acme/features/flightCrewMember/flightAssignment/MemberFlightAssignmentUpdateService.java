@@ -42,8 +42,14 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		id = super.getRequest().getData("id", int.class);
 		fa = this.repository.findFlightAssignmentById(id);
 
-		boolean statusD = fa.getDraft();
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && statusD;
+		boolean statusD = fa == null ? false : fa.getDraft();
+		boolean statusM = fa == null ? false : super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew());
+		status = statusM && statusD;
+
+		String ss = super.getRequest().getMethod();
+		Boolean statusMethod = ss.equals("POST");
+		if (!statusMethod)
+			status = false;
 
 		if (status) {
 			leg = super.getRequest().getData("leg", Leg.class);
@@ -93,20 +99,17 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		Timestamp moment = Timestamp.from(currentMoment.toInstant());
 
 		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.isEmpty() || legs.size() == 1 || legs.contains(fa.getLeg()), "leg", "acme.validation.legAssigned.message");
-
-		nPilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.PILOT));
-		nCopilots = this.repository.countMembersByIdAndDuty(fa.getId(), Optional.of(Duty.CO_PILOT));
+		super.state(legs.size() == 1 || legs.contains(fa.getLeg()), "leg", "acme.validation.legAssigned.message");
 
 		if (fa.getLeg() != null) {
 			nPilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
 			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
 
 			if (fa.getDuty() == Duty.PILOT)
-				super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
+				super.state(nPilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
 
 			if (fa.getDuty() == Duty.CO_PILOT)
-				super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+				super.state(nCopilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
 		}
 
 	}
@@ -118,7 +121,6 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 
 	@Override
 	public void unbind(final FlightAssignment fa) {
-		assert fa != null;
 		Dataset dataset;
 		Collection<Leg> legs;
 		FlightCrewMember fcm;
@@ -134,8 +136,6 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		choisesDut = SelectChoices.from(Duty.class, fa.getDuty());
 
 		dataset = super.unbindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks", "draft");
-		if (fa.getDraft() == false)
-			dataset.put("readonly", true);
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);

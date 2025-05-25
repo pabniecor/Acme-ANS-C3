@@ -27,7 +27,3 @@ manager.flight.form.button.update = Actualizar vuelo
 manager.flight.form.button.delete = Eliminar vuelo
 manager.flight.form.button.create = Crear vuelo
 manager.flight.form.button.publish = Publicar vuelo
-
-manager.flight.publish.error.no-legs = El vuelo no tiene escalas
-manager.flight.publish.error.unpublished-legs = El vuelo tiene escalas en modo borrador
-manager.flight.error.no-changes = No se han registrado modificaciones

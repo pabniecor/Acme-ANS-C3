@@ -1,6 +1,7 @@
 
 package acme.constraints;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.ConstraintValidatorContext;
@@ -11,15 +12,15 @@ import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.flight_management.Flight;
-import acme.entities.flight_management.FlightRepository;
 import acme.entities.flight_management.Leg;
+import acme.entities.flight_management.LegRepository;
 
 @Validator
 public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 
 	// Internal state ---------------------------------------------------------
 	@Autowired
-	FlightRepository flightRepository;
+	private LegRepository repository;
 	// ConstraintValidator interface ------------------------------------------
 
 
@@ -37,37 +38,25 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 
 		if (flight == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else if (!flight.getDraftMode()) {
-			{
-				boolean notOverlapping;
-				List<Leg> legsByFlight;
-				Leg currentLeg;
-				Leg nextLeg;
-				legsByFlight = this.flightRepository.computeLegsByFlight(flight.getId());
-				int overlappedLegs = 0;
-				for (int i = 0; i < legsByFlight.size() - 1; i++) {
-					currentLeg = legsByFlight.get(i);
-					nextLeg = legsByFlight.get(i + 1);
-					if (MomentHelper.isAfter(currentLeg.getScheduledArrival(), nextLeg.getScheduledDeparture()))
-						overlappedLegs = overlappedLegs + 1;
-				}
-				notOverlapping = overlappedLegs == 0;
-				super.state(context, notOverlapping, "*", "acme.validation.flight.overlapped.message");
-			}
-			{
-				boolean correctAirportMatches;
-				List<Leg> legsByFlight;
 
-				legsByFlight = this.flightRepository.computeLegsByFlight(flight.getId());
-				int noMatchedAirports = 0;
-				for (int i = 0; i < legsByFlight.size() - 1; i++) {
-					String arriveIataCode = legsByFlight.get(i).getArrivalAirport().getIataCode();
-					String departNextIataCode = legsByFlight.get(i + 1).getDepartureAirport().getIataCode();
-					if (!arriveIataCode.equals(departNextIataCode))
-						noMatchedAirports += 1;
+		else {
+
+			List<Leg> legs = this.repository.findLegsOrderByAscendentUsingSequenceOrder(flight.getId());
+
+			Boolean validFlight = true;
+			if (flight.getDraftMode().equals(true))
+				validFlight = true;
+			else {
+				for (int i = 1; i < legs.size(); i++) {
+					Date previousArrival = legs.get(i - 1).getScheduledArrival();
+					Date currentDeparture = legs.get(i).getScheduledDeparture();
+
+					validFlight = validFlight && MomentHelper.isAfter(currentDeparture, previousArrival);
 				}
-				correctAirportMatches = noMatchedAirports == 0;
-				super.state(context, correctAirportMatches, "*", "acme.validation.flight.matchAirports.message");
+				super.state(context, validFlight, "scheduledArrival", "acme.validation.flight.overlappedLegs.message");
+
+				boolean legsStatus = flight.getDraftMode().equals(true) || !legs.isEmpty() && legs.stream().allMatch(l -> l.getDraftMode() == false);
+				super.state(context, legsStatus, "*", "acme.validation.flight.nonPublishedLegs.message");
 			}
 		}
 		result = !super.hasErrors(context);

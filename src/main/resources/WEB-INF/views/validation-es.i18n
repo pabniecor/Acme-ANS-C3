@@ -20,19 +20,22 @@ acme.validation.technician.involves.error.nullDelete.message = Se debe elegir un
 acme.validation.manager.duplicate-identifier.message = El identificador del manager está duplicado
 acme.validation.manager.identifier.message = El identificador del manager es incorrecto
 
-acme.validation.flight.overlapped.message = Los tramos de este vuelo no pueden solaparse
+acme.validation.flight.overlappedLegs.message = Los tramos de este vuelo no pueden solaparse
 acme.validation.flight.matchAirports.message = El aeropuerto de llegada del tramo debe coincidir con el aeropuerto de salida del siguiente tramo.
+acme.validation.flight.canNotDelete.message = Los tramos y reservas asociados al vuelo deben estar en modo borrador para poder eliminar el vuelo
+acme.validation.flight.nonPublishedLegs.message = Este vuelo no tiene tramos o tiene tramos que no se han publicado
 
 acme.validation.leg.duplicate-flightNumber.message = El número de vuelo del tramo está duplicado
 acme.validation.leg.flightNumber.message = El número de vuelo del tramo es incorrecto
 acme.validation.leg.flightNumber-airlineIATA.message = Las 3 primeras letras del flightNumber del tramo deben corresponder a su iataCode de compañía aérea
-acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pueden solapar
+acme.validation.leg.notOverlappingLeg.message = Los tramos de un vuelo no se pueden solapar y deben ser secuenciales
 acme.validation.leg.scheduledDeparture.message = La salida programada debe ser una fecha futura
 acme.validation.leg.scheduledArrival.message = La salida programada debe ser anterior a la llegada programada con un minuto de diferencia
 acme.validation.leg.notNullDates.message = Las fechas programadas de salida y llegada no deben ser nulas
 acme.validation.leg.notNullAirports.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser nulos
 acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto
 acme.validation.leg.aircraft.message = El avión del tramo debe existir y estar Activo
+acme.validation.leg.canNotDelete.message = Las reclamaciones y asignaciones de vuelo asociadas al tramo deben estar en modo borrador para poder eliminar el tramo
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto

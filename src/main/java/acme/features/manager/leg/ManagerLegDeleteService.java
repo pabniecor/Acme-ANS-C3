@@ -11,6 +11,8 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
 import acme.entities.airport_management.Airport;
+import acme.entities.airport_management.FlightAssignment;
+import acme.entities.customer_service_and_claims.Claim;
 import acme.entities.flight_management.Flight;
 import acme.entities.flight_management.Leg;
 import acme.entities.flight_management.LegStatus;
@@ -56,21 +58,32 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+		boolean validLeg = true;
+		Collection<FlightAssignment> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
+		//Collection<Claim> claims = this.repository.findClaimsByLegId(leg.getId());
+
+		for (FlightAssignment fa : flightAssignments)
+			if (fa.getDraft().equals(false)) {
+				validLeg = false;
+				super.state(validLeg, "*", "acme.validation.leg.canNotDelete.message");
+				break;
+			}
+		//Este bucle for es inútil, ya que, para que una Claim se publique, su Leg asociado también debe estar publicado.
+		//		for (Claim c : claims)
+		//			if (c.getDraftMode().equals(false)) {
+		//				validLeg = false;
+		//				super.state(validLeg, "*", "acme.validation.leg.canNotDelete.message");
+		//				break;
+		//			}
 	}
 
 	@Override
 	public void perform(final Leg leg) {
-		//		Collection<FlightAssignment> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
-		//		Collection<Claim> claims = this.repository.findClaimsByLegId(leg.getId());
-		//
-		//		for (FlightAssignment fa : flightAssignments) {
-		//			Collection<ActivityLog> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
-		//			this.repository.deleteAll(flightAssignments);
-		//		}
-		//
-		//		this.repository.deleteAll(flightAssignments);
-		//		this.repository.deleteAll(claims);
+		Collection<FlightAssignment> flightAssignments = this.repository.findFlightAssignmentsByLegId(leg.getId());
+		Collection<Claim> claims = this.repository.findClaimsByLegId(leg.getId());
+
+		this.repository.deleteAll(flightAssignments);
+		this.repository.deleteAll(claims);
 		this.repository.delete(leg);
 	}
 

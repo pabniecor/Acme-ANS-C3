@@ -27,7 +27,3 @@ manager.flight.form.button.update = Update flight
 manager.flight.form.button.delete = Delete flight
 manager.flight.form.button.create = Create flight
 manager.flight.form.button.publish = Publish flight
-
-manager.flight.publish.error.no-legs = The flight has no legs
-manager.flight.publish.error.unpublished-legs = The flight has unpublished legs
-manager.flight.error.no-changes = No modifications registered

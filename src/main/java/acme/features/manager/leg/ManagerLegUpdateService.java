@@ -2,11 +2,13 @@
 package acme.features.manager.leg;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airline_operations.Aircraft;
@@ -57,7 +59,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 				Boolean statusDa = daId == 0 ? true : this.repository.findAllAirports().contains(da);
 				Boolean statusAa = aaId == 0 ? true : this.repository.findAllAirports().contains(aa);
 				Boolean statusA = aId == 0 ? true : this.repository.findAllAircrafts().contains(a);
-				status = super.getRequest().getPrincipal().hasRealm(leg.getFlight().getManager()) && statusDa && statusAa && statusA;
+				status = statusDa && statusAa && statusA;
 			}
 		}
 
@@ -82,7 +84,12 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+		boolean validDate;
+		Date currentMoment = MomentHelper.getCurrentMoment();
+		if (leg.getScheduledDeparture() != null) {
+			validDate = MomentHelper.isAfterOrEqual(leg.getScheduledDeparture(), currentMoment);
+			super.state(validDate, "scheduledDeparture", "acme.validation.leg.scheduledDeparture.message");
+		}
 	}
 
 	@Override
@@ -92,7 +99,6 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-		assert leg != null;
 		Dataset dataset;
 		Collection<Airport> airports;
 		Collection<Aircraft> aircrafts;

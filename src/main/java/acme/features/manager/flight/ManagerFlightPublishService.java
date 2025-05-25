@@ -21,33 +21,19 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int flightId;
-		Flight flight;
-		Manager manager;
+		int id = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(id);
+		Manager manager = flight == null ? null : flight.getManager();
 
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId);
-		manager = flight == null ? null : flight.getManager();
-
-		Collection<Leg> legs = this.repository.findLegsByFlightId(flightId);
-
-		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = legs.stream().noneMatch(Leg::getDraftMode);
-
-		status = super.getRequest().getPrincipal().hasRealm(manager) && flight != null && flight.getDraftMode() && hasLegs && allPublished;
+		boolean status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Flight flight;
-		int id;
-
-		id = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(id);
-
+		int id = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(id);
 		super.getBuffer().addData(flight);
 	}
 
@@ -58,14 +44,9 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void validate(final Flight flight) {
-		int flightId = flight.getId();
-		Collection<Leg> legs = this.repository.findLegsByFlightId(flightId);
-
-		boolean hasLegs = !legs.isEmpty();
-		boolean allPublished = legs.stream().noneMatch(Leg::getDraftMode);
-
-		super.state(hasLegs, "draftMode", "manager.flight.publish.error.no-legs");
-		super.state(allPublished, "draftMode", "manager.flight.publish.error.unpublished-legs");
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+		boolean validLegs = !legs.isEmpty() && legs.stream().noneMatch(Leg::getDraftMode);
+		super.state(validLegs, "*", "acme.validation.flight.nonPublishedLegs.message");
 	}
 
 	@Override
@@ -76,7 +57,6 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void unbind(final Flight flight) {
-		assert flight != null;
 		Dataset dataset;
 
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
@@ -85,6 +65,12 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		dataset.put("originCity", flight.getOriginCity());
 		dataset.put("destinationCity", flight.getDestinationCity());
 		dataset.put("layovers", flight.getLayovers());
+
+		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+		boolean hasLegs = !legs.isEmpty();
+		boolean canPublish = hasLegs && legs.stream().noneMatch(Leg::getDraftMode);
+
+		dataset.put("canPublish", canPublish);
 
 		super.getResponse().addData(dataset);
 	}

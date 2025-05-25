@@ -59,12 +59,8 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 
 			legs = this.repository.findAllLegs();
 			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
-			duties = this.repository.findAllDutyTypes();
-			statuss = this.repository.findAllStatusTypes();
-			boolean statusDuty = d == null ? true : duties.contains(d);
-			boolean statusSt = s == null ? true : statuss.contains(s);
 
-			status = statusLeg && statusDuty && statusSt;
+			status = statusLeg;
 		}
 		super.getResponse().setAuthorised(status);
 	}

@@ -61,9 +61,9 @@ master.menu.member.list.flight-assignments-incomplete = Listas asignaciones de v
 # master.menu.assistanceAgent ##########################################################
 
 master.menu.assistance-agent = Agente de asistencia
-master.menu.assistance-agent.list-claims-completed = Listar reclamaciones completadas
-master.menu.assistance-agent.list-public-claims-completed = Listar reclamaciones públicas
-master.menu.assistance-agent.list-claims-undergoing = Listar reclamaciones en curso
+master.menu.assistance-agent.list-public-claims-undergoing = Listar reclamaciones públicas en curso
+master.menu.assistance-agent.list-public-claims-completed = Listar reclamaciones públicas completadas
+master.menu.assistance-agent.list-claims-undergoing = Listar reclamaciones no públicas en curso
 
 # master.menu.user-account ####################################################
 

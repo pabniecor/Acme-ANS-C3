@@ -36,32 +36,10 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		super.getResponse().setAuthorised(status);
 	}
 
-	// probar si no puedo con el parametro claimId poniendo como parametro la trackingLog id y haciendo un filtro para saber si la id pertenece a claim o trackingLog
 	@Override
 	public void load() {
-		//		List<Integer> trackingLogIds;
-		//		List<Integer> claimIds;
 		Collection<TrackingLog> trackingLogs = new ArrayList<>();
 		int claimId;
-
-		//		id = super.getRequest().getData("masterId", int.class);
-
-		//		if (super.getRequest().getData("masterId", int.class) != null)
-		//			claimId = super.getRequest().getData("masterId", int.class);
-		//		else
-		//			claimId = super.getRequest().getData("claimId", int.class);
-
-		//		trackingLogIds = this.repository.findAllTrackingLogs().stream().map(tl -> tl.getId()).toList();
-		//
-		//		claimIds = this.repository.findAllClaims().stream().map(c -> c.getId()).toList();
-		//
-		//		if (claimIds.contains(id))
-		//			trackingLogs = this.repository.findAllTrackingLogsByClaimId(id);
-		//		else if (trackingLogIds.contains(id)) {
-		//			TrackingLog tl = this.repository.findTrackingLogById(id);
-		//			int claimId = tl.getClaim().getId();
-		//			trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
-		//		}
 
 		claimId = super.getRequest().getData("masterId", int.class);
 
@@ -75,8 +53,19 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		Dataset dataset;
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status");
+		//		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 
-		super.addPayload(dataset, trackingLog, "resolution", "draftMode", "claim.passengerEmail");
+		super.addPayload(dataset, trackingLog, "resolution", "draftMode", "claim.passengerEmail", "reclaimed");
 		super.getResponse().addData(dataset);
+	}
+
+	@Override
+	public void unbind(final Collection<TrackingLog> trackingLog) {
+		int masterId;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+
+		super.getResponse().addGlobal("masterId", masterId);
+
 	}
 }

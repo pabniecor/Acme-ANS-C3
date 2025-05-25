@@ -10,7 +10,7 @@
 	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${types}" />
  	<acme:input-textbox code="assistance-agent.claim.form.label.accepted" path="accepted" readonly="true"/>
 	<acme:input-checkbox code="assistance-agent.claim.form.label.draftMode" path="draftMode" readonly="true"/>
-	<acme:input-select code="assistance-agent.claim.form.label.assistanceAgent" path="assistanceAgent" choices="${assistanceAgents}" />
+	<acme:input-select code="assistance-agent.claim.form.label.assistanceAgent" path="assistanceAgent" choices="${assistanceAgents}" readonly="true" />
 	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices="${legs}" />
 	
 	<jstl:choose>

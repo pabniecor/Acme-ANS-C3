@@ -34,17 +34,23 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	@Override
 	public void load() {
 		Claim claim;
+		int userAccountId;
+		AssistanceAgent currentAgent;
+
+		userAccountId = super.getRequest().getPrincipal().getAccountId();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
 
 		claim = new Claim();
 		claim.setDraftMode(true);
 		claim.setRegistrationMoment(MomentHelper.getCurrentMoment());
+		claim.setAssistanceAgent(currentAgent);
 
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
-		super.bindObject(claim, "passengerEmail", "description", "type", "assistanceAgent", "leg");
+		super.bindObject(claim, "passengerEmail", "description", "type", "leg");
 	}
 
 	@Override

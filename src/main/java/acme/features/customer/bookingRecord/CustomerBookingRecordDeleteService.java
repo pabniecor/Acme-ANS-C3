@@ -1,8 +1,8 @@
+
 package acme.features.customer.bookingRecord;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.customer_management.Booking;
@@ -68,14 +68,4 @@ public class CustomerBookingRecordDeleteService extends AbstractGuiService<Custo
 		this.repository.delete(bookingRecord);
 	}
 
-	@Override
-	public void unbind(final BookingRecord bookingRecord) {
-		Dataset dataset;
-
-		dataset = super.unbindObject(bookingRecord, "booking", "passenger");
-		dataset.put("bookingId", bookingRecord.getBooking().getId());
-		dataset.put("passengerId", bookingRecord.getPassenger().getId());
-
-		super.getResponse().addData(dataset);
-	}
 }

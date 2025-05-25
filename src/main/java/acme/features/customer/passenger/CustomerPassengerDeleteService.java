@@ -1,4 +1,3 @@
-
 package acme.features.customer.passenger;
 
 import java.util.Collection;
@@ -22,28 +21,33 @@ public class CustomerPassengerDeleteService extends AbstractGuiService<Customer,
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int passengerId;
-		Passenger passenger;
-		Customer customer;
-
+		boolean status = false;
+		int customerId = 0;
+		int passengerId = 0;
+		Passenger passenger = null;
+		
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
-
-		if (status && super.getRequest().hasData("id")) {
-			passengerId = super.getRequest().getData("id", int.class);
+		
+		if (status) {
+			customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			
+			if (super.getRequest().hasData("id"))
+				passengerId = super.getRequest().getData("id", int.class);
+			
 			passenger = this.repository.findPassengerById(passengerId);
-			customer = passenger == null ? null : passenger.getCustomer();
-
-			status = passenger != null && super.getRequest().getPrincipal().hasRealm(customer);
-
-			status = status && passenger.getDraftModePassenger();
-
-			Booking booking = this.repository.findBookingByPassengerId(passenger.getId());
-			if (booking != null)
-				status = status && booking.getDraftMode();
-		} else
-			status = false;
-
+			
+			if (passenger != null) {
+				status = passenger.getDraftModePassenger() && passenger.getCustomer().getId() == customerId;
+				
+				if (status) {
+					Booking booking = this.repository.findBookingByPassengerId(passenger.getId());
+					if (booking != null)
+						status = booking.getDraftMode();
+				}
+			} else
+				status = false;
+		}
+		
 		super.getResponse().setAuthorised(status);
 	}
 

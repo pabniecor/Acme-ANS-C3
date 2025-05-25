@@ -1,3 +1,4 @@
+
 package acme.features.customer.passenger;
 
 import java.util.Collection;
@@ -24,7 +25,7 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		int customerId = 0;
 		int passengerId = 0;
 		Passenger passenger = null;
-		
+
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
 		if (status) {
@@ -35,9 +36,9 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 
 			passenger = this.repository.findPassengerById(passengerId);
 
-			if (passenger != null) {
+			if (passenger != null)
 				status = passenger.getDraftModePassenger() && passenger.getCustomer().getId() == customerId;
-			} else
+			else
 				status = false;
 		}
 
@@ -72,7 +73,6 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 
 	@Override
 	public void unbind(final Passenger passenger) {
-		assert passenger != null;
 
 		Dataset dataset;
 		Collection<Customer> customers;

@@ -2,11 +2,11 @@ key,locator-code,purchase-moment,travel-class,last-card-nibble,draft-mode,key:fl
 # base entity
 booking-00,ABC122,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
 # locator-code - standard variations
-booking-01,ABC123,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
-booking-02,ABCDEE,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
-booking-03,A1B2C3,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
-booking-04,123ABCD,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
-booking-05,A12345,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
+booking-01,ABC123,2012/07/02 00:00,ECONOMY,1234,false,flight-01,customer-01
+booking-02,ABCDEE,2012/07/02 00:00,ECONOMY,1234,false,flight-01,customer-01
+booking-03,A1B2C3,2012/07/02 00:00,ECONOMY,1234,false,flight-01,customer-01
+booking-04,123ABCD,2012/07/02 00:00,ECONOMY,1234,false,flight-01,customer-01
+booking-05,A12345,2012/07/02 00:00,ECONOMY,1234,false,flight-01,customer-01
 booking-06,ABCDEF,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
 booking-07,000000,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01
 booking-08,AAAAAA,2012/07/02 00:00,ECONOMY,1234,true,flight-01,customer-01

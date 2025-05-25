@@ -47,7 +47,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 	public void validate(final Flight flight) {
 		boolean validFlight = true;
 		Collection<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
-		Collection<Booking> bookings = this.repository.findBookingsByFlightId(flight.getId());
+		//		Collection<Booking> bookings = this.repository.findBookingsByFlightId(flight.getId());
 
 		for (Leg l : legs)
 			if (l.getDraftMode().equals(false)) {
@@ -56,12 +56,13 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 				break;
 			}
 
-		for (Booking b : bookings)
-			if (b.getDraftMode().equals(false)) {
-				validFlight = false;
-				super.state(validFlight, "*", "acme.validation.flight.canNotDelete.message");
-				break;
-			}
+		//Este bucle for es inútil, ya que, para que un Booking se publique, su Flight asociado también debe estar publicado.
+		//		for (Booking b : bookings)
+		//			if (b.getDraftMode().equals(false)) {
+		//				validFlight = false;
+		//				super.state(validFlight, "*", "acme.validation.flight.canNotDelete.message");
+		//				break;
+		//			}
 	}
 
 	@Override

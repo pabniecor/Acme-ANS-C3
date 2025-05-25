@@ -23,10 +23,15 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
+		boolean authorised = false;
+		int id;
+		Claim claim;
 
-		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
+		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
+			id = super.getRequest().getData("id", int.class);
+			claim = this.repository.findClaimById(id);
+			authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
+		}
 
 		super.getResponse().setAuthorised(authorised);
 	}

@@ -23,12 +23,22 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
+		boolean status = false;
+		AssistanceAgent currentAgent;
+		int claimId;
+		Claim claim;
+		int userAccountId;
+		Collection<Claim> agentXClaims;
 
-		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
-
-		super.getResponse().setAuthorised(authorised);
+		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
+			claimId = super.getRequest().getData("id", int.class);
+			claim = this.repository.findClaimById(claimId);
+			userAccountId = super.getRequest().getPrincipal().getAccountId();
+			currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+			agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

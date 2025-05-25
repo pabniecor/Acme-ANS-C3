@@ -1,23 +1,19 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
-import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.Duty;
 import acme.entities.airport_management.FlightAssignment;
 import acme.entities.flight_management.Leg;
+import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
-import acme.realms.Status;
 
 @GuiService
 public class MemberFlightAssignmentDeleteService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
@@ -34,7 +30,10 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 
 		masterId = super.getRequest().getData("id", int.class);
 		fa = this.repository.findFlightAssignmentById(masterId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && fa.getDraft() && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId() && fa.getDraft();
+		if (fa == null)
+			status = false;
+		else
+			status = super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew()) && fa.getDraft();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -56,41 +55,23 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 
 	@Override
 	public void validate(final FlightAssignment fa) {
-		boolean confirmation;
-		FlightCrewMember fcm;
-		//		Leg leg;
-		Collection<Leg> legs;
-		Long nPilots;
-		Long nCopilots;
-		fcm = fa.getFlightCrew();
-		super.state(fcm.getAvailabilityStatus() == Status.AVAILABLE, "*", "acme.validation.flightCrewUnavailable.message");
-		Date currentMoment = MomentHelper.getCurrentMoment();
-		Timestamp moment = Timestamp.from(currentMoment.toInstant());
-
-		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.isEmpty() || legs.contains(fa.getLeg()) || legs.size() == 1, "leg", "acme.validation.legAssigned.message");
-
-		if (fa.getLeg() != null) {
-			nPilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
-			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
-
-			if (fa.getDuty() == Duty.PILOT)
-				super.state(nPilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
-
-			if (fa.getDuty() == Duty.CO_PILOT)
-				super.state(nCopilots < 1 || fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
-		}
-
+		Collection<ActivityLog> logs = this.repository.findAllActivityLogByAssignmentId(fa.getId());
+		super.state(logs.stream().allMatch(x -> x.getDraft()), "*", "acme.validation.logsPublished.message");
 	}
 
 	@Override
 	public void perform(final FlightAssignment fa) {
-		this.repository.delete(fa);
+		Collection<ActivityLog> logs = this.repository.findAllActivityLogByAssignmentId(fa.getId());
+		if (logs.isEmpty())
+			this.repository.delete(fa);
+		if (logs.stream().allMatch(x -> x.getDraft())) {
+			this.repository.deleteAll(logs);
+			this.repository.delete(fa);
+		}
 	}
 
 	@Override
 	public void unbind(final FlightAssignment fa) {
-		assert fa != null;
 		Dataset dataset;
 		Collection<Leg> legs;
 		FlightCrewMember fcm;

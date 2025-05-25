@@ -27,10 +27,16 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 		boolean status;
 		int masterId;
 		FlightAssignment fa;
+		FlightCrewMember member;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		fa = this.repository.findFlightAssignmentById(masterId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && fa != null && super.getRequest().getPrincipal().getAccountId() == fa.getFlightCrew().getUserAccount().getId();
+		if (fa == null)
+			status = false;
+		else {
+			member = fa.getFlightCrew();
+			status = super.getRequest().getPrincipal().hasRealm(member);
+		}
 		super.getResponse().setAuthorised(status);
 
 	}
@@ -70,7 +76,6 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void unbind(final ActivityLog al) {
-		assert al != null;
 		Dataset dataset;
 		Collection<FlightAssignment> fas;
 		FlightAssignment fa;

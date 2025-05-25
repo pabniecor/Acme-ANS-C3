@@ -28,11 +28,12 @@ public class MemberLegShowService extends AbstractGuiService<FlightCrewMember, L
 		Boolean status;
 
 		id = super.getRequest().getData("id", int.class);
-		l = this.repository.findLegByMemberId(super.getRequest().getPrincipal().getActiveRealm().getId());
-		if (l == null)
+		l = this.repository.findLegById(id);
+		legs = this.repository.findLegByMemberId(super.getRequest().getPrincipal().getActiveRealm().getId());
+		if (!legs.contains(l))
 			status = false;
 		else
-			status = id == l.getId();
+			status = true;
 		super.getResponse().setAuthorised(status);
 	}
 

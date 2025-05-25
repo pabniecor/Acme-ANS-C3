@@ -50,7 +50,6 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 
 	@Override
 	public void unbind(final FlightAssignment fa) {
-		assert fa != null;
 		Dataset dataset;
 		Collection<Leg> legs;
 		Collection<FlightCrewMember> fcms;

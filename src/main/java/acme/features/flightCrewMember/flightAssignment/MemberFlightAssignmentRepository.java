@@ -13,6 +13,7 @@ import acme.entities.airport_management.Duty;
 import acme.entities.airport_management.FlightAssignment;
 import acme.entities.airport_management.Status;
 import acme.entities.flight_management.Leg;
+import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
 @Repository
@@ -53,4 +54,7 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 
 	@Query("select distinct(fa.currentStatus) from FlightAssignment fa")
 	Collection<Status> findAllStatusTypes();
+
+	@Query("select al from ActivityLog al where al.flightAssignment.id =:id")
+	Collection<ActivityLog> findAllActivityLogByAssignmentId(int id);
 }

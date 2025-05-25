@@ -1,4 +1,3 @@
-
 package acme.features.customer.bookingRecord;
 
 import java.util.Collection;
@@ -26,12 +25,23 @@ public class CustomerBookingRecordShowService extends AbstractGuiService<Custome
 		boolean isCustomer = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 		super.getResponse().setAuthorised(isCustomer);
 
-		if (!super.getRequest().getData().isEmpty()) {
+		if (isCustomer && !super.getRequest().getData().isEmpty()) {
 			int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 			int bookingRecordId = super.getRequest().getData("id", int.class);
-			Booking booking = this.repository.findBookingByBookingRecordId(bookingRecordId);
-
-			super.getResponse().setAuthorised(customerId == booking.getCustomer().getId());
+			BookingRecord bookingRecord = this.repository.findBookingRecordById(bookingRecordId);
+			
+			if (bookingRecord != null) {
+				Booking booking = bookingRecord.getBooking();
+				Passenger passenger = bookingRecord.getPassenger();
+				
+				boolean isAuthorised = booking.getCustomer().getId() == customerId && 
+						passenger != null && 
+						passenger.getCustomer().getId() == customerId;
+						
+				super.getResponse().setAuthorised(isAuthorised);
+			} else {
+				super.getResponse().setAuthorised(false);
+			}
 		}
 	}
 

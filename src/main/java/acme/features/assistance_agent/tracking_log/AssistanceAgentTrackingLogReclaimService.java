@@ -24,14 +24,6 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		//		boolean authorised;
-		//
-		//		int id = super.getRequest().getData("masterId", int.class);
-		//		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
-		//
-		//		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog.getReclaim() == true;
-		//
-		//		super.getResponse().setAuthorised(authorised);
 		boolean status = false;
 		AssistanceAgent currentAgent;
 		int trackingLogId;

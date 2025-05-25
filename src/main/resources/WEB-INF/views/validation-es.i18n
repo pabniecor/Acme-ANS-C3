@@ -62,8 +62,11 @@ acme.validation.trackingLog.resolutionPercentage-monotony.message = La resoluci�
 acme.validation.trackingLog.resolution-notNull.message = La resolución no puede ser nula cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar vacía ni con sólo tabuladores cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = La resolución debe ser nula o vacía cuando el estado es PENDING
-acme.validation.trackingLogPercentageIs100ToPublish.message = El porcentaje de resolución debe ser 100 para publicar
-acme.validation.claimMustBePublished.message = La reclamación del registro de seguimiento debe publicarse antes de publicar el registro de seguimiento
+acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message = El porcentaje de resolución debe ser 100 para publicar
+acme.validation.trackingLog.claimMustBePublished.message = La reclamación del registro de seguimiento debe publicarse antes de crear o publicar el registro de seguimiento
+acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message = La fecha de cración del registro de seguimiento no puede ser despues de la de última actualización
+acme.validation.trackingLog.monotony.message = El porcentaje de resolución debe seguir monotonía creciente
+acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = La creación de una reclamación no puede ser posterior a la creación o actualización del registro de seguimiento
 
 acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 

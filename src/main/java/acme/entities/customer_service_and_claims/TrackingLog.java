@@ -34,6 +34,11 @@ public class TrackingLog extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
+	private Date				creationMoment;
+
+	@Mandatory
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				lastUpdateMoment;
 
 	@Mandatory
@@ -60,6 +65,11 @@ public class TrackingLog extends AbstractEntity {
 	@Valid
 	@Automapped
 	private Boolean				draftMode;
+
+	@Mandatory
+	@Valid
+	@Automapped
+	private Boolean				reclaimed;
 
 
 	@Transient

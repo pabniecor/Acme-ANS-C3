@@ -14,7 +14,7 @@ import acme.realms.AssistanceAgent;
 public class AssistanceAgentClaimController extends AbstractGuiController<AssistanceAgent, Claim> {
 
 	@Autowired
-	private AssistanceAgentCompletedClaimListService		listCompletedService;
+	private AssistanceAgentUndergoingPublicClaimListService	listPublicUndergoingService;
 
 	@Autowired
 	private AssistanceAgentCompletedPublicClaimListService	listPublicCompletedService;
@@ -45,7 +45,7 @@ public class AssistanceAgentClaimController extends AbstractGuiController<Assist
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 
-		super.addCustomCommand("list-completed", "list", this.listCompletedService);
+		super.addCustomCommand("list-public-undergoing", "list", this.listPublicUndergoingService);
 		super.addCustomCommand("list-public-completed", "list", this.listPublicCompletedService);
 		super.addCustomCommand("list-undergoing", "list", this.listUndergoingService);
 		super.addCustomCommand("publish", "update", this.publishService);

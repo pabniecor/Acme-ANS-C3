@@ -25,26 +25,41 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void authorise() {
-		boolean authorised;
+		boolean status = false;
+		AssistanceAgent currentAgent;
+		int claimId;
+		Claim claim;
+		int userAccountId;
+		Collection<Claim> agentXClaims;
 
-		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		claimId = super.getRequest().getData("masterId", int.class);
+		claim = this.repository.findClaimById(claimId);
+		userAccountId = super.getRequest().getPrincipal().getAccountId();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
 
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		TrackingLog trackingLog;
+		int claimId = super.getRequest().getData("masterId", int.class);
+		Claim claim = this.repository.findClaimById(claimId);
 
 		trackingLog = new TrackingLog();
 		trackingLog.setDraftMode(true);
+		trackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		trackingLog.setClaim(claim);
+		trackingLog.setReclaimed(false);
 		super.getBuffer().addData(trackingLog);
 	}
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution", "claim");
+		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution");
 	}
 
 	@Override
@@ -71,6 +86,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	public void perform(final TrackingLog trackingLog) {
 		trackingLog.setDraftMode(true);
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		trackingLog.setReclaimed(false);
 		this.repository.save(trackingLog);
 	}
 
@@ -86,9 +102,10 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "reclaimed", "claim");
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
+		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		dataset.put("trackStatus", statusChoices);
 		dataset.put("reclaim", trackingLog.getReclaim());
 

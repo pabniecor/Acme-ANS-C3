@@ -59,7 +59,7 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "reclaimed", "claim");
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
 		dataset.put("trackStatus", statusChoices);

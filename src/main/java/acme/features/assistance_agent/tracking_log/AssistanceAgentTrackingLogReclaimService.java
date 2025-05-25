@@ -24,14 +24,29 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		boolean authorised;
+		//		boolean authorised;
+		//
+		//		int id = super.getRequest().getData("masterId", int.class);
+		//		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		//
+		//		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog.getReclaim() == true;
+		//
+		//		super.getResponse().setAuthorised(authorised);
+		boolean status = false;
+		AssistanceAgent currentAgent;
+		int trackingLogId;
+		TrackingLog trackingLog;
+		int userAccountId;
+		Collection<Claim> agentXClaims;
 
-		int id = super.getRequest().getData("masterId", int.class);
-		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		trackingLogId = super.getRequest().getData("masterId", int.class);
+		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		userAccountId = super.getRequest().getPrincipal().getAccountId();
+		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(trackingLog.getClaim()) && trackingLog.getReclaim() == true && !trackingLog.getDraftMode() && trackingLog != null;
 
-		authorised = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog.getReclaim() == true;
-
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -47,11 +62,13 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 		statusAssociated = lastTrackingLog.getStatus();
 
 		trackingLog = new TrackingLog();
+		trackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setDraftMode(true);
 		trackingLog.setStatus(statusAssociated);
 		trackingLog.setResolutionPercentage(100.);
 		trackingLog.setClaim(claimAssociated);
+		trackingLog.setReclaimed(true);
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -71,6 +88,7 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 	public void perform(final TrackingLog trackingLog) {
 		trackingLog.setDraftMode(true);
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		trackingLog.setReclaimed(true);
 		this.repository.save(trackingLog);
 	}
 
@@ -86,7 +104,7 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "reclaimed", "claim");
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));

@@ -23,12 +23,22 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		boolean status = false;
+		AssistanceAgent currentAgent;
+		int trackingLogId;
+		TrackingLog trackingLog;
+		int userAccountId;
+		Collection<Claim> agentXClaims;
 
-		boolean authorised = trackingLog != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog.getDraftMode();
-
-		super.getResponse().setAuthorised(authorised);
+		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
+			trackingLogId = super.getRequest().getData("id", int.class);
+			trackingLog = this.repository.findTrackingLogById(trackingLogId);
+			userAccountId = super.getRequest().getPrincipal().getAccountId();
+			currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+			agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(trackingLog.getClaim()) && trackingLog != null && trackingLog.getDraftMode() && trackingLog != null;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -44,23 +54,23 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution", "claim");
+		super.bindObject(trackingLog, "step", "resolutionPercentage", "status", "resolution");
 	}
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
-		boolean claimIsPublished;
+		//		boolean claimIsPublished;
 		boolean percentageIs100;
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 
-		claimIsPublished = !trackingLog.getClaim().getDraftMode();
-		super.state(claimIsPublished, "claim", "acme.validation.claimMustBePublished.message");
+		//		claimIsPublished = !trackingLog.getClaim().getDraftMode();
+		//		super.state(claimIsPublished, "claim", "acme.validation.trackingLog.claimMustBePublished.message");
 
 		percentageIs100 = trackingLog.getResolutionPercentage() == 100.;
-		super.state(percentageIs100, "resolutionPercentage", "acme.validation.trackingLogPercentageIs100ToPublish.message");
+		super.state(percentageIs100, "resolutionPercentage", "acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message");
 	}
 
 	@Override
@@ -81,7 +91,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		statusChoices = SelectChoices.from(AcceptanceStatus.class, trackingLog.getStatus());
 		claimChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "claim");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution", "draftMode", "reclaimed", "claim");
 		dataset.put("claim", claimChoices.getSelected().getKey());
 		dataset.put("claims", claimChoices);
 		dataset.put("trackStatus", statusChoices);

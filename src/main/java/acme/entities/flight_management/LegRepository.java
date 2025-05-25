@@ -15,22 +15,19 @@ public interface LegRepository extends AbstractRepository {
 	@Query("select l from Leg l where l.flightNumber = :flightNumber")
 	Leg findLegByFlightNumber(String flightNumber);
 
-	@Query("select l from Leg l where l.flight.id = :flightId")
-	List<Leg> computeLegsByFlight(int flightId);
-
-	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.scheduledDeparture ASC")
+	@Query("select l from Leg l where l.flight.id = :flightId order by l.scheduledDeparture ASC")
 	List<Leg> findLegsOrderByAscendent(Integer flightId);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.scheduledDeparture DESC")
+	@Query("select l from Leg l where l.flight.id = :flightId order by l.scheduledDeparture DESC")
 	List<Leg> findLegsOrderByDescendent(Integer flightId);
 
-	@Query("SELECT count(l) FROM Leg l WHERE l.flight.id = :flightId")
+	@Query("select count(l) from Leg l where l.flight.id = :flightId")
 	Integer countNumberOfLegsOfFlight(Integer flightId);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.scheduledDeparture")
+	@Query("select l from Leg l where l.flight.id = :flightId order by l.scheduledDeparture")
 	List<Leg> findLegsByFlight(Integer flightId);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.sequenceOrder ASC")
+	@Query("select l from Leg l where l.flight.id = :flightId order by l.sequenceOrder ASC")
 	List<Leg> findLegsOrderByAscendentUsingSequenceOrder(Integer flightId);
 
 	@Query("select max(l.sequenceOrder) from Leg l where l.flight.id = :flightId")

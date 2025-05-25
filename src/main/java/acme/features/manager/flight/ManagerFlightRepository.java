@@ -12,7 +12,6 @@ import acme.entities.customer_management.Booking;
 import acme.entities.customer_service_and_claims.Claim;
 import acme.entities.flight_management.Flight;
 import acme.entities.flight_management.Leg;
-import acme.realms.Manager;
 
 @Repository
 public interface ManagerFlightRepository extends AbstractRepository {
@@ -28,12 +27,6 @@ public interface ManagerFlightRepository extends AbstractRepository {
 
 	@Query("select l from Leg l where l.flight.id = :flightId")
 	Collection<Leg> findLegsByFlightId(int flightId);
-
-	@Query("select m from Manager m")
-	Collection<Manager> findAllManagers();
-
-	@Query("select m.id from Manager m where m.userAccount.id = :userAccountId")
-	Integer findManagerByUserAccountId(int userAccountId);
 
 	@Query("select b from Booking b where b.flight.id = :flightId")
 	Collection<Booking> findBookingsByFlightId(int flightId);

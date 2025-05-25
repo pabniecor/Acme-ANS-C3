@@ -36,6 +36,7 @@ acme.validation.leg.notNullAirports.message = The departure airport and arrival 
 acme.validation.leg.arrivalAirport.message = The departure airport and arrival airport must not be the same airport
 acme.validation.leg.aircraft.message = The aircraft of the leg must exist and be Active
 acme.validation.leg.canNotDelete.message = The claims and flight assignments associated with the leg must be in draft mode to delete the leg.
+acme.validation.leg.occupiedAircraft.message = The selected aircraft is occupied for the selected time slot
 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect

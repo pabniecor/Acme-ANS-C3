@@ -3,6 +3,7 @@ package acme.constraints;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
+import acme.entities.airline_operations.Aircraft;
 import acme.entities.flight_management.Leg;
 import acme.entities.flight_management.LegRepository;
 
@@ -53,19 +55,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			String AirlineIATA = leg.getFlight().getManager().getAirline().getIataCode();
 			boolean correctFlightNumber = leg.getFlightNumber().length() >= 3 && leg.getFlightNumber().substring(0, 3).equals(AirlineIATA);
 			super.state(context, correctFlightNumber, "flightNumber", "acme.validation.leg.flightNumber-airlineIATA.message");
-
-			//			boolean notNullDates;
-			//			notNullDates = leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null;
-			//			super.state(context, notNullDates, "scheduledDeparture", "acme.validation.leg.notNullDates.message");
-
-			//			if (leg.getScheduledDeparture() != null && leg.getScheduledDeparture().getClass() == Date.class) {
-			//
-			//				boolean notPastDeparture;
-			//
-			//				notPastDeparture = !MomentHelper.isPast(leg.getScheduledDeparture());
-			//
-			//				super.state(context, notPastDeparture, "scheduledDeparture", "acme.validation.leg.scheduledDeparture.message");
-			//			}
 
 			Date scheduledDeparture = leg.getScheduledDeparture();
 			Date scheduledArrival = leg.getScheduledArrival();
@@ -109,13 +98,17 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				}
 
 				super.state(context, notOverlapping, "scheduledDeparture", "acme.validation.leg.notOverlappingLeg.message");
-			}
 
-			//			boolean notNullAirports;
-			//
-			//			notNullAirports = leg.getDepartureAirport() != null && leg.getArrivalAirport() != null;
-			//
-			//			super.state(context, notNullAirports, "*", "acme.validation.leg.notNullAirports.message");
+				if (leg.getAircraft() != null) {
+					Aircraft aircraft = leg.getAircraft();
+					Collection<Leg> legsWithSameAircraft = this.repository.findLegsByAircraftId(aircraft.getId(), leg.getId());
+					boolean validAircraft = true;
+					for (Leg l : legsWithSameAircraft)
+						if (MomentHelper.isBefore(leg.getScheduledDeparture(), l.getScheduledArrival()) && MomentHelper.isAfter(leg.getScheduledArrival(), l.getScheduledDeparture()))
+							validAircraft = false;
+					super.state(context, validAircraft, "aircraft", "acme.validation.leg.occupiedAircraft.message");
+				}
+			}
 
 			boolean notEqualAirports;
 			notEqualAirports = leg.getDepartureAirport() != leg.getArrivalAirport();

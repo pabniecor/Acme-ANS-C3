@@ -45,6 +45,7 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		final boolean showCreate;
 
 		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
+		super.addPayload(dataset, flight, "manager.identity.fullName", "originCity", "destinationCity");
 
 		showCreate = super.getRequest().getPrincipal().hasRealm(flight.getManager());
 		super.getResponse().addGlobal("showCreate", showCreate);

@@ -36,6 +36,7 @@ acme.validation.leg.notNullAirports.message = El aeropuerto de salida y el aerop
 acme.validation.leg.arrivalAirport.message = El aeropuerto de salida y el aeropuerto de llegada no deben ser el mismo aeropuerto
 acme.validation.leg.aircraft.message = El avión del tramo debe existir y estar Activo
 acme.validation.leg.canNotDelete.message = Las reclamaciones y asignaciones de vuelo asociadas al tramo deben estar en modo borrador para poder eliminar el tramo
+acme.validation.leg.occupiedAircraft.message = El avión seleccionado está ocupado para la franja horaria seleccionada
 
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto

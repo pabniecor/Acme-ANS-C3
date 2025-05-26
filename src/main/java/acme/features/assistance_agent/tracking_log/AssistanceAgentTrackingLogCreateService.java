@@ -25,19 +25,13 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void authorise() {
-		boolean status = false;
-		AssistanceAgent currentAgent;
+		boolean status;
 		int claimId;
 		Claim claim;
-		int userAccountId;
-		Collection<Claim> agentXClaims;
 
 		claimId = super.getRequest().getData("masterId", int.class);
 		claim = this.repository.findClaimById(claimId);
-		userAccountId = super.getRequest().getPrincipal().getAccountId();
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
+		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -74,7 +68,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		if (trackingLogsOrderedByPercentage != null && !trackingLogsOrderedByPercentage.isEmpty()) {
 			TrackingLog trackingLogHighestPercentage = trackingLogsOrderedByPercentage.get(0);
 
-			resolutionPercentageMonotony = trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage();
+			resolutionPercentageMonotony = trackingLog.getResolutionPercentage() != null ? trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage() : true;
 			super.state(resolutionPercentageMonotony, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
 		}
 
@@ -92,7 +86,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 		Dataset dataset;
 		Collection<Claim> claims;
 		SelectChoices statusChoices;

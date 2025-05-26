@@ -23,15 +23,15 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		int trackingLogId;
+		TrackingLog trackingLog;
 		AssistanceAgent currentAgent;
 
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		trackingLogId = super.getRequest().getData("id", int.class);
+		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		currentAgent = trackingLog == null ? null : trackingLog.getClaim().getAssistanceAgent();
 
-		boolean authorised = (super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || trackingLog != null && !trackingLog.getDraftMode()) && agentXClaims.contains(trackingLog.getClaim());
+		boolean authorised = trackingLog != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !trackingLog.getDraftMode());
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -49,7 +49,6 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 		Dataset dataset;
 		Collection<Claim> claims;
 		SelectChoices statusChoices;

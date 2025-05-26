@@ -28,16 +28,12 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		AssistanceAgent currentAgent;
 		int claimId;
 		Claim claim;
-		int userAccountId;
-		Collection<Claim> agentXClaims;
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
+		if (super.getRequest().hasData("id", int.class)) {
 			claimId = super.getRequest().getData("id", int.class);
 			claim = this.repository.findClaimById(claimId);
-			userAccountId = super.getRequest().getPrincipal().getAccountId();
-			currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-			agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
-			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim) && claim != null && claim.getDraftMode();
+			currentAgent = claim == null ? null : claim.getAssistanceAgent();
+			status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && claim.getDraftMode();
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -60,13 +56,9 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 	@Override
 	public void validate(final Claim claim) {
 		boolean confirmation;
-		boolean draftMode = claim.getDraftMode();
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.draftMode-delete.message");
 	}
 
 	@Override
@@ -80,7 +72,6 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		Dataset dataset;
 		Collection<AssistanceAgent> assistanceAgents;
 		Collection<Leg> legs;

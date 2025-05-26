@@ -23,17 +23,34 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void authorise() {
-		boolean authorised = false;
-		int id;
-		Claim claim;
+		boolean status;
+		AssistanceAgent currentAgent;
+		int id = super.getRequest().getData("id", int.class);
+		Claim claim = this.repository.findClaimById(id);
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
-			id = super.getRequest().getData("id", int.class);
-			claim = this.repository.findClaimById(id);
-			authorised = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getDraftMode();
+		currentAgent = claim == null ? null : claim.getAssistanceAgent();
+
+		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && claim.getDraftMode();
+
+		if (status) {
+			String method;
+			int legId;
+			Leg leg;
+
+			method = super.getRequest().getMethod();
+
+			if (method.equals("GET"))
+				status = true;
+			else {
+				legId = super.getRequest().getData("leg", int.class);
+				leg = super.getRequest().getData("leg", Leg.class);
+
+				Boolean statusDa = legId == 0 ? true : this.repository.findAllLegs().contains(leg);
+				status = statusDa;
+			}
 		}
 
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -67,7 +84,6 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		Dataset dataset;
 		Collection<AssistanceAgent> assistanceAgents;
 		Collection<Leg> legs;

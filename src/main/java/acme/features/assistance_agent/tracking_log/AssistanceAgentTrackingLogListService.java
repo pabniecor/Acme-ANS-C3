@@ -24,14 +24,14 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void authorise() {
 		boolean status;
 		AssistanceAgent currentAgent;
-		int claimId = super.getRequest().getData("masterId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		int claimId;
+		Claim claim;
 
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		claimId = super.getRequest().getData("masterId", int.class);
+		claim = this.repository.findClaimById(claimId);
+		currentAgent = claim == null ? null : claim.getAssistanceAgent();
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
+		status = claim != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !claim.getDraftMode());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -53,7 +53,6 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		Dataset dataset;
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "step", "resolutionPercentage", "status");
-		//		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 
 		super.addPayload(dataset, trackingLog, "resolution", "draftMode", "claim.passengerEmail", "reclaimed");
 		super.getResponse().addData(dataset);

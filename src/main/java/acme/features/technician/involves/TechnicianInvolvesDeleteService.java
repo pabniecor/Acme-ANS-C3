@@ -47,9 +47,10 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 			t = this.repository.findTaskById(selectedTaskId);
 			mr = this.repository.findMRById(selectedMRId);
 
-			if (selectedTaskId != 0 && selectedMRId != 0)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(t) && MRs.contains(mr) && mr.getTechnician().equals(loggedTechnician) && !t.getDraftMode();
-
+			if (selectedTaskId != 0 || selectedMRId != 0)
+				status = tasks.contains(t) && MRs.contains(mr);
+			else
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -103,7 +104,6 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 
 	@Override
 	public void unbind(final Involves involves) {
-		assert involves != null;
 		Dataset dataset;
 		Collection<MaintenanceRecord> MRs;
 		Collection<Task> tasks;

@@ -47,8 +47,10 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 			selectedTaskId = super.getRequest().getData("task", int.class);
 			t = this.repository.findTaskById(selectedTaskId);
 
-			if (selectedTaskId != 0 && selectedMRId != 0)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && tasks.contains(t) && MRs.contains(mr);
+			if (selectedTaskId != 0 || selectedMRId != 0)
+				status = tasks.contains(t) && MRs.contains(mr);
+			else
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -115,7 +117,6 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 
 	@Override
 	public void unbind(final Involves involves) {
-		assert involves != null;
 		Dataset dataset;
 		Collection<MaintenanceRecord> MRs;
 		Collection<Task> tasks;

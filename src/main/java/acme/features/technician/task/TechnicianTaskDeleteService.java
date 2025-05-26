@@ -23,17 +23,10 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void authorise() {
-		int id;
-		Task task;
-		int technicianId;
 		boolean authorised = false;
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
-			id = super.getRequest().getData("id", int.class);
-			task = this.repository.findTaskById(id);
-			technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
-			authorised = task != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && task.getDraftMode() && task.getTechnician().getId() == technicianId;
-		}
+		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST"))
+			authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 
 		super.getResponse().setAuthorised(authorised);
 	}

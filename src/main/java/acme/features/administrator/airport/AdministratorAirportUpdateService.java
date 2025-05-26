@@ -1,8 +1,6 @@
 
 package acme.features.administrator.airport;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -23,12 +21,22 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 	@Override
 	public void authorise() {
 		Boolean status;
-		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
-		if (super.getRequest().hasData("id")) {
-			OperationalScope os = super.getRequest().getData("operationalScope", OperationalScope.class);
-			Collection<OperationalScope> oss = this.repository.findAllOperationalScopes();
-			Boolean statusSt = os == null ? true : oss.contains(os);
-			status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class) && statusSt;
+		int id = super.getRequest().getData("id", int.class);
+		Airport airport = this.repository.findAirportById(id);
+
+		status = airport != null && super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+
+		if (status) {
+			String method;
+			method = super.getRequest().getMethod();
+
+			if (method.equals("GET"))
+				status = true;
+			else {
+				@SuppressWarnings("unused")
+				OperationalScope os = super.getRequest().getData("operationalScope", OperationalScope.class);
+				status = true;
+			}
 		}
 		super.getResponse().setAuthorised(status);
 	}
@@ -63,7 +71,6 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void unbind(final Airport airport) {
-		assert airport != null;
 		Dataset dataset;
 		SelectChoices operationalScope;
 

@@ -26,9 +26,6 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 
 	@Override
 	public void authorise() {
-		int id;
-		MaintenanceRecord mr;
-		int technicianId;
 		Collection<Aircraft> aircrafts;
 		int aircraftId;
 		Aircraft a;
@@ -37,15 +34,15 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 		authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		if (super.getRequest().getMethod().equals("GET"))
 			authorised = false;
-		else if (super.getRequest().hasData("id", int.class)) {
-			id = super.getRequest().getData("id", int.class);
-			mr = this.repository.findMRById(id);
-			technicianId = this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()).getId();
+		else {
 			aircrafts = this.repository.findAllAircrafts();
 			aircraftId = super.getRequest().getData("aircraft", int.class);
 			a = this.repository.findAircraftById(aircraftId);
 
-			authorised = mr != null && super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getDraftMode() && mr.getTechnician().getId() == technicianId && aircrafts.contains(a);
+			if (aircraftId != 0)
+				authorised = aircrafts.contains(a);
+			else
+				authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		}
 
 		super.getResponse().setAuthorised(authorised);
@@ -64,12 +61,11 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 
 	@Override
 	public void bind(final MaintenanceRecord mr) {
-		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "draftMode", "aircraft", "technician");
+		super.bindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "aircraft");
 	}
 
 	@Override
 	public void validate(final MaintenanceRecord mr) {
-		boolean allTasksPublished;
 		boolean hasNoTasks;
 		boolean confirmation;
 		Collection<Involves> involves;
@@ -82,12 +78,7 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 		}
 
 		hasNoTasks = involvedTasks.isEmpty();
-		allTasksPublished = involvedTasks.stream().allMatch(t -> t.getDraftMode().equals(false));
-
-		if (!allTasksPublished)
-			super.state(allTasksPublished, "draftMode", "acme.validation.technician.maintenanceRecord.error.noUnpublishedTasks.message");
-		if (hasNoTasks)
-			super.state(!hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message");
+		super.state(!hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message");
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");

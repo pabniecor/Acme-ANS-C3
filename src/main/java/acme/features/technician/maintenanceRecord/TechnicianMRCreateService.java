@@ -35,7 +35,10 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 			aircraftId = super.getRequest().getData("aircraft", int.class);
 			a = this.repository.findAircraftById(aircraftId);
 			if (aircraftId != 0)
-				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && aircrafts.contains(a);
+				status = aircrafts.contains(a);
+			else
+				status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -75,7 +78,6 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void unbind(final MaintenanceRecord mr) {
-		assert mr != null;
 		Dataset dataset;
 		Collection<Aircraft> aircrafts;
 		Collection<Technician> technicians;

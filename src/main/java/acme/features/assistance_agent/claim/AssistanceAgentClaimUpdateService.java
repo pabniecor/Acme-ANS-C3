@@ -23,21 +23,33 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		boolean status = false;
+		boolean status;
 		AssistanceAgent currentAgent;
-		int claimId;
-		Claim claim;
-		int userAccountId;
-		Collection<Claim> agentXClaims;
+		int id = super.getRequest().getData("id", int.class);
+		Claim claim = this.repository.findClaimById(id);
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
-			claimId = super.getRequest().getData("id", int.class);
-			claim = this.repository.findClaimById(claimId);
-			userAccountId = super.getRequest().getPrincipal().getAccountId();
-			currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-			agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
-			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(claim);
+		currentAgent = claim == null ? null : claim.getAssistanceAgent();
+
+		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && claim.getDraftMode();
+
+		if (status) {
+			String method;
+			int legId;
+			Leg leg;
+
+			method = super.getRequest().getMethod();
+
+			if (method.equals("GET"))
+				status = true;
+			else {
+				legId = super.getRequest().getData("leg", int.class);
+				leg = super.getRequest().getData("leg", Leg.class);
+
+				Boolean statusDa = legId == 0 ? true : this.repository.findAllLegs().contains(leg);
+				status = statusDa;
+			}
 		}
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -60,13 +72,9 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	@Override
 	public void validate(final Claim claim) {
 		boolean confirmation;
-		boolean draftMode = claim.getDraftMode();
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.draftMode-update.message");
 	}
 
 	@Override
@@ -76,7 +84,6 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		Dataset dataset;
 		Collection<AssistanceAgent> assistanceAgents;
 		Collection<Leg> legs;

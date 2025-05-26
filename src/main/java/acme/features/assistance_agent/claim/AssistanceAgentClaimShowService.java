@@ -27,11 +27,9 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		Claim claim = this.repository.findClaimById(id);
 		AssistanceAgent currentAgent;
 
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-		Collection<Claim> agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
+		currentAgent = claim == null ? null : claim.getAssistanceAgent();
 
-		boolean authorised = (super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) || claim != null && !claim.getDraftMode()) && agentXClaims.contains(claim);
+		boolean authorised = claim != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !claim.getDraftMode());
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -49,7 +47,6 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		Dataset dataset;
 		Collection<AssistanceAgent> assistanceAgents;
 		Collection<Leg> legs;

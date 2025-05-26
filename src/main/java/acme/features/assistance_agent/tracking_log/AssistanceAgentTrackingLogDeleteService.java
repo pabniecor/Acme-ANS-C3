@@ -27,16 +27,12 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 		AssistanceAgent currentAgent;
 		int trackingLogId;
 		TrackingLog trackingLog;
-		int userAccountId;
-		Collection<Claim> agentXClaims;
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("POST")) {
+		if (super.getRequest().hasData("id", int.class)) {
 			trackingLogId = super.getRequest().getData("id", int.class);
 			trackingLog = this.repository.findTrackingLogById(trackingLogId);
-			userAccountId = super.getRequest().getPrincipal().getAccountId();
-			currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
-			agentXClaims = this.repository.findAllClaimsByCurrentUser(currentAgent.getId());
-			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && agentXClaims.contains(trackingLog.getClaim()) && trackingLog != null && trackingLog.getDraftMode();
+			currentAgent = trackingLog == null ? null : trackingLog.getClaim().getAssistanceAgent();
+			status = trackingLog != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && trackingLog.getDraftMode();
 		}
 		super.getResponse().setAuthorised(status);
 	}
@@ -58,13 +54,9 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
-		boolean draftMode = trackingLog.getDraftMode();
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.draftMode-delete.message");
 	}
 
 	@Override
@@ -74,7 +66,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 		Dataset dataset;
 		Collection<Claim> claims;
 		SelectChoices statusChoices;

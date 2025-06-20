@@ -52,6 +52,7 @@ acme.validation.customer.publishedFlight.message = El vuelo asignado debe estar 
 acme.validation.customer.passenger.error.booking-exists = Este pasajero está asociado a una o más reservas
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
+acme.validation.assistanceAgent.pattern-employeeCode.message = El código de empleado no sigue el patrón requerido: "^[A-Z]{2-3}\d{6}$"
 
 acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
 

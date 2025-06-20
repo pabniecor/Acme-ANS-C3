@@ -50,6 +50,7 @@ acme.validation.customer.duplicate-identifier.message = The customer's identifie
 acme.validation.customer.identifier.message = The customer's identifier is incorrect
 
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
+acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
 

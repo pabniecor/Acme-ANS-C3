@@ -34,25 +34,12 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 		if (assistanceAgent == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			{
-				String name = assistanceAgent.getIdentity().getName();
-				String surname = assistanceAgent.getIdentity().getSurname();
+			String name = assistanceAgent.getIdentity().getName();
+			String surname = assistanceAgent.getIdentity().getSurname();
 
-				boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
+			boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
 
-				super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
-			}
-
-			{
-				boolean correctEmployeeCodePattern;
-				String employeeCoe = assistanceAgent.getEmployeeCode();
-
-				if (employeeCoe != null) {
-					correctEmployeeCodePattern = employeeCoe.matches("^[A-Z]{2,3}\\d{6}$");
-
-					super.state(context, correctEmployeeCodePattern, "employeeCode", "acme.validation.technician.correctPhoneNumberPattern.message");
-				}
-			}
+			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
 		}
 
 		result = !super.hasErrors(context);

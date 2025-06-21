@@ -5,8 +5,8 @@ acme.validation.flightCrewMember.employeeCode.message = The manager's identifier
 acme.validation.maintenanceRecord.coherentNextInspection.message = Next inspection must take place after last inspection
 
 acme.validation.technician.uniqueLicenseNumber.message = License number must be unique for each technician
-acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
-acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$
+acme.validation.technician.correctLicenseNumberPattern.message = The specified license number does not follow the required pattern
+acme.validation.technician.correctPhoneNumberPattern.message = The specified phone number does not follow the required pattern
 acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenance record it must have any associated task
 acme.validation.technician.maintenanceRecord.error.validStatus.message = A new maintenance record cannot be already completed
 

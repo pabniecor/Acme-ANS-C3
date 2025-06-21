@@ -31,31 +31,16 @@ public class TechnicianValidator extends AbstractValidator<ValidTechnician, Tech
 		if (t == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			{
-				boolean uniqueLicenseNumber;
-				boolean correctLicenseNumberPattern;
-				List<String> allLicenseNumbers = this.repository.findAllLicenseNumbers();
-				String licenseNumber = t.getLicenseNumber();
+			boolean uniqueLicenseNumber;
+			List<String> allLicenseNumbers = this.repository.findAllLicenseNumbers();
+			String licenseNumber = t.getLicenseNumber();
 
-				if (allLicenseNumbers != null && licenseNumber != null) {
-					uniqueLicenseNumber = allLicenseNumbers.stream().filter(ln -> ln.equals(licenseNumber)).toList().size() == 1;
-					correctLicenseNumberPattern = licenseNumber.matches("^[A-Z]{2,3}\\d{6}$");
+			if (allLicenseNumbers != null && licenseNumber != null) {
+				uniqueLicenseNumber = allLicenseNumbers.stream().filter(ln -> ln.equals(licenseNumber)).toList().size() == 1;
 
-					super.state(context, uniqueLicenseNumber, "licenseNumber", "acme.validation.technician.uniqueLicenseNumber.message");
-					super.state(context, correctLicenseNumberPattern, "licenseNumber", "acme.validation.technician.correctLicenseNumberPattern.message");
-				}
+				super.state(context, uniqueLicenseNumber, "licenseNumber", "acme.validation.technician.uniqueLicenseNumber.message");
+
 			}
-			{
-				boolean correctPhoneNumberPattern;
-				String phoneNumber = t.getPhoneNumber();
-
-				if (phoneNumber != null) {
-					correctPhoneNumberPattern = phoneNumber.matches("^\\+?\\d{6,15}$");
-
-					super.state(context, correctPhoneNumberPattern, "phoneNumber", "acme.validation.technician.correctPhoneNumberPattern.message");
-				}
-			}
-
 		}
 
 		res = !super.hasErrors(context);

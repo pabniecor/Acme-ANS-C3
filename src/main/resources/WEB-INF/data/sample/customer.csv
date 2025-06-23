@@ -1,3 +1,4 @@
 key,key:userAccount,identifier,phoneNumber,physicalAddress,city,country,earnedPoints
 customer-01,user-account-customer-01,RR123456,+1234567890,123 Main St,New York,USA,25000
 customer-02,user-account-customer-02,DL789012,+441234567890,456 Elm St,London,UK,150000
+customer-03,user-account-customer-03,SC789012,+441234567890,456 Elm St,London,UK,150000

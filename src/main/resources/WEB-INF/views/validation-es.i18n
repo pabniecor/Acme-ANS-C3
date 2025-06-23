@@ -48,6 +48,9 @@ acme.validation.booking.locatorCode.message = El código localizador de la reser
 
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
+acme.validation.customer.phone-number.message = El número de teléfono del cliente es incorrecto
+acme.validation.customer.lastCardNibble.message = Los últimos cuatro dígitos del número de la tarjeta de crédito debe guardarse para poder publicar una reserva
+acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados para poder ser publicada
 acme.validation.customer.publishedFlight.message = El vuelo asignado debe estar publicado
 acme.validation.customer.passenger.error.booking-exists = Este pasajero está asociado a una o más reservas
 

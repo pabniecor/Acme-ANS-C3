@@ -61,3 +61,10 @@ passenger-46,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 
 passenger-47,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,true,customer-02
 passenger-48,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,ABC123DE,2012/07/02 00:00,Vegetarian meal,false,customer-02
 # draft-mode-passenger - no singular values
+# customer-03 passengers
+passenger-49,Lorem ipsum dolor sit ame,acme@lorem-ipsum.org,XYZ789AB,2012/02/16 00:00,None,false,customer-03
+passenger-50,Ana Canales,ana@acme.org,PQR456CD,2012/05/20 00:00,Wheelchair assistance,true,customer-03
+passenger-51,Miguel Torres,miguel@acme.org,LMN123EF,2012/11/10 00:00,Gluten-free meal,false,customer-03
+passenger-52,Laura Sánchez,laura@acme.org,JKL789GH,2012/07/25 00:00,,true,customer-03
+passenger-53,Carlos Ruiz,carlos@acme.org,DEF456IJ,2012/03/30 00:00,Extra legroom,false,customer-03
+passenger-54,Elena Martínez,elena@acme.org,UVW123KL,2012/09/12 00:00,Vegan meal,true,customer-03

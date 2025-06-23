@@ -46,9 +46,6 @@ acme.validation.airline.iataCode.message = The airline's iataCode is incorrect
 acme.validation.booking.duplicate-locatorCode.message = The booking's locatorCode is duplicated
 acme.validation.booking.locatorCode.message = The booking's locatorCode is incorrect
 
-acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
-acme.validation.customer.identifier.message = The customer's identifier is incorrect
-
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
 
@@ -68,6 +65,9 @@ acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = Claim crea
 
 acme.validation.confirmation.message = Need confirmation
 
+acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
+acme.validation.customer.identifier.message = The customer's identifier is incorrect
+acme.validation.customer.phone-number.message = The customer's phone number is incorrect
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
 acme.validation.customer.publishedFlight.message = The flight assigned must be published

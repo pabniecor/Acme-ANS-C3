@@ -37,3 +37,10 @@ booking-24,ABT123,2012/07/02 00:00,ECONOMY,9999,false,flight-01,customer-02
 booking-25,ABU123,2012/07/02 00:00,ECONOMY,0000,true,flight-01,customer-02
 booking-26,ABV123,2012/07/02 00:00,ECONOMY,0000,false,flight-01,customer-02
 # draft-mode - no singular values
+# customer-03 bookings
+booking-27,ABW123,2023/01/15 10:30,ECONOMY,5678,false,flight-01,customer-03
+booking-28,ABX456,2023/02/20 14:45,BUSINESS,4321,true,flight-01,customer-03
+booking-29,ABY789,2023/03/10 09:15,ECONOMY,9876,false,flight-01,customer-03
+booking-30,ABZ012,2023/04/05 16:20,BUSINESS,1122,true,flight-01,customer-03
+booking-31,ACA345,2023/05/12 11:00,ECONOMY,3344,false,flight-01,customer-03
+booking-32,ACB678,2023/06/18 08:30,BUSINESS,5566,true,flight-01,customer-03

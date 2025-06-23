@@ -28,7 +28,6 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 
 	@Override
 	public boolean isValid(final Booking booking, final ConstraintValidatorContext context) {
-		// HINT: job can be null
 		assert context != null;
 
 		boolean result;

@@ -47,6 +47,8 @@ acme.validation.booking.duplicate-locatorCode.message = The booking's locatorCod
 acme.validation.booking.locatorCode.message = The booking's locatorCode is incorrect
 acme.validation.booking.lastCardNibble.message = Invalid last card nibble
 
+acme.validation.passenger.passportNumber.message = Invalid passport number
+
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
 

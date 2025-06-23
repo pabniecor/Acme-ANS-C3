@@ -47,6 +47,8 @@ acme.validation.booking.duplicate-locatorCode.message = El código localizador d
 acme.validation.booking.locatorCode.message = El código localizador de la reserva es incorrecto
 acme.validation.booking.lastCardNibble.message = Últimos cuatro dígitos de la tarjeta de crédito inválidos
 
+acme.validation.passenger.passportNumber.message = Número de pasaporte inválido
+
 acme.validation.customer.duplicate-identifier.message = El identificador del cliente está duplicado
 acme.validation.customer.identifier.message = El identificador del cliente es incorrecto
 acme.validation.customer.phone-number.message = El número de teléfono del cliente es incorrecto

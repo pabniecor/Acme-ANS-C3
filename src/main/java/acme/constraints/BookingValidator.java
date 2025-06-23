@@ -54,6 +54,15 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 
 				super.state(context, isValidLocatorCode, "locatorCode", "acme.validation.booking.locatorCode.message");
 			}
+			{
+				String lastCardNibble;
+				boolean isValidLastCardNibble;
+
+				lastCardNibble = booking.getLastCardNibble();
+				isValidLastCardNibble = lastCardNibble != null && Pattern.matches("^\\d{4}$", lastCardNibble);
+
+				super.state(context, isValidLastCardNibble, "lastCardNibble", "acme.validation.booking.lastCardNibble.message");
+			}
 
 		}
 

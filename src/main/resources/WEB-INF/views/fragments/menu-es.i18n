@@ -64,6 +64,7 @@ master.menu.assistance-agent = Agente de asistencia
 master.menu.assistance-agent.list-public-claims-undergoing = Listar reclamaciones públicas en curso
 master.menu.assistance-agent.list-public-claims-completed = Listar reclamaciones públicas completadas
 master.menu.assistance-agent.list-claims-undergoing = Listar reclamaciones no públicas en curso
+master.menu.assistance-agent.create-claim = Crear reclamación
 
 # master.menu.user-account ####################################################
 

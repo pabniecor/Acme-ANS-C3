@@ -14,7 +14,6 @@ assistance-agent.claim.form.label.leg = Etapa:
 assistance-agent.claim.list.title = Lista de reclamaciones
 assistance-agent.claim.form.title = Formulario de reclamaciones
 
-assistance-agent.claim.list.button.create = Crear reclamación
 assistance-agent.claim.form.button.create = Crear reclamación
 assistance-agent.claim.form.button.update = Actualizar reclamación
 assistance-agent.claim.form.button.delete = Eliminar reclamación

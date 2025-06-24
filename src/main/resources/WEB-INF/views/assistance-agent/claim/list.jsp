@@ -9,5 +9,3 @@
 	<acme:list-column code="assistance-agent.claim.list.label.accepted" path="accepted" width="33%"/>
 	<acme:list-payload path="payload"/>	
 </acme:list>
-
-<acme:button code="assistance-agent.claim.list.button.create" action="/assistance-agent/claim/create"/>

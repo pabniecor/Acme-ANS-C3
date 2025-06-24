@@ -10,7 +10,6 @@
 	<acme:input-select code="assistance-agent.tracking-log.form.label.status" path="status" choices="${trackStatus}" readonly="${_command == 'reclaim' || reclaimed == true}"/>
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.resolution" path="resolution" />
 	<acme:input-checkbox code="assistance-agent.tracking-log.form.label.draftMode" path="draftMode" readonly="true"/>
-	<acme:input-select code="assistance-agent.tracking-log.form.label.claim" path="claim" choices="${claims}" readonly="true" />
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">

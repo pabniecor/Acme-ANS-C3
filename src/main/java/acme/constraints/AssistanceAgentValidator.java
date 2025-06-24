@@ -36,14 +36,12 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 		if (assistanceAgent == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			String name = assistanceAgent.getIdentity().getName();
-			String surname = assistanceAgent.getIdentity().getSurname();
+			{
+				String name = assistanceAgent.getIdentity().getName();
+				String surname = assistanceAgent.getIdentity().getSurname();
 
-			boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
+				boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
 
-<<<<<<< Updated upstream
-			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
-=======
 				super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
 			}
 
@@ -58,7 +56,7 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 					super.state(context, uniqueEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.uniqueEmployeeCode.message");
 				}
 			}
->>>>>>> Stashed changes
+
 		}
 
 		result = !super.hasErrors(context);

@@ -60,6 +60,10 @@ acme.validation.customer.passenger.error.booking-exists = Este pasajero está as
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 acme.validation.assistanceAgent.pattern-employeeCode.message = El código de empleado no sigue el patrón requerido: "^[A-Z]{2-3}\d{6}$"
+<<<<<<< Updated upstream
+=======
+acme.validation.assistanceAgent.uniqueEmployeeCode.message = El código de empleado debe ser único para cada agente de asistencia
+>>>>>>> Stashed changes
 
 acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
 

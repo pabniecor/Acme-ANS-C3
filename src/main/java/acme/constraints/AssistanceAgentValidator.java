@@ -1,6 +1,8 @@
 
 package acme.constraints;
 
+import java.util.Collection;
+
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,24 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 
 			boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
 
+<<<<<<< Updated upstream
 			super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
+=======
+				super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
+			}
+
+			{
+				boolean uniqueEmployeeCode;
+				Collection<String> allEmployeeCodes = this.repository.findAllEmployeeCodes();
+				String employeeCode = assistanceAgent.getEmployeeCode();
+
+				if (allEmployeeCodes != null && employeeCode != null) {
+					uniqueEmployeeCode = allEmployeeCodes.stream().filter(ec -> ec.equals(employeeCode)).toList().size() == 1;
+
+					super.state(context, uniqueEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.uniqueEmployeeCode.message");
+				}
+			}
+>>>>>>> Stashed changes
 		}
 
 		result = !super.hasErrors(context);

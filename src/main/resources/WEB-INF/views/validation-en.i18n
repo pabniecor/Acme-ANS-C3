@@ -52,6 +52,10 @@ acme.validation.passenger.duplicate-passportNumber.message = The passenger's pas
 
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
+<<<<<<< Updated upstream
+=======
+acme.validation.assistanceAgent.uniqueEmployeeCode.message = Employee code must be unique for each assistance agent
+>>>>>>> Stashed changes
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
 

@@ -29,7 +29,7 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 		currentAgent = claim == null ? null : claim.getAssistanceAgent();
 
-		boolean authorised = claim != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !claim.getDraftMode());
+		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent);
 
 		super.getResponse().setAuthorised(authorised);
 	}

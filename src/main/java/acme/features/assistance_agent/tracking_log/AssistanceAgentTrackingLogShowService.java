@@ -28,7 +28,7 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 		trackingLog = this.repository.findTrackingLogById(trackingLogId);
 		currentAgent = trackingLog == null ? null : trackingLog.getClaim().getAssistanceAgent();
 
-		boolean authorised = trackingLog != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !trackingLog.getDraftMode());
+		boolean authorised = trackingLog != null && super.getRequest().getPrincipal().hasRealm(currentAgent);
 
 		super.getResponse().setAuthorised(authorised);
 	}

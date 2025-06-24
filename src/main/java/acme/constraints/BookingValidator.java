@@ -28,7 +28,6 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 
 	@Override
 	public boolean isValid(final Booking booking, final ConstraintValidatorContext context) {
-		// HINT: job can be null
 		assert context != null;
 
 		boolean result;
@@ -53,6 +52,15 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 				isValidLocatorCode = locatorCode != null && Pattern.matches("^[A-Z0-9]{6,8}$", locatorCode);
 
 				super.state(context, isValidLocatorCode, "locatorCode", "acme.validation.booking.locatorCode.message");
+			}
+			{
+				String lastCardNibble;
+				boolean isValidLastCardNibble;
+
+				lastCardNibble = booking.getLastCardNibble();
+				isValidLastCardNibble = lastCardNibble != null && Pattern.matches("^\\d{4}$", lastCardNibble);
+
+				super.state(context, isValidLastCardNibble, "lastCardNibble", "acme.validation.booking.lastCardNibble.message");
 			}
 
 		}

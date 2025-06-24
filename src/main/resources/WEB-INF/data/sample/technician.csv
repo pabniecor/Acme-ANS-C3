@@ -1,3 +1,4 @@
 key,key:userAccount,licenseNumber,phoneNumber,specialisation,healthTestPassed,experience,certifications
 technician1,user-account-technician-01,AB123456,9876543210,لوريم إيبسوم,true,23,洛伦·伊普森
 technician2,user-account-technician-02,XYZ654321,+5551234567890,<marquee>Hacked</marquee>,false,35,<script>alert(‘Hacked!’);</script>
+technician3,user-account-technician-03,HRZ654321,+5551234567890,<marquee>Hacked</marquee>,false,35,<script>alert(‘Hacked!’);</script>

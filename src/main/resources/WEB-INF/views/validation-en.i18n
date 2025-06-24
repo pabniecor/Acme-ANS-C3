@@ -5,8 +5,8 @@ acme.validation.flightCrewMember.employeeCode.message = The manager's identifier
 acme.validation.maintenanceRecord.coherentNextInspection.message = Next inspection must take place after last inspection
 
 acme.validation.technician.uniqueLicenseNumber.message = License number must be unique for each technician
-acme.validation.technician.correctLicenseNumberPattern.message = License number must follow this pattern -> ^[A-Z]{2,3}\\d{6}$
-acme.validation.technician.correctPhoneNumberPattern.message = Phone number must follow this pattern -> ^\\+?\\d{6,15}$
+acme.validation.technician.correctLicenseNumberPattern.message = The specified license number does not follow the required pattern
+acme.validation.technician.correctPhoneNumberPattern.message = The specified phone number does not follow the required pattern
 acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenance record it must have any associated task
 acme.validation.technician.maintenanceRecord.error.validStatus.message = A new maintenance record cannot be already completed
 
@@ -45,9 +45,10 @@ acme.validation.airline.iataCode.message = The airline's iataCode is incorrect
 
 acme.validation.booking.duplicate-locatorCode.message = The booking's locatorCode is duplicated
 acme.validation.booking.locatorCode.message = The booking's locatorCode is incorrect
+acme.validation.booking.lastCardNibble.message = Invalid last card nibble
 
-acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
-acme.validation.customer.identifier.message = The customer's identifier is incorrect
+acme.validation.passenger.passportNumber.message = Invalid passport number
+acme.validation.passenger.duplicate-passportNumber.message = The passenger's passport number is duplicated
 
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
@@ -72,6 +73,9 @@ acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = Claim crea
 
 acme.validation.confirmation.message = Need confirmation
 
+acme.validation.customer.duplicate-identifier.message = The customer's identifier is duplicated
+acme.validation.customer.identifier.message = The customer's identifier is incorrect
+acme.validation.customer.phone-number.message = The customer's phone number is incorrect
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
 acme.validation.customer.publishedFlight.message = The flight assigned must be published

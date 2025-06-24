@@ -36,9 +36,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>acme-framework-25.5.0</name>
+			<name>acme-framework-25.6.0</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.5.0/target/classes</locationURI>
+			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.6.0/target/classes</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

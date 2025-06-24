@@ -27,10 +27,11 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 		assert context != null;
 
 		boolean result;
-		if (customer == null)
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else {
 
+		if (customer == null) {
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+			result = false;
+		} else {
 			boolean uniqueCustomer;
 			Customer existingCustomer;
 
@@ -38,23 +39,21 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 			uniqueCustomer = existingCustomer == null || existingCustomer.equals(customer);
 
 			super.state(context, uniqueCustomer, "identifier", "acme.validation.customer.duplicate-identifier.message");
-		}
-		{
-			boolean isValidIdentifier;
 
-			isValidIdentifier = customer.getIdentifier().matches("^[A-Z]{2,3}\\d{6}$");
+			boolean isValidIdentifier = customer.getIdentifier().matches("^[A-Z]{2,3}\\d{6}$");
 			super.state(context, isValidIdentifier, "identifier", "acme.validation.customer.identifier.message");
-		}
-		{
+
 			String name = customer.getIdentity().getName();
 			String surname = customer.getIdentity().getSurname();
-
 			boolean correctIdentifier = customer.getIdentifier().charAt(0) == name.charAt(0) && customer.getIdentifier().charAt(1) == surname.charAt(0);
 			super.state(context, correctIdentifier, "identifier", "acme.validation.customer.identifier.message");
+
+			boolean isValidPhoneNumber = customer.getPhoneNumber().matches("^\\+?\\d{6,15}$");
+			super.state(context, isValidPhoneNumber, "phoneNumber", "acme.validation.customer.phone-number.message");
+
+			result = !super.hasErrors(context);
 		}
 
-		result = !super.hasErrors(context);
 		return result;
 	}
-
 }

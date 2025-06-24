@@ -17,7 +17,6 @@
 	<jstl:choose>		
  		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
  		<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list-for-mr?masterId=${id}"/>
- 			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	
  			<acme:submit code="technician.maintenanceRecord.form.button.update" action="/technician/maintenance-record/update"/>
  			<acme:submit code="technician.maintenanceRecord.form.button.delete" action="/technician/maintenance-record/delete"/>
  			<acme:submit code="technician.maintenanceRecord.form.button.publish" action="/technician/maintenance-record/publish"/>
@@ -26,7 +25,6 @@
  			<acme:button code="technician.maintenanceRecord.form.button.tasks" action="/technician/task/list-for-mr?masterId=${id}"/>
  		</jstl:when>
  		<jstl:when test="${_command == 'create'}">
- 			<acme:input-checkbox code="technician.maintenanceRecord.form.label.confirmation" path="confirmation" />	
  			<acme:submit code="technician.maintenanceRecord.form.button.create" action="/technician/maintenance-record/create"/>
  		</jstl:when>		
  	</jstl:choose>

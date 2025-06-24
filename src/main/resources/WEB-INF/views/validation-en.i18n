@@ -10,12 +10,6 @@ acme.validation.technician.correctPhoneNumberPattern.message = The specified pho
 acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message = To publish a maintenance record it must have any associated task
 acme.validation.technician.maintenanceRecord.error.validStatus.message = A new maintenance record cannot be already completed
 
-acme.validation.technician.involves.error.notAssignedTask.message = The task is not assigned to the maintenance record, this maintenance record has these tasks: {0}
-acme.validation.technician.involves.error.notAssignedMR.message = The maintenance record is not assigned related with the task, this task is assigned to: {0}
-acme.validation.technician.involves.error.alreadyAssignedTask.message = This task is already assigned to this maintenance record, you may assign these: {0}
-acme.validation.technician.involves.error.alreadyAssignedMR.message = This maintenance record is already related with this task, these others are not: {0} 
-acme.validation.technician.involves.error.nullDelete.message = You must choose a task and a maintenance record
-
 acme.validation.manager.duplicate-identifier.message = The manager's identifier is duplicated
 acme.validation.manager.identifier.message = The manager's identifier is incorrect
 

@@ -14,6 +14,4 @@
  
 <jstl:if test="${_command == 'list'}">
 	<acme:button code="technician.maintenanceRecord.list.button.create" action="/technician/maintenance-record/create"/>
-	<acme:button code="technician.involves.form.button.create" action="/technician/involves/create"/>
-	<acme:button code="technician.involves.form.button.delete" action="/technician/involves/delete"/>
 </jstl:if>

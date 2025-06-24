@@ -67,7 +67,6 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 	@Override
 	public void validate(final MaintenanceRecord mr) {
 		boolean hasNoTasks;
-		boolean confirmation;
 		Collection<Involves> involves;
 		Collection<Task> involvedTasks = new ArrayList<>();
 
@@ -79,9 +78,6 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 
 		hasNoTasks = involvedTasks.isEmpty();
 		super.state(!hasNoTasks, "draftMode", "acme.validation.technician.maintenanceRecord.error.noMrWithoutTasks.message");
-
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override

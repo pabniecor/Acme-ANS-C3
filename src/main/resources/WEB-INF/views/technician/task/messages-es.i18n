@@ -1,6 +1,7 @@
 technician.task.list.label.taskType = Tipo de tarea:
 technician.task.list.label.priority = Prioridad:
 technician.task.list.label.estimatedDuration = Duración estimada:
+technician.task.list.label.assignableTasks = Elija una tarea para asignar
 
 technician.task.form.label.taskType = Tipo de tarea:
 technician.task.form.label.description = Descripción:

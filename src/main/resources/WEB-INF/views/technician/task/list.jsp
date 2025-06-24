@@ -10,6 +10,12 @@
  	<acme:list-payload path="payload"/>	
  </acme:list>
  
-  <jstl:if test="${_command == 'list'}">
-	<acme:button code="technician.task.list.button.create" action="/technician/task/create"/>
-  </jstl:if>
+ <jstl:choose>
+ 	<jstl:when test="${_command == 'list'}">
+ 		<acme:button code="technician.task.list.button.create" action="/technician/task/create"/>
+ 	</jstl:when>
+ 	<jstl:when test="${_command == 'list-for-mr'}">
+ 		<acme:button code="technician.involves.form.button.create" action="/technician/involves/create?mrId=${mrId}"/>
+		<acme:button code="technician.involves.form.button.delete" action="/technician/involves/delete?mrId=${mrId}"/>
+	</jstl:when>
+ </jstl:choose>

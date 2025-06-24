@@ -62,10 +62,6 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 
 	@Override
 	public void validate(final MaintenanceRecord mr) {
-		boolean confirmation;
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
 		boolean validStatus;
 		validStatus = super.getRequest().getData("maintenanceStatus", MaintenanceStatus.class) == MaintenanceStatus.COMPLETED;
 		super.state(!validStatus, "maintenanceStatus", "acme.validation.technician.maintenanceRecord.error.validStatus.message");

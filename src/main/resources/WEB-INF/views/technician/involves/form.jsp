@@ -5,17 +5,14 @@
 
 <acme:form>
 	
-	<acme:input-select code="technician.involves.form.label.maintenanceRecord" path="maintenanceRecord" choices="${MRs}"/>
 	<acme:input-select code="technician.involves.form.label.task" path="task" choices="${tasks}"/>
 	
 	<jstl:choose>		
- 		<jstl:when test="${_command == 'create'}">
- 			<acme:input-checkbox code="technician.involves.form.label.confirmation" path="confirmation" />	
- 			<acme:submit code="technician.involves.form.button.create.submit" action="/technician/involves/create"/>
+ 		<jstl:when test="${_command == 'create'}">	
+ 			<acme:submit code="technician.involves.form.button.create.submit" action="/technician/involves/create?mrId=${mrId}"/>
  		</jstl:when>
  		<jstl:when test="${_command == 'delete'}">
- 		 	<acme:input-checkbox code="technician.involves.form.label.confirmation" path="confirmation" />	
- 			<acme:submit code="technician.involves.form.button.delete.submit" action="/technician/involves/delete"/>
+ 			<acme:submit code="technician.involves.form.button.delete.submit" action="/technician/involves/delete?mrId=${mrId}"/>
  		</jstl:when>		
  	</jstl:choose>
 		

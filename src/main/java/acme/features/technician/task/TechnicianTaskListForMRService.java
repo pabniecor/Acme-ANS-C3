@@ -66,4 +66,14 @@ public class TechnicianTaskListForMRService extends AbstractGuiService<Technicia
 		super.getResponse().addData(dataset);
 	}
 
+	@Override
+	public void unbind(final Collection<Task> tasks) {
+
+		int mrId;
+
+		mrId = super.getRequest().getData("masterId", int.class);
+
+		super.getResponse().addGlobal("mrId", mrId);
+	}
+
 }

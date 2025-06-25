@@ -1,8 +1,6 @@
 
 package acme.constraints;
 
-import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,34 +33,13 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 		if (booking == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			{
-				boolean uniqueBooking;
-				Booking existingBooking;
+			boolean uniqueBooking;
+			Booking existingBooking;
 
-				existingBooking = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
-				uniqueBooking = existingBooking == null || booking.getLocatorCode().isBlank() || existingBooking.equals(booking);
+			existingBooking = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
+			uniqueBooking = existingBooking == null || booking.getLocatorCode().isBlank() || existingBooking.equals(booking);
 
-				super.state(context, uniqueBooking, "locatorCode", "acme.validation.booking.duplicate-locatorCode.message");
-			}
-			{
-				String locatorCode;
-				boolean isValidLocatorCode;
-
-				locatorCode = booking.getLocatorCode();
-				isValidLocatorCode = locatorCode != null && Pattern.matches("^[A-Z0-9]{6,8}$", locatorCode);
-
-				super.state(context, isValidLocatorCode, "locatorCode", "acme.validation.booking.locatorCode.message");
-			}
-			{
-				String lastCardNibble;
-				boolean isValidLastCardNibble;
-
-				lastCardNibble = booking.getLastCardNibble();
-				isValidLastCardNibble = lastCardNibble != null && Pattern.matches("^\\d{4}$", lastCardNibble);
-
-				super.state(context, isValidLastCardNibble, "lastCardNibble", "acme.validation.booking.lastCardNibble.message");
-			}
-
+			super.state(context, uniqueBooking, "locatorCode", "acme.validation.booking.duplicate-locatorCode.message");
 		}
 
 		result = !super.hasErrors(context);

@@ -38,7 +38,7 @@ acme.validation.airline.duplicate-iataCode.message = El código iata de la aerol
 acme.validation.airline.iataCode.message = El código iata de la aerolínea es incorrecto
 
 acme.validation.booking.duplicate-locatorCode.message = El código localizador de la reserva está duplicado
-acme.validation.booking.locatorCode.message = El código localizador de la reserva es incorrecto
+acme.validation.booking.locatorCode.message = El código localizador de la reserva es inválido
 acme.validation.booking.lastCardNibble.message = Últimos cuatro dígitos de la tarjeta de crédito inválidos
 
 acme.validation.passenger.passportNumber.message = Número de pasaporte inválido

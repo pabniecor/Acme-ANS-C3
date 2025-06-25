@@ -1,8 +1,6 @@
 
 package acme.constraints;
 
-import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +24,16 @@ public class PassengerValidator extends AbstractValidator<ValidPassenger, Passen
 		if (passenger == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			{
-				String passportNumber;
-				boolean isValidPassportNumber;
+			boolean uniquePassenger;
+			Passenger existingPassenger;
 
-				passportNumber = passenger.getPassportNumber();
-				isValidPassportNumber = passportNumber != null && Pattern.matches("^[A-Z0-9]{6,9}$", passportNumber);
+			// Each customer has a series of passengers associated with a unique passport number
+			// but it may be possible that for different customers there are passengers associated with the same passport number
+			existingPassenger = this.repository.findPassengerByPassportNumberAndCustomer(passenger.getPassportNumber(), passenger.getCustomer().getId());
 
-				super.state(context, isValidPassportNumber, "passportNumber", "acme.validation.passenger.passportNumber.message");
-			}
-			{
-				boolean uniquePassenger;
-				Passenger existingPassenger;
+			uniquePassenger = existingPassenger == null || passenger.getPassportNumber().isBlank() || existingPassenger.equals(passenger);
 
-				// Each customer has a series of passengers associated with a unique passport number
-				// but it may be possible that for different customers there are passengers associated with the same passport number
-				existingPassenger = this.repository.findPassengerByPassportNumberAndCustomer(passenger.getPassportNumber(), passenger.getCustomer().getId());
-
-				uniquePassenger = existingPassenger == null || passenger.getPassportNumber().isBlank() || existingPassenger.equals(passenger);
-
-				super.state(context, uniquePassenger, "passportNumber", "acme.validation.passenger.duplicate-passportNumber.message");
-			}
+			super.state(context, uniquePassenger, "passportNumber", "acme.validation.passenger.duplicate-passportNumber.message");
 		}
 
 		result = !super.hasErrors(context);

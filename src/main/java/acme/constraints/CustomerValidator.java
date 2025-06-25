@@ -40,16 +40,10 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 
 			super.state(context, uniqueCustomer, "identifier", "acme.validation.customer.duplicate-identifier.message");
 
-			boolean isValidIdentifier = customer.getIdentifier().matches("^[A-Z]{2,3}\\d{6}$");
-			super.state(context, isValidIdentifier, "identifier", "acme.validation.customer.identifier.message");
-
 			String name = customer.getIdentity().getName();
 			String surname = customer.getIdentity().getSurname();
 			boolean correctIdentifier = customer.getIdentifier().charAt(0) == name.charAt(0) && customer.getIdentifier().charAt(1) == surname.charAt(0);
-			super.state(context, correctIdentifier, "identifier", "acme.validation.customer.identifier.message");
-
-			boolean isValidPhoneNumber = customer.getPhoneNumber().matches("^\\+?\\d{6,15}$");
-			super.state(context, isValidPhoneNumber, "phoneNumber", "acme.validation.customer.phone-number.message");
+			super.state(context, correctIdentifier, "identifier", "acme.validation.customer.identifier-incorrect-initials.message");
 
 			result = !super.hasErrors(context);
 		}

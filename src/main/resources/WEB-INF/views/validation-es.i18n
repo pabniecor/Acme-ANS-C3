@@ -51,6 +51,7 @@ acme.validation.customer.lastCardNibble.message = Los últimos cuatro dígitos d
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados para poder ser publicada
 acme.validation.customer.publishedFlight.message = El vuelo asignado debe estar publicado
 acme.validation.customer.passenger.error.booking-exists = Este pasajero está asociado a una o más reservas
+acme.validation.customer.identifier-incorrect-initials.message = Iniciales incorrectas en el identificador
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 acme.validation.assistanceAgent.pattern-employeeCode.message = El código de empleado no sigue el patrón requerido: "^[A-Z]{2-3}\d{6}$"

@@ -46,12 +46,11 @@ acme.validation.passenger.duplicate-passportNumber.message = The passenger's pas
 
 acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
 acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
-<<<<<<< Updated upstream
-=======
 acme.validation.assistanceAgent.uniqueEmployeeCode.message = Employee code must be unique for each assistance agent
->>>>>>> Stashed changes
 
 acme.validation.service.promotionCode.message = The last two digits must correspond to the current year
+acme.validation.service.pattern-promotionCode.message = The promotion code does not follow the pattern required: "^[A-Z]{4}-[0-9]{2}$"
+acme.validation.service.uniquePromotionCode.message = Promotion code must be unique for each service
 
 acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Resolution percentage must be 100% when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Resolution percentage cannot be 100% when status is PENDING

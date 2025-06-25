@@ -54,12 +54,11 @@ acme.validation.customer.passenger.error.booking-exists = Este pasajero está as
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
 acme.validation.assistanceAgent.pattern-employeeCode.message = El código de empleado no sigue el patrón requerido: "^[A-Z]{2-3}\d{6}$"
-<<<<<<< Updated upstream
-=======
 acme.validation.assistanceAgent.uniqueEmployeeCode.message = El código de empleado debe ser único para cada agente de asistencia
->>>>>>> Stashed changes
 
 acme.validation.service.promotionCode.message = Los dos últimos dígitos deben corresponder al año actual
+acme.validation.service.pattern-promotionCode.message = El código promocional no sigue el patrón requerido: "^[A-Z]{4}-[0-9]{2}$"
+acme.validation.service.uniqueEmployeeCode.message = El código promocional debe ser único para cada servicio
 
 acme.validation.trackingLog.resolutionPercentage-mustBe100.message = El porcentaje de resolución debe ser 100% cuando el estado es ACCEPTED o REJECTED
 acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = El porcentaje de resolución no puede ser 100% cuando el estado es PENDING

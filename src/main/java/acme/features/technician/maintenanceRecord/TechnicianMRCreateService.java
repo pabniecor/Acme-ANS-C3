@@ -26,7 +26,7 @@ public class TechnicianMRCreateService extends AbstractGuiService<Technician, Ma
 	public void authorise() {
 		boolean status;
 		Collection<Aircraft> aircrafts;
-		int aircraftId;
+		int aircraftId = 0;
 		Aircraft a;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);

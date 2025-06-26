@@ -30,7 +30,7 @@ public class TechnicianMRShowService extends AbstractGuiService<Technician, Main
 
 		if (mr != null) {
 			if (mr.getDraftMode())
-				authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && mr.getTechnician().getId() == technicianId;
+				authorised = mr.getTechnician().getId() == technicianId;
 			else
 				authorised = super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 		} else

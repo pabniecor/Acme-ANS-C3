@@ -39,9 +39,7 @@ public class TechnicianInvolvesDeleteService extends AbstractGuiService<Technici
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && MRs.contains(mr);
 
-		if (super.getRequest().hasData("id", int.class) && super.getRequest().getMethod().equals("GET"))
-			status = false;
-		else if (super.getRequest().hasData("id", int.class)) {
+		if (super.getRequest().hasData("id", int.class)) {
 
 			tasks = this.repository.findTasksByMRId(mrId);
 			selectedTaskId = super.getRequest().getData("task", int.class);

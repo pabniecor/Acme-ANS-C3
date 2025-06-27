@@ -16,5 +16,5 @@
 </jstl:if>
 
 <jstl:if test="${couldReclaim == true}">
-    <acme:button code="assistance-agent.tracking-log.show.button.reclaim" action="/assistance-agent/tracking-log/reclaim?masterId=${id}"/>
+    <acme:button code="assistance-agent.tracking-log.show.button.reclaim" action="/assistance-agent/tracking-log/reclaim?masterId=${masterId}"/>
 </jstl:if>

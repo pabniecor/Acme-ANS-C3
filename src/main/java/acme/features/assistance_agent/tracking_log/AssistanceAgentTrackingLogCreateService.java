@@ -1,6 +1,7 @@
 
 package acme.features.assistance_agent.tracking_log;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,15 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		boolean status;
 		int claimId;
 		Claim claim;
+		Collection<TrackingLog> trackingLogs;
+		boolean existsTl100Percentage;
 
 		claimId = super.getRequest().getData("masterId", int.class);
 		claim = this.repository.findClaimById(claimId);
-		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent());
+		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
+		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
+
+		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !existsTl100Percentage;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -62,7 +68,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 		int claimId = trackingLog.getClaim().getId();
 
-		List<TrackingLog> trackingLogsOrderedByPercentage = this.repository.getTrackingLogsByResolutionPercentageOrder(claimId);
+		List<TrackingLog> trackingLogsOrderedByPercentage = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
 
 		if (trackingLogsOrderedByPercentage != null && !trackingLogsOrderedByPercentage.isEmpty()) {
 			TrackingLog trackingLogHighestPercentage = trackingLogsOrderedByPercentage.get(0);

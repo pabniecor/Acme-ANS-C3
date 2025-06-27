@@ -1,6 +1,8 @@
 
 package acme.features.assistance_agent.tracking_log;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -24,28 +26,34 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 	public void authorise() {
 		boolean status = false;
 		AssistanceAgent currentAgent;
-		int trackingLogId;
-		TrackingLog trackingLog;
+		int claimId;
+		List<TrackingLog> trackingLogs;
+		TrackingLog lastTrackingLog;
 
-		trackingLogId = super.getRequest().getData("id", int.class);
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		claimId = super.getRequest().getData("masterId", int.class);
+		trackingLogs = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
+		lastTrackingLog = trackingLogs.get(0);
 
-		currentAgent = trackingLog == null ? null : trackingLog.getClaim().getAssistanceAgent();
+		currentAgent = lastTrackingLog == null ? null : lastTrackingLog.getClaim().getAssistanceAgent();
 
-		status = trackingLog != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && trackingLog.getReclaim() == true && !trackingLog.getDraftMode();
+		status = lastTrackingLog != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && lastTrackingLog.getReclaim() == true && !lastTrackingLog.getDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		TrackingLog trackingLog;
+		int claimId;
+		List<TrackingLog> trackingLogs;
 		TrackingLog lastTrackingLog;
-		Claim claimAssociated = new Claim();
+		Claim claimAssociated;
 		AcceptanceStatus statusAssociated;
-		int id = super.getRequest().getData("masterId", int.class);
+		TrackingLog trackingLog;
 
-		lastTrackingLog = this.repository.findTrackingLogById(id);
+		claimId = super.getRequest().getData("masterId", int.class);
+		trackingLogs = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
+		lastTrackingLog = trackingLogs.get(0);
+
 		claimAssociated = lastTrackingLog.getClaim();
 		statusAssociated = lastTrackingLog.getStatus();
 

@@ -18,9 +18,6 @@
 			<acme:submit code="assistance-agent.tracking-log.form.button.delete" action="/assistance-agent/tracking-log/delete"/>
 			<acme:submit code="assistance-agent.tracking-log.form.button.publish" action="/assistance-agent/tracking-log/publish"/>
 		</jstl:when>
-		<jstl:when test="${_command == 'show' && reclaim == true}">
-			<acme:button code="assistance-agent.tracking-log.show.button.reclaim" action="/assistance-agent/tracking-log/reclaim?masterId=${id}"/>
-		</jstl:when>
 		<jstl:when test="${_command == 'reclaim'}">
 			<acme:input-checkbox code="assistance-agent.tracking-log.form.label.confirmation" path="confirmation"/>
 			<acme:submit code="assistance-agent.tracking-log.form.button.reclaim" action="/assistance-agent/tracking-log/reclaim?masterId=${masterId}"/>

@@ -61,10 +61,18 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	@Override
 	public void unbind(final Collection<TrackingLog> trackingLog) {
 		int masterId;
+		Collection<TrackingLog> trackingLogs;
+		boolean existsTl100Percentage;
+		boolean couldReclaim;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 
-		super.getResponse().addGlobal("masterId", masterId);
+		trackingLogs = this.repository.findAllTrackingLogsByClaimId(masterId);
+		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
+		couldReclaim = trackingLogs.stream().anyMatch(tl -> tl.getReclaim());
 
+		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("claimIsCompleted", existsTl100Percentage);
+		super.getResponse().addGlobal("couldReclaim", couldReclaim);
 	}
 }

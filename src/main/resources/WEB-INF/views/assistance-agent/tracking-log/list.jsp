@@ -11,4 +11,10 @@
 	<acme:list-payload path="payload"/>	
 </acme:list>
 
-<acme:button code="assistance-agent.tracking-log.list.button.create" action="/assistance-agent/tracking-log/create?masterId=${masterId}"/>
+<jstl:if test="${claimIsCompleted == false}">
+    <acme:button code="assistance-agent.tracking-log.list.button.create" action="/assistance-agent/tracking-log/create?masterId=${masterId}" />
+</jstl:if>
+
+<jstl:if test="${couldReclaim == true}">
+    <acme:button code="assistance-agent.tracking-log.show.button.reclaim" action="/assistance-agent/tracking-log/reclaim?masterId=${id}"/>
+</jstl:if>

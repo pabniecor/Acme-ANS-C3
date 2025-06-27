@@ -37,8 +37,8 @@ public interface AssistanceAgentTrackingLogRepository extends AbstractRepository
 	Claim findClaimById(int claimId);
 
 	@Query("SELECT tl FROM TrackingLog tl WHERE tl.claim.id = :claimId ORDER BY tl.resolutionPercentage DESC")
-	List<TrackingLog> getTrackingLogsByResolutionPercentageOrder(int claimId);
+	List<TrackingLog> findTrackingLogsByResolutionPercentageOrder(int claimId);
 
 	@Query("SELECT tl FROM TrackingLog tl WHERE tl.claim.id = :claimId ORDER BY tl.creationMoment ASC")
-	List<TrackingLog> getTrackingLogsBycreationMomentOrderAsc(int claimId);
+	List<TrackingLog> findTrackingLogsBycreationMomentOrderAsc(int claimId);
 }

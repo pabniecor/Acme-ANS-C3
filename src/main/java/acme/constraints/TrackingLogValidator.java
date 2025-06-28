@@ -48,7 +48,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 			if (indicator != AcceptanceStatus.PENDING) {
 				if (indicator == AcceptanceStatus.ACCEPTED || indicator == AcceptanceStatus.REJECTED) {
 					{
-						correctResolutionPercentage = resolutionPercentage != null ? resolutionPercentage == 100. : true;
+						correctResolutionPercentage = resolutionPercentage != null && resolutionPercentage >= 0. && resolutionPercentage <= 100. ? resolutionPercentage == 100. : true;
 						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
 					}
 
@@ -60,7 +60,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 					}
 				}
 			} else {
-				correctResolutionPercentage = resolutionPercentage != null ? resolutionPercentage < 100. : true;
+				correctResolutionPercentage = resolutionPercentage != null && resolutionPercentage <= 100. ? resolutionPercentage < 100. : true;
 				super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
 			}
 
@@ -81,7 +81,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 				int claimId = trackingLog.getClaim().getId();
 				List<TrackingLog> trackingLogsOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimId);
 
-				if (trackingLogsOrdered.contains(trackingLog) && !trackingLog.getReclaimed()) {
+				if (trackingLogsOrdered.contains(trackingLog) && !trackingLog.getReclaimed() && trackingLog.getResolutionPercentage() != null && trackingLog.getResolutionPercentage() <= 100. && trackingLog.getResolutionPercentage() >= 0.) {
 					TrackingLog trackingLogActual = trackingLogsOrdered.stream().filter(tl -> tl.getId() == trackingLog.getId()).findFirst().get();
 
 					int indiceActual = trackingLogsOrdered.indexOf(trackingLogActual);
@@ -120,6 +120,26 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 				if (!claimCreationBeforeTrackingLogCreation || !claimCreationBeforeTrackingLogUpdate) {
 					super.state(context, claimCreationBeforeTrackingLogCreation, "creationMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
 					super.state(context, claimCreationBeforeTrackingLogUpdate, "lastUpdateMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
+				}
+			}
+
+			{
+				boolean previosTlPublishedToCreate;
+				int claimAssociatedId;
+				List<TrackingLog> trackingLogsRelatedToClaimOrdered;
+				int actualTrackingLogIndex;
+				List<TrackingLog> previousTrackingLogs;
+
+				claimAssociatedId = trackingLog.getClaim().getId();
+				trackingLogsRelatedToClaimOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimAssociatedId);
+
+				actualTrackingLogIndex = trackingLogsRelatedToClaimOrdered.indexOf(trackingLog);
+
+				if (actualTrackingLogIndex != -1) { // para que no me lo tenga en cuenta en el create
+					previousTrackingLogs = trackingLogsRelatedToClaimOrdered.subList(0, actualTrackingLogIndex); // tener en cuenta que es hasta actualTrackingLogIndex - 1
+
+					previosTlPublishedToCreate = previousTrackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
+					super.state(context, previosTlPublishedToCreate, "draftMode", "acme.validation.trackingLog.previousTlMustBePublished.message");
 				}
 			}
 		}

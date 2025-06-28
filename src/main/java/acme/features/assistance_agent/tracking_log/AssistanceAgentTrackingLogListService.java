@@ -1,7 +1,6 @@
 
 package acme.features.assistance_agent.tracking_log;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +30,14 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		claim = this.repository.findClaimById(claimId);
 		currentAgent = claim == null ? null : claim.getAssistanceAgent();
 
-		status = claim != null && (super.getRequest().getPrincipal().hasRealm(currentAgent) || !claim.getDraftMode());
+		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && !claim.getDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Collection<TrackingLog> trackingLogs = new ArrayList<>();
+		Collection<TrackingLog> trackingLogs;
 		int claimId;
 
 		claimId = super.getRequest().getData("masterId", int.class);
@@ -63,16 +62,21 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		int masterId;
 		Collection<TrackingLog> trackingLogs;
 		boolean existsTl100Percentage;
+		boolean previosTlPublishedToCreate;
 		boolean couldReclaim;
+		boolean couldCreate;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 
 		trackingLogs = this.repository.findAllTrackingLogsByClaimId(masterId);
-		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
+		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.) ? false : true; // Al revés ya que busco que no haya uno al 100% para crear
+		previosTlPublishedToCreate = trackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
+
+		couldCreate = existsTl100Percentage && previosTlPublishedToCreate;
 		couldReclaim = trackingLogs.stream().anyMatch(tl -> tl.getReclaim());
 
 		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("claimIsCompleted", existsTl100Percentage);
+		super.getResponse().addGlobal("couldCreate", couldCreate);
 		super.getResponse().addGlobal("couldReclaim", couldReclaim);
 	}
 }

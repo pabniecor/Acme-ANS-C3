@@ -3,13 +3,13 @@ member.leg.list.label.flight = Vuelo:
 member.leg.list.label.arrival-time = Hora de llegada estimada: 
 member.leg.list.label.arrival-airport = Aeropuerto de llegada:
 
-flight-crew-member.leg.list.title = Escalas asociadas a la asignación de vuelo.
-flight-crew-member.leg.form.title = Formulario de escala
+flight-crew-member.leg.list.title = Tramos asociados a la asignación de vuelo.
+flight-crew-member.leg.form.title = Formulario de tramo
 
 member.leg.form.label.flight-number = Número de vuelo: 
 member.leg.form.label.scheduled-departure = Fecha programada de salida:
 member.leg.form.label.scheduled-arrival = Fecha programada de llegada:
-member.leg.form.label.status = Estado de la escala: 
+member.leg.form.label.status = Estado del tramo: 
 member.leg.form.label.flight = Vuelo: 
 member.leg.form.label.departure-airport = Aeropuerto de salida:
 member.leg.form.label.arrival-airport = Aeropuerto de llegada: 

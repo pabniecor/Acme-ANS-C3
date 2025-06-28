@@ -1,10 +1,10 @@
 member.flight-assignment.list.label.status = Estatus: 
 member.flight-assignment.list.label.moment = Momento: 
-member.flight-assignment.list.label.duty = Servicio:
+member.flight-assignment.list.label.duty = Responsabilidad:
 
-member.flight-assignment.form.label.leg = Escala:
+member.flight-assignment.form.label.leg = Tramo:
 member.flight-assignment.form.label.flightcrew = Miembro de la flota: 
-member.flight-assignment.form.label.duty = Servicio: 
+member.flight-assignment.form.label.duty = Responsabilidad: 
 member.flight-assignment.form.label.moment = Momento actual: 
 member.flight-assignment.form.label.status = Estatus: 
 member.flight-assignment.form.label.remarks = Anotaciones: 
@@ -13,7 +13,7 @@ member.flight-assignment.form.label.draft = ¿Borrador?
 flight-crew-member.flight-assignment.list.title = Listado de las asignaciones de vuelo
 flight-crew-member.flight-assignment.form.title = Formulario de asignación de vuelo
 
-member.flight-assignment.form.button.legs = Escalas asociadas
+member.flight-assignment.form.button.legs = Tramos asociados
 member.flight-assignment.form.button.fcm = Miembros asociados
 member.flight-assignment.form.button.als = Registros de actividad asociados
 

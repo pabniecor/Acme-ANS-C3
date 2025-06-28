@@ -6,11 +6,10 @@
 <acme:form>
 	<acme:input-select code="member.flight-assignment.form.label.leg" path="leg" choices="${legs}"/>
 	<acme:input-select code="member.flight-assignment.form.label.duty" path="duty" choices="${duties}"/>
-	<acme:input-moment code="member.flight-assignment.form.label.moment" path="moment" />
 	<acme:input-select code="member.flight-assignment.form.label.status" path="currentStatus" choices="${status}" />
 	<acme:input-textarea code="member.flight-assignment.form.label.remarks" path="remarks" />
 	
-	<jstl:if test="${acme:anyOf(_command, 'show|update|publish|delete')}">
+	<jstl:if test="${acme:anyOf(_command, 'show|update|publish|delete')&&draft == false}">
 			<acme:button code="member.flight-assignment.form.button.legs" action="/flight-crew-member/leg/list?masterId=${id}" />
 			<acme:button code="member.flight-assignment.form.button.fcm" action="/flight-crew-member/flight-crew-member/list?masterId=${id}" />
 			<acme:button code="member.flight-assignment.form.button.als" action="/flight-crew-member/activity-log/list?masterId=${id}" />

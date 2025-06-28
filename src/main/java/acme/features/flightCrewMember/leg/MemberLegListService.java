@@ -30,7 +30,7 @@ public class MemberLegListService extends AbstractGuiService<FlightCrewMember, L
 		if (fa == null)
 			status = false;
 		else
-			status = super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew());
+			status = super.getRequest().getPrincipal().hasRealm(fa.getFlightCrew()) && !fa.getDraft();
 		super.getResponse().setAuthorised(status);
 	}
 

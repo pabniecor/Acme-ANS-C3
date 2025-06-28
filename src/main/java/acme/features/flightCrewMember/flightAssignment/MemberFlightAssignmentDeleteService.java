@@ -50,7 +50,7 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 
 	@Override
 	public void bind(final FlightAssignment fa) {
-		super.bindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks");
+		super.bindObject(fa, "leg", "duty", "currentStatus", "remarks");
 	}
 
 	@Override

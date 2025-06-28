@@ -1,7 +1,6 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -78,34 +77,36 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 
 	@Override
 	public void bind(final FlightAssignment fa) {
-		super.bindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks");
+		super.bindObject(fa, "leg", "duty", "currentStatus", "remarks");
 	}
 
 	@Override
 	public void validate(final FlightAssignment fa) {
 		FlightCrewMember fcm;
 		Collection<Leg> legs;
-		Long nPilots;
-		Long nCopilots;
+		Collection<FlightAssignment> assignments;
+		boolean overlappedLegs = true;
+		FlightAssignment pilotFa;
+		FlightAssignment copilotFa;
 
 		fcm = fa.getFlightCrew();
 		super.state(fcm.getAvailabilityStatus() == Status.AVAILABLE, "*", "acme.validation.flightCrewUnavailable.message");
 
 		Date currentMoment = MomentHelper.getCurrentMoment();
-		Timestamp moment = Timestamp.from(currentMoment.toInstant());
-
-		legs = this.repository.findLegsByFlightCrewMemberId(moment, fcm.getId());
-		super.state(legs.size() == 1 || legs.contains(fa.getLeg()), "leg", "acme.validation.legAssigned.message");
-
 		if (fa.getLeg() != null) {
-			nPilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
-			nCopilots = this.repository.countMembersByIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
+			super.state(MomentHelper.isAfter(fa.getLeg().getScheduledArrival(), currentMoment), "leg", "acme.validation.legCompleted.message");
+			assignments = this.repository.findAllFlightAssignmentByFlightCrewMemberId(fa.getFlightCrew().getId());
 
-			if (fa.getDuty() == Duty.PILOT)
-				super.state(nPilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyPilots.message");
+			overlappedLegs = assignments.stream().filter(a -> a.getId() != fa.getId())
+				.anyMatch(a -> !(MomentHelper.isBefore(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBefore(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
+			super.state(!overlappedLegs, "leg", "acme.validation.overlappedLegs.message");
+			if (fa.getDuty() != null) {
+				pilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
+				super.state(pilotFa == null || pilotFa.getId() == fa.getId() || !fa.getDuty().equals(Duty.PILOT), "duty", "acme.validation.tooManyPilots.message");
 
-			if (fa.getDuty() == Duty.CO_PILOT)
-				super.state(nCopilots < 1 && fcm != super.getRequest().getPrincipal().getActiveRealm(), "duty", "acme.validation.tooManyCopilots.message");
+				copilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
+				super.state(copilotFa == null || copilotFa.getId() == fa.getId() || !fa.getDuty().equals(Duty.CO_PILOT), "duty", "acme.validation.tooManyCopilots.message");
+			}
 		}
 	}
 	@Override
@@ -117,18 +118,20 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 	@Override
 	public void unbind(final FlightAssignment fa) {
 		Dataset dataset;
+		FlightCrewMember fcm;
 		Collection<Leg> legs;
 		SelectChoices choisesLeg;
 		SelectChoices choisesSta;
 		SelectChoices choisesDut;
 
-		legs = this.repository.findAllLegs();
+		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
+		legs = this.repository.findLegsByAirline(fcm.getAirline().getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());
 		choisesDut = SelectChoices.from(Duty.class, fa.getDuty());
 
-		dataset = super.unbindObject(fa, "leg", "duty", "moment", "currentStatus", "remarks", "draft");
+		dataset = super.unbindObject(fa, "leg", "duty", "currentStatus", "remarks", "draft");
 		dataset.put("leg", choisesLeg.getSelected().getKey());
 		dataset.put("legs", choisesLeg);
 		dataset.put("status", choisesSta);

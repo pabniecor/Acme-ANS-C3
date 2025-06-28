@@ -55,13 +55,9 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
-		boolean draftMode = trackingLog.getDraftMode();
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		if (draftMode == false)
-			super.state(draftMode, "draftMode", "acme.validation.draftMode-update.message");
 	}
 
 	@Override

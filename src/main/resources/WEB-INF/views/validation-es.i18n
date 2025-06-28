@@ -72,6 +72,7 @@ acme.validation.trackingLog.claimMustBePublished.message = La reclamación del r
 acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message = La fecha de cración del registro de seguimiento no puede ser despues de la de última actualización
 acme.validation.trackingLog.monotony.message = El porcentaje de resolución debe seguir monotonía creciente
 acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = La creación de una reclamación no puede ser posterior a la creación o actualización del registro de seguimiento
+acme.validation.trackingLog.previousTlMustBePublished.message = All previous tracking logs must be published = Todos los registros de seguimiento anteriores deben estar publicados
 
 acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 

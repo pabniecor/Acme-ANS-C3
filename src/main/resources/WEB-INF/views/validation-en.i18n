@@ -58,11 +58,11 @@ acme.validation.trackingLog.resolutionPercentage-monotony.message = Resolution m
 acme.validation.trackingLog.resolution-notNull.message = Resolution cannot be null when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-notBlanck.message = Resolution cannot be blank when status is ACCEPTED or REJECTED
 acme.validation.trackingLog.resolution-nullOrBlanck.message = Resolution must be null or blank when status is PENDING
-acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message = Resolution must be 100.00 to publish
 acme.validation.trackingLog.claimMustBePublished.message = Tracking log's claim must be published before create or publish tracking log
 acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message = Tracking log creation moment cannot be after last update moment
 acme.validation.trackingLog.monotony.message = Resolution percentage must follow increasing monotony
 acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = Claim creation cannot be later than tracking log creation or update
+acme.validation.trackingLog.previousTlMustBePublished.message = All previous tracking logs must be published
 
 acme.validation.confirmation.message = Need confirmation
 

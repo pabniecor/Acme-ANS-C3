@@ -54,17 +54,9 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean confirmation;
-		//		boolean claimIsPublished;
-		boolean percentageIs100;
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
-
-		//		claimIsPublished = !trackingLog.getClaim().getDraftMode();
-		//		super.state(claimIsPublished, "claim", "acme.validation.trackingLog.claimMustBePublished.message");
-
-		percentageIs100 = trackingLog.getResolutionPercentage() == 100.;
-		super.state(percentageIs100, "resolutionPercentage", "acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message");
 	}
 
 	@Override

@@ -30,13 +30,15 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		Claim claim;
 		Collection<TrackingLog> trackingLogs;
 		boolean existsTl100Percentage;
+		boolean previosTlPublishedToCreate;
 
 		claimId = super.getRequest().getData("masterId", int.class);
 		claim = this.repository.findClaimById(claimId);
 		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
+		previosTlPublishedToCreate = trackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
 		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
 
-		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !existsTl100Percentage;
+		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !existsTl100Percentage && previosTlPublishedToCreate;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -73,8 +75,10 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		if (trackingLogsOrderedByPercentage != null && !trackingLogsOrderedByPercentage.isEmpty()) {
 			TrackingLog trackingLogHighestPercentage = trackingLogsOrderedByPercentage.get(0);
 
-			resolutionPercentageMonotony = trackingLog.getResolutionPercentage() != null ? trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage() : true;
-			super.state(resolutionPercentageMonotony, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
+			if (trackingLog.getResolutionPercentage() != null && trackingLog.getResolutionPercentage() >= 0. && trackingLog.getResolutionPercentage() <= 100.) {
+				resolutionPercentageMonotony = trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage();
+				super.state(resolutionPercentageMonotony, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
+			}
 		}
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);

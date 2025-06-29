@@ -38,7 +38,7 @@ public class TechnicianInvolvesCreateService extends AbstractGuiService<Technici
 		MRs = this.repository.findMRsByTechnicianId(loggedTechnician.getId());
 		mr = this.repository.findMRById(mrId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && MRs.contains(mr);
+		status = super.getRequest().getPrincipal().hasRealmOfType(Technician.class) && MRs.contains(mr) && mr.getDraftMode();
 
 		if (super.getRequest().hasData("id", int.class)) {
 

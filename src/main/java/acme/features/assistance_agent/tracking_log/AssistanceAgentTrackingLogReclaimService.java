@@ -32,7 +32,7 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 
 		claimId = super.getRequest().getData("masterId", int.class);
 		trackingLogs = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
-		lastTrackingLog = trackingLogs.get(0);
+		lastTrackingLog = !trackingLogs.isEmpty() ? trackingLogs.get(0) : null;
 
 		currentAgent = lastTrackingLog == null ? null : lastTrackingLog.getClaim().getAssistanceAgent();
 

@@ -70,10 +70,13 @@ public class TechnicianTaskListForMRService extends AbstractGuiService<Technicia
 	public void unbind(final Collection<Task> tasks) {
 
 		int mrId;
+		boolean draftMode;
 
 		mrId = super.getRequest().getData("masterId", int.class);
+		draftMode = this.repository.findMRById(mrId).getDraftMode();
 
 		super.getResponse().addGlobal("mrId", mrId);
+		super.getResponse().addGlobal("mrDraftMode", draftMode);
 	}
 
 }

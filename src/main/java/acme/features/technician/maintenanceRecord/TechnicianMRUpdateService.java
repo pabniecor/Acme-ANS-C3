@@ -87,6 +87,7 @@ public class TechnicianMRUpdateService extends AbstractGuiService<Technician, Ma
 		maintenanceStatus = SelectChoices.from(MaintenanceStatus.class, mr.getMaintenanceStatus());
 		aircraftChoices = SelectChoices.from(aircrafts, "model", mr.getAircraft());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", mr.getTechnician());
+		super.getRequest().getData("maintenanceStatus", MaintenanceStatus.class);
 
 		dataset = super.unbindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "draftMode", "aircraft", "technician");
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());

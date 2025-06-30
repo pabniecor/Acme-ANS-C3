@@ -12,7 +12,6 @@ import acme.client.services.GuiService;
 import acme.entities.airport_management.Duty;
 import acme.entities.airport_management.FlightAssignment;
 import acme.entities.flight_management.Leg;
-import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
 @GuiService
@@ -55,19 +54,12 @@ public class MemberFlightAssignmentDeleteService extends AbstractGuiService<Flig
 
 	@Override
 	public void validate(final FlightAssignment fa) {
-		Collection<ActivityLog> logs = this.repository.findAllActivityLogByAssignmentId(fa.getId());
-		super.state(logs.stream().allMatch(x -> x.getDraft()), "*", "acme.validation.logsPublished.message");
+		;
 	}
 
 	@Override
 	public void perform(final FlightAssignment fa) {
-		Collection<ActivityLog> logs = this.repository.findAllActivityLogByAssignmentId(fa.getId());
-		if (logs.isEmpty())
-			this.repository.delete(fa);
-		if (logs.stream().allMatch(x -> x.getDraft())) {
-			this.repository.deleteAll(logs);
-			this.repository.delete(fa);
-		}
+		this.repository.delete(fa);
 	}
 
 	@Override

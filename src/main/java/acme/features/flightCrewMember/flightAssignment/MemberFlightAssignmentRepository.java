@@ -46,7 +46,7 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 	Collection<FlightCrewMember> findAllMembers();
 
 	@Query("select fa from FlightAssignment fa where fa.leg.id =:id and fa.duty =:duty and fa.draft = false")
-	FlightAssignment findAssignmentByLegIdAndDuty(int id, Optional<Duty> duty);
+	Collection<FlightAssignment> findAssignmentByLegIdAndDuty(int id, Optional<Duty> duty);
 
 	@Query("select al from ActivityLog al where al.flightAssignment.id =:id")
 	Collection<ActivityLog> findAllActivityLogByAssignmentId(int id);

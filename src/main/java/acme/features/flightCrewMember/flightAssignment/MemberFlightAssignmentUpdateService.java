@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.Duty;
@@ -83,6 +84,7 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 
 	@Override
 	public void perform(final FlightAssignment fa) {
+		fa.setMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(fa);
 	}
 

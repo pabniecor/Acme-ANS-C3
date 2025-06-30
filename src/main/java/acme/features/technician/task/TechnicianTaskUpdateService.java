@@ -67,6 +67,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		technicians = List.of(this.repository.findTechnicianByUserId(super.getRequest().getPrincipal().getAccountId()));
 		taskType = SelectChoices.from(TaskType.class, task.getTaskType());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", task.getTechnician());
+		super.getRequest().getData("taskType", TaskType.class);
 
 		dataset = super.unbindObject(task, "taskType", "description", "priority", "estimatedDuration", "draftMode", "technician");
 		dataset.put("technician", technicianChoices.getSelected().getKey());

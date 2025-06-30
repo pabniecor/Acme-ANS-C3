@@ -101,6 +101,7 @@ public class TechnicianMRPublishService extends AbstractGuiService<Technician, M
 		technicians = this.repository.findAllTechnicians();
 		aircraftChoices = SelectChoices.from(aircrafts, "model", mr.getAircraft());
 		technicianChoices = SelectChoices.from(technicians, "licenseNumber", mr.getTechnician());
+		super.getRequest().getData("maintenanceStatus", MaintenanceStatus.class);
 
 		dataset = super.unbindObject(mr, "momentDone", "maintenanceStatus", "nextInspection", "estimatedCost", "notes", "draftMode", "aircraft", "technician");
 		dataset.put("status", maintenanceStatus);

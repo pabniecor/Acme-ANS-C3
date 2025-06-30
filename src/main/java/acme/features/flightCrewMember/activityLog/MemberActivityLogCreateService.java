@@ -33,7 +33,7 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 			status = false;
 		else {
 			member = fa.getFlightCrew();
-			status = super.getRequest().getPrincipal().hasRealm(member);
+			status = super.getRequest().getPrincipal().hasRealm(member) && !fa.getDraft();
 		}
 		super.getResponse().setAuthorised(status);
 

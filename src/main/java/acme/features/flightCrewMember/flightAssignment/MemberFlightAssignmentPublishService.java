@@ -101,10 +101,10 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 				.anyMatch(a -> !(MomentHelper.isBefore(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBefore(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
 			super.state(!overlappedLegs, "leg", "acme.validation.overlappedLegs.message");
 			if (fa.getDuty() != null) {
-				pilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT));
+				pilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT)).stream().findFirst().orElse(null);
 				super.state(pilotFa == null || pilotFa.getId() == fa.getId() || !fa.getDuty().equals(Duty.PILOT), "duty", "acme.validation.tooManyPilots.message");
 
-				copilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT));
+				copilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.CO_PILOT)).stream().findFirst().orElse(null);
 				super.state(copilotFa == null || copilotFa.getId() == fa.getId() || !fa.getDuty().equals(Duty.CO_PILOT), "duty", "acme.validation.tooManyCopilots.message");
 			}
 		}
@@ -112,6 +112,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 	@Override
 	public void perform(final FlightAssignment fa) {
 		fa.setDraft(false);
+		fa.setMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(fa);
 	}
 

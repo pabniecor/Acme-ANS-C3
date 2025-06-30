@@ -88,5 +88,6 @@ acme.validation.assignmentPublished.message = The assignment has already been pu
 acme.validation.leadAttendant.message = You are not lead attendant in this assignment
 acme.validation.logsPublished.message = There are published logs and you cannot delete this assignment.
 acme.validation.overlappedLegs.message = There are already a published assignment that overlapped this one.
+acme.validation.legCompleted.message = Leg is completed
 
 acme.validation.airline.invalid-type.message = They Airline Type must be STANDARD, LOWCOST or LUXURY

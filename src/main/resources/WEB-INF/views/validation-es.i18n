@@ -93,5 +93,6 @@ acme.validation.assignmentPublished.message = La asignación ya ha sido publicad
 acme.validation.leadAttendant.message = No eres encargado principal en esta asignación
 acme.validation.logsPublished.message = Hay registros publicados y no puedes borrar esta asignación
 acme.validation.overlappedLegs.message = Hay una asignación publicada que solapa esta asignación
+acme.validation.legCompleted.message = El tramo ya ha finalizado
 
 acme.validation.airline.invalid-type.message = El tipo de aerolínea debe ser STANDARD, LOWCOST o LUXURY

@@ -42,6 +42,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 			if (method.equals("GET"))
 				status = true;
 			else {
+				super.getRequest().getData("type", ClaimType.class);
 				legId = super.getRequest().getData("leg", int.class);
 				leg = super.getRequest().getData("leg", Leg.class);
 

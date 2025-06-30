@@ -1,6 +1,6 @@
 key,key:leg,key:flightCrew,duty,moment,current-status,remarks,draft
 #base entity
-flight-assignment-00,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true
+flight-assignment-00,leg-00,member-01,PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",false
 #duty - standard variations
 flight-assignment-01,leg-00,member-01,CO_PILOT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true
 flight-assignment-02,leg-00,member-01,LEAD_ATTENDANT,2012/07/02 00:00,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true

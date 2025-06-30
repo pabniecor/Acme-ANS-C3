@@ -38,6 +38,8 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		previosTlPublishedToCreate = trackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
 		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
 
+		if (super.getRequest().hasData("id"))
+			super.getRequest().getData("status", AcceptanceStatus.class);
 		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !existsTl100Percentage && previosTlPublishedToCreate;
 
 		super.getResponse().setAuthorised(status);

@@ -28,9 +28,6 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 		int id;
 		Booking booking;
 		Customer customer;
-		String method;
-
-		method = super.getRequest().getMethod();
 		status = super.getRequest().getPrincipal().hasRealmOfType(Customer.class);
 
 		if (status && super.getRequest().hasData("id")) {

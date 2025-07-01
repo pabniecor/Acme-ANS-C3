@@ -46,7 +46,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 				legId = super.getRequest().getData("leg", int.class);
 				leg = super.getRequest().getData("leg", Leg.class);
 
-				Boolean statusDa = legId == 0 ? true : this.repository.findAllLegs().contains(leg);
+				Boolean statusDa = legId == 0 ? true : this.repository.findLegsWithDepartureBeforeClaimRegistration().contains(leg);
 				status = statusDa;
 			}
 		}

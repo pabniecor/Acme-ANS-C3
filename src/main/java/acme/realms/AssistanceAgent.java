@@ -31,7 +31,7 @@ import lombok.Setter;
 @Setter
 @ValidAssistanceAgent
 @Table(indexes = {
-	@Index(columnList = "employeeCode"), @Index(columnList = "userAccount_id")
+	@Index(columnList = "employeeCode", unique = true), @Index(columnList = "user_account_id")
 })
 public class AssistanceAgent extends AbstractRole {
 

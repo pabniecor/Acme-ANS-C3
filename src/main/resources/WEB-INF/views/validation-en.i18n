@@ -35,7 +35,8 @@ acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is d
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
 
 acme.validation.airline.duplicate-iataCode.message = The airline's iataCode is duplicated
-acme.validation.airline.iataCode.message = The airline's iataCode is incorrect
+acme.validation.airline.iataCode.message = Invalid IATA Code 
+acme.validation.airline.phoneNumber.message = Invalid phone number
 
 acme.validation.booking.duplicate-locatorCode.message = The booking's locatorCode is duplicated
 acme.validation.booking.locatorCode.message = Invalid locator code

@@ -11,7 +11,6 @@
 		</jstl:when>
 		<jstl:when test="${_command == 'show'}">
 			<acme:input-textbox code="customer.booking-record.form.label.passenger" path="passengerName" readonly="true"/>
-			<!-- Solo mostrar el botón de eliminar si la reserva está en modo borrador -->
 			<jstl:if test="${booking.draftMode == true}">
 				<acme:submit code="customer.booking-record.form.button.delete" action="/customer/booking-record/delete"/>
 			</jstl:if>

@@ -72,7 +72,6 @@ acme.validation.customer.phone-number.message = The customer's phone number is i
 acme.validation.customer.lastCardNibble.message = The last credit card nibble should be stored in order to publish a booking
 acme.validation.customer.passengersForBookingNotNull.message = The booking must have associated passengers in order to be published
 acme.validation.customer.publishedFlight.message = The flight assigned must be published
-acme.validation.customer.passenger.error.booking-exists = This passenger is associated to one or more bookings
 acme.validation.customer.identifier-incorrect-initials.message = Wrong initials in the identifier
 
 acme.validation.claim.draftMode-update.message = Cannot update because this claim is published

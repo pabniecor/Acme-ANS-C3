@@ -50,7 +50,6 @@ acme.validation.customer.phone-number.message = El número de teléfono del clie
 acme.validation.customer.lastCardNibble.message = Los últimos cuatro dígitos del número de la tarjeta de crédito debe guardarse para poder publicar una reserva
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados para poder ser publicada
 acme.validation.customer.publishedFlight.message = El vuelo asignado debe estar publicado
-acme.validation.customer.passenger.error.booking-exists = Este pasajero está asociado a una o más reservas
 acme.validation.customer.identifier-incorrect-initials.message = Iniciales incorrectas en el identificador
 
 acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales

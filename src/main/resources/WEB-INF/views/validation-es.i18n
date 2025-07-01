@@ -34,8 +34,9 @@ acme.validation.leg.occupiedAircraft.message = El avión seleccionado está ocup
 acme.validation.airport.duplicate-iataCode.message = El código iata del aeropuerto está duplicado
 acme.validation.airport.iataCode.message = El código iata del aeropuerto es incorrecto
 
-acme.validation.airline.duplicate-iataCode.message = El código iata de la aerolínea está duplicado
-acme.validation.airline.iataCode.message = El código iata de la aerolínea es incorrecto
+acme.validation.airline.duplicate-iataCode.message = El código IATA de la aerolínea está duplicado
+acme.validation.airline.iataCode.message = El código IATA de la aerolínea es inválido
+acme.validation.airline.phoneNumber.message = El número de teléfono es inválido
 
 acme.validation.booking.duplicate-locatorCode.message = El código localizador de la reserva está duplicado
 acme.validation.booking.locatorCode.message = El código localizador de la reserva es inválido

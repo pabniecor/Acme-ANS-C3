@@ -1,8 +1,6 @@
 
 package acme.constraints;
 
-import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,6 @@ public class AirlineValidator extends AbstractValidator<ValidAirline, Airline> {
 
 	@Override
 	public boolean isValid(final Airline airline, final ConstraintValidatorContext context) {
-		// HINT: job can be null
 		assert context != null;
 
 		boolean result;
@@ -36,25 +33,13 @@ public class AirlineValidator extends AbstractValidator<ValidAirline, Airline> {
 		if (airline == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			{
-				boolean uniqueAirline;
-				Airline existingAirline;
+			boolean uniqueAirline;
+			Airline existingAirline;
 
-				existingAirline = this.repository.findAirlineByIataCode(airline.getIataCode());
-				uniqueAirline = existingAirline == null || airline.getIataCode().isBlank() || existingAirline.equals(airline);
+			existingAirline = this.repository.findAirlineByIataCode(airline.getIataCode());
+			uniqueAirline = existingAirline == null || airline.getIataCode().isBlank() || existingAirline.equals(airline);
 
-				super.state(context, uniqueAirline, "iataCode", "acme.validation.airline.duplicate-iataCode.message");
-			}
-			{
-				String iataCode;
-				boolean isValidIataCode;
-
-				iataCode = airline.getIataCode();
-				isValidIataCode = iataCode != null && Pattern.matches("^[A-Z]{3}$", iataCode);
-
-				super.state(context, isValidIataCode, "iataCode", "acme.validation.airline.iataCode.message");
-			}
-
+			super.state(context, uniqueAirline, "iataCode", "acme.validation.airline.duplicate-iataCode.message");
 		}
 
 		result = !super.hasErrors(context);

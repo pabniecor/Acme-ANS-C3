@@ -96,3 +96,5 @@ acme.validation.overlappedLegs.message = Hay una asignación publicada que solap
 acme.validation.legCompleted.message = El tramo ya ha finalizado
 
 acme.validation.airline.invalid-type.message = El tipo de aerolínea debe ser STANDARD, LOWCOST o LUXURY
+
+acme.validation.aircraft.registrationNumber.message = Este número de registro ya esta utilizado

@@ -91,3 +91,5 @@ acme.validation.overlappedLegs.message = There are already a published assignmen
 acme.validation.legCompleted.message = Leg is completed
 
 acme.validation.airline.invalid-type.message = They Airline Type must be STANDARD, LOWCOST or LUXURY
+
+acme.validation.aircraft.registrationNumber.message = This registration number is already used.

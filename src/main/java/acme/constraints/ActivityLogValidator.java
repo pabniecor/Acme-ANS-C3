@@ -9,10 +9,12 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
+import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.entities.maintenance_and_technical.ActivityLogRepository;
 
+@Validator
 public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, ActivityLog> {
 	// Internal state ---------------------------------------------------------
 

@@ -33,6 +33,8 @@ acme.validation.leg.occupiedAircraft.message = The selected aircraft is occupied
 
 acme.validation.airport.duplicate-iataCode.message = The airport's iataCode is duplicated
 acme.validation.airport.iataCode.message = The airport's iataCode is incorrect
+acme.validation.airport.correctIataCode.message = The specified IATA code does not follow the required pattern
+acme.validation.airport.correctPhoneNumber.message = The specified phone number does not follow the required pattern
 
 acme.validation.airline.duplicate-iataCode.message = The airline's iataCode is duplicated
 acme.validation.airline.iataCode.message = Invalid IATA Code 

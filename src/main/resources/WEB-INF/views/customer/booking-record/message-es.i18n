@@ -1,7 +1,7 @@
 customer.booking-record.list.label.passenger.fullName = Nombre completo
 customer.booking-record.list.label.passenger.email = Email
 customer.booking-record.list.label.passenger.passportNumber = Número de pasaporte
-customer.booking-record.list.label.passenger.birthDate = Fecha de cumpleaños
+customer.booking-record.list.label.passenger.birthDate = Fecha de nacimiento
 customer.booking-record.list.label.passenger.draftModePassenger = Modo borrador
 
 customer.booking-record.list.button.create = Asignar pasajero a reserva

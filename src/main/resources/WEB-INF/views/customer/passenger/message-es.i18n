@@ -1,7 +1,7 @@
 customer.passenger.list.label.fullName = Nombre completo:
 customer.passenger.list.label.email = Email:
 customer.passenger.list.label.passportNumber = Número de pasaporte:
-customer.passenger.list.label.birthDate = Fecha de cumpleaños:
+customer.passenger.list.label.birthDate = Fecha de nacimiento:
 customer.passenger.list.label.draftModePassenger = Modo borrador del pasajero:
 
 customer.passenger.form.label.fullName = Nombre completo:

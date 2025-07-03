@@ -78,7 +78,7 @@ acme.validation.trackingLog.previousTlMustBePublished.message = All previous tra
 
 acme.validation.customer.lastCardNibble.message = El último conjunto de cuatro dígitos de la tarjeta de crédito debe haber sido almacenado para publicar una reserva
 
-acme.validation.confirmation.message = Necesitas confirmar
+acme.validation.confirmation.message = Necesita confirmar
 
 acme.validation.customer.passengersForBookingNotNull.message = La reserva debe tener pasajeros asociados si desea que se publique
 

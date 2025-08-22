@@ -36,9 +36,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>acme-framework-25.6.0</name>
+			<name>acme-framework-25.7.0</name>
 			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.6.0/target/classes</locationURI>
+			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.7.0/target/classes</locationURI>
+		</link>
+		<link>
+			<name>target/classes</name>
+			<type>2</type>
+			<location>//C:/Users/aleja/OneDrive/Escritorio/BAKOP/COSITAS CARRERA/3do/DP2/Workspace-25.zip/Workspace-25/Projects/Acme-ANS-C3/target/classes/</location>
 		</link>
 	</linkedResources>
 </projectDescription>

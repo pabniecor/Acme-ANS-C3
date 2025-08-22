@@ -40,7 +40,7 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 			l = super.getRequest().getData("leg", int.class);
 			duty = super.getRequest().getData("duty", Duty.class);
 			st = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
-			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
+			boolean statusLeg = l == 0 ? true : this.repository.findAllLegsPublished().contains(leg);
 			status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && statusLeg;
 		}
 		super.getResponse().setAuthorised(status);

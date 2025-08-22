@@ -33,6 +33,9 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 	@Query("select l from Leg l")
 	Collection<Leg> findAllLegs();
 
+	@Query("select l from Leg l where l.draftMode = false")
+	Collection<Leg> findAllLegsPublished();
+
 	@Query("select l from Leg l where l.id =:id")
 	Leg findLegById(int id);
 
@@ -51,6 +54,6 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 	@Query("select al from ActivityLog al where al.flightAssignment.id =:id")
 	Collection<ActivityLog> findAllActivityLogByAssignmentId(int id);
 
-	@Query("select l from Leg l where l.aircraft.airline.id =:airlineId")
+	@Query("select l from Leg l where l.aircraft.airline.id =:airlineId and l.draftMode = false")
 	Collection<Leg> findLegsByAirline(int airlineId);
 }

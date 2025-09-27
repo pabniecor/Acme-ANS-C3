@@ -1,9 +1,9 @@
 key,flight-number,scheduled-departure,scheduled-arrival,status,key:flight,key:departure-airport,key:arrival-airport,key:aircraft,sequence-order,draft-mode
 #base entity
-leg-00,AAX1234,2030/01/01 00:00,2030/01/01 00:01,ON_TIME,flight-00,airport-00,airport-01,aircraft-00,1,true
+leg-00,AAX1234,2030/01/01 00:00,2030/01/01 00:01,ON_TIME,flight-00,airport-00,airport-01,aircraft-00,1,false
 #flight-number - standard variations
-leg-01,AAX0000,2030/01/01 00:01,2030/01/01 00:02,ON_TIME,flight-00,airport-01,airport-02,aircraft-00,2,true
-leg-02,AAX9999,2030/01/01 00:02,2030/01/01 00:03,ON_TIME,flight-00,airport-02,airport-03,aircraft-00,3,true
+leg-01,AAX0000,2030/01/01 00:01,2030/01/01 00:02,ON_TIME,flight-00,airport-01,airport-02,aircraft-00,2,false
+leg-02,AAX9999,2030/01/01 00:02,2030/01/01 00:03,ON_TIME,flight-00,airport-02,airport-03,aircraft-00,3,false
 #flight-number - no singular values
 #scheduled-departure - standard variations
 leg-03,AAX1111,2000/01/01 00:00,2000/01/01 00:01,ON_TIME,flight-01,airport-00,airport-01,aircraft-01,1,false

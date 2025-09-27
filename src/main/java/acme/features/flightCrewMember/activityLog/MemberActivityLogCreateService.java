@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.FlightAssignment;
@@ -48,12 +49,13 @@ public class MemberActivityLogCreateService extends AbstractGuiService<FlightCre
 		al = new ActivityLog();
 		al.setFlightAssignment(this.repository.findFlightAssignmentById(masterId));
 		al.setDraft(true);
+		al.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		super.getBuffer().addData(al);
 	}
 
 	@Override
 	public void bind(final ActivityLog al) {
-		super.bindObject(al, "registrationMoment", "typeOfIncident", "description", "severityLevel");
+		super.bindObject(al, "typeOfIncident", "description", "severityLevel");
 	}
 
 	@Override

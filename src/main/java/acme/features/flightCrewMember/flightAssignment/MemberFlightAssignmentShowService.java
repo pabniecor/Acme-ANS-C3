@@ -1,12 +1,14 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.Duty;
@@ -53,12 +55,23 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 		Dataset dataset;
 		Collection<Leg> legs;
 		Collection<FlightCrewMember> fcms;
+		FlightCrewMember fcm;
 		SelectChoices choisesLeg;
 		SelectChoices choisesSta;
 		SelectChoices choisesDut;
 		SelectChoices choisesMem;
+		Collection<Leg> publishedFaLegs;
 
-		legs = this.repository.findAllLegs();
+		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
+		Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
+		//publishedFaLegs = this.repository.findAllFlightAssignmentByFlightCrewMemberIdPublished(fcm.getId());
+		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
+
+		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
+
+		if (!fa.getDraft())
+			legs.add(fa.getLeg());
+
 		fcms = this.repository.findAllMembers();
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
@@ -75,6 +88,8 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 		dataset.put("duties", choisesDut);
 		dataset.put("members", choisesMem);
 		dataset.put("flightCrew", choisesMem.getSelected().getKey());
+		Leg ll = this.repository.findLegById(Integer.parseInt(choisesLeg.getSelected().getKey()));
+		dataset.put("ocurred", MomentHelper.isAfter(MomentHelper.getCurrentMoment(), ll.getScheduledArrival()));
 
 		super.getResponse().addData(dataset);
 	}

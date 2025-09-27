@@ -33,8 +33,8 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 	@Query("select l from Leg l")
 	Collection<Leg> findAllLegs();
 
-	@Query("select l from Leg l where l.draftMode = false")
-	Collection<Leg> findAllLegsPublished();
+	@Query("select l from Leg l where l.draftMode = false and l.scheduledArrival >:date")
+	Collection<Leg> findAllLegsPublished(Timestamp date);
 
 	@Query("select l from Leg l where l.id =:id")
 	Leg findLegById(int id);
@@ -54,6 +54,12 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 	@Query("select al from ActivityLog al where al.flightAssignment.id =:id")
 	Collection<ActivityLog> findAllActivityLogByAssignmentId(int id);
 
-	@Query("select l from Leg l where l.aircraft.airline.id =:airlineId and l.draftMode = false")
-	Collection<Leg> findLegsByAirline(int airlineId);
+	@Query("select l from Leg l where l.aircraft.airline.id =:airlineId and l.draftMode = false and l.scheduledArrival >:date")
+	Collection<Leg> findLegsByAirline(int airlineId, Timestamp date);
+
+	@Query("select fa.leg from FlightAssignment fa where fa.flightCrew.id =:id and fa.draft = false")
+	Collection<Leg> findAllFlightAssignmentByFlightCrewMemberIdPublished(int id);
+
+	@Query("select l from Leg l where l.aircraft.airline.id = :airlineId and l.draftMode = false and l.scheduledArrival > :date and not exists (select 1 from FlightAssignment fa where fa.leg = l and fa.flightCrew.id = :crewId and fa.draft = false)")
+	Collection<Leg> findLegsByAirlineAndCrew(int airlineId, Timestamp date, int crewId);
 }

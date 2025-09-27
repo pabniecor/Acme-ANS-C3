@@ -1,6 +1,7 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,10 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 			leg = super.getRequest().getData("leg", Leg.class);
 			l = super.getRequest().getData("leg", int.class);
 			duty = super.getRequest().getData("duty", Duty.class);
+			FlightCrewMember fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
 			st = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
-			boolean statusLeg = l == 0 ? true : this.repository.findAllLegsPublished().contains(leg);
+			Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
+			boolean statusLeg = l == 0 ? true : this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId()).contains(leg);
 			status = super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && statusLeg;
 		}
 		super.getResponse().setAuthorised(status);
@@ -84,9 +87,16 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		SelectChoices choisesLeg;
 		SelectChoices choisesSta;
 		SelectChoices choisesDut;
+		Collection<Leg> publishedFaLegs;
 
 		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
-		legs = this.repository.findLegsByAirline(fcm.getAirline().getId());
+		Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
+
+		//publishedFaLegs = this.repository.findAllFlightAssignmentByFlightCrewMemberIdPublished(fcm.getId());
+		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
+		//legs.removeAll(publishedFaLegs);
+
+		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

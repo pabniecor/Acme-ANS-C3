@@ -4,7 +4,6 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 <acme:form>
 	<%-- <acme:input-select readonly="true" code="member.activity-log.form.label.assignment" path="flightAssignment" choices="${assignments}"/> --%>
-	<acme:input-moment code="member.activity-log.form.label.moment" path="registrationMoment"/>
 	<acme:input-textbox code="member.activity-log.form.label.incident" path="typeOfIncident"/>
 	<acme:input-textarea code="member.activity-log.form.label.description" path="description" />
 	<acme:input-integer code="member.activity-log.form.label.severity" path="severityLevel" />

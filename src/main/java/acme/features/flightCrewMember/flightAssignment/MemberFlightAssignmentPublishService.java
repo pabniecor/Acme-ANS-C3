@@ -1,6 +1,7 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -54,11 +55,13 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 			leg = super.getRequest().getData("leg", Leg.class);
 			l = super.getRequest().getData("leg", int.class);
 			d = super.getRequest().getData("duty", Duty.class);
+			FlightCrewMember fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
 			s = super.getRequest().getData("currentStatus", acme.entities.airport_management.Status.class);
 
-			legs = this.repository.findAllLegs();
-			boolean statusLeg = l == 0 ? true : this.repository.findAllLegs().contains(leg);
-
+			Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
+			legs = this.repository.findAllLegsPublished(date);
+			//boolean statusLeg = l == 0 ? true : this.repository.findAllLegsPublished(date).contains(leg);
+			boolean statusLeg = l == 0 ? true : this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId()).contains(leg);
 			status = statusLeg;
 		}
 		super.getResponse().setAuthorised(status);
@@ -98,7 +101,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 			assignments = this.repository.findAllFlightAssignmentByFlightCrewMemberId(fa.getFlightCrew().getId());
 
 			overlappedLegs = assignments.stream().filter(a -> a.getId() != fa.getId())
-				.anyMatch(a -> !(MomentHelper.isBefore(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBefore(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
+				.anyMatch(a -> !(MomentHelper.isBeforeOrEqual(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBeforeOrEqual(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
 			super.state(!overlappedLegs, "leg", "acme.validation.overlappedLegs.message");
 			if (fa.getDuty() != null) {
 				pilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT)).stream().findFirst().orElse(null);
@@ -124,9 +127,16 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		SelectChoices choisesLeg;
 		SelectChoices choisesSta;
 		SelectChoices choisesDut;
+		Collection<Leg> publishedFaLegs;
 
 		fcm = this.repository.findFlightCrewMemberById(this.getRequest().getPrincipal().getActiveRealm().getId());
-		legs = this.repository.findLegsByAirline(fcm.getAirline().getId());
+		Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
+
+		//publishedFaLegs = this.repository.findAllFlightAssignmentByFlightCrewMemberIdPublished(fcm.getId());
+		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
+		//legs.removeAll(publishedFaLegs);
+
+		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

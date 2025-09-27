@@ -1,0 +1,5 @@
+key,flight-number,scheduled-departure,scheduled-arrival,status,key:flight,key:departure-airport,key:arrival-airport,key:aircraft,sequence-order,draft-mode
+#needed entries
+leg-15,AAX0001,2031/01/01 00:00,2031/01/01 00:01,ON_TIME,flight-00,airport-00,airport-01,aircraft-00,4,false
+leg-16,AAX0002,2031/01/01 00:01,2031/01/01 00:02,ON_TIME,flight-00,airport-01,airport-02,aircraft-00,5,false
+leg-17,AAX0003,2031/01/01 00:02,2031/01/01 00:03,ON_TIME,flight-00,airport-02,airport-03,aircraft-00,6,false

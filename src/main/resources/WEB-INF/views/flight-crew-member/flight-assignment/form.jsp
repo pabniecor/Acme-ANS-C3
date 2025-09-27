@@ -12,6 +12,9 @@
 	<jstl:if test="${acme:anyOf(_command, 'show|update|publish|delete')&&draft == false}">
 			<acme:button code="member.flight-assignment.form.button.legs" action="/flight-crew-member/leg/list?masterId=${id}" />
 			<acme:button code="member.flight-assignment.form.button.fcm" action="/flight-crew-member/flight-crew-member/list?masterId=${id}" />
+	</jstl:if>
+	
+	<jstl:if test="${acme:anyOf(_command, 'show|update|publish|delete')&&draft == false&&ocurred==true}">
 			<acme:button code="member.flight-assignment.form.button.als" action="/flight-crew-member/activity-log/list?masterId=${id}" />
 	</jstl:if>
 	

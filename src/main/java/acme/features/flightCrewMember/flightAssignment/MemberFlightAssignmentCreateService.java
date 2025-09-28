@@ -96,7 +96,7 @@ public class MemberFlightAssignmentCreateService extends AbstractGuiService<Flig
 		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
 		//legs.removeAll(publishedFaLegs);
 
-		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
+		legs = this.repository.findLegsWithoutOverlapNoCurrent(fcm.getAirline().getId(), date, fcm.getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

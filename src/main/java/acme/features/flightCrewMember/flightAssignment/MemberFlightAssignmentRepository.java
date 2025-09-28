@@ -62,4 +62,14 @@ public interface MemberFlightAssignmentRepository extends AbstractRepository {
 
 	@Query("select l from Leg l where l.aircraft.airline.id = :airlineId and l.draftMode = false and l.scheduledArrival > :date and not exists (select 1 from FlightAssignment fa where fa.leg = l and fa.flightCrew.id = :crewId and fa.draft = false)")
 	Collection<Leg> findLegsByAirlineAndCrew(int airlineId, Timestamp date, int crewId);
+
+	@Query("select l from Leg l where l.aircraft.airline.id = :airlineId and l.draftMode = false and l.scheduledArrival >= :date and not exists (select 1 from FlightAssignment fa where fa.flightCrew.id = :crewId and fa.draft = false and ((l.scheduledDeparture < fa.leg.scheduledArrival) and (l.scheduledArrival > fa.leg.scheduledDeparture)))")
+	Collection<Leg> findLegsWithoutOverlapNoCurrent(int airlineId, Timestamp date, int crewId);
+
+	@Query("select l from Leg l where l.aircraft.airline.id = :airlineId and l.draftMode = false and ((:currentLegId is not null and l.id = :currentLegId) or (l.scheduledArrival >= :date and not exists (select 1 from FlightAssignment fa where fa.flightCrew.id = :crewId and fa.draft = false and l.scheduledDeparture < fa.leg.scheduledArrival and l.scheduledArrival > fa.leg.scheduledDeparture)))")
+	Collection<Leg> findLegsWithoutOverlap(int airlineId, Timestamp date, int crewId, int currentLegId);
+
+	@Query("select fa from FlightAssignment fa where fa.flightCrew.id =:id and fa.draft = false")
+	Collection<FlightAssignment> findAllFlightAssignmentByFMCPUBLISHED(int id);
+
 }

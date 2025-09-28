@@ -67,9 +67,9 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 		//publishedFaLegs = this.repository.findAllFlightAssignmentByFlightCrewMemberIdPublished(fcm.getId());
 		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
 
-		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
+		legs = this.repository.findLegsWithoutOverlap(fcm.getAirline().getId(), date, fcm.getId(), fa.getLeg().getId());
 
-		if (!fa.getDraft())
+		if (!legs.contains(fa.getLeg()))
 			legs.add(fa.getLeg());
 
 		fcms = this.repository.findAllMembers();

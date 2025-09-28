@@ -61,7 +61,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 			Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
 			legs = this.repository.findAllLegsPublished(date);
 			//boolean statusLeg = l == 0 ? true : this.repository.findAllLegsPublished(date).contains(leg);
-			boolean statusLeg = l == 0 ? true : this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId()).contains(leg);
+			boolean statusLeg = l == 0 ? true : this.repository.findLegsWithoutOverlap(fcm.getAirline().getId(), date, fcm.getId(), leg.getId()).contains(leg);
 			status = statusLeg;
 		}
 		super.getResponse().setAuthorised(status);
@@ -98,7 +98,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		Date currentMoment = MomentHelper.getCurrentMoment();
 		if (fa.getLeg() != null) {
 			super.state(MomentHelper.isAfter(fa.getLeg().getScheduledArrival(), currentMoment), "leg", "acme.validation.legCompleted.message");
-			assignments = this.repository.findAllFlightAssignmentByFlightCrewMemberId(fa.getFlightCrew().getId());
+			assignments = this.repository.findAllFlightAssignmentByFMCPUBLISHED(fa.getFlightCrew().getId());
 
 			overlappedLegs = assignments.stream().filter(a -> a.getId() != fa.getId())
 				.anyMatch(a -> !(MomentHelper.isBeforeOrEqual(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBeforeOrEqual(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
@@ -137,6 +137,9 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		//legs.removeAll(publishedFaLegs);
 
 		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
+
+		if (!legs.contains(fa.getLeg()))
+			legs.add(fa.getLeg());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

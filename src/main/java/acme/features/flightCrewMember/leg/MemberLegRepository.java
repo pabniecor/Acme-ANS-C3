@@ -22,6 +22,6 @@ public interface MemberLegRepository extends AbstractRepository {
 	@Query("select fa from FlightAssignment fa where fa.id =:id")
 	FlightAssignment findFlightAssignmentById(int id);
 
-	@Query("select fa.leg from FlightAssignment fa where fa.flightCrew.id =:id")
+	@Query("select fa.leg from FlightAssignment fa where fa.flightCrew.id =:id and fa.draft = false")
 	Collection<Leg> findLegByMemberId(int id);
 }

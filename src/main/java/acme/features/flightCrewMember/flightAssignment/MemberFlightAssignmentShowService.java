@@ -69,9 +69,6 @@ public class MemberFlightAssignmentShowService extends AbstractGuiService<Flight
 
 		legs = this.repository.findLegsWithoutOverlap(fcm.getAirline().getId(), date, fcm.getId(), fa.getLeg().getId());
 
-		if (!legs.contains(fa.getLeg()))
-			legs.add(fa.getLeg());
-
 		fcms = this.repository.findAllMembers();
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());

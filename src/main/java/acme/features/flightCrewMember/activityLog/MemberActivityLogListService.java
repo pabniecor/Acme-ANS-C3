@@ -1,7 +1,9 @@
 
 package acme.features.flightCrewMember.activityLog;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,7 +44,9 @@ public class MemberActivityLogListService extends AbstractGuiService<FlightCrewM
 		int masterId;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		aLs = this.repository.findActivityLogsByFlightAssignmentId(masterId);
+		Date currentMoment = MomentHelper.getCurrentMoment();
+		Timestamp moment = Timestamp.from(currentMoment.toInstant());
+		aLs = this.repository.findActivityLogsByFlightAssignmentId(masterId, moment);
 
 		super.getBuffer().addData(aLs);
 	}

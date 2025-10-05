@@ -133,7 +133,7 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
 		//legs.removeAll(publishedFaLegs);
 
-		legs = this.repository.findLegsWithoutOverlapNoCurrent(fcm.getAirline().getId(), date, fcm.getId());
+		legs = fa.getLeg() != null ? this.repository.findLegsWithoutOverlap(fcm.getAirline().getId(), date, fcm.getId(), fa.getLeg().getId()) : this.repository.findLegsWithoutOverlapNoCurrent(fcm.getAirline().getId(), date, fcm.getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

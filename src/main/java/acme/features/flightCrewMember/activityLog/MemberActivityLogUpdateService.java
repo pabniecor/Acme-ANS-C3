@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.FlightAssignment;
@@ -31,7 +32,7 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<FlightCre
 		if (log == null)
 			status = false;
 		else
-			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && log.getDraft();
+			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && log.getDraft() && MomentHelper.isAfter(MomentHelper.getCurrentMoment(), log.getFlightAssignment().getLeg().getScheduledArrival());
 		super.getResponse().setAuthorised(status);
 	}
 

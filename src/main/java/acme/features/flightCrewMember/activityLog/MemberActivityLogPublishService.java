@@ -11,7 +11,6 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.airport_management.FlightAssignment;
-import acme.entities.flight_management.Leg;
 import acme.entities.maintenance_and_technical.ActivityLog;
 import acme.realms.FlightCrewMember;
 
@@ -33,7 +32,8 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 		if (log == null)
 			status = false;
 		else
-			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && !log.getFlightAssignment().getDraft();
+			status = super.getRequest().getPrincipal().hasRealm(log.getFlightAssignment().getFlightCrew()) && log.getDraft() && !log.getFlightAssignment().getDraft()
+				&& MomentHelper.isAfter(MomentHelper.getCurrentMoment(), log.getFlightAssignment().getLeg().getScheduledArrival());
 
 		super.getResponse().setAuthorised(status);
 
@@ -56,11 +56,7 @@ public class MemberActivityLogPublishService extends AbstractGuiService<FlightCr
 
 	@Override
 	public void validate(final ActivityLog al) {
-		Leg l;
-
-		l = al.getFlightAssignment().getLeg();
-		if (al.getRegistrationMoment() != null)
-			super.state(MomentHelper.isAfter(al.getRegistrationMoment(), l.getScheduledArrival()), "registrationMoment", "acme.validation.activityLog.registrationMoment.message");
+		;
 	}
 	@Override
 	public void perform(final ActivityLog al) {

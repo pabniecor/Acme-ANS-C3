@@ -58,7 +58,7 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 			Timestamp date = Timestamp.from(MomentHelper.getCurrentMoment().toInstant());
 			legs = this.repository.findAllLegsPublished(date);
 			//boolean statusLeg = l == 0 ? true : this.repository.findAllLegsPublished(date).contains(leg);
-			boolean statusLeg = l == 0 ? true : this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId()).contains(leg);
+			boolean statusLeg = l == 0 ? true : this.repository.findLegsWithoutOverlap(fcm.getAirline().getId(), date, fcm.getId(), fa.getLeg().getId()).contains(leg);
 
 			status = statusLeg;
 		}
@@ -109,7 +109,7 @@ public class MemberFlightAssignmentUpdateService extends AbstractGuiService<Flig
 		//legs = this.repository.findLegsByAirline(fcm.getAirline().getId(), date);
 		//legs.removeAll(publishedFaLegs);
 
-		legs = this.repository.findLegsByAirlineAndCrew(fcm.getAirline().getId(), date, fcm.getId());
+		legs = this.repository.findLegsWithoutOverlapNoCurrent(fcm.getAirline().getId(), date, fcm.getId());
 
 		choisesLeg = SelectChoices.from(legs, "flightNumber", fa.getLeg());
 		choisesSta = SelectChoices.from(acme.entities.airport_management.Status.class, fa.getCurrentStatus());

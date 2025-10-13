@@ -100,6 +100,10 @@ public class MemberFlightAssignmentPublishService extends AbstractGuiService<Fli
 			super.state(MomentHelper.isAfter(fa.getLeg().getScheduledArrival(), currentMoment), "leg", "acme.validation.legCompleted.message");
 			assignments = this.repository.findAllFlightAssignmentByFMCPUBLISHED(fa.getFlightCrew().getId());
 
+			overlappedLegs = assignments.stream().filter(a -> a.getId() != fa.getId())
+				.anyMatch(a -> !(MomentHelper.isBeforeOrEqual(fa.getLeg().getScheduledArrival(), a.getLeg().getScheduledDeparture()) || MomentHelper.isBeforeOrEqual(a.getLeg().getScheduledArrival(), fa.getLeg().getScheduledDeparture())));
+			super.state(!overlappedLegs, "leg", "acme.validation.overlappedLegs.message");
+
 			if (fa.getDuty() != null) {
 				pilotFa = this.repository.findAssignmentByLegIdAndDuty(fa.getLeg().getId(), Optional.of(Duty.PILOT)).stream().findFirst().orElse(null);
 				super.state(pilotFa == null || pilotFa.getId() == fa.getId() || !fa.getDuty().equals(Duty.PILOT), "duty", "acme.validation.tooManyPilots.message");
